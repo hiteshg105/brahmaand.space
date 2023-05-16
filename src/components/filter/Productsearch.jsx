@@ -112,7 +112,7 @@ function Productsearch(args) {
       setRating(newValue);
     },
   };
-
+  console.log("hi")
   const handleEnter = event => {
     if (event.key === "Enter") {
       handlesearchdescription();
@@ -842,11 +842,10 @@ function Productsearch(args) {
             <Col className="seachareapr" lg="10">
               <div className="inputareaa searchba">
                 <input
-                  value={searchitem}
+                  value="xyz mfU8"
                   type="text"
                   onKeyDown={handleEnter}
-                  placeholder=" Search for the top resources on any subject ... (e.g. Java) "
-                  className="searchprd inputareaa searchba "
+
                   onChange={e => {
                     setSearchitem(e.target.value);
                   }}
@@ -1532,7 +1531,7 @@ function Productsearch(args) {
                                                 </div>
                                               </Col>
                                               <Col lg="6">
-                                                <h4>Write your review</h4>
+                                                <h4>Write your Review</h4>
 
                                                 <ReactStars
                                                   {...secondExample}
