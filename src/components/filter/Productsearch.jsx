@@ -1534,6 +1534,7 @@ function Productsearch(args) {
                                                 <h4>Write your Review</h4>
 
                                                 <ReactStars
+                                                style={{borderRadius: '50%'}}
                                                   {...secondExample}
                                                 />
                                               </Col>
@@ -1698,6 +1699,7 @@ function Productsearch(args) {
                                                                   <ReactStars
                                                                     style={{
                                                                       size: "25px",
+                                                                      borderRadius: '50%'
                                                                     }}
                                                                     {...secondExample}
                                                                   />
@@ -2379,6 +2381,7 @@ function Productsearch(args) {
                                                   activeColor="#ffd700"
                                                 /> */}
                                                 <ReactStars
+                                                style={{borderRadius: '50%'}}
                                                   {...secondExample}
                                                 />
                                               </Col>
@@ -2581,6 +2584,7 @@ function Productsearch(args) {
                                                                   <ReactStars
                                                                     style={{
                                                                       size: "25px",
+                                                                      borderRadius: '50%'
                                                                     }}
                                                                     {...secondExample}
                                                                   />
@@ -3268,7 +3272,7 @@ function Productsearch(args) {
                                           size={40}
                                           color2={"#ffd700"}
                                         /> */}
-                                        <ReactStars {...secondExample} />
+                                        <ReactStars  style={{ borderRadius: '50%'}} {...secondExample} />
                                       </Col>
                                       <Row lg="12" key={Producdetail?._id}>
                                         <div className="rat-right">
@@ -3427,6 +3431,7 @@ function Productsearch(args) {
                                                           <ReactStars
                                                             style={{
                                                               size: "25px",
+                                                              borderRadius: '50%'
                                                             }}
                                                             {...secondExample}
                                                           />

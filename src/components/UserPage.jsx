@@ -46,7 +46,7 @@ function UserPage({ direction, ...args }) {
       <div className="dropdown">
         <img
           className="imgloginb"
-          src={userdata?.profileImg}
+          src="https://www.dpforwhatsapp.in/img/no-dp-images/7.webp"
           alt="image"
           style={{ width: "50px", height: "42px", borderRadius: "50%" }}
         />

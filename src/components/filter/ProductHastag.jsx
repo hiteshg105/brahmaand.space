@@ -1718,6 +1718,7 @@ function ProductHastag(args) {
                                                 <ReactStars
                                                   
                                                   {...secondExample}
+                                                  style={{ borderRadius: '50%' }}
                                                 />
                                               </Col>
                                               <Row lg="12">
@@ -1881,6 +1882,7 @@ function ProductHastag(args) {
                                                                   <ReactStars
                                                                     style={{
                                                                       size: "25px",
+                                                                      borderRadius: '50%'
                                                                     }}
                                                                     {...secondExample}
                                                                   />
@@ -2562,6 +2564,7 @@ function ProductHastag(args) {
                                                   activeColor="#ffd700"
                                                 /> */}
                                               <ReactStars
+                                               style={{borderRadius: '50%'}}
                                                 {...secondExample}
                                               />
                                             </Col>
@@ -2764,6 +2767,7 @@ function ProductHastag(args) {
                                                                 <ReactStars
                                                                   style={{
                                                                     size: "25px",
+                                                                    borderRadius: '50%'
                                                                   }}
                                                                   {...secondExample}
                                                                 />
@@ -3451,7 +3455,7 @@ function ProductHastag(args) {
                                           size={40}
                                           color2={"#ffd700"}
                                         /> */}
-                                      <ReactStars {...secondExample} />
+                                      <ReactStars style={{borderRadius: '50%'}} {...secondExample} />
                                     </Col>
                                     <Row lg="12" key={Producdetail?._id}>
                                       <div className="rat-right">
@@ -3610,7 +3614,7 @@ function ProductHastag(args) {
                                                         <ReactStars
                                                           style={{
                                                             size: "25px",
-                                                            borderRadius:"15px"
+                                                            borderRadius: '50%'
                                                           }}
                                                           {...secondExample}
                                                         />

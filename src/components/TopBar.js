@@ -122,7 +122,7 @@ function TopBar() {
               <div className="st-1 text-center  ">
                 <div className="imagewite ">
                   <img
-                    src={userdata?.profileImg}
+                    src="https://www.dpforwhatsapp.in/img/no-dp-images/7.webp"
                     className="imageone"
                     style={{
                       height: "263px",
