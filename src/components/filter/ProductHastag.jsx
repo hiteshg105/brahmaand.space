@@ -877,7 +877,7 @@ function ProductHastag(args) {
                   value={searchitem}
                   type="text"
                   onKeyDown={handleEnter}
-                  placeholder="Search for the top resources on any subject ... [e.g. saiteja]"
+                  placeholder="Search for the top resources on any subject ... [e.g. saitej]"
                   className="searchprd inputareaa searchba "
                   onChange={e => {
                     setSearchitem(e.target.value);
