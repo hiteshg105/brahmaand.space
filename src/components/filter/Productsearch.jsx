@@ -844,8 +844,8 @@ function Productsearch(args) {
                 <input
                   value="xyz mfU8"
                   type="text"
-                  onKeyDown={handleEnter}
-
+                  onKeyDown={handleEnter} 
+                  
                   onChange={e => {
                     setSearchitem(e.target.value);
                   }}

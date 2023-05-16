@@ -874,10 +874,10 @@ function ProductHastag(args) {
             <Col className="seachareapr" lg="10">
               <div className="inputareaa searchba">
                 <input
-                  value={searchbarname}
+                  value={searchitem}
                   type="text"
                   onKeyDown={handleEnter}
-                  placeholder={searchbarname}
+                  placeholder="Search for the top resources on any subject ... [e.g. saiteja]"
                   className="searchprd inputareaa searchba "
                   onChange={e => {
                     setSearchitem(e.target.value);
