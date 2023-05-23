@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
+import ReactStars from "react-rating-stars-component";
+import versus from "../../images/versus.png";
+
 import HtmlParser from "react-html-parser";
 import {
   Card,
@@ -41,8 +44,25 @@ function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
   const [newslettervid, setNewslettervid] = useState([]);
+  const [rating, setRating] = useState("");
+
   const navigate = useNavigate();
 
+  const secondExample = {
+    size: 30,
+    count: 5,
+    color: "#434b4d47",
+    activeColor: "#d9ad26",
+    value: 7.5,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    // filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      setRating(newValue);
+    },
+  };
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
@@ -60,7 +80,9 @@ function Hastag() {
       .then((response) => {
         setPop(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        // console.log(error.response.data.data);
+      });
   };
 
   useEffect(() => {
@@ -217,6 +239,148 @@ function Hastag() {
         </section>
       </Container>
       <Container>
+        <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
+        <Swiper
+          breakpoints={{
+            1084: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            980: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            910: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+
+            768: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            320: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            240: {
+              slidesPerView: 1,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+          }}
+          className="sld-1"
+          modules={[Navigation, Pagination, Scrollbar]}
+          spaceBetween={80}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+        >
+          {feature?.map((features) => (
+            <SwiperSlide className="swiperslidescutom" key={features?._id}>
+              <div className="mb-3">
+                <h4>COMEDY</h4>
+              </div>
+              <div className="ifram warzone">
+                <div>
+                  {" "}
+                  <Row className="rowmainheading">
+                    <Col lg="">
+                      <div className="iframmainhead">
+                        <iframe
+                          allowfullscreen="true"
+                          className="iframesetdata"
+                          width="300px"
+                          // height="300px"
+                          style={{ borderRadius: "12px" }}
+                          src={`https://www.youtube.com/embed/${features?.video_link}`}
+                        ></iframe>
+                      </div>
+                    </Col>
+                    <Col lg="2" className="imagehead">
+                      <div className="middlebox">
+                        <div className="imagemain">
+                          <div
+                            className="borderimage"
+                            style={{
+                              borderRadius: "50%",
+                              background: "#5F56C6",
+                            }}
+                          >
+                            <div className="imagemainhead">
+                              <img
+                                // style={{ marginLeft: "20px" }}
+                                className="imageimg"
+                                src={versus}
+                                alt="img"
+                              />
+                            </div>{" "}
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                    <Col lg="">
+                      <iframe
+                        allowfullscreen="true"
+                        className="iframesetdata"
+                        width="300px"
+                        // height="300px"
+                        style={{ borderRadius: "12px" }}
+                        src={`https://www.youtube.com/embed/${features?.video_link}`}
+                      ></iframe>
+                    </Col>
+                  </Row>
+                </div>
+
+                <div>
+                  <h4>Carry Minati (4.00)</h4>
+                  <p>
+                    <ReactStars {...secondExample} />
+                  </p>
+                  <div className="mb-3">
+                    <Button
+                      style={{ borderRadius: "10px" }}
+                      size="sm"
+                      className="btlisting"
+                    >
+                      Rate Now
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+      <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
