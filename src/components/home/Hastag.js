@@ -46,23 +46,21 @@ function Hastag() {
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
-      .then(res => {
+      .then((res) => {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch(err => {});
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
     axios
       .get(`https://backend.brahmaand.space/user/popularBlog`)
 
-      .then(response => {
+      .then((response) => {
         setPop(response.data.data);
       })
-      .catch(error => {
-        // console.log(error.response.data.data);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {
@@ -75,11 +73,11 @@ function Hastag() {
   const allcategory = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getallCategory`)
-      .then(response => {
+      .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch(error => {});
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -88,7 +86,7 @@ function Hastag() {
   function performValidation() {
     return email.length > 14;
   }
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const userid = localStorage.getItem("userid");
 
@@ -97,11 +95,11 @@ function Hastag() {
         email: email,
         userid: userid,
       })
-      .then(response => {
+      .then((response) => {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch(error => {});
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -113,15 +111,15 @@ function Hastag() {
   const monthlynewslettervid = () => {
     axiosConfig
       .get(`/user/getVideo`)
-      .then(res => {
+      .then((res) => {
         setNewslettervid(res.data.data);
         // console.log(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         // console.log(err);
       });
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     if (!isValidEmail(event.target.value)) {
       setError("Please Enter correct Email to Subscribe");
     } else {
@@ -135,11 +133,11 @@ function Hastag() {
   const featuredContent = () => {
     axiosConfig
       .get(`/user/get_featured_cnt`)
-      .then(res => {
+      .then((res) => {
         setFeature(res.data.data);
         // console.log(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -156,7 +154,7 @@ function Hastag() {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: hastag,
         })
-        .then(res => {
+        .then((res) => {
           console.log(res.data);
           if (
             res.data.data[0]?.sub_category === "" ||
@@ -173,7 +171,7 @@ function Hastag() {
             navigate(`/producthastag/${search}`);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -198,7 +196,7 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 32).map(trendingtopics => (
+                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
@@ -222,7 +220,7 @@ function Hastag() {
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
-            {categry?.slice(0, 8).map(value => (
+            {categry?.slice(0, 8).map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
@@ -332,10 +330,10 @@ function Hastag() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={swiper => console.log(swiper)}
+          onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {feature?.map(features => (
+          {feature?.map((features) => (
             <SwiperSlide key={features?._id}>
               <div className="ifram">
                 <iframe
@@ -558,7 +556,7 @@ function Hastag() {
           <div className=" col-lg-6 col-md-6 col-sm-12">
             {/* api integrate form here */}
             {newslettervid
-              ?.map(video => (
+              ?.map((video) => (
                 <Col className="container" key={video?._id}>
                   <div
                     style={{ backgroundImage: `url(${video})` }}
@@ -659,10 +657,10 @@ function Hastag() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={swiper => console.log(swiper)}
+          onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          {popblog?.map(value => (
+          {popblog?.map((value) => (
             <SwiperSlide key={value?._id}>
               <Card key={value?._id}>
                 <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
