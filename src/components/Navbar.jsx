@@ -302,6 +302,12 @@ function CustomNavbar(args) {
         />
       </Navbar.Brand>
 
+      <Link to="/leaderboard">
+        <button className="btn rbutton mobile" type="submit">
+          <h4 className="rText">LeaderBoard</h4>
+        </button>
+      </Link>
+
       <Navbar.Toggle
         className="navbar-toggle"
         aria-controls="responsive-navbar-nav"
