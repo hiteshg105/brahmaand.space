@@ -85,7 +85,7 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
-import ReactGA from "react-ga"
+import ReactGA from "react-ga";
 
 const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
 
