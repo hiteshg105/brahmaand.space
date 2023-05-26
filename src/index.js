@@ -98,9 +98,9 @@ import App from "./App";
 // }, []);
 const rootElement = document.getElementById("root");
 render(
-  // <Router>
+  <HashRouter>
     <App />,
-  // </Router>,
+  </HashRouter>,
   rootElement
 );
 

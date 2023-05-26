@@ -22,6 +22,7 @@ import {
   Route,
   Redirect,
   HashRouter,
+  useLocation,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -91,10 +92,11 @@ const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
-
+  const { pathname } = useLocation()
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
+    console.log("hello")
+    ReactGA.pageview(pathname + window.location.search);
+  }, [pathname]);
 
   return (
     // <div className="App">
@@ -102,87 +104,86 @@ function App() {
     //     <img src={logo} className="App-logo" alt="logo" />
     //   </header>
     // </div>
-    <HashRouter>
-      <AuthProvider>
-        <MenuProvider>
-          <Layout>
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route exact path="/myaccount" element={<Myaccount />} />
-              <Route exact path="/service" element={<Service />} />
-              <Route exact path="/multiModule" element={<MultiModule />} />
-              <Route exact path="/navbar" element={<Navbar />} />
-              <Route exact path="/logout" element={<Logout />} />
-              <Route exact path="/signup" element={<Signup />} />
-              <Route exact path="/blog" element={<Blog />} />
-              <Route exact path="/topBar" element={<TopBar />} />
-              <Route exact path="/videoPosted" element={<VideoPosted />} />
-              <Route exact path="/profileRouter" element={<ProfileRouter />} />
-              <Route exact path="/Bookmark" element={<Bookmarks />} />
-              <Route exact path="/demopaginate" element={<DemoPaginate />} />
-              <Route exact path="/pagination" element={<Pagination />} />
-              <Route exact path="/posts" element={<Posts />} />
-              <Route exact path="/paginationnew" element={<Paginationnew />} />
-              <Route exact path="/allpromotion" element={<Allpromotion />} />
-              <Route exact path="/selectapp" element={<SelectApp />} />
-              <Route exact path="/otpinputpage" element={<OtpInputpage />} />
-              <Route exact path="/resetpassword" element={<ResetPassword />} />
-              <Route exact path="/forgetpassword" element={<Forgetpass />} />
-              <Route exact path="/resetforget" element={<ResetForget />} />
-              <Route
-                exact
-                path="/productsearch/:id"
-                element={<Productsearch />}
-              />
-              <Route
-                exact
-                path="/producthastag/:id"
-                element={<ProductHastag />}
-              />
 
-              <Route
-                exact
-                path="/recblogdesription/:id"
-                element={<Recblogdescription />}
-              />
-              <Route exact path="/passwordhide" element={<Passwordhide />} />
-              <Route exact path="/formvalidation" element={<Formvalidation />} />
-              <Route
-                exact
-                path="/blogdescription/:id"
-                element={<Blogdescription />}
-              />
-              <Route exact path="/faq" element={<FAQ />} />
-              <Route exact path="/leaderBoard" element={<LeaderBoard />} />
-              <Route exact path="/productList/:id" element={<ProductList />} />
-              <Route exact path="/autoSearch" element={<AutoSearch />} />
-              <Route exact path="/privacy" element={<Privacy />} />
-              <Route exact path="/work" element={<Work />} />
-              <Route exact path="/allcategory" element={<Allcategory />} />
-              <Route exact path="/subcategory/:id" element={<AllSubCategory />} />
-              <Route exact path="/contactUs" element={<ContactUs />} />
-              <Route exact path="/notification" element={<Notification />} />
-              <Route
-                exact
-                path="/termsConditions"
-                element={<TermsConditions />}
-              />
-              <Route
-                path="reset-password/:uid/:token"
-                element={<ResetPasswordComponent />}
-              />
-              <Route path="geolocation" element={<Geolocation />} />
-              <Route
-                path="send-reset-password-request"
-                element={<SendRequestResetPasswordComponent />}
-              />
-              <Route path="/loginplan" element={<Loginplan />} />
-            </Routes>
-          </Layout>
-        </MenuProvider>
-      </AuthProvider>
-    </HashRouter>
+    <AuthProvider>
+      <MenuProvider>
+        <Layout>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route exact path="/myaccount" element={<Myaccount />} />
+            <Route exact path="/service" element={<Service />} />
+            <Route exact path="/multiModule" element={<MultiModule />} />
+            <Route exact path="/navbar" element={<Navbar />} />
+            <Route exact path="/logout" element={<Logout />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/blog" element={<Blog />} />
+            <Route exact path="/topBar" element={<TopBar />} />
+            <Route exact path="/videoPosted" element={<VideoPosted />} />
+            <Route exact path="/profileRouter" element={<ProfileRouter />} />
+            <Route exact path="/Bookmark" element={<Bookmarks />} />
+            <Route exact path="/demopaginate" element={<DemoPaginate />} />
+            <Route exact path="/pagination" element={<Pagination />} />
+            <Route exact path="/posts" element={<Posts />} />
+            <Route exact path="/paginationnew" element={<Paginationnew />} />
+            <Route exact path="/allpromotion" element={<Allpromotion />} />
+            <Route exact path="/selectapp" element={<SelectApp />} />
+            <Route exact path="/otpinputpage" element={<OtpInputpage />} />
+            <Route exact path="/resetpassword" element={<ResetPassword />} />
+            <Route exact path="/forgetpassword" element={<Forgetpass />} />
+            <Route exact path="/resetforget" element={<ResetForget />} />
+            <Route
+              exact
+              path="/productsearch/:id"
+              element={<Productsearch />}
+            />
+            <Route
+              exact
+              path="/producthastag/:id"
+              element={<ProductHastag />}
+            />
+
+            <Route
+              exact
+              path="/recblogdesription/:id"
+              element={<Recblogdescription />}
+            />
+            <Route exact path="/passwordhide" element={<Passwordhide />} />
+            <Route exact path="/formvalidation" element={<Formvalidation />} />
+            <Route
+              exact
+              path="/blogdescription/:id"
+              element={<Blogdescription />}
+            />
+            <Route exact path="/faq" element={<FAQ />} />
+            <Route exact path="/leaderBoard" element={<LeaderBoard />} />
+            <Route exact path="/productList/:id" element={<ProductList />} />
+            <Route exact path="/autoSearch" element={<AutoSearch />} />
+            <Route exact path="/privacy" element={<Privacy />} />
+            <Route exact path="/work" element={<Work />} />
+            <Route exact path="/allcategory" element={<Allcategory />} />
+            <Route exact path="/subcategory/:id" element={<AllSubCategory />} />
+            <Route exact path="/contactUs" element={<ContactUs />} />
+            <Route exact path="/notification" element={<Notification />} />
+            <Route
+              exact
+              path="/termsConditions"
+              element={<TermsConditions />}
+            />
+            <Route
+              path="reset-password/:uid/:token"
+              element={<ResetPasswordComponent />}
+            />
+            <Route path="geolocation" element={<Geolocation />} />
+            <Route
+              path="send-reset-password-request"
+              element={<SendRequestResetPasswordComponent />}
+            />
+            <Route path="/loginplan" element={<Loginplan />} />
+          </Routes>
+        </Layout>
+      </MenuProvider>
+    </AuthProvider>
   );
 }
 
