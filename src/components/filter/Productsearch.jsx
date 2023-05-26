@@ -845,7 +845,7 @@ function Productsearch(args) {
                   value={searchitem}
                   type="text"
                   onKeyDown={handleEnter}
-                  placeholder=" Search for the top resources on any subject ... (e.g. Java) "
+                  placeholder=" Search for the top content in any niche ... (e.g. Java)"
                   className="searchprd inputareaa searchba "
                   onChange={e => {
                     setSearchitem(e.target.value);

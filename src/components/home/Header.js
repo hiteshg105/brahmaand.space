@@ -177,7 +177,7 @@ function Header() {
 
             <input
               type="text"
-              placeholder="Search for the top resources on any subject ... (e.g. Java) "
+              placeholder="Search for the top content in any niche ... (e.g. Java) "
               className="search"
               onKeyDown={handleEnter}
               value={searchdata}

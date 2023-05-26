@@ -580,7 +580,7 @@ function Hastag() {
             <Card>
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
-                <p>Search for the top content on any subject ... (e.g. Java)</p>
+                <p>Search for the top content in any niche ... (e.g. Java)</p>
 
                 <ShowMore
                   className="showmore"
