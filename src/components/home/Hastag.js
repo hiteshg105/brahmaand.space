@@ -311,7 +311,6 @@ function Hastag() {
               </div>
               <div className="ifram warzone">
                 <div>
-                  {" "}
                   <Row className="rowmainheading">
                     <Col lg="">
                       <div className="iframmainhead">
@@ -672,7 +671,7 @@ function Hastag() {
             <Container>
               <Container>
                 <Container>
-                  <Col className="  Card-Form ">
+                  <Col className="Card-Form ">
                     <Container>
                       <p className="d-flex  ">Get the Latest Updates.</p>
                     </Container>

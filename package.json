@@ -25,7 +25,7 @@
     "moment-timezone": "^0.5.38",
     "multiselect-react-dropdown": "^2.0.25",
     "ng-multiselect-dropdown": "^1.0.0-beta.19",
-    "node-sass": "^7.0.3",
+    "node-sass": "^9.0.0",
     "pretty-rating-react": "^2.1.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -96,7 +96,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://localhost:5000/",
+
   "devDependencies": {
     "@babel/node": "^7.16.8",
     "@babel/plugin-transform-react-jsx": "^7.17.3",
