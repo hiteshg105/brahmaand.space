@@ -92,12 +92,23 @@ const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 function App() {
-  const { pathname } = useLocation()
-  useEffect(() => {
-    console.log("hello")
-    ReactGA.pageview(pathname + window.location.search);
-  }, [pathname]);
+  const location = useLocation()
 
+  useEffect(() => {
+    ReactGA.initialize(TRACKING_ID);
+  }, []);
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
+
+  useEffect(() => {
+    ReactGA.set({ page: location.pathname })
+    ReactGA.pageview(location.pathname)
+  }, [location]);
+
+  console.log(location.pathname)
   return (
     // <div className="App">
     //   <header className="App-header">

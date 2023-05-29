@@ -54,6 +54,7 @@
     "react-player": "^2.11.0",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.4.1",
+    "react-router-ga": "^1.2.3",
     "react-router-sitemap-generator": "0.0.8",
     "react-scripts": "5.0.0",
     "react-search-autocomplete": "^8.2.1",
