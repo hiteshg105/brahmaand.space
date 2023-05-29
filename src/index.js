@@ -16,55 +16,55 @@ import ResetPassword from "./components/ResetPassword";
 // Routing
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
-  Redirect,
-  HashRouter,
+  // Routes,
+  // Route,
+  // Redirect,
+  // HashRouter,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import Pages
-import Landing from "./pages/index";
-import CreateAccount from "./pages";
+// import Landing from "./pages/index";
+// import CreateAccount from "./pages";
 // import Myaccount from "../src/components/Myaccount.jsx";
 
-// import UserAccountInfo from "./pages/UserAccountInfo";
-import Service from "./pages/service";
-import Logout from "./pages/logout";
-import ResetPasswordComponent from "./components/ResetPasswordComponent";
-import SendRequestResetPasswordComponent from "./pages/send-reset-password";
-import MultiModule from "./components/homepages/MultiModule";
-import Home from "./components/home/Home";
-import Activity from "./components/Account";
-import Blog from "./components/Blog";
-import Bookmarks from "./components/Bookmarks";
-import Points from "./components/Points";
-import ProfileRouter from "./components/ProfileRouter";
-import TopBar from "./components/TopBar";
-import VideoPosted from "./components/VideoPosted";
-import ProductList from "./components/filter/ProductList";
-import AutoSearch from "./components/filter/AutoSearch";
-import Privacy from "./components/Privacy";
-import TermsConditions from "./components/TermsConditions";
-import ContactUs from "./components/home/ContactUs";
-import Work from "./components/Work";
-import Allcategory from "./components/home/Allcategory";
-import AllSubCategory from "./components/home/AllSubCategory";
-import Notification from "./components/Notification";
-import Paginationnew from "./components/Paginationnew";
-import Blogdescription from "./components/Blogdescription";
-import DemoPaginate from "./components/DemoPaginate";
-import Pagination from "./components/Pagination";
-import Posts from "./components/Posts";
-import Allpromotion from "./components/filter/Allpromotion";
-import Recblogdescription from "./components/Recblogdescription";
-import Layout from "./components/Layout";
-import LeaderBoard from "./components/home/LeaderBoard";
-import NewSignup from "./components/NewSignup";
-import Passwordhide from "./components/Passwordhide";
-import Formvalidation from "./components/Formvalidation";
-import OtpInputpage from "./pages/OtpInputpage";
+// // import UserAccountInfo from "./pages/UserAccountInfo";
+// import Service from "./pages/service";
+// import Logout from "./pages/logout";
+// import ResetPasswordComponent from "./components/ResetPasswordComponent";
+// import SendRequestResetPasswordComponent from "./pages/send-reset-password";
+// import MultiModule from "./components/homepages/MultiModule";
+// import Home from "./components/home/Home";
+// import Activity from "./components/Account";
+// import Blog from "./components/Blog";
+// import Bookmarks from "./components/Bookmarks";
+// import Points from "./components/Points";
+// import ProfileRouter from "./components/ProfileRouter";
+// import TopBar from "./components/TopBar";
+// import VideoPosted from "./components/VideoPosted";
+// import ProductList from "./components/filter/ProductList";
+// import AutoSearch from "./components/filter/AutoSearch";
+// import Privacy from "./components/Privacy";
+// import TermsConditions from "./components/TermsConditions";
+// import ContactUs from "./components/home/ContactUs";
+// import Work from "./components/Work";
+// import Allcategory from "./components/home/Allcategory";
+// import AllSubCategory from "./components/home/AllSubCategory";
+// import Notification from "./components/Notification";
+// import Paginationnew from "./components/Paginationnew";
+// import Blogdescription from "./components/Blogdescription";
+// import DemoPaginate from "./components/DemoPaginate";
+// import Pagination from "./components/Pagination";
+// import Posts from "./components/Posts";
+// import Allpromotion from "./components/filter/Allpromotion";
+// import Recblogdescription from "./components/Recblogdescription";
+// import Layout from "./components/Layout";
+// import LeaderBoard from "./components/home/LeaderBoard";
+// import NewSignup from "./components/NewSignup";
+// import Passwordhide from "./components/Passwordhide";
+// import Formvalidation from "./components/Formvalidation";
+// import OtpInputpage from "./pages/OtpInputpage";
 // Import Context
 import { MenuProvider } from "./context/MenuContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -74,16 +74,18 @@ import Login from "./components/Login.jsx";
 import Myaccount from "./components/Myaccount";
 import Geolocation from "./components/filter/Golocation";
 
-// import Searchfiltermodel from "./components/filter/Searchfiltermodel";
-import FAQ from "./components/FAQ";
-import SelectApp from "./components/SelectApp";
-import Forgetpass from "./pages/Forgetpass";
-import ResetForget from "./components/ResetForget";
-import Productsearch from "./components/filter/Productsearch";
-import ProductHastag from "./components/filter/ProductHastag";
-import Loginplan from "./planable.io/Loginplan";
-import ReactGA from "react-ga";
+// // import Searchfiltermodel from "./components/filter/Searchfiltermodel";
+// import FAQ from "./components/FAQ";
+// import SelectApp from "./components/SelectApp";
+// import Forgetpass from "./pages/Forgetpass";
+// import ResetForget from "./components/ResetForget";
+// import Productsearch from "./components/filter/Productsearch";
+// import ProductHastag from "./components/filter/ProductHastag";
+// import Loginplan from "./planable.io/Loginplan";
 import App from "./App";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-250944909-1');
 
 
 
@@ -98,9 +100,9 @@ import App from "./App";
 // }, []);
 const rootElement = document.getElementById("root");
 render(
-  <HashRouter>
-    <App />,
-  </HashRouter>,
+  <Router>
+    <App />
+  </Router>,
   rootElement
 );
 

@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import ReactGA from "react-ga";
+
 
 // Fonts
 import "./assets/fonts/Arial/Arial.ttf";
@@ -12,37 +12,25 @@ import "./assets/fonts/Futura/Futura.ttc";
 import "./assets/fonts/MyriadPro/MyriadPro-Regular.otf";
 
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import { render } from "react-dom";
 import ResetPassword from "./components/ResetPassword";
 // Routing
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Redirect,
-  HashRouter,
-  useLocation,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import Pages
-import Landing from "./pages/index";
-import CreateAccount from "./pages";
-// import Myaccount from "../src/components/Myaccount.jsx";
-
-// import UserAccountInfo from "./pages/UserAccountInfo";
 import Service from "./pages/service";
 import Logout from "./pages/logout";
 import ResetPasswordComponent from "./components/ResetPasswordComponent";
 import SendRequestResetPasswordComponent from "./pages/send-reset-password";
 import MultiModule from "./components/homepages/MultiModule";
 import Home from "./components/home/Home";
-import Activity from "./components/Account";
 import Blog from "./components/Blog";
 import Bookmarks from "./components/Bookmarks";
-import Points from "./components/Points";
 import ProfileRouter from "./components/ProfileRouter";
 import TopBar from "./components/TopBar";
 import VideoPosted from "./components/VideoPosted";
@@ -64,7 +52,6 @@ import Allpromotion from "./components/filter/Allpromotion";
 import Recblogdescription from "./components/Recblogdescription";
 import Layout from "./components/Layout";
 import LeaderBoard from "./components/home/LeaderBoard";
-import NewSignup from "./components/NewSignup";
 import Passwordhide from "./components/Passwordhide";
 import Formvalidation from "./components/Formvalidation";
 import OtpInputpage from "./pages/OtpInputpage";
@@ -85,30 +72,88 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
-import ReactGA from "react-ga";
 
-const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
-
-ReactGA.initialize(TRACKING_ID);
 
 function App() {
-  const location = useLocation()
+
+
 
   useEffect(() => {
-    ReactGA.initialize(TRACKING_ID);
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
-
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
+  console.log(window.location.pathname)
 
 
-  useEffect(() => {
-    ReactGA.set({ page: location.pathname })
-    ReactGA.pageview(location.pathname)
-  }, [location]);
 
-  console.log(location.pathname)
+
+
+
+
+
+
+
+
+
+
+  // // useEffect(() => {
+  // //   const handleHashChange = () => {
+  // //     ReactGA.pageview(window.location.pathname + window.location.search + window.location.hash);
+  // //   };
+
+  // //   window.addEventListener('hashchange', handleHashChange);
+
+  // //   return () => {
+  // //     window.removeEventListener('hashchange', handleHashChange);
+  // //   };
+  // // }, []);
+  // useEffect(() => {
+  //   console.log("hello")
+  //   ReactGA.pageview(window.location.pathname + window.location.search);
+  //   console.log(window.location.pathname)
+  // }, [window.location.pathname]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     // <div className="App">
     //   <header className="App-header">
