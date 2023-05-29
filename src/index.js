@@ -19,7 +19,7 @@ import {
   // Routes,
   // Route,
   // Redirect,
-  // HashRouter,
+  HashRouter,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -100,9 +100,9 @@ ReactGA.initialize('UA-250944909-1');
 // }, []);
 const rootElement = document.getElementById("root");
 render(
-  <Router>
+  <HashRouter>
     <App />
-  </Router>,
+  </HashRouter>,
   rootElement
 );
 
