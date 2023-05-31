@@ -2,9 +2,8 @@ import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
 import swal from "sweetalert";
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./spinner.css";
@@ -13,7 +12,6 @@ const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
 const SendRequestResetPasswordComponent = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
   const [emailcheck, setEmailcheck] = useState("");
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +19,7 @@ const SendRequestResetPasswordComponent = () => {
 
   const handleEmail = (e) => {
     setEmailcheck(e.target.value);
-    var expression =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var expression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regex = new RegExp(expression);
 
     var res = "";
