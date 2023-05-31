@@ -9,8 +9,10 @@ import ServiceBanner from "../components/ServiceBanner";
 import ClavesSteps from "../components/ClavesSteps";
 import ContactUs from "../components/home/ContactUs";
 import { Link } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 export default function Home() {
+  const gaEventTracker = useAnalyticsEventTracker('Home')
   return (
     <div>
       <BannerCarousel />
@@ -59,7 +61,7 @@ export default function Home() {
 
         <div className="comenzar-button-div">
           <Link to="/create-account">
-            <Button variant="primary" className="comenzar-button">
+            <Button variant="primary" className="comenzar-button" onClick={()=>gaEventTracker('COMENZAR YA!')}>
               COMENZAR YA!
             </Button>
           </Link>

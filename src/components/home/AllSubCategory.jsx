@@ -14,6 +14,7 @@ import {
 import { InputGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import swal from "sweetalert";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function AllSubCategory() {
   let Params = useParams();
@@ -45,6 +46,7 @@ function AllSubCategory() {
         // console.log(error.response.data);
       });
   };
+  const gaEventTracker = useAnalyticsEventTracker('AllSubCategory')
   return (
     <div>
       <p className="category mt-5 mb-2">
@@ -67,7 +69,7 @@ function AllSubCategory() {
                       />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting">
+                          <Button className="btlisting" onClick={()=>gaEventTracker('Listing')}>
                             {value?.conent_count} - Listing
                           </Button>
                         </Row>

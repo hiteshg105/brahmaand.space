@@ -50,7 +50,7 @@ function Footer() {
                 <li className="justify-content-left">
                   <Link to="#">
                     <b>Address</b> : Bengaluru, India
-                    <p> PO Box 97845 Baker st. 567,</p>
+              
                   </Link>
                 </li>
               </ul>
@@ -61,16 +61,13 @@ function Footer() {
               <h4>Popular Categories</h4>
               <ul>
                 <li>
-                  <Link to="#">Health care</Link>
+                  <Link to="/subcategory/645796f3c4c9cb7557f39db6">Software Development</Link>
                 </li>
                 <li>
-                  <Link to="#">Business</Link>
+                  <Link to="/subcategory/646b3f1e29866f23e9ac1ecd">Health & Wellness</Link>
                 </li>
                 <li>
-                  <Link to="#">Education</Link>
-                </li>
-                <li>
-                  <Link to="#">Eat & Food</Link>
+                  <Link to="/subcategory/646ef61f0fba31d8db059536">Fashion</Link>
                 </li>
                 <li>
                   <Link to="/leaderboard">LeaderBoard</Link>
@@ -84,9 +81,6 @@ function Footer() {
               <ul>
                 <li>
                   <Link to="/work">How It Works</Link>
-                </li>
-                <li>
-                  <Link to="#">Pricing Packages</Link>
                 </li>
                 <li>
                   <Link to="/blog">Our Blog</Link>
@@ -120,7 +114,7 @@ function Footer() {
           <div className="footer-bootom">
             <Row>
               <Col md="6">
-                <p>© brahmaand.space 2022 -2023. All rights reserved</p>
+                <p>© brahmaand.space 2023 -2024. All rights reserved</p>
               </Col>
               <Col md="6">
                 <div className="icon">

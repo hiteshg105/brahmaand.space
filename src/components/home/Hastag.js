@@ -39,6 +39,7 @@ import "../../styles/Hastag.scss";
 
 import { Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
@@ -201,6 +202,9 @@ function Hastag() {
 
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
+
+
+  const gaEventTracker = useAnalyticsEventTracker('Hastag')
   return (
     <>
       <Container>
@@ -222,7 +226,7 @@ function Hastag() {
                       <button
                         key={trendingtopics._id}
                         onClick={() =>
-                          handlehastagtopic(trendingtopics?.topics)
+                          (handlehastagtopic(trendingtopics?.topics),gaEventTracker(`${trendingtopics?.topics}`))
                         }
                         className="btn1"
                       >
@@ -392,7 +396,7 @@ function Hastag() {
                       <img className="imgCol" src={value?.cat_img} alt="img" />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting">
+                          <Button className="btlisting" onClick={()=>gaEventTracker('Listing')}>
                             {value?.subCount} - Listing
                           </Button>
                         </Row>
@@ -426,7 +430,7 @@ function Hastag() {
           to="/allcategory"
           style={{ color: "white", textDecoration: "none" }}
         >
-          <Button to="/allcategory" className="viewall" size="lg">
+          <Button to="/allcategory" className="viewall" size="lg" onClick={()=>gaEventTracker('VIEW All')}>
             VIEW All
           </Button>
         </Link>
@@ -705,7 +709,7 @@ function Hastag() {
                           sm="3"
                           type="submit"
                           disabled={!performValidation()}
-                          onClick={handleSubmit}
+                          onClick={() => (handleSubmit(),gaEventTracker('Subscribe'))}
                           className=" d-flex justify-content-center subscribebtn col-md-4"
                         >
                           Subscribe

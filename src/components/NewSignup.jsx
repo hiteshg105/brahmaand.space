@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { signInWithGoogle } from "../Firebase";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function NewSignup() {
   const navigate = useNavigate();
@@ -223,6 +224,8 @@ function NewSignup() {
     errtwo,
   ]);
 
+  const gaEventTracker = useAnalyticsEventTracker('NewSignup');
+  
   return (
     <Container className="mt-4">
       <Row>
@@ -360,7 +363,7 @@ function NewSignup() {
                 style={{ padding: "13px", borderRadius: "11px" }}
                 // type="submit"
                 class="btn btn-primary createaccount"
-                onClick={handleSubmit}
+                onClick={(e) => (handleSubmit(e),gaEventTracker('CREATE ACCOUNT'))}
               >
                 <b>CREATE ACCOUNT</b>
               </button>
@@ -375,7 +378,7 @@ function NewSignup() {
           <div className style={{ marginTop: "18px" }}>
             <Row className="signupwithgoogle">
               <button
-                onClick={handlegooglelogin}
+                onClick={() => (handlegooglelogin(),gaEventTracker('Sign in with Google'))}
                 className="d-flex justify-content-center signupwithgoogle"
               >
                 <img

@@ -32,6 +32,7 @@ import PrettyRating from "pretty-rating-react";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { Modal, ModalBody, ModalHeader, Label } from "reactstrap";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function VideoPosted(args) {
   const [modalone, setModalone] = useState(false);
@@ -326,7 +327,7 @@ function VideoPosted(args) {
         });
     }
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('VideoPosted')
   return (
     <div className="container test nohover mb-4">
       <h3 className="d-flex justify-content-center mt-4 mb-4">
@@ -335,271 +336,270 @@ function VideoPosted(args) {
       <div className="search-st mt-4 mb-4">
         {mylikes !== ""
           ? mylikes?.map((data) => (
-              <Row className="videopostedall mb-4" key={data?._id}>
-                <Col md="4">
-                  <div className="product-image8 st-2">
-                    <Link
-                      key={data?._id}
-                      onClick={() => handleSelection(data?._id)}
-                    >
-                      {" "}
-                      {data?.link.match(
-                        /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
-                      ) ? (
-                        <>
-                          {data?.link ? (
-                            <>
-                              {/* <h2 style={{ color: "green" }}>{promotion[1]}</h2> */}
-                              <iframe
-                                allowfullscreen="true"
-                                width="100%"
-                                height="280px"
-                                style={{
-                                  borderRadius: "12px",
-                                }}
-                                src={`https://www.youtube.com/embed/${
-                                  data?.link?.split("=")[1]
+            <Row className="videopostedall mb-4" key={data?._id}>
+              <Col md="4">
+                <div className="product-image8 st-2">
+                  <Link
+                    key={data?._id}
+                    onClick={() => handleSelection(data?._id)}
+                  >
+                    {" "}
+                    {data?.link.match(
+                      /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                    ) ? (
+                      <>
+                        {data?.link ? (
+                          <>
+                            {/* <h2 style={{ color: "green" }}>{promotion[1]}</h2> */}
+                            <iframe
+                              allowfullscreen="true"
+                              width="100%"
+                              height="280px"
+                              style={{
+                                borderRadius: "12px",
+                              }}
+                              src={`https://www.youtube.com/embed/${data?.link?.split("=")[1]
                                 }`}
-                              ></iframe>
-                            </>
-                          ) : null}
-                        </>
-                      ) : (
-                        <img
-                          style={{ borderRadius: "10px" }}
-                          src={data?.img}
-                          alt="image"
-                          width="100%"
-                          height="260px"
-                        />
-                      )}
-                      {/* <img
+                            ></iframe>
+                          </>
+                        ) : null}
+                      </>
+                    ) : (
+                      <img
+                        style={{ borderRadius: "10px" }}
+                        src={data?.img}
+                        alt="image"
+                        width="100%"
+                        height="260px"
+                      />
+                    )}
+                    {/* <img
                         height={280}
                         src={data?.img}
                         alt="image"
                         style={{ borderRadius: "10px" }}
                         width="90%"
                       /> */}
-                      <Modal
-                        key={Producdetail?._Id}
-                        className="mdlg"
-                        isOpen={modal}
-                        toggle={toggle}
-                        {...args}
-                      >
-                        <ModalBody>
-                          <div className="main-content">
-                            <h2>
-                              {ReactHtmlParser(
-                                Producdetail?.resTitle?.slice(0, 150)
-                              )}
-                            </h2>
-                            <div className="top-icon">
-                              <Link to="#">
-                                <img src={mdicon1} alt="" />
-                              </Link>
-                              <Link to="#">
-                                <img src={mdicon2} alt="" />
-                              </Link>
-                            </div>
-                            <div className="tag-list">
-                              <div className="tag-1">
-                                <h5>
-                                  <span>
-                                    <img src={icons} alt="" width="30px" />
-                                  </span>
-                                  Topic:
-                                </h5>
-                              </div>
-                              <div className=" d-flex tag-2">
-                                {Producdetail?.topics?.map((val) => (
-                                  <Link className="d-flex " to="#">
-                                    {val}{" "}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-
-                            <hr></hr>
+                    <Modal
+                      key={Producdetail?._Id}
+                      className="mdlg"
+                      isOpen={modal}
+                      toggle={toggle}
+                      {...args}
+                    >
+                      <ModalBody>
+                        <div className="main-content">
+                          <h2>
+                            {ReactHtmlParser(
+                              Producdetail?.resTitle?.slice(0, 150)
+                            )}
+                          </h2>
+                          <div className="top-icon">
+                            <Link to="#">
+                              <img src={mdicon1} alt="" />
+                            </Link>
+                            <Link to="#">
+                              <img src={mdicon2} alt="" />
+                            </Link>
                           </div>
-
-                          <div className="mid">
-                            <h5 className="mt-3">
-                              Link :
-                              <a href={Producdetail?.link}>
-                                {Producdetail?.link}
-                              </a>
-                            </h5>
-                            <div className="mid-content">
-                              <Row>
-                                <Col lg="6" md="6">
-                                  <div className="mid-1 mb-3">
-                                    <div className="mid-1-a">
-                                      <img src={createricon} alt="" />
-                                    </div>
-                                    <div className="mid-1-b">
-                                      <p>Creator:</p>
-                                      <h4>{Producdetail?.creatorName}</h4>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="6" md="6">
-                                  <div className="mid-1 mb-3 ">
-                                    <div className="mid-1-a">
-                                      <img src={usericon} alt="" />
-                                    </div>
-                                    <div className="mid-1-b">
-                                      <p>Submitted by:</p>
-                                      <h4>
-                                        {Producdetail?.userid?.display_name}
-                                      </h4>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="3" md="3">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img src={typeicon} alt="" width="35px" />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Type:</p>
-                                      <Link to="#">{Producdetail?.type}</Link>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="3" md="3">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img
-                                        src={formaticon}
-                                        alt=""
-                                        width="35px"
-                                      />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Format:</p>
-                                      <Link to="#">{Producdetail?.format}</Link>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="3" md="3">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img
-                                        src={diffculty}
-                                        alt=""
-                                        width="35px"
-                                      />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Category:</p>
-                                      <Link>
-                                        {Producdetail?.category?.title}
-                                      </Link>
-                                    </div>
-                                  </div>
-                                </Col>
-
-                                <Col lg="3" md="3">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img src={yearicon} alt="" width="35px" />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Year:</p>
-
-                                      {Producdetail?.relYear?.map((year) => (
-                                        <Link>{year?.yrName}</Link>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="3" md="3">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img src={rating} alt="" width="35px" />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Ratings:</p>
-                                      <Link to="#">
-                                        {Producdetail?.ava_rating}
-                                      </Link>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="4" md="4">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img
-                                        src={submiticon}
-                                        alt=""
-                                        width="35px"
-                                      />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Submitted:</p>
-                                      <Link to="#">
-                                        <Moment format="ll">
-                                          {Producdetail?.createdAt}
-                                        </Moment>
-                                      </Link>
-                                    </div>
-                                  </div>
-                                </Col>
-                                <Col lg="4" md="4">
-                                  <div className="mid-1 mb-3 tt-2">
-                                    <div className="mid-1-a">
-                                      <img
-                                        src={languageicon}
-                                        alt=""
-                                        width="35px"
-                                      />
-                                    </div>
-                                    <div className="mid-1-b tt-1">
-                                      <p>Language:</p>
-                                      {Producdetail?.language?.map((lang) => (
-                                        <span>{lang?.language} </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                </Col>
-                              </Row>
+                          <div className="tag-list">
+                            <div className="tag-1">
+                              <h5>
+                                <span>
+                                  <img src={icons} alt="" width="30px" />
+                                </span>
+                                Topic:
+                              </h5>
+                            </div>
+                            <div className=" d-flex tag-2">
+                              {Producdetail?.topics?.map((val) => (
+                                <Link className="d-flex " to="#">
+                                  {val}{" "}
+                                </Link>
+                              ))}
                             </div>
                           </div>
 
                           <hr></hr>
+                        </div>
 
-                          <div className="description mt-3 mb-3">
-                            <h4>Description:</h4>
-                            <p>
-                              {ReactHtmlParser(
-                                Producdetail?.desc?.slice(0, 80)
-                              )}
-                            </p>
-                          </div>
-
-                          <hr></hr>
-
-                          <div className="rating-box">
+                        <div className="mid">
+                          <h5 className="mt-3">
+                            Link :
+                            <a href={Producdetail?.link}>
+                              {Producdetail?.link}
+                            </a>
+                          </h5>
+                          <div className="mid-content">
                             <Row>
-                              <Col lg="4">
-                                <div className="rat-left mt-3">
-                                  <h4>Customer Rating</h4>
-                                  <div className="">
-                                    <PrettyRating
-                                      value={Producdetail?.ava_rating}
-                                      icons={icons.star}
-                                      colors={colors.star}
+                              <Col lg="6" md="6">
+                                <div className="mid-1 mb-3">
+                                  <div className="mid-1-a">
+                                    <img src={createricon} alt="" />
+                                  </div>
+                                  <div className="mid-1-b">
+                                    <p>Creator:</p>
+                                    <h4>{Producdetail?.creatorName}</h4>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="6" md="6">
+                                <div className="mid-1 mb-3 ">
+                                  <div className="mid-1-a">
+                                    <img src={usericon} alt="" />
+                                  </div>
+                                  <div className="mid-1-b">
+                                    <p>Submitted by:</p>
+                                    <h4>
+                                      {Producdetail?.userid?.display_name}
+                                    </h4>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="3" md="3">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img src={typeicon} alt="" width="35px" />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Type:</p>
+                                    <Link to="#">{Producdetail?.type}</Link>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="3" md="3">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img
+                                      src={formaticon}
+                                      alt=""
+                                      width="35px"
                                     />
-                                    <span className="starratinginno">
-                                      {Producdetail?.ava_rating} of 5 Stars
-                                    </span>
-                                    <br></br>
-                                    <span className="mt-3">
-                                      {getonecomment?.length}- Customers Reviews
-                                    </span>
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Format:</p>
+                                    <Link to="#">{Producdetail?.format}</Link>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="3" md="3">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img
+                                      src={diffculty}
+                                      alt=""
+                                      width="35px"
+                                    />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Category:</p>
+                                    <Link>
+                                      {Producdetail?.category?.title}
+                                    </Link>
+                                  </div>
+                                </div>
+                              </Col>
 
-                                    {/* <Row>
+                              <Col lg="3" md="3">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img src={yearicon} alt="" width="35px" />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Year:</p>
+
+                                    {Producdetail?.relYear?.map((year) => (
+                                      <Link>{year?.yrName}</Link>
+                                    ))}
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="3" md="3">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img src={rating} alt="" width="35px" />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Ratings:</p>
+                                    <Link to="#">
+                                      {Producdetail?.ava_rating}
+                                    </Link>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="4" md="4">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img
+                                      src={submiticon}
+                                      alt=""
+                                      width="35px"
+                                    />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Submitted:</p>
+                                    <Link to="#">
+                                      <Moment format="ll">
+                                        {Producdetail?.createdAt}
+                                      </Moment>
+                                    </Link>
+                                  </div>
+                                </div>
+                              </Col>
+                              <Col lg="4" md="4">
+                                <div className="mid-1 mb-3 tt-2">
+                                  <div className="mid-1-a">
+                                    <img
+                                      src={languageicon}
+                                      alt=""
+                                      width="35px"
+                                    />
+                                  </div>
+                                  <div className="mid-1-b tt-1">
+                                    <p>Language:</p>
+                                    {Producdetail?.language?.map((lang) => (
+                                      <span>{lang?.language} </span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
+                        </div>
+
+                        <hr></hr>
+
+                        <div className="description mt-3 mb-3">
+                          <h4>Description:</h4>
+                          <p>
+                            {ReactHtmlParser(
+                              Producdetail?.desc?.slice(0, 80)
+                            )}
+                          </p>
+                        </div>
+
+                        <hr></hr>
+
+                        <div className="rating-box">
+                          <Row>
+                            <Col lg="4">
+                              <div className="rat-left mt-3">
+                                <h4>Customer Rating</h4>
+                                <div className="">
+                                  <PrettyRating
+                                    value={Producdetail?.ava_rating}
+                                    icons={icons.star}
+                                    colors={colors.star}
+                                  />
+                                  <span className="starratinginno">
+                                    {Producdetail?.ava_rating} of 5 Stars
+                                  </span>
+                                  <br></br>
+                                  <span className="mt-3">
+                                    {getonecomment?.length}- Customers Reviews
+                                  </span>
+
+                                  {/* <Row>
                                       <Col
                                         className="d-flex justify-content-left "
                                         style={{ color: "blue" }}
@@ -703,54 +703,54 @@ function VideoPosted(args) {
                                         />
                                       </Col>
                                     </Row> */}
-                                  </div>
                                 </div>
-                              </Col>
-                              <Col lg="8">
-                                {" "}
-                                <Col lg="6">
-                                  <h4 className="mt-3">Write your Review</h4>
-                                  <ReactStars {...secondExample} />
-                                  {/* <StarsRating
+                              </div>
+                            </Col>
+                            <Col lg="8">
+                              {" "}
+                              <Col lg="6">
+                                <h4 className="mt-3">Write your Review</h4>
+                                <ReactStars {...secondExample} />
+                                {/* <StarsRating
                                     count={5}
                                     onChange={ratingChanged}
                                     size={40}
                                     color2={"#ffd700"}
                                   /> */}
-                                </Col>
                               </Col>
-                            </Row>
-                            <Row>
-                              <Col lg="12" key={Producdetail?._id}>
-                                <div className="rat-right">
-                                  <div className="">
-                                    <form key={Producdetail?._id}>
-                                      <textarea
-                                        key={Producdetail?._id}
-                                        value={text}
-                                        name="text"
-                                        onChange={onchangehandler}
-                                        className="form-control st-taetarea"
-                                        placeholder=" Enter your Review if you want"
-                                      ></textarea>
-                                      <Button
-                                        onClick={(e) =>
-                                          handleSubmit(e, Producdetail?._id)
-                                        }
-                                        // onClick={handleSubmit}
-                                        className="bt-st reviewbutton mb-3"
-                                      >
-                                        Submit
-                                      </Button>
-                                    </form>
-                                  </div>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg="12" key={Producdetail?._id}>
+                              <div className="rat-right">
+                                <div className="">
+                                  <form key={Producdetail?._id}>
+                                    <textarea
+                                      key={Producdetail?._id}
+                                      value={text}
+                                      name="text"
+                                      onChange={onchangehandler}
+                                      className="form-control st-taetarea"
+                                      placeholder=" Enter your Review if you want"
+                                    ></textarea>
+                                    <Button
+                                      onClick={(e) =>
+                                        (handleSubmit(e, Producdetail?._id), gaEventTracker('Submit'))
+                                      }
+                                      // onClick={handleSubmit}
+                                      className="bt-st reviewbutton mb-3"
+                                    >
+                                      Submit
+                                    </Button>
+                                  </form>
                                 </div>
-                              </Col>
-                            </Row>
-                          </div>
-                          <Row key={data?._id}>
-                            <Col lg="4"></Col>
-                            {/* <Col lg="8" key={data?._id}>
+                              </div>
+                            </Col>
+                          </Row>
+                        </div>
+                        <Row key={data?._id}>
+                          <Col lg="4"></Col>
+                          {/* <Col lg="8" key={data?._id}>
                               <button
                                 key={data?.submitresrcId?._id}
                                 className="addbookmark  btn btn-secondary"
@@ -760,105 +760,105 @@ function VideoPosted(args) {
                                 Remove bookmark
                               </button>
                             </Col> */}
-                          </Row>
-                          <hr></hr>
-                          <div className="review-list mt-3  ">
-                            <h4>Reviews:</h4>
-                            {getonecomment?.map((value) => (
-                              <div className="re-list">
-                                <div className="re-listimg">
-                                  <img
-                                    src={value?.userid?.profileImg}
-                                    alt="UserImage"
+                        </Row>
+                        <hr></hr>
+                        <div className="review-list mt-3  ">
+                          <h4>Reviews:</h4>
+                          {getonecomment?.map((value) => (
+                            <div className="re-list">
+                              <div className="re-listimg">
+                                <img
+                                  src={value?.userid?.profileImg}
+                                  alt="UserImage"
+                                />
+                              </div>
+                              <div className="re-listcont">
+                                <h5>
+                                  {value?.userid?.username}
+                                  <span>
+                                    <Moment format="ll">
+                                      {value?.createdAt}
+                                    </Moment>
+                                  </span>
+                                </h5>
+                                <div className="star-1">
+                                  <PrettyRating
+                                    value={value?.rating}
+                                    icons={icons.star}
+                                    colors={colors.star}
                                   />
                                 </div>
-                                <div className="re-listcont">
-                                  <h5>
-                                    {value?.userid?.username}
-                                    <span>
-                                      <Moment format="ll">
-                                        {value?.createdAt}
-                                      </Moment>
-                                    </span>
-                                  </h5>
-                                  <div className="star-1">
-                                    <PrettyRating
-                                      value={value?.rating}
-                                      icons={icons.star}
-                                      colors={colors.star}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="re-btext mt-3">
-                                  <Row>
-                                    <Col lg="10"> {value?.comment}</Col>
-                                    <Col lg="2">
-                                      {value?.userid?._id ==
+                              </div>
+                              <div className="re-btext mt-3">
+                                <Row>
+                                  <Col lg="10"> {value?.comment}</Col>
+                                  <Col lg="2">
+                                    {value?.userid?._id ==
                                       localStorage.getItem("userId") ? (
-                                        <>
-                                          <h6>
-                                            <AiFillEdit
-                                              onClick={() =>
-                                                handleeditcomment(value?._id)
-                                              }
-                                              // onClick={
-                                              //
-                                              // }
-                                              size="25px"
-                                            />
-                                          </h6>
-                                          <Modal
-                                            isOpen={editmodal}
-                                            toggle={toggleedit}
-                                            {...args}
-                                          >
-                                            <ModalHeader toggle={toggleedit}>
-                                              Edit Your Comment
-                                            </ModalHeader>
-                                            <ModalBody>
-                                              <Row>
-                                                <Col>
-                                                  <Label>Edit Review</Label>
-                                                  <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder={value?.comment}
-                                                    value={upcom}
-                                                    onChange={(e) =>
-                                                      setUpcom(e.target.value)
-                                                    }
-                                                    aria-describedby="inputGroupPrepend"
-                                                    required
-                                                  />
-                                                </Col>
-                                                <Col>
-                                                  <ReactStars
-                                                    style={{
-                                                      size: "25px",
-                                                    }}
-                                                    {...secondExample}
-                                                  />
-                                                </Col>
-                                              </Row>
-
-                                              <Col className="d-flex justify-content-center">
-                                                <button
-                                                  style={{
-                                                    color: "white",
-                                                  }}
-                                                  onClick={() => {
-                                                    editcomment(
-                                                      value?._id,
-                                                      Producdetail?._id
-                                                    );
-                                                  }}
-                                                  class="btn success"
-                                                >
-                                                  Edit your comment
-                                                </button>
+                                      <>
+                                        <h6>
+                                          <AiFillEdit
+                                            onClick={() =>
+                                              handleeditcomment(value?._id)
+                                            }
+                                            // onClick={
+                                            //
+                                            // }
+                                            size="25px"
+                                          />
+                                        </h6>
+                                        <Modal
+                                          isOpen={editmodal}
+                                          toggle={toggleedit}
+                                          {...args}
+                                        >
+                                          <ModalHeader toggle={toggleedit}>
+                                            Edit Your Comment
+                                          </ModalHeader>
+                                          <ModalBody>
+                                            <Row>
+                                              <Col>
+                                                <Label>Edit Review</Label>
+                                                <input
+                                                  type="text"
+                                                  className="form-control"
+                                                  placeholder={value?.comment}
+                                                  value={upcom}
+                                                  onChange={(e) =>
+                                                    setUpcom(e.target.value)
+                                                  }
+                                                  aria-describedby="inputGroupPrepend"
+                                                  required
+                                                />
                                               </Col>
-                                            </ModalBody>
-                                            {/* <ModalFooter>
+                                              <Col>
+                                                <ReactStars
+                                                  style={{
+                                                    size: "25px",
+                                                  }}
+                                                  {...secondExample}
+                                                />
+                                              </Col>
+                                            </Row>
+
+                                            <Col className="d-flex justify-content-center">
+                                              <button
+                                                style={{
+                                                  color: "white",
+                                                }}
+                                                onClick={() =>
+                                                (editcomment(
+                                                  value?._id,
+                                                  Producdetail?._id
+                                                ), gaEventTracker('Edit your comment'))
+                                                }
+                                                class="btn success"
+                                              >
+                                                Edit your comment
+                                              </button>
+                                            </Col>
+                                          </ModalBody>
+                                          {/* <ModalFooter>
                                                               <Button
                                                                 color="primary"
                                                                 onClick={
@@ -876,70 +876,70 @@ function VideoPosted(args) {
                                                                 Cancel
                                                               </Button>
                                                             </ModalFooter> */}
-                                          </Modal>
-                                        </>
-                                      ) : null}
-                                    </Col>
-                                  </Row>
+                                        </Modal>
+                                      </>
+                                    ) : null}
+                                  </Col>
+                                </Row>
 
-                                  {/* <p>{value?.comment}</p> */}
-                                </div>
+                                {/* <p>{value?.comment}</p> */}
                               </div>
-                            ))}
-                          </div>
-                        </ModalBody>
-                      </Modal>
-                    </Link>
-                    {/* <span className="product-discount-label st-1"></span> */}
-                  </div>
-                </Col>
-                <Col
-                  key={data?._id}
-                  onClick={() => handleSelection(data?._id)}
-                  md="8"
-                >
-                  <div className="product-content">
-                    <ul className="rating mb-3 topicslike">
-                      {data?.topics?.map((val) => (
-                        <Link style={{ textDecoration: "none" }} to="#">
-                          {val} &nbsp;
-                        </Link>
-                      ))}
-                    </ul>
-                    <h3 className="mb-3">{data?.resTitle}</h3>
-                    <h5 className="mb-3">
-                      <span>By </span> {data?.creatorName}
-                    </h5>
-                    <h6 className="mb-3">{data?.desc}</h6>
-                    <div className="">
-                      <Row className="review mb-3">
-                        <Col lg="4">
-                          <PrettyRating
-                            value={data?.ava_rating}
-                            icons={icons.star}
-                            colors={colors.star}
-                          />
-                        </Col>
-                        <Col className="justify-content-left" lg="4">
-                          {data?.ava_rating}- Rating
-                        </Col>
+                            </div>
+                          ))}
+                        </div>
+                      </ModalBody>
+                    </Modal>
+                  </Link>
+                  {/* <span className="product-discount-label st-1"></span> */}
+                </div>
+              </Col>
+              <Col
+                key={data?._id}
+                onClick={() => handleSelection(data?._id)}
+                md="8"
+              >
+                <div className="product-content">
+                  <ul className="rating mb-3 topicslike">
+                    {data?.topics?.map((val) => (
+                      <Link style={{ textDecoration: "none" }} to="#">
+                        {val} &nbsp;
+                      </Link>
+                    ))}
+                  </ul>
+                  <h3 className="mb-3">{data?.resTitle}</h3>
+                  <h5 className="mb-3">
+                    <span>By </span> {data?.creatorName}
+                  </h5>
+                  <h6 className="mb-3">{data?.desc}</h6>
+                  <div className="">
+                    <Row className="review mb-3">
+                      <Col lg="4">
+                        <PrettyRating
+                          value={data?.ava_rating}
+                          icons={icons.star}
+                          colors={colors.star}
+                        />
+                      </Col>
+                      <Col className="justify-content-left" lg="4">
+                        {data?.ava_rating}- Rating
+                      </Col>
 
-                        <Col lg="2">
-                          <b>
-                            {/* <span style={{ color: "#5F56C6" }}>
+                      <Col lg="2">
+                        <b>
+                          {/* <span style={{ color: "#5F56C6" }}>
                               {data?.submitresrcId?.__v} Reviews
                             </span> */}
-                          </b>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="2">{data?.relYear[0]?.yrName}</Col>
-                      </Row>
-                    </div>
+                        </b>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg="2">{data?.relYear[0]?.yrName}</Col>
+                    </Row>
                   </div>
-                </Col>
-              </Row>
-            ))
+                </div>
+              </Col>
+            </Row>
+          ))
           : null}
       </div>
     </div>

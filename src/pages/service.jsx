@@ -8,8 +8,10 @@ import SimpleBanner from "../components/SimpleBanner";
 import dollarIcon from "../assets/icons/money-icon.png";
 import banner5 from "../assets/images/banner5.jpeg";
 import { Link } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 export default function Service() {
+  const gaEventTracker = useAnalyticsEventTracker('Service')
   return (
     <div>
       <SimpleBanner
@@ -63,7 +65,7 @@ export default function Service() {
 
       <div className="service-button-div">
         <Link to="/create-account">
-          <Button variant="primary" className="service-button">
+          <Button variant="primary" className="service-button" onClick={()=>gaEventTracker('COMENZAR YA!')}>
             COMENZAR YA!
           </Button>
         </Link>

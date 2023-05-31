@@ -4,6 +4,7 @@ import "../../components/Selectapp.css";
 import "../../styles/ModulePage.css";
 import { Container, Row, Button, Col } from "reactstrap";
 import { Link } from "react-router-dom";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Allcategory() {
   const [categry, setCategry] = useState([]);
@@ -23,7 +24,7 @@ function Allcategory() {
         // console.log(error.response.data.data);
       });
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Allcategory')
   return (
     <div>
       <p className="category mt-5 mb-2">All Categories</p>
@@ -45,7 +46,7 @@ function Allcategory() {
                       />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting">
+                          <Button className="btlisting"  onClick={()=>gaEventTracker('Listing')}>
                             {value?.subCount} - Listing
                           </Button>
                         </Row>

@@ -5,8 +5,11 @@ import EditFileIcon from "../assets/icons/edit-file-icon.png";
 
 import "../styles/ServiceBanner.css";
 import { Button } from "react-bootstrap";
+ 
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function ServiceBanner() {
+  const gaEventTracker = useAnalyticsEventTracker('ServiceBanner')
   return (
     <div className="complexBanner-div">
       <div className="complexBanner-img-div">
@@ -42,7 +45,7 @@ function ServiceBanner() {
           </div>
 
           <div className="complexBanner-button-div">
-            <Button variant="primary" className="complexBanner-button">
+            <Button variant="primary" className="complexBanner-button" onClick={()=>gaEventTracker('ENVIAR DOCUMENTOS')}>
               ENVIAR DOCUMENTOS
             </Button>
           </div>
