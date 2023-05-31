@@ -73,6 +73,7 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
+import TrendingWarzone from "./pages/TrendingWarzone";
 
 ReactGA.initialize("UA-250944909-1");
 // ReactGA.initialize("UA-250944909-1");
@@ -167,6 +168,7 @@ function App() {
               element={<SendRequestResetPasswordComponent />}
             />
             <Route path="/loginplan" element={<Loginplan />} />
+            <Route path="/trending-warzone" element={<TrendingWarzone />} />
           </Routes>
         </Layout>
       </MenuProvider>
