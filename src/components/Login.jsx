@@ -19,6 +19,8 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import "../../src/css/Signup.css";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -177,7 +179,7 @@ function Login() {
         // }
       });
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Login');
   return (
     <>
       <Container className="login-container">
@@ -310,7 +312,7 @@ function Login() {
                     style={{ borderRadius: "11px" }}
                     type="button"
                     class="btn btn-primary loginbuttonsize"
-                    onClick={handleLoginSubmit}
+                    onClick={(e) => (handleLoginSubmit(e), gaEventTracker('LOGIN')) }
                   >
                     <b>LOGIN</b>
                   </button>
@@ -324,7 +326,7 @@ function Login() {
                 <div className="mt-4">
                   <Row className="signupwithgoogle">
                     <button
-                      onClick={() => handlegooglelogin()}
+                      onClick={(e) => (handlegooglelogin(e), gaEventTracker('Sign in with Google'))}
                       className="d-flex justify-content-center signupwithgoogle"
                     >
                       <img

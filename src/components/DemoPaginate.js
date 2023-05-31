@@ -6,6 +6,7 @@ import axios from "axios";
 // import "../../css/topBar.css";
 import Posts from "../../src/components/Posts";
 import Pagination from "../../src/components/Pagination";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 function DemoPaginate() {
   const [posts, setPosts] = useState([]);
@@ -67,7 +68,7 @@ function DemoPaginate() {
     setCurrentPage(pageNumber);
   };
   // console.log("currentPosts: ", currentPosts);
-
+  const gaEventTracker = useAnalyticsEventTracker('DemoPaginate');
   return (
     <>
       <div className="container mt-5">
@@ -88,7 +89,7 @@ function DemoPaginate() {
           setInput(e.target.value);
         }}
       />
-      <button onClick={handleUrl}>submit</button>
+      <button onClick={(e) => (handleUrl(e),gaEventTracker('submit'))}>submit</button>
     </>
   );
 }

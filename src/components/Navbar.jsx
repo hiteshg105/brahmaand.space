@@ -36,6 +36,7 @@ import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
 import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -283,6 +284,9 @@ function CustomNavbar(args) {
   const onSelesubcat = (selectedsubcat, selectedItem) => {
     // setLngage(selectedList);
   };
+
+  const gaEventTracker = useAnalyticsEventTracker('CustomNavbar');
+
   return (
     <Navbar
       bg="light"
@@ -302,6 +306,12 @@ function CustomNavbar(args) {
         />
       </Navbar.Brand>
 
+      <Link to="/leaderboard">
+        <button className="btn rbutton mobile" type="submit" onClick={() => gaEventTracker('LeaderBoard')}>
+          <h4 className="rText">LeaderBoard</h4>
+        </button>
+      </Link>
+
       <Navbar.Toggle
         className="navbar-toggle"
         aria-controls="responsive-navbar-nav"
@@ -310,13 +320,13 @@ function CustomNavbar(args) {
         <Nav className="ms-auto navbar-nav">
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
                 type="submit"
-                onClick={toggle}
+                onClick={(e) => (toggle(e), gaEventTracker('+Submit a Content'))}
               >
                 <h4 className="rText">+Submit a Content</h4>
               </button>
@@ -572,8 +582,8 @@ function CustomNavbar(args) {
                               style={{ font: "GT Walsheim Pro" }}
                             >
                               {sellang !== "" &&
-                              sellang !== null &&
-                              sellang !== undefined ? (
+                                sellang !== null &&
+                                sellang !== undefined ? (
                                 <p>Language of Content</p>
                               ) : (
                                 <p style={{ color: "red" }}>
@@ -665,8 +675,8 @@ function CustomNavbar(args) {
                               style={{ font: "GT Walsheim Pro" }}
                             >
                               {Desc != "" &&
-                              Desc != null &&
-                              Desc != undefined ? (
+                                Desc != null &&
+                                Desc != undefined ? (
                                 <p>
                                   Descriptions
                                   <span>*</span>
@@ -879,7 +889,7 @@ function CustomNavbar(args) {
                               <>
                                 <Col>
                                   <Button
-                                    onClick={() => setModal(false)}
+                                    onClick={() => (setModal(false), gaEventTracker('Discard'))}
                                     color="danger"
                                     className="m-1"
                                   >
@@ -888,7 +898,7 @@ function CustomNavbar(args) {
                                   <Button
                                     color="success"
                                     className="m-1"
-                                    onClick={handleSubmitResource}
+                                    onClick={(e) => (handleSubmitResource(e), gaEventTracker('Submit'))}
                                   >
                                     SUBMIT
                                   </Button>
@@ -915,6 +925,7 @@ function CustomNavbar(args) {
                 <button
                   className="btn rbutton mobile"
                   onClick={() => {
+                    gaEventTracker('+ Submit a Content')
                     return (
                       <p
                         className="d-flex justify-content-center"
@@ -933,8 +944,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>
@@ -958,7 +969,7 @@ function CustomNavbar(args) {
                 as={NavLink}
                 className="navbar-link lText"
               >
-                <button className="btn rLogin mobile" type="submit">
+                <button className="btn rLogin mobile" type="submit" onClick={()=>gaEventTracker('LOGIN')}>
                   <span className="">LOGIN</span>
                 </button>
               </Nav.Link>

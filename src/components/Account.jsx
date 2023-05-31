@@ -11,6 +11,7 @@ import EditDocumentModal from "./EditDocumentModal";
 import banner4 from "../assets/images/banner4.jpg";
 
 import axios from "axios";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 function Account({
   onClickEditAccount,
@@ -64,7 +65,7 @@ function Account({
     if (doc_name === "Insurance") return handleInsuranceModal();
     if (doc_name === "NOA") return handleNOAModal();
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Account');
   return (
     <div className="account-div">
       <SimpleBanner
@@ -230,7 +231,8 @@ function Account({
                         <Button
                           variant="primary"
                           className="user-info-document-button"
-                          onClick={(e) => getCurrentShowModal(doc_info.name)}
+                          onClick={(e) =>{ getCurrentShowModal(doc_info.name),
+                          gaEventTracker('CAMBIAR')}}
                         >
                           CAMBIAR
                         </Button>
