@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 function Formvalidation() {
   const {
     register,
@@ -10,6 +11,7 @@ function Formvalidation() {
   const onSubmit = (data) => {
     // console.log(data);
   };
+  const gaEventTracker = useAnalyticsEventTracker('Formvalidation');
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +58,7 @@ function Formvalidation() {
           />
         </Form.Field>
         {errors.password && <p>Please check the Password</p>}
-        <Button type="submit">Submit</Button>
+        <Button type="submit" onClick={() => gaEventTracker('Submit')} >Submit</Button>
       </Form>
     </div>
   );

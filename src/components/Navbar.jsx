@@ -302,6 +302,12 @@ function CustomNavbar(args) {
         />
       </Navbar.Brand>
 
+      <Link to="/leaderboard">
+        <button className="btn rbutton mobile" type="submit">
+          <h4 className="rText">LeaderBoard</h4>
+        </button>
+      </Link>
+
       <Navbar.Toggle
         className="navbar-toggle"
         aria-controls="responsive-navbar-nav"
@@ -310,13 +316,13 @@ function CustomNavbar(args) {
         <Nav className="ms-auto navbar-nav">
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
                 type="submit"
-                onClick={toggle}
+                onClick={(e) => (toggle())}
               >
                 <h4 className="rText">+Submit a Content</h4>
               </button>
@@ -572,8 +578,8 @@ function CustomNavbar(args) {
                               style={{ font: "GT Walsheim Pro" }}
                             >
                               {sellang !== "" &&
-                              sellang !== null &&
-                              sellang !== undefined ? (
+                                sellang !== null &&
+                                sellang !== undefined ? (
                                 <p>Language of Content</p>
                               ) : (
                                 <p style={{ color: "red" }}>
@@ -665,8 +671,8 @@ function CustomNavbar(args) {
                               style={{ font: "GT Walsheim Pro" }}
                             >
                               {Desc != "" &&
-                              Desc != null &&
-                              Desc != undefined ? (
+                                Desc != null &&
+                                Desc != undefined ? (
                                 <p>
                                   Descriptions
                                   <span>*</span>
@@ -933,8 +939,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>

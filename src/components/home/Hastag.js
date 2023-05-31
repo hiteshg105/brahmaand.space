@@ -238,7 +238,7 @@ function Hastag() {
           </div>
         </section>
       </Container>
-      {/* <Container>
+      <Container>
         <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
         <Swiper
           breakpoints={{
@@ -379,7 +379,7 @@ function Hastag() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </Container> */}
+      </Container>
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -432,7 +432,7 @@ function Hastag() {
         </Link>
       </Container>
       <Container>
-        <h2 className="category2 mt-4 mb-4">Featured</h2>
+        <h2 className="category2 mt-4 mb-4">Featured</h2>+
         <Swiper
           breakpoints={{
             1084: {
