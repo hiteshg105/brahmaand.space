@@ -72,6 +72,7 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
+import TrendingWarzone from "./pages/TrendingWarzone";
 
 
 function App() {
@@ -236,6 +237,7 @@ function App() {
               element={<SendRequestResetPasswordComponent />}
             />
             <Route path="/loginplan" element={<Loginplan />} />
+            <Route path="/trending-warzone" element={<TrendingWarzone />} />
           </Routes>
         </Layout>
       </MenuProvider>
