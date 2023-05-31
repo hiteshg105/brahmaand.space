@@ -87,28 +87,21 @@ import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
 import ReactGA from "react-ga";
 
-const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
+// const TRACKING_ID = ; // OUR_TRACKING_ID
 
-ReactGA.initialize(TRACKING_ID);
-
+ReactGA.initialize("UA-250944909-1");
+// ReactGA.initialize("UA-250944909-1");
 function App() {
-  const location = useLocation()
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   ReactGA.pageview(location.pathname);
+  // }, [location]);
 
   useEffect(() => {
-    ReactGA.initialize(TRACKING_ID);
-  }, []);
-
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname);
-  }, []);
-
-
-  useEffect(() => {
-    ReactGA.set({ page: location.pathname })
-    ReactGA.pageview(location.pathname)
+    ReactGA.pageview(location.pathname + location.search);
   }, [location]);
 
-  console.log(location.pathname)
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -119,9 +112,10 @@ function App() {
     <AuthProvider>
       <MenuProvider>
         <Layout>
+          {/* <GoogleAnalytics trackingId="UA-250944909-1" /> */}
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route exact path="/login" element={<Login />} />
             <Route exact path="/myaccount" element={<Myaccount />} />
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />

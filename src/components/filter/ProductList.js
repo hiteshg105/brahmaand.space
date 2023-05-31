@@ -792,7 +792,6 @@ function ProductList(args) {
           navigate(-1);
         } else {
           setCategry(response.data.data);
-          console.log(response.data.data);
         }
       })
       .catch(error => {

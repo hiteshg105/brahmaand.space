@@ -85,8 +85,6 @@ import Loginplan from "./planable.io/Loginplan";
 import ReactGA from "react-ga";
 import App from "./App";
 
-
-
 // const TRACKING_ID = "UA-250944909-1"; // OUR_TRACKING_ID
 
 // ReactGA.initialize(TRACKING_ID);
@@ -96,11 +94,13 @@ import App from "./App";
 // useEffect(() => {
 //   ReactGA.pageview(window.location.pathname + window.location.search);
 // }, []);
+
+ReactGA.initialize("UA-250944909-1");
 const rootElement = document.getElementById("root");
 render(
-  <HashRouter>
-    <App />,
-  </HashRouter>,
+  <Router>
+    <App />
+  </Router>,
   rootElement
 );
 

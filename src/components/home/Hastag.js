@@ -152,12 +152,13 @@ function Hastag() {
 
   // featured content api integration
   const [feature, setFeature] = useState([]);
+
   const featuredContent = () => {
     axiosConfig
-      .get(`/user/get_featured_cnt`)
+      .get(`/get/all/warzone`)
       .then((res) => {
-        setFeature(res.data.data);
-        // console.log(res.data.data);
+        // console.log(res.data.war);
+        setFeature(res.data.war);
       })
       .catch((err) => {
         console.log(err);
@@ -307,7 +308,7 @@ function Hastag() {
           {feature?.map((features) => (
             <SwiperSlide className="swiperslidescutom" key={features?._id}>
               <div className="mb-3">
-                <h4>COMEDY</h4>
+                <h4>{features.title}</h4>
               </div>
               <div className="ifram warzone">
                 <div>
@@ -320,7 +321,8 @@ function Hastag() {
                           width="300px"
                           // height="300px"
                           style={{ borderRadius: "12px" }}
-                          src={`https://www.youtube.com/embed/${features?.video_link}`}
+                          src={`https://www.youtube.com/embed/${features?.resource1.link}`}
+                          // src={features?.resource1.link}
                         ></iframe>
                       </div>
                     </Col>
@@ -353,7 +355,8 @@ function Hastag() {
                         width="300px"
                         // height="300px"
                         style={{ borderRadius: "12px" }}
-                        src={`https://www.youtube.com/embed/${features?.video_link}`}
+                        src={`https://www.youtube.com/embed/${features?.resource2.link}`}
+                        // src={features?.resource2.link}
                       ></iframe>
                     </Col>
                   </Row>
