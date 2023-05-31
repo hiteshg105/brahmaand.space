@@ -18,6 +18,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useLocation,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -76,84 +77,12 @@ import TrendingWarzone from "./pages/TrendingWarzone";
 
 
 function App() {
-
-
+  const location = useLocation();
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-  console.log(window.location.pathname)
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // // useEffect(() => {
-  // //   const handleHashChange = () => {
-  // //     ReactGA.pageview(window.location.pathname + window.location.search + window.location.hash);
-  // //   };
-
-  // //   window.addEventListener('hashchange', handleHashChange);
-
-  // //   return () => {
-  // //     window.removeEventListener('hashchange', handleHashChange);
-  // //   };
-  // // }, []);
-  // useEffect(() => {
-  //   console.log("hello")
-  //   ReactGA.pageview(window.location.pathname + window.location.search);
-  //   console.log(window.location.pathname)
-  // }, [window.location.pathname]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
+  console.log(location.pathname)
 
   return (
     // <div className="App">

@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Service.css";
 
-import { Button, Row, Col, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import SimpleBanner from "../components/SimpleBanner";
 
@@ -40,7 +40,7 @@ export default function Service() {
           <br />
           Sugerencia de cargas de regreso o a otros destinos con mejor rate por milla
           <br />
-           Setup con nuevos brokers
+          Setup con nuevos brokers
         </p>
       </div>
 
@@ -49,15 +49,15 @@ export default function Service() {
         <p className="service-p">
           Ofertas de carga para el destino que usted prefiera
           <br />
-           Sugerencia de cargas de regreso o a otros destinos con mejor rate por milla
-           <br />
-           Setup con nuevos brokers
-           <br />
-            Negociación para Detentión o Layovers
-            <br />
-            Envío de documentos a su companía de Factoring
-            <br />
-            Analítica semanal por camión
+          Sugerencia de cargas de regreso o a otros destinos con mejor rate por milla
+          <br />
+          Setup con nuevos brokers
+          <br />
+          Negociación para Detentión o Layovers
+          <br />
+          Envío de documentos a su companía de Factoring
+          <br />
+          Analítica semanal por camión
         </p>
       </div>
 

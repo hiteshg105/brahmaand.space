@@ -6,6 +6,7 @@ import "../styles/EditAccountModal.css";
 
 import { Container, Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 function EditAccountModal({ show_modal, close_modal, user_info, editAccountFunction }) {
   const [contact_name, setContactName] = useState(user_info.contact_name);
@@ -18,12 +19,12 @@ function EditAccountModal({ show_modal, close_modal, user_info, editAccountFunct
     phone
   })
 
-  const editAccountHelper = async(e) => {
-      e.preventDefault();
-      await editAccountFunction(body);
-      close_modal()
+  const editAccountHelper = async (e) => {
+    e.preventDefault();
+    await editAccountFunction(body);
+    close_modal()
   }
-
+  const gaEventTracker = useAnalyticsEventTracker('EditAccountModal');
   return (
     <Container className="edit-account-modal-container">
       <Modal show={show_modal} onHide={close_modal} className="edit-modal">
@@ -81,11 +82,11 @@ function EditAccountModal({ show_modal, close_modal, user_info, editAccountFunct
           <Button
             variant="secondary"
             className="edit-modal-close-button"
-            onClick={close_modal}
+            onClick={(e) => (close_modal(e), gaEventTracker('Close'))}
           >
             Close
           </Button>
-          <Button variant="primary" className="edit-modal-save-button" onClick={(e) => editAccountHelper(e)}>
+          <Button variant="primary" className="edit-modal-save-button" onClick={(e) => (editAccountHelper(e), gaEventTracker('Save changes'))}>
             Save changes
           </Button>
         </Modal.Footer>

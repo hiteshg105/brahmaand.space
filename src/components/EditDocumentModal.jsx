@@ -8,6 +8,7 @@ import { Container, Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
+import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
@@ -30,7 +31,7 @@ function EditDocumentModal({
       document_filename
     );
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('EditDocumentModal');
   return (
     <Container className="edit-account-modal-container">
       <Modal show={show_modal} onHide={close_modal} className="edit-modal">
@@ -73,14 +74,14 @@ function EditDocumentModal({
           <Button
             variant="secondary"
             className="edit-modal-close-button"
-            onClick={close_modal}
+            onClick={(e) => (close_modal(e), gaEventTracker('Close'))}
           >
             Close
           </Button>
           <Button
             variant="primary"
             className="edit-modal-save-button"
-            onClick={(e) => updateDocumentHelper(e)}
+            onClick={(e) => (updateDocumentHelper(e),gaEventTracker('Save changes'))}
           >
             Save changes
           </Button>
@@ -118,7 +119,7 @@ const updateDocument = async (
       const result = await res.data;
       close_modal();
     })
-    .catch((error) => {});
+    .catch((error) => { });
 };
 
 export default EditDocumentModal;
