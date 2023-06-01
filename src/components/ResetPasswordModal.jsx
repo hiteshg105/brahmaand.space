@@ -6,6 +6,7 @@ import "../styles/EditAccountModal.css";
 
 import { Container, Button, Modal, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function ResetPasswordModal({ show_modal, close_modal, user_info, editAccountFunction }) {
   const [password, setPassword] = useState("");
@@ -16,12 +17,12 @@ function ResetPasswordModal({ show_modal, close_modal, user_info, editAccountFun
     re_password
   })
 
-  const editAccountHelper = async(e) => {
-      e.preventDefault();
-      await editAccountFunction(body);
-      close_modal()
+  const editAccountHelper = async (e) => {
+    e.preventDefault();
+    await editAccountFunction(body);
+    close_modal()
   }
-
+  const gaEventTracker = useAnalyticsEventTracker('ResetPasswordModal')
   return (
     <Container className="edit-account-modal-container">
       <Modal show={show_modal} onHide={close_modal} className="edit-modal">
@@ -63,11 +64,11 @@ function ResetPasswordModal({ show_modal, close_modal, user_info, editAccountFun
           <Button
             variant="secondary"
             className="edit-modal-close-button"
-            onClick={close_modal}
+            onClick={() => (close_modal(), gaEventTracker('Close'))}
           >
             Close
           </Button>
-          <Button variant="primary" className="edit-modal-save-button" onClick={(e) => editAccountHelper(e)}>
+          <Button variant="primary" className="edit-modal-save-button" onClick={(e) => (editAccountHelper(e), gaEventTracker('Save changes'))}>
             Save changes
           </Button>
         </Modal.Footer>

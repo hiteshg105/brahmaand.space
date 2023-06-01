@@ -14,6 +14,7 @@ import profile from "../images/1.png";
 import boy from "../images/boy.png";
 import topBar from "../css/topBar.css";
 import ProfileRouter from "./ProfileRouter";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function TopBar() {
   const [modal, setModal] = useState(false);
@@ -104,7 +105,7 @@ function TopBar() {
       });
     setModal(false);
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('TopBar')
   return (
     <section className="mt-200">
       <section
@@ -180,7 +181,7 @@ function TopBar() {
             <button
               className="btn rbutton mobile"
               type="submit"
-              onClick={toggle}
+              onClick={() =>(toggle, gaEventTracker('Edit your Profile'))}
             >
               <h4 className="rText">Edit your Profile</h4>
             </button>
@@ -267,7 +268,7 @@ function TopBar() {
                         <Col></Col>
                         <Col>
                           <Button
-                            onClick={() => setModal(false)}
+                            onClick={() => (setModal(false), gaEventTracker('Discard'))}
                             color="danger"
                             className="m-1"
                           >
@@ -277,7 +278,7 @@ function TopBar() {
                           <Button
                             type="submit"
                             color="success"
-                            onClick={handleLoginSubmit}
+                            onClick={() => (handleLoginSubmit(), gaEventTracker('SUBMIT'))}
                             className="m-1"
                           >
                             SUBMIT

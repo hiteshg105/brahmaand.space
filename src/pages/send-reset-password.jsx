@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./spinner.css";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
@@ -63,6 +64,8 @@ const SendRequestResetPasswordComponent = () => {
     // await send_request_reset_password(email, setMessage, navigate);
     // swal("Password sent to your mail, please check your mail ");
   };
+
+  const gaEventTracker = useAnalyticsEventTracker('SendRequestResetPasswordComponent')
 
   return (
     <Container className="login-container mt-4 mx-15 resetpasswordotp">
@@ -131,6 +134,7 @@ const SendRequestResetPasswordComponent = () => {
                     // disabled={!performValidation()}
                     className="login-button"
                     type="submit"
+                    onClick={()=>gaEventTracker('Send')}
                   >
                     Send
                   </Button>

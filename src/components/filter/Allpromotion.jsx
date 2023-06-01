@@ -32,6 +32,7 @@ import ratingstar from "../../assets/icons/ratingstar.png";
 import createricon from "../../assets/icons/createricon.png";
 import "../../styles/ModulePage.css";
 import ProgressBar from "@ramonak/react-progress-bar";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Allpromotion(args) {
   const [promotion, setPromotion] = useState([]);
@@ -333,6 +334,8 @@ function Allpromotion(args) {
       });
   };
 
+  const gaEventTracker = useAnalyticsEventTracker('Allpromotion')
+
   return (
     <>
       <div className="container mt-3 mb-3">
@@ -363,9 +366,8 @@ function Allpromotion(args) {
                                 style={{
                                   borderRadius: "12px",
                                 }}
-                                src={`https://www.youtube.com/embed/${
-                                  promotion?.link?.split("=")[1]
-                                }`}
+                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                  }`}
                               ></iframe>
                             </>
                           ) : null}
@@ -689,7 +691,7 @@ function Allpromotion(args) {
                                       ></textarea>
                                       <Button
                                         onClick={(e) =>
-                                          handleSubmit(e, promotiondata._id)
+                                          (handleSubmit(e, promotiondata._id), gaEventTracker('Send'))
                                         }
                                         // onClick={handleSubmit}
                                         className=" bt-st reviewbutton mb-3 btn btn-primary"
@@ -764,7 +766,7 @@ function Allpromotion(args) {
                                     <Col lg="10"> {value?.comment}</Col>
                                     <Col lg="2">
                                       {value?.userid?._id ==
-                                      localStorage.getItem("userId") ? (
+                                        localStorage.getItem("userId") ? (
                                         <>
                                           <h6>
                                             <AiFillEdit
@@ -816,13 +818,11 @@ function Allpromotion(args) {
                                                   style={{
                                                     color: "white",
                                                   }}
-                                                  onClick={() => {
-                                                    editcomment(
-                                                      value?._id,
-                                                      promotiondata?._id,
-                                                      value?.rating
-                                                    );
-                                                  }}
+                                                  onClick={() => (editcomment(
+                                                    value?._id,
+                                                    promotiondata?._id,
+                                                    value?.rating
+                                                  ), gaEventTracker('Edit your comment'))}
                                                   class="btn success"
                                                 >
                                                   Edit your comment

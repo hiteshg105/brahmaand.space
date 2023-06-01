@@ -4,6 +4,7 @@ import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import axios from "axios";
 import "moment-timezone";
 import swal from "sweetalert";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function ResetPassword() {
   const [oldpass, setOldpass] = useState("");
@@ -177,6 +178,8 @@ function ResetPassword() {
       // document.getElementById("messagesa").innerHTML = "**Password Matched";
     }
   };
+
+  const gaEventTracker = useAnalyticsEventTracker('Passwordhide')
   return (
     <>
       <Container className="container">
@@ -318,7 +321,7 @@ function ResetPassword() {
                     <Button
                       type="submit"
                       color="success"
-                      onClick={handleLoginSubmit}
+                      onClick={() => (handleLoginSubmit(),gaEventTracker('Update'))}
                       className="m-1"
                     >
                       Update

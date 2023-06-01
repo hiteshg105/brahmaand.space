@@ -13,6 +13,7 @@ import banner5 from "../assets/images/banner5.jpeg";
 import regularFolderIcon from "../assets/icons/folder-icon.png";
 
 import { useNavigate } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME
@@ -60,7 +61,7 @@ export default function CreateAccount() {
     }
     
   }
-
+  const gaEventTracker = useAnalyticsEventTracker('CreateAccount')
   return (
     <div>
       <SimpleBanner
@@ -261,6 +262,7 @@ export default function CreateAccount() {
               variant="primary"
               className="create-account-button"
               type="submit"
+              onClick={()=>gaEventTracker('COMENZAR YA!')}
             >
               COMENZAR YA!
             </Button>

@@ -17,6 +17,7 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import "../../css/Contact.css";
 import woman from "../../images/woman.png";
 import swal from "sweetalert";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function ContactUs() {
   const [name, setName] = useState("");
@@ -65,7 +66,7 @@ function ContactUs() {
         .catch(error => {});
     }
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('ContactUs')
   return (
     <>
       <Row>
@@ -159,7 +160,7 @@ function ContactUs() {
                 </Row>
                 <div className=" d-flex justify-content-center ">
                   <Button
-                    onClick={contactsubmit}
+                    onClick={() => (contactsubmit(),gaEventTracker('Leave a message'))}
                     className="mt-3"
                     style={{ justifyContent: "center" }}
                   >

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Row } from "reactstrap";
 import "./Selectapp.css";
 import technology from "../images/technology.png";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 const SelectApp = () => {
   const [text, setText] = useState();
@@ -16,7 +17,7 @@ const SelectApp = () => {
   // console.log(text);
   // handle submit events
   const onSubmit = (data) => alert(JSON.stringify(data));
-
+  const gaEventTracker = useAnalyticsEventTracker('SelectApp')
   return (
     <React.Fragment>
       <section>
@@ -134,7 +135,7 @@ const SelectApp = () => {
           <div className="hero-text">
             <h1>I am John Doe</h1>
             <p>And I'm a Photographer</p>
-            <button>Hire me</button>
+            <button onClick={()=>gaEventTracker('Hire me')}>Hire me</button>
           </div>
         </div>
       </Row>

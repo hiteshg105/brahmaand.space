@@ -6,6 +6,7 @@ import OtpInput from "react-otp-input";
 import { Col, Row } from "reactstrap";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function Forgetpass() {
   const navigate = useNavigate();
@@ -57,6 +58,9 @@ function Forgetpass() {
       swal("Enter OTP First");
     }
   };
+
+  const gaEventTracker = useAnalyticsEventTracker('Forgetpass')
+   
   return (
     <Container className="login-container mt-5 mx-15 otpinputconstainer">
       <Card className="login-card">
@@ -101,7 +105,7 @@ function Forgetpass() {
               </Col>
              </Row> */}
             <div className="login-button-div">
-              <Button variant="primary" className="login-button" type="submit">
+              <Button variant="primary" className="login-button" type="submit" onClick={()=>gaEventTracker('Submit')}>
                 Submit
               </Button>
             </div>

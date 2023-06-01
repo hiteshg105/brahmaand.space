@@ -19,6 +19,7 @@ import reviewstar from "../../assets/icons/reviewstra.png";
 import ratingstar from "../../assets/icons/ratingstar.png";
 import { FaStar } from "react-icons/fa";
 import usermdl from "../../assets/images/usermdl.jpg";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 // import { FaBook, FaHeart, FaStar } from "react-icons/fa";
 
@@ -26,10 +27,10 @@ function MultiModule(args) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-
+  const gaEventTracker = useAnalyticsEventTracker('MultiModule')
   return (
     <div>
-      <Button onClick={toggle}>Click Me</Button>
+      <Button onClick={() => (toggle(),gaEventTracker('Click Me'))}>Click Me</Button>
       <Modal className="mdlg" isOpen={modal}>
         <ModalBody>
           <div className="main-content">
@@ -211,7 +212,7 @@ function MultiModule(args) {
                         className="form-control st-taetarea"
                         placeholder=""
                       ></textarea>
-                      <Button className="bt-st">Send</Button>
+                      <Button className="bt-st" onClick={()=>gaEventTracker('Send')}>Send</Button>
                     </form>
                   </div>
                 </div>

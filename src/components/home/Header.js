@@ -8,6 +8,7 @@ import { Container, Row, Col, Card, Button } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Header() {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -119,7 +120,7 @@ function Header() {
         // console.log(err);
       });
   }, []);
-
+  const gaEventTracker = useAnalyticsEventTracker('Header')
   return (
     <>
       <div
@@ -187,7 +188,7 @@ function Header() {
             />
           </div>
           <div className="text-center mt-3">
-            <Button onClick={handlesearchtopics} className="btn btn-success">
+            <Button onClick={(handlesearchtopics(),gaEventTracker('Search'))} className="btn btn-success">
               Search
             </Button>
           </div>

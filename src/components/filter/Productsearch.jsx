@@ -63,6 +63,7 @@ import "swiper/css/pagination";
 import "../../styles/Filter.css";
 import { number } from "prop-types";
 import { useFormState } from "react-hook-form";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Productsearch(args) {
   const [modalsuggestion, setModalsuggestion] = useState(false);
@@ -833,6 +834,7 @@ function Productsearch(args) {
     // );
     setItemOffset(newOffset);
   };
+  const gaEventTracker = useAnalyticsEventTracker('Productsearch')
 
   return (
     <>
@@ -856,7 +858,7 @@ function Productsearch(args) {
             <Col lg="2">
               <Button className=" d-flex probtn text-center ">
                 <p
-                  onClick={handlesearchdescription}
+                  onClick={() => (handlesearchdescription(),gaEventTracker('SEARCH'))}
                   className="searchproduct d-flex"
                 >
                   SEARCH
@@ -1082,7 +1084,7 @@ function Productsearch(args) {
 
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
-                        <Button onClick={clearfilter} color="info">
+                        <Button onClick={() => (clearfilter(),gaEventTracker('Clear Filter'))} color="info">
                           Clear Filter
                         </Button>
                       </div>
@@ -1557,10 +1559,10 @@ function Productsearch(args) {
                                                       ></textarea>
                                                       <Button
                                                         onClick={e =>
-                                                          handleSubmit(
+                                       (                   handleSubmit(
                                                             e,
                                                             promotiondata._id
-                                                          )
+                                                          ),gaEventTracker('Send'))
                                                         }
                                                         className=" bt-st reviewbutton mb-3 btn btn-primary"
                                                       >
@@ -1711,13 +1713,13 @@ function Productsearch(args) {
                                                                     color:
                                                                       "white",
                                                                   }}
-                                                                  onClick={() => {
-                                                                    editcomment(
+                                                                  onClick={() => 
+                                                                   ( editcomment(
                                                                       value?._id,
                                                                       promotiondata?._id,
                                                                       value?.rating
-                                                                    );
-                                                                  }}
+                                                                    ),gaEventTracker('Edit your comment'))
+                                                                  }
                                                                   class="btn success"
                                                                 >
                                                                   Edit your
@@ -2421,10 +2423,10 @@ function Productsearch(args) {
                                                       <Button
                                                         // onClick={handleSubmit}
                                                         onClick={e =>
-                                                          handleSubmit(
+                                             (             handleSubmit(
                                                             e,
                                                             Producdetail?._id
-                                                          )
+                                                          ),gaEventTracker('Submit'))
                                                         }
                                                         className="bt-st reviewbutton mb-3"
                                                       >
@@ -2594,13 +2596,13 @@ function Productsearch(args) {
                                                                     color:
                                                                       "white",
                                                                   }}
-                                                                  onClick={() => {
-                                                                    editcomment(
+                                                                  onClick={() => 
+                                                       (             editcomment(
                                                                       value?._id,
                                                                       Producdetail?._id,
                                                                       value?.rating
-                                                                    );
-                                                                  }}
+                                                                    ),gaEventTracker('Edit your comment'))
+                                                                  }
                                                                   class="btn success"
                                                                 >
                                                                   Edit your
@@ -3299,10 +3301,10 @@ function Productsearch(args) {
                                               ></textarea>
                                               <Button
                                                 onClick={e =>
-                                                  handleSubmit(
+                                        (          handleSubmit(
                                                     e,
                                                     Producdetail?._id
-                                                  )
+                                                  ),gaEventTracker('Submit'))
                                                 }
                                                 // onClick={handleSubmit}
                                                 className="bt-st reviewbutton mb-3"
@@ -3439,13 +3441,13 @@ function Productsearch(args) {
                                                           style={{
                                                             color: "white",
                                                           }}
-                                                          onClick={() => {
-                                                            editcomment(
+                                                          onClick={() => 
+                                             (               editcomment(
                                                               value?._id,
                                                               Producdetail?._id,
                                                               value?.rating
-                                                            );
-                                                          }}
+                                                            ),gaEventTracker('Edit your comment'))
+                                                          }
                                                           class="btn success"
                                                         >
                                                           Edit your comment

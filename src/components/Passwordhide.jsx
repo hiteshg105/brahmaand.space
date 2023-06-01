@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function Passwordhide() {
   const [passwordType, setPasswordType] = useState("password");
@@ -15,7 +16,7 @@ function Passwordhide() {
     }
     setPasswordType("password");
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Passwordhide');
   return (
     <div className="row">
       <div className="col-sm-3">
@@ -29,7 +30,7 @@ function Passwordhide() {
             placeholder="Password"
           />
           <div className="input-group-btn ">
-            <button className="" onClick={togglePassword}>
+            <button className="" onClick={() => (togglePassword(),gaEventTracker('PasswordHide'))}>
               {passwordType === "password" ? (
                 <FaRegEyeSlash />
               ) : (

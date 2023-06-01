@@ -5,6 +5,7 @@ import axios from "axios";
 import "moment-timezone";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function ResetForget() {
   const [newpass, setNewpass] = useState("");
@@ -86,6 +87,8 @@ function ResetForget() {
         "**Enter correct Password**";
     }
   };
+
+  const gaEventTracker = useAnalyticsEventTracker('ResetForget')
   return (
     <>
       <Container className="container">
@@ -225,7 +228,7 @@ function ResetForget() {
                     <Button
                       type="submit"
                       color="success"
-                      onClick={handleLoginSubmit}
+                      onClick={() =>(handleLoginSubmit(),gaEventTracker('Update'))}
                       className="m-1"
                     >
                       Update

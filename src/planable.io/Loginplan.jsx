@@ -4,8 +4,10 @@ import "./login.css";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import logo from "./logo.svg";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function Loginplan() {
+  const gaEventTracker = useAnalyticsEventTracker('LoginPlan')
   return (
     <div>
       <Row>
@@ -41,7 +43,7 @@ function Loginplan() {
                   <h6 className="donothave">
                     Don't have an account?
                     <span>
-                      <button type="button" class="btn btn-light">
+                      <button type="button" class="btn btn-light" onClick={()=>gaEventTracker('Sign up')}>
                         Sign up
                       </button>
                     </span>
@@ -55,11 +57,11 @@ function Loginplan() {
                   <form>
                     <div className="froms">
                       <div className="buttin">
-                        <button className="btn btn-primary facebookbtn">
+                        <button className="btn btn-primary facebookbtn" onClick={()=>gaEventTracker('Sign in with Facebook')}>
                           <BsFacebook color="blue" size={18} />{" "}
                           <span className="fbtext">Sign in with Facebook</span>
                         </button>
-                        <button className="btn btn-primary facebookbtn googlebtn">
+                        <button className="btn btn-primary facebookbtn googlebtn" onClick={()=>gaEventTracker('Signin with Google')}>
                           <FcGoogle className="fcgool" size={18} />{" "}
                           <span className="fbtext"> Signin with Google</span>
                         </button>

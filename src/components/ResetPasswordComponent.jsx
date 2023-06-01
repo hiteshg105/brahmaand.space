@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
 
@@ -21,7 +22,7 @@ const ResetPasswordComponent = () => {
     e.preventDefault();
     await reset_password(password, re_password, uid, token, navigate);
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Passwordhide')
   return (
     <Container className="login-container">
       <Card className="login-card">
@@ -61,7 +62,7 @@ const ResetPasswordComponent = () => {
             </Form.Group>
 
             <div className="login-button-div">
-              <Button variant="primary" className="login-button" type="submit">
+              <Button variant="primary" className="login-button" onClick={()=>gaEventTracker('Send Email to Password')} type="submit">
                 Send Email to Password
               </Button>
             </div>

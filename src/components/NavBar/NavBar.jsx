@@ -1,7 +1,9 @@
 import React from "react";
 import "../../styles/Navbar.css";
 import logo from "../../assets/logos/logo.png";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 function NavBar() {
+  const gaEventTracker = useAnalyticsEventTracker('NavBar')
   return (
     <>
      <header className="main">
@@ -24,7 +26,7 @@ function NavBar() {
         </button>
         <div className="collapse navbar-collapse tgl" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-          <button className="btn rbutton mobile" type="submit">
+          <button className="btn rbutton mobile" type="submit" onClick={()=>gaEventTracker('+ Submit a Resource')}>
            <span className='rText'>+ Submit a Resource</span> 
           </button>
 
@@ -40,7 +42,7 @@ function NavBar() {
                   </a>
                 </li>
                 <li className="nav-item">
-                <button className="btn rLogin mobile" type="submit">
+                <button className="btn rLogin mobile" type="submit" onClick={()=>gaEventTracker('LOGIN')}>
                  <span className='lText'>LOGIN</span> 
                 </button>
                 </li>

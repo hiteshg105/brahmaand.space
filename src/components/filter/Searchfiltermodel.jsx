@@ -26,6 +26,7 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import Moment from "react-moment";
 import { CloudLightning } from "react-feather";
 import swal from "sweetalert";
+import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 
 function Searchfiltermodel(...args) {
   const [Producdetail, setProductdetail] = useState({});
@@ -104,7 +105,7 @@ function Searchfiltermodel(...args) {
         // console.log(err);
       });
   };
-
+  const gaEventTracker = useAnalyticsEventTracker('Searchfiltermodel')
   return (
     <>
       <div className="container">
@@ -303,7 +304,7 @@ function Searchfiltermodel(...args) {
                           placeholder=" Enter your Review if you want"
                         ></textarea>
                         <Button
-                          onClick={handleSubmit}
+                          onClick={() => (handleSubmit(),gaEventTracker('Send'))}
                           className="bt-st reviewbutton"
                         >
                           Send
