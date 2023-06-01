@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createContext } from "react";
 import { useEffect, useState, useContext } from "react";
-import ReactGA from "react-ga";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;

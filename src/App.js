@@ -73,8 +73,10 @@ import ResetForget from "./components/ResetForget";
 import Productsearch from "./components/filter/Productsearch";
 import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
+import TrendingWarzone from "./pages/TrendingWarzone";
 
-
+ReactGA.initialize("UA-250944909-1");
+// ReactGA.initialize("UA-250944909-1");
 function App() {
   const location = useLocation();
 
@@ -93,9 +95,10 @@ function App() {
     <AuthProvider>
       <MenuProvider>
         <Layout>
+          {/* <GoogleAnalytics trackingId="UA-250944909-1" /> */}
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route exact path="/login" element={<Login />} />
             <Route exact path="/myaccount" element={<Myaccount />} />
             <Route exact path="/service" element={<Service />} />
             <Route exact path="/multiModule" element={<MultiModule />} />
@@ -165,6 +168,7 @@ function App() {
               element={<SendRequestResetPasswordComponent />}
             />
             <Route path="/loginplan" element={<Loginplan />} />
+            <Route path="/tranding-warzone" element={<TrendingWarzone />} />
           </Routes>
         </Layout>
       </MenuProvider>
