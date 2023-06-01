@@ -36,7 +36,7 @@ import agreement_download from "../assets/files/Dispatch305-agreement.pdf";
 import UserPage from "./UserPage";
 import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
-import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
+import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -102,16 +102,7 @@ function CustomNavbar(args) {
       );
     }
 
-    if (
-      link !== "" &&
-      catgry !== "" &&
-      subcatry !== "" &&
-      type !== "" &&
-      formate !== "" &&
-      sellang !== "" &&
-      topic !== "" &&
-      Desc !== ""
-    ) {
+    if (link !== "" && catgry !== "" && subcatry !== "") {
       axios
         .post(`https://backend.brahmaand.space/user/App_Sub_resrc`, {
           link: url,
@@ -285,7 +276,7 @@ function CustomNavbar(args) {
     // setLngage(selectedList);
   };
 
-  const gaEventTracker = useAnalyticsEventTracker('CustomNavbar');
+  const gaEventTracker = useAnalyticsEventTracker("CustomNavbar");
 
   return (
     <Navbar
@@ -307,7 +298,11 @@ function CustomNavbar(args) {
       </Navbar.Brand>
 
       <Link to="/leaderboard">
-        <button className="btn rbutton mobile" type="submit" onClick={() => gaEventTracker('LeaderBoard')}>
+        <button
+          className="btn rbutton mobile"
+          type="submit"
+          onClick={() => gaEventTracker("LeaderBoard")}
+        >
           <h4 className="rText">LeaderBoard</h4>
         </button>
       </Link>
@@ -320,13 +315,15 @@ function CustomNavbar(args) {
         <Nav className="ms-auto navbar-nav">
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
                 type="submit"
-                onClick={(e) => (toggle(e), gaEventTracker('+Submit a Content'))}
+                onClick={(e) => (
+                  toggle(e), gaEventTracker("+Submit a Content")
+                )}
               >
                 <h4 className="rText">+Submit a Content</h4>
               </button>
@@ -481,7 +478,6 @@ function CustomNavbar(args) {
                                   </p>
                                 )}
                               </Label>
-
                               <select
                                 required
                                 type="select"
@@ -510,7 +506,8 @@ function CustomNavbar(args) {
                                 className="mt-3"
                                 style={{ font: "GT Walsheim Pro" }}
                               >
-                                {type !== "" ? (
+                                <b> Type</b>
+                                {/* {type !== "" ? (
                                   <p
                                     style={{ color: "black" }}
                                     className="mt-4"
@@ -520,16 +517,15 @@ function CustomNavbar(args) {
                                 ) : (
                                   <p style={{ color: "red" }} className="mt-4">
                                     Type
-                                    <span style={{ color: "red" }}>*</span>
+                                 
                                   </p>
-                                )}
+                                )} */}
 
                                 {/* <b>
                                   Type <span style={{ color: "red" }}>*</span>
                                 </b> */}
                               </Label>
                               <select
-                                required
                                 onChange={(e) => setType(e.target.value)}
                                 className="form-control"
                               >
@@ -544,7 +540,8 @@ function CustomNavbar(args) {
                                 className="mt-3"
                                 style={{ font: "GT Walsheim Pro" }}
                               >
-                                {formate !== "" ? (
+                                <b> Format</b>
+                                {/* {formate !== "" ? (
                                   <p
                                     style={{ color: "black" }}
                                     className="mt-4"
@@ -554,15 +551,14 @@ function CustomNavbar(args) {
                                 ) : (
                                   <p style={{ color: "red" }} className="mt-4">
                                     Format
-                                    <span style={{ color: "red" }}>*</span>
+                                   
                                   </p>
-                                )}
+                                )} */}
                                 {/* <b>
                                   Format <span style={{ color: "red" }}>*</span>
                                 </b> */}
                               </Label>
                               <select
-                                required
                                 onChange={(e) => setformate(e.target.value)}
                                 className="form-control"
                               >
@@ -581,23 +577,23 @@ function CustomNavbar(args) {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              {sellang !== "" &&
-                                sellang !== null &&
-                                sellang !== undefined ? (
+                              <b> Language of Content</b>
+                              {/* {sellang !== "" &&
+                              sellang !== null &&
+                              sellang !== undefined ? (
                                 <p>Language of Content</p>
                               ) : (
                                 <p style={{ color: "red" }}>
                                   Language of Content
-                                  <span style={{ color: "red" }}>*</span>
+                               
                                 </p>
-                              )}
+                              )} */}
                               {/* <b>
                                 Language of Content
                                 <span style={{ color: "red" }}>*</span>
                               </b> */}
                             </Label>
                             <Multiselect
-                              required
                               style={{ borderRadius: "14px" }}
                               placeholder="Select language"
                               className="w-100%"
@@ -615,13 +611,15 @@ function CustomNavbar(args) {
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              {topic != "" ? (
+                              <b> Topic</b>
+                              {/* {topic != "" ? (
                                 <p>Topic </p>
                               ) : (
                                 <p style={{ color: "red" }}>
-                                  Topic <span style={{ color: "red" }}>*</span>
+                                  
+                              
                                 </p>
-                              )}
+                              )} */}
                             </Label>
                             {/* <Row className="mt-3 mb-3 textarea">
                               <Form.Group controlId="validationCustomtopics">
@@ -654,7 +652,6 @@ function CustomNavbar(args) {
                             </Row> */}
                             <h5>
                               <textarea
-                                required
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
@@ -674,19 +671,7 @@ function CustomNavbar(args) {
                               className="mt-4"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              {Desc != "" &&
-                                Desc != null &&
-                                Desc != undefined ? (
-                                <p>
-                                  Descriptions
-                                  <span>*</span>
-                                </p>
-                              ) : (
-                                <p style={{ color: "red" }}>
-                                  Descriptions
-                                  <span style={{ color: "red" }}>*</span>
-                                </p>
-                              )}
+                              <b> Descriptions</b>
                               {/* <b>
                                 Descriptions
                                 <span style={{ color: "red" }}>*</span>
@@ -694,7 +679,6 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <textarea
-                                required
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
@@ -889,7 +873,9 @@ function CustomNavbar(args) {
                               <>
                                 <Col>
                                   <Button
-                                    onClick={() => (setModal(false), gaEventTracker('Discard'))}
+                                    onClick={() => (
+                                      setModal(false), gaEventTracker("Discard")
+                                    )}
                                     color="danger"
                                     className="m-1"
                                   >
@@ -898,7 +884,10 @@ function CustomNavbar(args) {
                                   <Button
                                     color="success"
                                     className="m-1"
-                                    onClick={(e) => (handleSubmitResource(e), gaEventTracker('Submit'))}
+                                    onClick={(e) => (
+                                      handleSubmitResource(e),
+                                      gaEventTracker("Submit")
+                                    )}
                                   >
                                     SUBMIT
                                   </Button>
@@ -925,7 +914,7 @@ function CustomNavbar(args) {
                 <button
                   className="btn rbutton mobile"
                   onClick={() => {
-                    gaEventTracker('+ Submit a Content')
+                    gaEventTracker("+ Submit a Content");
                     return (
                       <p
                         className="d-flex justify-content-center"
@@ -944,8 +933,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>
@@ -969,7 +958,11 @@ function CustomNavbar(args) {
                 as={NavLink}
                 className="navbar-link lText"
               >
-                <button className="btn rLogin mobile" type="submit" onClick={()=>gaEventTracker('LOGIN')}>
+                <button
+                  className="btn rLogin mobile"
+                  type="submit"
+                  onClick={() => gaEventTracker("LOGIN")}
+                >
                   <span className="">LOGIN</span>
                 </button>
               </Nav.Link>
