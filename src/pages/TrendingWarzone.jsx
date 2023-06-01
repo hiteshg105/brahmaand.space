@@ -308,9 +308,7 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2"
           >
-            <p style={{ fontSize: "24px" }}>
-              Rated <span style={{ fontWeight: "600" }}>Average</span>
-            </p>
+            <p style={{ fontSize: "24px", fontWeight: "600" }}>Average</p>
             <p className="my-3">Based on 227 reviews</p>
             <div className="d-flex align-items-center">
               <ReactStars
@@ -336,9 +334,7 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ps-4 py-2"
           >
-            <p style={{ fontSize: "24px" }}>
-              Rated <span style={{ fontWeight: "600" }}>Average</span>
-            </p>
+            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Bad</p>
             <p className="my-3">Based on 227 reviews</p>
             <div className="d-flex align-items-center">
               <ReactStars
@@ -359,21 +355,22 @@ const TrendingWarzone = () => {
       </Row>
 
       <Row className="px-2">
-        <div className="text-center">
-          <p
-            style={{ fontSize: "20px", fontWeight: "bold" }}
-            className="text-uppercase py-2"
-          >
-            Links
-          </p>
-          <Link
-            style={{ color: "#5F56C6", fontSize: "20px" }}
-            to={"https://pl-coding.com/multi-module-course"}
-          >
-            https://pl-coding.com/multi-module-course
-          </Link>
-        </div>
+        <p
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+          className="text-uppercase text-center border-bottom py-3"
+        >
+          Links
+        </p>
+
         <Col lg={6} className="border-top border-bottom border-right py-4">
+          <Row className="mb-4 text-end pe-4">
+            <Link
+              style={{ color: "#5F56C6", fontSize: "20px" }}
+              to={"https://pl-coding.com/multi-module-course"}
+            >
+              https://pl-coding.com/multi-module-course
+            </Link>
+          </Row>
           <Row className="justify-content-center justify-content-lg-start">
             <Row className="gap-3 mb-3">
               <Col className="shadow-lg px-0">
@@ -519,6 +516,14 @@ const TrendingWarzone = () => {
           lg={6}
           className="content-box border-top border-bottom border-right py-4"
         >
+          <Row className="mb-4 ps-4">
+            <Link
+              style={{ color: "#5F56C6", fontSize: "20px" }}
+              to={"https://pl-coding.com/multi-module-course"}
+            >
+              https://pl-coding.com/multi-module-course
+            </Link>
+          </Row>
           <Row className="justify-content-center justify-content-lg-end">
             <Row className="gap-3 mb-3">
               <Col className="shadow-lg px-0">
@@ -665,143 +670,272 @@ const TrendingWarzone = () => {
       <Row>
         <p
           style={{ fontSize: "20px", fontWeight: "bold" }}
-          className="text-uppercase py-2 text-center"
+          className="text-uppercase text-center py-3"
         >
           Descriptions
         </p>
-        <p className="text-center">What is the meaning of description? noun. a statement, picture in words, or account that
-          describes; descriptive representation. the act or method of describing.</p>
+        <Col lg={6} className="px-0">
+          <p style={{ color: "#737373" }} className="text-center mx-auto border-top">What is the meaning of description? noun. a statement, picture in words, or account that
+            describes; descriptive representation. the act or method of describing.</p>
+        </Col>
+        <Col lg={6} className="content-box px-0">
+          <p style={{ color: "#737373" }} className="text-center mx-auto border-top">What is the meaning of description? noun. a statement, picture in words, or account that
+            describes; descriptive representation. the act or method of describing.</p>
+        </Col>
       </Row>
 
-
-      <hr></hr>
-
-      <div className="rating-box">
-        <Row>
-          <Col lg="6">
-            <div className="rat-left mt-3">
-              <h4>Customer Rating</h4>
-              <div className="">
-                <PrettyRating
-                  value={2.5}
-                  icons={icons.star}
-                  colors={colors.star}
-                />
-                <span className="starratinginno">
-                  {0 ? <>69 of 5 Stars</> : null}
-                </span>
-                <br></br>
-                <span className="mt-3">69 - Customers Reviews</span>
+      <Row className="border-top border-bottom">
+        <p
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+          className="text-uppercase text-center py-3"
+        >
+          Overall Rating
+        </p>
+        <Col lg={6} className="d-flex border-top justify-content-center text-end p-3">
+          <div style={{ width: "fit-content" }} className="mx-0 ms-lg-auto me-0 me-lg-4">
+            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Average</p>
+            <div className="d-flex align-items-center">
+              <ReactStars
+                edit={false}
+                value={war?.resource1.ava_rating}
+                {...warRating}
+              />
+              <p
+                style={{ fontSize: "22px", fontWeight: "600" }}
+                className="ms-2"
+              >
+                {war?.resource1.ava_rating}
+              </p>
+            </div>
+            <p style={{ fontSize: "14px", color: "#CACACA" }} className="mt-2 text-start fw-bold">362 customers reviews</p>
+            <div className="d-flex flex-column gap-2 mt-3">
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">5 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
               </div>
-            </div>
-          </Col>
-          <Col lg="6">
-            <h4 className="mt-3">Write your Review</h4>
-            <ReactStars {...secondExample} />
-          </Col>
-          <Row lg="12">
-            <div className="rat-right">
-              <Row>
-                <Col lg="6"></Col>
-              </Row>
-
-              <div className="">
-                <form>
-                  <textarea
-                    value={"Somthing"}
-                    name="text"
-                    className="form-control st-taetarea"
-                    placeholder=" Enter your Review if you want"
-                  ></textarea>
-                  <Button className="bt-st reviewbutton mb-3">
-                    Submit
-                  </Button>
-                </form>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">4 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
               </div>
-            </div>
-          </Row>
-        </Row>
-      </div>
-      <Row>
-        <Col lg="4"></Col>
-      </Row>
-      <hr></hr>
-      <div className="review-list mt-3">
-        <h4>Reviews:</h4>
-        {new Array(3)?.map((value) => (
-          <div className="re-list">
-            <div className="re-listimg">
-              <img src={value?.userid?.profileImg} alt="UserImage" />
-            </div>
-            <div className="re-listcont">
-              <h5>
-                {value?.userid?.username}
-                <span>
-                  <Moment format="ll">{value?.createdAt}</Moment>
-                </span>
-              </h5>
-              <div className="star-1">
-                STARSSS
-                {/* <PrettyRating
-                    value={value?.rating}
-                    icons={icons.star}
-                    colors={colors.star}
-                  /> */}
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">3 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
               </div>
-            </div>
-            <div className="re-btext mt-3">
-              <Row>
-                <Col lg="10"> {value?.comment}</Col>
-                <Col lg="2">
-                  {true ? (
-                    <>
-                      <h6>
-                        <AiFillEdit size="25px" />
-                      </h6>
-                      <Modal>
-                        <ModalHeader>Edit Your Comment</ModalHeader>
-                        <ModalBody>
-                          <Row>
-                            <Col>
-                              <Label>Edit Review</Label>
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder={value?.comment}
-                                value={"Something"}
-                                required
-                              />
-                            </Col>
-                            <Col>
-                              STARSSSS
-                              {/* <ReactStars
-                                  style={{
-                                    size: "25px",
-                                  }}
-                                /> */}
-                            </Col>
-                          </Row>
-
-                          <Col className="d-flex justify-content-center">
-                            <button
-                              style={{
-                                color: "white",
-                              }}
-                              class="btn success"
-                            >
-                              Edit your comment
-                            </button>
-                          </Col>
-                        </ModalBody>
-                      </Modal>
-                    </>
-                  ) : null}
-                </Col>
-              </Row>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">2 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">1 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        </Col>
+        <Col lg={6} className="content-box border-top d-flex justify-content-center text-end p-3">
+          <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
+            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Bad</p>
+            <div className="d-flex align-items-center">
+              <ReactStars
+                edit={false}
+                value={war?.resource1.ava_rating}
+                {...warRating}
+              />
+              <p
+                style={{ fontSize: "22px", fontWeight: "600" }}
+                className="ms-2"
+              >
+                {war?.resource1.ava_rating}
+              </p>
+            </div>
+            <p style={{ fontSize: "14px", color: "#CACACA" }} className="mt-2 text-start fw-bold">362 customers reviews</p>
+            <div className="d-flex flex-column gap-2 mt-3">
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">5 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">4 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">3 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">2 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+              <div className="d-flex flex-nowrap align-items-center gap-3">
+                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">1 Stars</span>
+                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
+                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      <Row className="border-top border-bottom">
+        <p
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+          className="text-uppercase text-center py-3"
+        >
+          Write Your reviews
+        </p>
+        <Col lg={6} className="p-3 pe-4 border-top">
+          <div className="w-100 w-lg-75 mx-auto ms-lg-auto mt-5">
+            <div className="reviews-rating-stars d-flex justify-content-lg-end">
+              <PrettyRating
+                value={2.5}
+                icons={icons.star}
+                colors={colors.star}
+              />
+            </div>
+            <form className="position-relative">
+              <textarea
+                value={"Somthing"}
+                name="text"
+                className="form-control st-taetarea"
+                placeholder=" Enter your Review if you want"
+              ></textarea>
+              <button style={{ backgroundColor: "#5F56C6", right: '8px', bottom: "8px" }} className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2">send</button>
+            </form>
+          </div>
+        </Col>
+        <Col lg={6} className="content-box p-3 ps-4 border-top">
+          <div className="w-100 w-lg-75 mt-5 mx-auto mx-lg-0">
+            <div className="reviews-rating-stars d-flex">
+              <PrettyRating
+                value={2.5}
+                icons={icons.star}
+                colors={colors.star}
+              />
+            </div>
+            <form className="position-relative">
+              <textarea
+                value={"Somthing"}
+                name="text"
+                className="form-control st-taetarea"
+                placeholder=" Enter your Review if you want"
+              ></textarea>
+              <button style={{ backgroundColor: "#5F56C6", right: '8px', bottom: "8px" }} className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2">send</button>
+            </form>
+          </div>
+        </Col>
+      </Row>
+
+      <Row className="border-top border-bottom">
+        <p
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+          className="text-uppercase text-center py-3"
+        >
+          REVIEWS
+        </p>
+        <Col style={{ padding: "40px 16px 16px" }} className="border-top">
+          {[{
+            userid: {
+              username: "Nai bataunga",
+              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+            },
+            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+            createdAt: "Atayare j"
+          }].map((value) => (
+            <div style={{ backgroundColor: "rgba(0,0,0,0.08)" }} className="d-flex flex-column p-3 rounded-4">
+              <div className="re-list d-flex align-items-center gap-4">
+                <div style={{ width: "50px" }}>
+                  <img className="w-100 h-auto rounded-circle" src={value?.userid?.profileImg} alt="UserImage" />
+                </div>
+                <div className="re-listcont w-100 d-flex justify-content-between">
+                  <div>
+                    <h5>
+                      {value?.userid?.username}
+                    </h5>
+                    <div className="star-1">
+                      <PrettyRating
+                        value={2}
+                        icons={icons.star}
+                        colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                      />
+                    </div>
+                  </div>
+                  <span>
+                    {/* <Moment format="ll"></Moment> */}
+                    {value?.createdAt}
+                  </span>
+                </div>
+              </div>
+              <p className="fw-bold">There're so many choices in their menu. I appreciated that it also showed the calories. Good to know about that. Then I chose the one with
+                lower calories:)</p>
+            </div>
+          ))}
+        </Col>
+
+        <Col style={{ padding: "40px 16px 16px" }} className="content-box border-top d-flex flex-column gap-3">
+          {[{
+            userid: {
+              username: "Nai bataunga",
+              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+            },
+            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+            createdAt: "Atayare j"
+          }, {
+            userid: {
+              username: "Nai bataunga",
+              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+            },
+            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+            createdAt: "Atayare j"
+          }].map((value) => (
+            <div style={{ backgroundColor: "rgba(0,0,0,0.08)" }} className="d-flex flex-column p-3 rounded-4">
+              <div className="re-list d-flex align-items-center gap-4">
+                <div style={{ width: "50px" }}>
+                  <img className="w-100 h-auto rounded-circle" src={value?.userid?.profileImg} alt="UserImage" />
+                </div>
+                <div className="re-listcont w-100 d-flex justify-content-between">
+                  <div>
+                    <h5>
+                      {value?.userid?.username}
+                    </h5>
+                    <div className="star-1">
+                      <PrettyRating
+                        value={2}
+                        icons={icons.star}
+                        colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                      />
+                    </div>
+                  </div>
+                  <span>
+                    {/* <Moment format="ll"></Moment> */}
+                    {value?.createdAt}
+                  </span>
+                </div>
+              </div>
+              <p className="fw-bold">There're so many choices in their menu. I appreciated that it also showed the calories. Good to know about that. Then I chose the one with
+                lower calories:)</p>
+            </div>
+          ))}
+        </Col>
+      </Row>
     </Container>
   );
 };
