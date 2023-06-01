@@ -404,7 +404,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b">
                         <p>Creator:</p>
-                        <h4 className="fw-bold">Philipp Lackner</h4>
+                        <h4 className="fw-bold">
+                          {war?.resource1.creatorName}
+                        </h4>
                       </div>
                     </div>
                   </Col>
@@ -415,7 +417,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b">
                         <p>Submitted by:</p>
-                        <h4 className="fw-bold">Florian 3428</h4>
+                        <h4 className="fw-bold">
+                          {war?.resource1.userid.username}
+                        </h4>
                       </div>
                     </div>
                   </Col>
@@ -429,7 +433,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Type:</p>
-                        <Link to="#">Paid</Link>
+                        <Link to="#">{war?.resource1.type}</Link>
                       </div>
                     </div>
                   </Col>
@@ -440,7 +444,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Format:</p>
-                        <Link to="#">Link tag</Link>
+                        <Link to="#">{war?.resource1.format}</Link>
                       </div>
                     </div>
                   </Col>
@@ -451,7 +455,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Category:</p>
-                        <Link>Link tag</Link>
+                        <Link>{war?.resource1.category.title}</Link>
                       </div>
                     </div>
                   </Col>
@@ -462,8 +466,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Language:</p>
-                        {["Bava Hindi"].map((lang) => (
+                        {war?.resource1.language.map((lang) => (
                           <Link
+                            key={lang._id}
                             style={{
                               borderWidth: "0.5px",
                               borderColor: "#494949",
@@ -472,7 +477,7 @@ const TrendingWarzone = () => {
                               backgroundColor: "#F1F1F1",
                             }}
                           >
-                            {lang}
+                            {lang.language}
                           </Link>
                         ))}
                       </div>
@@ -488,19 +493,18 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Year:</p>
-                        {["2022"].map((lang) => (
-                          <Link
-                            style={{
-                              borderWidth: "0.5px",
-                              borderColor: "#494949",
-                              color: "#494949",
-                              fontWeight: 500,
-                              backgroundColor: "#F1F1F1",
-                            }}
-                          >
-                            {lang}
-                          </Link>
-                        ))}
+
+                        <Link
+                          style={{
+                            borderWidth: "0.5px",
+                            borderColor: "#494949",
+                            color: "#494949",
+                            fontWeight: 500,
+                            backgroundColor: "#F1F1F1",
+                          }}
+                        >
+                          {war?.resource1.relYear[0].yrName}
+                        </Link>
                       </div>
                     </div>
                   </Col>
@@ -516,7 +520,9 @@ const TrendingWarzone = () => {
                           className="d-flex align-items-center"
                         >
                           <BsFillStarFill size={20} />
-                          <span className="ms-2">(4.5)</span>
+                          <span className="ms-2">
+                            {war?.resource1.ava_rating}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -528,7 +534,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Submitted:</p>
-                        <p className="text-black fw-bold">Aug 24, 2022</p>
+                        <p className="text-black fw-bold">
+                          {war?.resource1.createdAt.toString().slice(0, 10)}
+                        </p>
                       </div>
                     </div>
                   </Col>
@@ -549,7 +557,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b">
                         <p>Creator:</p>
-                        <h4 className="fw-bold">Philipp Lackner</h4>
+                        <h4 className="fw-bold">
+                          {war?.resource2.creatorName}
+                        </h4>
                       </div>
                     </div>
                   </Col>
@@ -560,7 +570,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b">
                         <p>Submitted by:</p>
-                        <h4 className="fw-bold">Florian 3428</h4>
+                        <h4 className="fw-bold">
+                          {war?.resource2.userid.username}
+                        </h4>
                       </div>
                     </div>
                   </Col>
@@ -574,7 +586,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Type:</p>
-                        <Link to="#">Paid</Link>
+                        <Link to="#">{war?.resource2.type}</Link>
                       </div>
                     </div>
                   </Col>
@@ -585,7 +597,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Format:</p>
-                        <Link to="#">Link tag</Link>
+                        <Link to="#">{war?.resource2.format}</Link>
                       </div>
                     </div>
                   </Col>
@@ -596,7 +608,7 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Category:</p>
-                        <Link>Link tag</Link>
+                        <Link>{war?.resource2.category.title}</Link>
                       </div>
                     </div>
                   </Col>
@@ -607,8 +619,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Language:</p>
-                        {["Bava Hindi"].map((lang) => (
+                        {war?.resource2.language.map((lang) => (
                           <Link
+                            key={lang._id}
                             style={{
                               borderWidth: "0.5px",
                               borderColor: "#494949",
@@ -617,7 +630,7 @@ const TrendingWarzone = () => {
                               backgroundColor: "#F1F1F1",
                             }}
                           >
-                            {lang}
+                            {lang.language}
                           </Link>
                         ))}
                       </div>
@@ -643,7 +656,7 @@ const TrendingWarzone = () => {
                               backgroundColor: "#F1F1F1",
                             }}
                           >
-                            {lang}
+                            {war?.resource2.relYear[0].yrName}
                           </Link>
                         ))}
                       </div>
@@ -661,7 +674,10 @@ const TrendingWarzone = () => {
                           className="d-flex align-items-center"
                         >
                           <BsFillStarFill size={20} />
-                          <span className="ms-2">(4.5)</span>
+                          <span className="ms-2">
+                            {" "}
+                            {war?.resource2.ava_rating}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -673,7 +689,9 @@ const TrendingWarzone = () => {
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Submitted:</p>
-                        <p className="text-black fw-bold">Aug 24, 2022</p>
+                        <p className="text-black fw-bold">
+                          {war?.resource2.createdAt.toString().slice(0, 10)}
+                        </p>
                       </div>
                     </div>
                   </Col>
