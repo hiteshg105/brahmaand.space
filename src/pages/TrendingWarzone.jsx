@@ -1,13 +1,11 @@
 import PrettyRating from "pretty-rating-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { BsBookmark, BsFillBookmarkCheckFill } from "react-icons/bs";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { Label, Modal, ModalBody, ModalHeader } from "reactstrap";
 import ReactStars from "react-rating-stars-component";
-
-
 
 //images
 import { AiFillEdit } from "react-icons/ai";
@@ -32,11 +30,14 @@ import trophy from "../assets/icons/trophy.png";
 import loser from "../assets/icons/loser.png";
 import link from "../assets/icons/link.png";
 import ratings from "../assets/icons/ratings.png";
-
+import { async } from "@firebase/util";
+import instance from "../components/axiosConfig";
+import CountDown from "./CountDown";
 
 const TrendingWarzone = () => {
   const [isModal, setIsModal] = useState(false);
   const [rating, setRating] = useState("");
+  const [war, setWar] = useState();
 
   const icons = {
     star: {
@@ -70,7 +71,7 @@ const TrendingWarzone = () => {
     count: 5,
     color: "#434b4d47",
     activeColor: "#d9ad26",
-    value: 7.5,
+    // value: 2.5,
     a11y: true,
     isHalf: true,
     emptyIcon: <i className="far fa-star" />,
@@ -79,55 +80,55 @@ const TrendingWarzone = () => {
       setRating(newValue);
     },
   };
+  // console.log(instance)
+  const getSingleWar = async () => {
+    const data = await instance.get(
+      `/get/single/warzone/6476da36304297648d94da9b`
+    );
+    console.log(data.data.war);
+    setWar(data.data.war);
+  };
 
+  useEffect(() => {
+    getSingleWar();
+  }, []);
 
   return (
     <>
-      <Button onClick={() => setIsModal(true)}>
-        OPEN MODAL
-      </Button>
+      <Button onClick={() => setIsModal(true)}>OPEN MODAL</Button>
 
       <Modal
         isOpen={isModal}
         toggle={() => setIsModal(!isModal)}
-        className="twmdlg">
+        className="twmdlg"
+      >
         <ModalBody>
           <Col className="mb-4">
-            <h1 style={{ fontSize: "40px", textAlign: "center" }}>Trending Warzone</h1>
+            <h1 style={{ fontSize: "40px", textAlign: "center" }}>
+              Trending Warzone
+            </h1>
           </Col>
           <Row className="justify-content-between">
             <Col className="d-none d-lg-flex justify-content-center mt-5">
-              <div style={{ border: "3px solid #6BE585", width: "fit-content" }} className="d-flex align-items-center px-4 py-2">
+              <div
+                style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                className="d-flex align-items-center px-4 py-2"
+              >
                 <span className="me-3">
                   <img src={trophy} width={25} alt="" />
                 </span>
-                <span style={{ color: "#6BE585", fontWeight: "bold" }}>WINNER</span>
+                <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                  WINNER
+                </span>
               </div>
             </Col>
             <Col>
-              <div className="d-flex justify-content-center">
-                <p style={{ fontSize: "20px", fontWeight: "bold" }} className="d-flex align-items-center me-4 text-uppercase text-nowrap">Ends In:</p>
-                <Row style={{ border: "3px solid #000" }} className="rounded-2 px-3 py-2 flex-nowrap">
-                  <Col>
-                    <p style={{ fontSize: "24px", fontWeight: "bold", whiteSpace: "nowrap" }}>10</p>
-                    <p style={{ fontSize: "8px", fontWeight: "bold" }} className="text-center p-0">Days</p>
-                  </Col>
-                  <Col>
-                    <p style={{ fontSize: "24px", fontWeight: "bold", whiteSpace: "nowrap" }}>02</p>
-                    <p style={{ fontSize: "8px", fontWeight: "bold" }} className="text-center p-0">hours</p>
-                  </Col>
-                  <Col>
-                    <p style={{ fontSize: "24px", fontWeight: "bold", whiteSpace: "nowrap" }}>57</p>
-                    <p style={{ fontSize: "8px", fontWeight: "bold" }} className="text-center p-0">minutes</p>
-                  </Col>
-                  <Col>
-                    <p style={{ fontSize: "24px", fontWeight: "bold", whiteSpace: "nowrap" }}>48</p>
-                    <p style={{ fontSize: "8px", fontWeight: "bold" }} className="text-center p-0">Seconds</p>
-                  </Col>
-                </Row>
-              </div>
+              <CountDown endDate={war && war.endDate} />
             </Col>
-            <Col style={{ top: "-16px", right: "-12px" }} className="h-100 text-end position-absolute d-sm-block d-lg-none">
+            <Col
+              style={{ top: "-16px", right: "-12px" }}
+              className="h-100 text-end position-absolute d-sm-block d-lg-none"
+            >
               <MdCancelPresentation
                 className="cancelbuttondata"
                 size={40}
@@ -136,11 +137,16 @@ const TrendingWarzone = () => {
             </Col>
             <Col className="d-none d-lg-flex align-items-center">
               <Col className="h-100 d-flex align-items-end">
-                <div style={{ border: "3px solid #B62E17", width: "fit-content" }} className="d-flex align-items-center px-4 py-2">
+                <div
+                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
                   <span className="me-3">
                     <img src={loser} width={25} alt="" />
                   </span>
-                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>LOSER</span>
+                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                    LOSER
+                  </span>
                 </div>
               </Col>
               <Col className="h-100 text-end">
@@ -153,7 +159,6 @@ const TrendingWarzone = () => {
             </Col>
           </Row>
           <Row className="d-flex d-lg-none border-top mt-4">
-
             {/* <Col className="h-100 d-flex justify-content-center border-start py-4">
               <div style={{ border: "3px solid #B62E17", width: "fit-content" }} className="d-flex align-items-center px-4 py-2">
                 <span className="me-3">
@@ -167,17 +172,25 @@ const TrendingWarzone = () => {
           <Row className="m-0 mt-0 mt-lg-4">
             <Col lg={6} className="border-top border-bottom p-0">
               <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div style={{ border: "3px solid #6BE585", width: "fit-content" }} className="d-flex align-items-center px-4 py-2">
+                <div
+                  style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
                   <span className="me-3">
                     <img src={trophy} width={25} alt="" />
                   </span>
-                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>WINNER</span>
+                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                    WINNER
+                  </span>
                 </div>
               </Col>
               <Row className="py-3 pe-4">
-                <p style={{ fontSize: "24px", fontWeight: "bold" }} className="col-lg-10 mb-3">
-                  Building Industry-Level Apps With Multi-Module
-                  Architecture</p>
+                <p
+                  style={{ fontSize: "24px", fontWeight: "bold" }}
+                  className="col-lg-10 mb-3"
+                >
+                  {war?.resource1.desc}
+                </p>
                 <div className="d-flex align-items-center">
                   <Link className="me-3" to="#">
                     <img src={mdicon1} alt="" width={24} />
@@ -190,17 +203,25 @@ const TrendingWarzone = () => {
             </Col>
             <Col lg={6} className="content-box border-top border-bottom p-0">
               <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div style={{ border: "3px solid #B62E17", width: "fit-content" }} className="d-flex align-items-center px-4 py-2">
+                <div
+                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
                   <span className="me-3">
                     <img src={loser} width={25} alt="" />
                   </span>
-                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>LOSER</span>
+                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                    LOSER
+                  </span>
                 </div>
               </Col>
               <Row className="py-3 ps-4">
-                <p style={{ fontSize: "24px", fontWeight: "bold" }} className="col-lg-10 mb-3">
-                  Building Industry-Level Apps With Multi-Module
-                  Architecture</p>
+                <p
+                  style={{ fontSize: "24px", fontWeight: "bold" }}
+                  className="col-lg-10 mb-3"
+                >
+                  {war?.resource2.desc}
+                </p>
                 <div className="d-flex align-items-center">
                   <Link className="me-3" to="#">
                     <img src={mdicon1} alt="" width={24} />
@@ -213,73 +234,145 @@ const TrendingWarzone = () => {
             </Col>
           </Row>
           <Row>
-            <p style={{ fontSize: "20px", fontWeight: "bold" }} className="text-center text-uppercase py-3">ALL-Topics</p>
+            <p
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+              className="text-center text-uppercase py-3"
+            >
+              ALL-Topics
+            </p>
             <Col lg={6} className="border-top border-bottom p-0 py-4">
               <div className="d-flex justify-content-center">
                 <span className="me-3">
                   <img src={link} alt="" width={20} />
                 </span>
                 <div className="d-flex flex-wrap tag-2">
-                  {["Android", "clean architecture", "multi-module", "mvvm", "use cases", "solid", "jetpack compose", "kotlin",
-                    "room", "retrofit"].map((val) => (
-                      <Link className="d-flex" to="#">
-                        {val}
-                      </Link>
-                    ))}
+                  {war?.resource1.topics[0].split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </Col>
-            <Col lg={6} className="content-box border-top border-bottom p-0 py-4">
+            <Col
+              lg={6}
+              className="content-box border-top border-bottom p-0 py-4"
+            >
               <div className="d-flex justify-content-center">
                 <span className="me-3">
                   <img src={link} alt="" width={20} />
                 </span>
                 <div className="d-flex flex-wrap tag-2">
-                  {["Android", "clean architecture", "multi-module", "mvvm", "use cases", "solid", "jetpack compose", "kotlin",
-                    "room", "retrofit"].map((val) => (
-                      <Link className="d-flex" to="#">
-                        {val}
-                      </Link>
-                    ))}
+                  {war?.resource2.topics[0].split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
                 </div>
               </div>
             </Col>
           </Row>
 
           <Row>
-            <p style={{ fontSize: "20px", fontWeight: "bold" }} className="text-center text-uppercase py-3">comparison</p>
-            <Col lg={6} className="border-top border-bottom border-right py-4 px-0 pe-4">
+            <p
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+              className="text-center text-uppercase py-3"
+            >
+              comparison
+            </p>
+            <Col
+              lg={6}
+              className="border-top border-bottom border-right py-4 px-0 pe-4"
+            >
               <div>
-                <iframe style={{ height: "400px" }} className="w-100" src="https://www.youtube.com/embed/Sg8XVnCneXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe
+                  style={{ height: "400px" }}
+                  className="w-100"
+                  src="https://www.youtube.com/embed/Sg8XVnCneXE"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
               </div>
             </Col>
-            <Col lg={6} className="content-box border-top border-bottom border-right py-4 px-0 ps-4">
+            <Col
+              lg={6}
+              className="content-box border-top border-bottom border-right py-4 px-0 ps-4"
+            >
               <div>
-                <iframe style={{ height: "400px" }} className="w-100" src="https://www.youtube.com/embed/lpsLAP4x-tk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe
+                  style={{ height: "400px" }}
+                  className="w-100"
+                  src="https://www.youtube.com/embed/lpsLAP4x-tk"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
               </div>
             </Col>
           </Row>
 
           <Row>
-            <p style={{ fontSize: "20px", fontWeight: "bold" }} className="text-center text-uppercase py-3">War rating</p>
-            <Col lg={6} className="border-top border-bottom border-right py-4 pe-4">
-              <div style={{ width: "69%" }} className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2">
-                <p style={{ fontSize: "24px" }}>Rated <span style={{ fontWeight: "600" }}>Average</span></p>
+            <p
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+              className="text-center text-uppercase py-3"
+            >
+              War rating
+            </p>
+            <Col
+              lg={6}
+              className="border-top border-bottom border-right py-4 pe-4"
+            >
+              <div
+                style={{ width: "69%" }}
+                className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2"
+              >
+                <p style={{ fontSize: "24px" }}>
+                  Rated <span style={{ fontWeight: "600" }}>Average</span>
+                </p>
                 <p className="my-3">Based on 227 reviews</p>
                 <div className="d-flex align-items-center">
-                  <ReactStars {...warRating} />
-                  <p style={{ fontSize: "22px", fontWeight: "600" }} className="ms-2">{secondExample.value}</p>
+                  <ReactStars
+                    edit={false}
+                    value={war?.resource1.ava_rating}
+                    {...warRating}
+                  />
+                  <p
+                    style={{ fontSize: "22px", fontWeight: "600" }}
+                    className="ms-2"
+                  >
+                    {war?.resource1.ava_rating}
+                  </p>
                 </div>
                 <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
               </div>
             </Col>
-            <Col lg={6} className="content-box border-top border-bottom border-right py-4 ps-4">
-              <div style={{ width: "69%" }} className="shadow-lg mx-auto mx-lg-0 ps-4 py-2">
-                <p style={{ fontSize: "24px" }}>Rated <span style={{ fontWeight: "600" }}>Average</span></p>
+            <Col
+              lg={6}
+              className="content-box border-top border-bottom border-right py-4 ps-4"
+            >
+              <div
+                style={{ width: "69%" }}
+                className="shadow-lg mx-auto mx-lg-0 ps-4 py-2"
+              >
+                <p style={{ fontSize: "24px" }}>
+                  Rated <span style={{ fontWeight: "600" }}>Average</span>
+                </p>
                 <p className="my-3">Based on 227 reviews</p>
                 <div className="d-flex align-items-center">
-                  <ReactStars {...warRating} />
-                  <p style={{ fontSize: "22px", fontWeight: "600" }} className="ms-2">{secondExample.value}</p>
+                  <ReactStars
+                    edit={false}
+                    value={war?.resource2.ava_rating}
+                    {...warRating}
+                  />
+                  <p
+                    style={{ fontSize: "22px", fontWeight: "600" }}
+                    className="ms-2"
+                  >
+                    {war?.resource2.ava_rating}
+                  </p>
                 </div>
                 <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
               </div>
@@ -288,8 +381,18 @@ const TrendingWarzone = () => {
 
           <Row>
             <div className="text-center">
-              <p style={{ fontSize: "20px", fontWeight: "bold" }} className="text-uppercase py-2">Links</p>
-              <Link style={{ color: "#5F56C6", fontSize: "20px" }} to={"https://pl-coding.com/multi-module-course"}>https://pl-coding.com/multi-module-course</Link>
+              <p
+                style={{ fontSize: "20px", fontWeight: "bold" }}
+                className="text-uppercase py-2"
+              >
+                Links
+              </p>
+              <Link
+                style={{ color: "#5F56C6", fontSize: "20px" }}
+                to={"https://pl-coding.com/multi-module-course"}
+              >
+                https://pl-coding.com/multi-module-course
+              </Link>
             </div>
             <Col lg={6} className="border-top border-bottom border-right py-4">
               <Row>
@@ -333,11 +436,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={formaticon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={formaticon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Format:</p>
@@ -348,11 +447,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={diffculty}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={diffculty} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Category:</p>
@@ -363,16 +458,22 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={languageicon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={languageicon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Language:</p>
                         {["Bava Hindi"].map((lang) => (
-                          <Link style={{ borderWidth: "0.5px", borderColor: "#494949", color: "#494949", fontWeight: 500, backgroundColor: "#F1F1F1" }}>{lang}</Link>
+                          <Link
+                            style={{
+                              borderWidth: "0.5px",
+                              borderColor: "#494949",
+                              color: "#494949",
+                              fontWeight: 500,
+                              backgroundColor: "#F1F1F1",
+                            }}
+                          >
+                            {lang}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -383,16 +484,22 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={yearicon}
-                          alt=""
-                          width="35px"
-                        />
+                        <img src={yearicon} alt="" width="35px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Year:</p>
                         {["2022"].map((lang) => (
-                          <Link style={{ borderWidth: "0.5px", borderColor: "#494949", color: "#494949", fontWeight: 500, backgroundColor: "#F1F1F1" }}>{lang}</Link>
+                          <Link
+                            style={{
+                              borderWidth: "0.5px",
+                              borderColor: "#494949",
+                              color: "#494949",
+                              fontWeight: 500,
+                              backgroundColor: "#F1F1F1",
+                            }}
+                          >
+                            {lang}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -400,15 +507,14 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={ratings}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={ratings} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Ratings:</p>
-                        <div style={{ color: "#FCAF3B" }} className="d-flex align-items-center">
+                        <div
+                          style={{ color: "#FCAF3B" }}
+                          className="d-flex align-items-center"
+                        >
                           <BsFillStarFill size={20} />
                           <span className="ms-2">(4.5)</span>
                         </div>
@@ -418,11 +524,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={submiticon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={submiticon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Submitted:</p>
@@ -434,7 +536,10 @@ const TrendingWarzone = () => {
                 </Row>
               </Row>
             </Col>
-            <Col lg={6} className="content-box border-top border-bottom border-right py-4">
+            <Col
+              lg={6}
+              className="content-box border-top border-bottom border-right py-4"
+            >
               <Row className="justify-content-start justify-content-lg-end">
                 <Row className="gap-3 mb-3">
                   <Col className="shadow-lg px-0">
@@ -476,11 +581,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={formaticon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={formaticon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Format:</p>
@@ -491,11 +592,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={diffculty}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={diffculty} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Category:</p>
@@ -506,16 +603,22 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={languageicon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={languageicon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Language:</p>
                         {["Bava Hindi"].map((lang) => (
-                          <Link style={{ borderWidth: "0.5px", borderColor: "#494949", color: "#494949", fontWeight: 500, backgroundColor: "#F1F1F1" }}>{lang}</Link>
+                          <Link
+                            style={{
+                              borderWidth: "0.5px",
+                              borderColor: "#494949",
+                              color: "#494949",
+                              fontWeight: 500,
+                              backgroundColor: "#F1F1F1",
+                            }}
+                          >
+                            {lang}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -526,16 +629,22 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={yearicon}
-                          alt=""
-                          width="35px"
-                        />
+                        <img src={yearicon} alt="" width="35px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Year:</p>
                         {["2022"].map((lang) => (
-                          <Link style={{ borderWidth: "0.5px", borderColor: "#494949", color: "#494949", fontWeight: 500, backgroundColor: "#F1F1F1" }}>{lang}</Link>
+                          <Link
+                            style={{
+                              borderWidth: "0.5px",
+                              borderColor: "#494949",
+                              color: "#494949",
+                              fontWeight: 500,
+                              backgroundColor: "#F1F1F1",
+                            }}
+                          >
+                            {lang}
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -543,15 +652,14 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={ratings}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={ratings} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Ratings:</p>
-                        <div style={{ color: "#FCAF3B" }} className="d-flex align-items-center">
+                        <div
+                          style={{ color: "#FCAF3B" }}
+                          className="d-flex align-items-center"
+                        >
                           <BsFillStarFill size={20} />
                           <span className="ms-2">(4.5)</span>
                         </div>
@@ -561,11 +669,7 @@ const TrendingWarzone = () => {
                   <Col className="shadow-lg px-0">
                     <div className="mid-1 tt-2">
                       <div className="me-3">
-                        <img
-                          src={submiticon}
-                          alt=""
-                          width="25px"
-                        />
+                        <img src={submiticon} alt="" width="25px" />
                       </div>
                       <div className="mid-1-b tt-1">
                         <p>Submitted:</p>
@@ -604,9 +708,7 @@ const TrendingWarzone = () => {
                       {0 ? <>69 of 5 Stars</> : null}
                     </span>
                     <br></br>
-                    <span className="mt-3">
-                      69 - Customers Reviews
-                    </span>
+                    <span className="mt-3">69 - Customers Reviews</span>
                   </div>
                 </div>
               </Col>
@@ -628,9 +730,7 @@ const TrendingWarzone = () => {
                         className="form-control st-taetarea"
                         placeholder=" Enter your Review if you want"
                       ></textarea>
-                      <Button
-                        className="bt-st reviewbutton mb-3"
-                      >
+                      <Button className="bt-st reviewbutton mb-3">
                         Submit
                       </Button>
                     </form>
@@ -648,10 +748,7 @@ const TrendingWarzone = () => {
             {new Array(3)?.map((value) => (
               <div className="re-list">
                 <div className="re-listimg">
-                  <img
-                    src={value?.userid?.profileImg}
-                    alt="UserImage"
-                  />
+                  <img src={value?.userid?.profileImg} alt="UserImage" />
                 </div>
                 <div className="re-listcont">
                   <h5>
@@ -676,14 +773,10 @@ const TrendingWarzone = () => {
                       {true ? (
                         <>
                           <h6>
-                            <AiFillEdit
-                              size="25px"
-                            />
+                            <AiFillEdit size="25px" />
                           </h6>
                           <Modal>
-                            <ModalHeader>
-                              Edit Your Comment
-                            </ModalHeader>
+                            <ModalHeader>Edit Your Comment</ModalHeader>
                             <ModalBody>
                               <Row>
                                 <Col>
@@ -727,7 +820,7 @@ const TrendingWarzone = () => {
             ))}
           </div>
         </ModalBody>
-      </Modal >
+      </Modal>
     </>
   );
 };
