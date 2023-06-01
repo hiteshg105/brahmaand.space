@@ -37,6 +37,8 @@ import CountDown from "./CountDown";
 const TrendingWarzone = () => {
   const [rating, setRating] = useState("");
   const [war, setWar] = useState();
+  const [warReview, setWarReview] = useState();
+  const [warRscReview, setWarRscReview] = useState();
 
   const icons = {
     star: {
@@ -88,8 +90,26 @@ const TrendingWarzone = () => {
     setWar(data.data.war);
   };
 
+  const getWarReview = async () => {
+    const data = await instance.get(
+      `/get/review/warzone/6476da36304297648d94da9b`
+    );
+    // console.log(data.data);
+    setWarReview(data.data);
+  };
+
+  const getWarRscReview = async () => {
+    const data = await instance.get(
+      `/get/allreview/warzone/resource/6476da36304297648d94da9b`
+    );
+    console.log(data.data);
+    setWarRscReview(data.data);
+  };
+
   useEffect(() => {
     getSingleWar();
+    getWarReview();
+    getWarRscReview();
   }, []);
 
   return (
@@ -108,9 +128,7 @@ const TrendingWarzone = () => {
             <span className="me-3">
               <img src={trophy} width={25} alt="" />
             </span>
-            <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-              WINNER
-            </span>
+            <span style={{ color: "#6BE585", fontWeight: "bold" }}>WINNER</span>
           </div>
         </Col>
         <Col>
@@ -119,8 +137,7 @@ const TrendingWarzone = () => {
         <Col
           style={{ top: "-16px", right: "-12px" }}
           className="h-100 text-end position-absolute d-sm-block d-lg-none"
-        >
-        </Col>
+        ></Col>
         <Col className="d-none d-lg-flex align-items-center">
           <Col className="h-100 d-flex align-items-end">
             <div
@@ -233,10 +250,7 @@ const TrendingWarzone = () => {
             </div>
           </div>
         </Col>
-        <Col
-          lg={6}
-          className="content-box border-top border-bottom p-0 py-4"
-        >
+        <Col lg={6} className="content-box border-top border-bottom p-0 py-4">
           <div className="d-flex justify-content-center">
             <span className="me-3">
               <img src={link} alt="" width={20} />
@@ -264,15 +278,27 @@ const TrendingWarzone = () => {
           className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
         >
           <div>
-            <iframe
-              style={{ height: "400px" }}
-              className="w-100"
-              src="https://www.youtube.com/embed/Sg8XVnCneXE"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+            {war?.resource1.format === "Video" ? (
+              <iframe
+                style={{ height: "400px" }}
+                className="w-100"
+                src={`https://www.youtube.com/embed/${
+                  war?.resource1.link.split("v=")[1]
+                }`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            ) : (
+              <div className="d-flex">
+                <img
+                  className="mx-auto"
+                  style={{ height: "400px" }}
+                  src={war?.resource1.img}
+                />
+              </div>
+            )}
           </div>
         </Col>
         <Col
@@ -280,15 +306,27 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
-            <iframe
-              style={{ height: "400px" }}
-              className="w-100"
-              src="https://www.youtube.com/embed/lpsLAP4x-tk"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
+            {war?.resource2.format === "Video" ? (
+              <iframe
+                style={{ height: "400px" }}
+                className="w-100"
+                src={`https://www.youtube.com/embed/${
+                  war?.resource2.link.split("v=")[1]
+                }`}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            ) : (
+              <div className="d-flex">
+                <img
+                  className="mx-auto"
+                  style={{ height: "400px" }}
+                  src={war?.resource1.img}
+                />
+              </div>
+            )}
           </div>
         </Col>
       </Row>
@@ -308,19 +346,33 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2"
           >
-            <p style={{ fontSize: "24px", fontWeight: "600" }}>Average</p>
-            <p className="my-3">Based on 227 reviews</p>
+            <p style={{ fontSize: "24px", fontWeight: "600" }}>
+              {warReview?.rsc1AvReview < 2
+                ? "Bad"
+                : warReview?.rsc1AvReview >= 2 && warReview?.rsc1AvReview < 3
+                ? "Everage"
+                : warReview?.rsc1AvReview >= 3 && warReview?.rsc1AvReview < 4
+                ? "Good"
+                : warReview?.rsc1AvReview >= 4 && warReview?.rsc1AvReview < 4.5
+                ? "Very Good"
+                : "Excellent"}
+            </p>
+            <p className="my-3">Based on {warReview?.toalRsc1} reviews</p>
             <div className="d-flex align-items-center">
-              <ReactStars
-                edit={false}
-                value={war?.resource1.ava_rating}
-                {...warRating}
-              />
+              {/* {console.log(warReview?.rsc1AvReview)} */}
+              {warReview && (
+                <ReactStars
+                  edit={false}
+                  value={warReview?.rsc1AvReview}
+                  {...warRating}
+                />
+              )}
+
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {war?.resource1.ava_rating}
+                {warReview?.rsc1AvReview}
               </p>
             </div>
             <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
@@ -334,19 +386,32 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ps-4 py-2"
           >
-            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Bad</p>
-            <p className="my-3">Based on 227 reviews</p>
+            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              {warReview?.rsc2AvReview < 2
+                ? "Bad"
+                : warReview?.rsc2AvReview >= 2 && warReview?.rsc2AvReview < 3
+                ? "Everage"
+                : warReview?.rsc2AvReview >= 3 && warReview?.rsc2AvReview < 4
+                ? "Good"
+                : warReview?.rsc2AvReview >= 4 && warReview?.rsc2AvReview < 4.5
+                ? "Very Good"
+                : "Excellent"}
+            </p>
+            <p className="my-3">Based on {warReview?.toalRsc2} reviews</p>
             <div className="d-flex align-items-center">
-              <ReactStars
-                edit={false}
-                value={war?.resource2.ava_rating}
-                {...warRating}
-              />
+              {warReview && (
+                <ReactStars
+                  edit={false}
+                  value={warReview?.rsc2AvReview}
+                  {...warRating}
+                />
+              )}
+
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {war?.resource2.ava_rating}
+                {warReview?.rsc2AvReview}
               </p>
             </div>
             <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
@@ -363,12 +428,12 @@ const TrendingWarzone = () => {
         </p>
 
         <Col lg={6} className="border-top border-bottom border-right py-4">
-          <Row className="mb-4 text-end pe-4">
+          <Row className="mb-4 text-lg-end pe-4">
             <Link
               style={{ color: "#5F56C6", fontSize: "20px" }}
-              to={"https://pl-coding.com/multi-module-course"}
+              to={war?.resource1.link}
             >
-              https://pl-coding.com/multi-module-course
+              {war?.resource1.link}
             </Link>
           </Row>
           <Row className="justify-content-center justify-content-lg-start">
@@ -380,7 +445,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b">
                     <p>Creator:</p>
-                    <h4 className="fw-bold">Philipp Lackner</h4>
+                    <h4 className="fw-bold">{war?.resource1.creatorName}</h4>
                   </div>
                 </div>
               </Col>
@@ -391,7 +456,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b">
                     <p>Submitted by:</p>
-                    <h4 className="fw-bold">Florian 3428</h4>
+                    <h4 className="fw-bold">
+                      {war?.resource1.userid.username}
+                    </h4>
                   </div>
                 </div>
               </Col>
@@ -405,7 +472,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Type:</p>
-                    <Link to="#">Paid</Link>
+                    <Link to="#">{war?.resource1.type}</Link>
                   </div>
                 </div>
               </Col>
@@ -416,7 +483,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Format:</p>
-                    <Link to="#">Link tag</Link>
+                    <Link to="#">{war?.resource1.format}</Link>
                   </div>
                 </div>
               </Col>
@@ -427,7 +494,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Category:</p>
-                    <Link>Link tag</Link>
+                    <Link>{war?.resource1.category.title}</Link>
                   </div>
                 </div>
               </Col>
@@ -438,8 +505,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Language:</p>
-                    {["Bava Hindi"].map((lang) => (
+                    {war?.resource1.language.map((lang) => (
                       <Link
+                        key={lang._id}
                         style={{
                           borderWidth: "0.5px",
                           borderColor: "#494949",
@@ -448,7 +516,7 @@ const TrendingWarzone = () => {
                           backgroundColor: "#F1F1F1",
                         }}
                       >
-                        {lang}
+                        {lang.language}
                       </Link>
                     ))}
                   </div>
@@ -464,19 +532,17 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Year:</p>
-                    {["2022"].map((lang) => (
-                      <Link
-                        style={{
-                          borderWidth: "0.5px",
-                          borderColor: "#494949",
-                          color: "#494949",
-                          fontWeight: 500,
-                          backgroundColor: "#F1F1F1",
-                        }}
-                      >
-                        {lang}
-                      </Link>
-                    ))}
+                    <Link
+                      style={{
+                        borderWidth: "0.5px",
+                        borderColor: "#494949",
+                        color: "#494949",
+                        fontWeight: 500,
+                        backgroundColor: "#F1F1F1",
+                      }}
+                    >
+                      {war?.resource1.relYear[0].yrName}
+                    </Link>
                   </div>
                 </div>
               </Col>
@@ -492,7 +558,7 @@ const TrendingWarzone = () => {
                       className="d-flex align-items-center"
                     >
                       <BsFillStarFill size={20} />
-                      <span className="ms-2">(4.5)</span>
+                      <span className="ms-2">{war?.resource1.ava_rating}</span>
                     </div>
                   </div>
                 </div>
@@ -504,7 +570,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Submitted:</p>
-                    <p className="text-black fw-bold">Aug 24, 2022</p>
+                    <p className="text-black fw-bold">
+                      {war?.resource1.createdAt.toString().slice(0, 10)}
+                    </p>
                   </div>
                 </div>
               </Col>
@@ -512,19 +580,20 @@ const TrendingWarzone = () => {
             </Row>
           </Row>
         </Col>
+
         <Col
           lg={6}
           className="content-box border-top border-bottom border-right py-4"
         >
-          <Row className="mb-4 ps-4">
+          <Row className="mb-4 text-lg-start pe-4">
             <Link
               style={{ color: "#5F56C6", fontSize: "20px" }}
-              to={"https://pl-coding.com/multi-module-course"}
+              to={war?.resource2.link}
             >
-              https://pl-coding.com/multi-module-course
+              {war?.resource2.link}
             </Link>
           </Row>
-          <Row className="justify-content-center justify-content-lg-end">
+          <Row className="justify-content-start justify-content-lg-end">
             <Row className="gap-3 mb-3">
               <Col className="shadow-lg px-0">
                 <div className="mid-1">
@@ -533,7 +602,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b">
                     <p>Creator:</p>
-                    <h4 className="fw-bold">Philipp Lackner</h4>
+                    <h4 className="fw-bold">{war?.resource2.creatorName}</h4>
                   </div>
                 </div>
               </Col>
@@ -544,7 +613,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b">
                     <p>Submitted by:</p>
-                    <h4 className="fw-bold">Florian 3428</h4>
+                    <h4 className="fw-bold">
+                      {war?.resource2.userid.username}
+                    </h4>
                   </div>
                 </div>
               </Col>
@@ -558,7 +629,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Type:</p>
-                    <Link to="#">Paid</Link>
+                    <Link to="#">{war?.resource2.type}</Link>
                   </div>
                 </div>
               </Col>
@@ -569,7 +640,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Format:</p>
-                    <Link to="#">Link tag</Link>
+                    <Link to="#">{war?.resource2.format}</Link>
                   </div>
                 </div>
               </Col>
@@ -580,7 +651,7 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Category:</p>
-                    <Link>Link tag</Link>
+                    <Link>{war?.resource2.category.title}</Link>
                   </div>
                 </div>
               </Col>
@@ -591,8 +662,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Language:</p>
-                    {["Bava Hindi"].map((lang) => (
+                    {war?.resource2.language.map((lang) => (
                       <Link
+                        key={lang._id}
                         style={{
                           borderWidth: "0.5px",
                           borderColor: "#494949",
@@ -601,7 +673,7 @@ const TrendingWarzone = () => {
                           backgroundColor: "#F1F1F1",
                         }}
                       >
-                        {lang}
+                        {lang.language}
                       </Link>
                     ))}
                   </div>
@@ -627,7 +699,7 @@ const TrendingWarzone = () => {
                           backgroundColor: "#F1F1F1",
                         }}
                       >
-                        {lang}
+                        {war?.resource2.relYear[0].yrName}
                       </Link>
                     ))}
                   </div>
@@ -645,7 +717,7 @@ const TrendingWarzone = () => {
                       className="d-flex align-items-center"
                     >
                       <BsFillStarFill size={20} />
-                      <span className="ms-2">(4.5)</span>
+                      <span className="ms-2"> {war?.resource2.ava_rating}</span>
                     </div>
                   </div>
                 </div>
@@ -657,7 +729,9 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Submitted:</p>
-                    <p className="text-black fw-bold">Aug 24, 2022</p>
+                    <p className="text-black fw-bold">
+                      {war?.resource2.createdAt.toString().slice(0, 10)}
+                    </p>
                   </div>
                 </div>
               </Col>
@@ -675,12 +749,20 @@ const TrendingWarzone = () => {
           Descriptions
         </p>
         <Col lg={6} className="px-0">
-          <p style={{ color: "#737373" }} className="text-center mx-auto border-top">What is the meaning of description? noun. a statement, picture in words, or account that
-            describes; descriptive representation. the act or method of describing.</p>
+          <p
+            style={{ color: "#737373" }}
+            className="text-center mx-auto border-top"
+          >
+            {war?.resource1.res_desc}
+          </p>
         </Col>
         <Col lg={6} className="content-box px-0">
-          <p style={{ color: "#737373" }} className="text-center mx-auto border-top">What is the meaning of description? noun. a statement, picture in words, or account that
-            describes; descriptive representation. the act or method of describing.</p>
+          <p
+            style={{ color: "#737373" }}
+            className="text-center mx-auto border-top"
+          >
+            {war?.resource2.res_desc}
+          </p>
         </Col>
       </Row>
 
@@ -691,60 +773,156 @@ const TrendingWarzone = () => {
         >
           Overall Rating
         </p>
-        <Col lg={6} className="d-flex border-top justify-content-center text-end p-3">
-          <div style={{ width: "fit-content" }} className="mx-0 ms-lg-auto me-0 me-lg-4">
-            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Average</p>
+        <Col
+          lg={6}
+          className="d-flex border-top justify-content-center text-end p-3"
+        >
+          <div
+            style={{ width: "fit-content" }}
+            className="mx-0 ms-lg-auto me-0 me-lg-4"
+          >
+            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              Average
+            </p>
             <div className="d-flex align-items-center">
-              <ReactStars
-                edit={false}
-                value={war?.resource1.ava_rating}
-                {...warRating}
-              />
+              {warReview && (
+                <ReactStars
+                  edit={false}
+                  value={warReview?.rsc1AvReview}
+                  {...warRating}
+                />
+              )}
+
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {war?.resource1.ava_rating}
+                {warRscReview?.rsc1AvReview}
               </p>
             </div>
-            <p style={{ fontSize: "14px", color: "#CACACA" }} className="mt-2 text-start fw-bold">362 customers reviews</p>
+            <p
+              style={{ fontSize: "14px", color: "#CACACA" }}
+              className="mt-2 text-start fw-bold"
+            >
+              {warRscReview?.toalRsc1} customers reviews
+            </p>
             <div className="d-flex flex-column gap-2 mt-3">
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">5 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  5 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">4 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  4 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">3 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  3 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">2 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  2 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">1 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  1 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
             </div>
           </div>
         </Col>
-        <Col lg={6} className="content-box border-top d-flex justify-content-center text-end p-3">
+        <Col
+          lg={6}
+          className="content-box border-top d-flex justify-content-center text-end p-3"
+        >
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
-            <p style={{ fontSize: '24px' }} className="text-start fw-bold">Bad</p>
+            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              Bad
+            </p>
             <div className="d-flex align-items-center">
               <ReactStars
                 edit={false}
@@ -758,36 +936,116 @@ const TrendingWarzone = () => {
                 {war?.resource1.ava_rating}
               </p>
             </div>
-            <p style={{ fontSize: "14px", color: "#CACACA" }} className="mt-2 text-start fw-bold">362 customers reviews</p>
+            <p
+              style={{ fontSize: "14px", color: "#CACACA" }}
+              className="mt-2 text-start fw-bold"
+            >
+              362 customers reviews
+            </p>
             <div className="d-flex flex-column gap-2 mt-3">
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">5 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  5 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">4 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  4 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">3 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  3 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">2 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  2 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
               <div className="d-flex flex-nowrap align-items-center gap-3">
-                <span style={{ color: "#5F56C6", fontSize: "14px" }} className="text-nowrap fw-bold">1 Stars</span>
-                <div style={{ backgroundColor: "#F2F2F2", height: "14px", minWidth: "150px" }} className="rounded-2 position-relative">
-                  <span style={{ backgroundColor: "#FDB800", width: "69%" }} className="position-absolute start-0 h-100 rounded-2"></span>
+                <span
+                  style={{ color: "#5F56C6", fontSize: "14px" }}
+                  className="text-nowrap fw-bold"
+                >
+                  1 Stars
+                </span>
+                <div
+                  style={{
+                    backgroundColor: "#F2F2F2",
+                    height: "14px",
+                    minWidth: "150px",
+                  }}
+                  className="rounded-2 position-relative"
+                >
+                  <span
+                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    className="position-absolute start-0 h-100 rounded-2"
+                  ></span>
                 </div>
               </div>
             </div>
@@ -818,7 +1076,16 @@ const TrendingWarzone = () => {
                 className="form-control st-taetarea"
                 placeholder=" Enter your Review if you want"
               ></textarea>
-              <button style={{ backgroundColor: "#5F56C6", right: '8px', bottom: "8px" }} className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2">send</button>
+              <button
+                style={{
+                  backgroundColor: "#5F56C6",
+                  right: "8px",
+                  bottom: "8px",
+                }}
+                className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
+              >
+                send
+              </button>
             </form>
           </div>
         </Col>
@@ -838,7 +1105,16 @@ const TrendingWarzone = () => {
                 className="form-control st-taetarea"
                 placeholder=" Enter your Review if you want"
               ></textarea>
-              <button style={{ backgroundColor: "#5F56C6", right: '8px', bottom: "8px" }} className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2">send</button>
+              <button
+                style={{
+                  backgroundColor: "#5F56C6",
+                  right: "8px",
+                  bottom: "8px",
+                }}
+                className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
+              >
+                send
+              </button>
             </form>
           </div>
         </Col>
@@ -852,24 +1128,33 @@ const TrendingWarzone = () => {
           REVIEWS
         </p>
         <Col style={{ padding: "40px 16px 16px" }} className="border-top">
-          {[{
-            userid: {
-              username: "Nai bataunga",
-              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+          {[
+            {
+              userid: {
+                username: "Nai bataunga",
+                profileImg:
+                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
+              },
+              comment:
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+              createdAt: "Atayare j",
             },
-            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-            createdAt: "Atayare j"
-          }].map((value) => (
-            <div style={{ backgroundColor: "rgba(0,0,0,0.08)" }} className="d-flex flex-column p-3 rounded-4">
+          ].map((value) => (
+            <div
+              style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+              className="d-flex flex-column p-3 rounded-4"
+            >
               <div className="re-list d-flex align-items-center gap-4">
                 <div style={{ width: "50px" }}>
-                  <img className="w-100 h-auto rounded-circle" src={value?.userid?.profileImg} alt="UserImage" />
+                  <img
+                    className="w-100 h-auto rounded-circle"
+                    src={value?.userid?.profileImg}
+                    alt="UserImage"
+                  />
                 </div>
                 <div className="re-listcont w-100 d-flex justify-content-between">
                   <div>
-                    <h5>
-                      {value?.userid?.username}
-                    </h5>
+                    <h5>{value?.userid?.username}</h5>
                     <div className="star-1">
                       <PrettyRating
                         value={2}
@@ -884,38 +1169,56 @@ const TrendingWarzone = () => {
                   </span>
                 </div>
               </div>
-              <p className="fw-bold">There're so many choices in their menu. I appreciated that it also showed the calories. Good to know about that. Then I chose the one with
-                lower calories:)</p>
+              <p className="fw-bold">
+                There're so many choices in their menu. I appreciated that it
+                also showed the calories. Good to know about that. Then I chose
+                the one with lower calories:)
+              </p>
             </div>
           ))}
         </Col>
 
-        <Col style={{ padding: "40px 16px 16px" }} className="content-box border-top d-flex flex-column gap-3">
-          {[{
-            userid: {
-              username: "Nai bataunga",
-              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+        <Col
+          style={{ padding: "40px 16px 16px" }}
+          className="content-box border-top d-flex flex-column gap-3"
+        >
+          {[
+            {
+              userid: {
+                username: "Nai bataunga",
+                profileImg:
+                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
+              },
+              comment:
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+              createdAt: "Atayare j",
             },
-            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-            createdAt: "Atayare j"
-          }, {
-            userid: {
-              username: "Nai bataunga",
-              profileImg: "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png"
+            {
+              userid: {
+                username: "Nai bataunga",
+                profileImg:
+                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
+              },
+              comment:
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
+              createdAt: "Atayare j",
             },
-            comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-            createdAt: "Atayare j"
-          }].map((value) => (
-            <div style={{ backgroundColor: "rgba(0,0,0,0.08)" }} className="d-flex flex-column p-3 rounded-4">
+          ].map((value) => (
+            <div
+              style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+              className="d-flex flex-column p-3 rounded-4"
+            >
               <div className="re-list d-flex align-items-center gap-4">
                 <div style={{ width: "50px" }}>
-                  <img className="w-100 h-auto rounded-circle" src={value?.userid?.profileImg} alt="UserImage" />
+                  <img
+                    className="w-100 h-auto rounded-circle"
+                    src={value?.userid?.profileImg}
+                    alt="UserImage"
+                  />
                 </div>
                 <div className="re-listcont w-100 d-flex justify-content-between">
                   <div>
-                    <h5>
-                      {value?.userid?.username}
-                    </h5>
+                    <h5>{value?.userid?.username}</h5>
                     <div className="star-1">
                       <PrettyRating
                         value={2}
@@ -930,8 +1233,11 @@ const TrendingWarzone = () => {
                   </span>
                 </div>
               </div>
-              <p className="fw-bold">There're so many choices in their menu. I appreciated that it also showed the calories. Good to know about that. Then I chose the one with
-                lower calories:)</p>
+              <p className="fw-bold">
+                There're so many choices in their menu. I appreciated that it
+                also showed the calories. Good to know about that. Then I chose
+                the one with lower calories:)
+              </p>
             </div>
           ))}
         </Col>
