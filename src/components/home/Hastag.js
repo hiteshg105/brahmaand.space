@@ -390,7 +390,7 @@ function Hastag() {
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
-            {categry?.slice(0, 8).map((value) => (
+            {categry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
