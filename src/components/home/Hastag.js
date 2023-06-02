@@ -103,7 +103,7 @@ function Hastag() {
       .catch((error) => {});
   };
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); 
   const [error, setError] = useState("");
 
   function performValidation() {
