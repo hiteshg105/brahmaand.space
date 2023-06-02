@@ -39,6 +39,55 @@ const TrendingWarzone = () => {
   const [war, setWar] = useState();
   const [warReview, setWarReview] = useState();
   const [warRscReview, setWarRscReview] = useState();
+  const [rsc1Review, setRsc1Review] = useState({ rate: 0, comment: "" });
+  const [rsc2Review, setRsc2Review] = useState({ rate: 0, comment: "" });
+
+  // console.log(warRscReview, "warRscReview");
+
+  // for (let i = 0; i < warRscReview?.rsc1Comment.length; i++) {
+  //   let Start1 = 0;
+  //   let Start2 = 0;
+  //   let Start3 = 0;
+  //   let Start4 = 0;
+  //   let Start5 = 0;
+
+  //   if (
+  //     warRscReview.rsc1Comment[i].rating > 0 &&
+  //     warRscReview.rsc1Comment[i].rating <= 1
+  //   ) {
+  //     Start1++;
+  //   }
+  //   if (
+  //     warRscReview.rsc1Comment[i].rating > 1 &&
+  //     warRscReview.rsc1Comment[i].rating <= 2
+  //   ) {
+  //     Start2++;
+  //   }
+  //   if (
+  //     warRscReview.rsc1Comment[i].rating > 2 &&
+  //     warRscReview.rsc1Comment[i].rating <= 3
+  //   ) {
+  //     Start3++;
+  //     console.log(Start3, "Start3");
+  //   }
+  //   if (
+  //     warRscReview.rsc1Comment[i].rating > 3 &&
+  //     warRscReview.rsc1Comment[i].rating <= 4
+  //   ) {
+  //     Start4++;
+  //   }
+  //   if (
+  //     warRscReview.rsc1Comment[i].rating > 4 &&
+  //     warRscReview.rsc1Comment[i].rating <= 5
+  //   ) {
+  //     Start5++;
+  //   }
+  //   // console.log(Start1, "Start1");
+  //   // console.log(Start2, "Start2");
+  //   // console.log(Start3, "Start3");
+  //   // console.log(Start4, "Start4");
+  //   // console.log(Start5, "Start5");
+  // }
 
   const icons = {
     star: {
@@ -86,7 +135,7 @@ const TrendingWarzone = () => {
     const data = await instance.get(
       `/get/single/warzone/6476da36304297648d94da9b`
     );
-    console.log(data.data.war);
+    // console.log(data.data.war);
     setWar(data.data.war);
   };
 
@@ -102,8 +151,54 @@ const TrendingWarzone = () => {
     const data = await instance.get(
       `/get/allreview/warzone/resource/6476da36304297648d94da9b`
     );
-    console.log(data.data);
+    // console.log(data.data);
     setWarRscReview(data.data);
+  };
+
+  const submitRcc1Comment = async () => {
+    try {
+      const userid = localStorage.getItem("userId");
+      const data = await instance.post(`user/add_Comment`, {
+        submitresrcId: war.resource1._id,
+        userid: userid,
+        comment: rsc1Review.comment,
+        rating: rsc1Review.rate,
+      });
+      // console.log(data.data);
+      if (data.data.message === "success") {
+        alert("Added Successfully..");
+      }
+      if (data.data.msg === "waiting for admin approvel") {
+        alert("waiting for admin approvel");
+      }
+    } catch (error) {
+      if (error.response.status === 403) {
+        alert("Comment Exist");
+      }
+    }
+  };
+
+  const submitRcc2Comment = async () => {
+    try {
+      const userid = localStorage.getItem("userId");
+      const data = await instance.post(`user/add_Comment`, {
+        submitresrcId: war.resource2._id,
+        userid: userid,
+        comment: rsc2Review.comment,
+        rating: rsc2Review.rate,
+      });
+      // console.log(data.data);
+      if (data.data.message === "success") {
+        alert("Added Successfully..");
+      }
+      if (data.data.msg === "waiting for admin approvel") {
+        alert("waiting for admin approvel");
+      }
+    } catch (error) {
+      if (error.response.status === 403) {
+        alert("Comment Exist");
+      }
+    }
   };
 
   useEffect(() => {
@@ -782,13 +877,24 @@ const TrendingWarzone = () => {
             className="mx-0 ms-lg-auto me-0 me-lg-4"
           >
             <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-              Average
+              {warRscReview?.rsc1AvReview < 2
+                ? "Bad"
+                : warRscReview?.rsc1AvReview >= 2 &&
+                  warRscReview?.rsc1AvReview < 3
+                ? "Everage"
+                : warRscReview?.rsc1AvReview >= 3 &&
+                  warRscReview?.rsc1AvReview < 4
+                ? "Good"
+                : warRscReview?.rsc1AvReview >= 4 &&
+                  warRscReview?.rsc1AvReview < 4.5
+                ? "Very Good"
+                : "Excellent"}
             </p>
             <div className="d-flex align-items-center">
-              {warReview && (
+              {warRscReview && (
                 <ReactStars
                   edit={false}
-                  value={warReview?.rsc1AvReview}
+                  value={warRscReview?.rsc1AvReview}
                   {...warRating}
                 />
               )}
@@ -915,32 +1021,47 @@ const TrendingWarzone = () => {
             </div>
           </div>
         </Col>
+
         <Col
           lg={6}
           className="content-box border-top d-flex justify-content-center text-end p-3"
         >
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
             <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-              Bad
+              {warRscReview?.rsc2AvReview < 2
+                ? "Bad"
+                : warRscReview?.rsc2AvReview >= 2 &&
+                  warRscReview?.rsc2AvReview < 3
+                ? "Everage"
+                : warRscReview?.rsc2AvReview >= 3 &&
+                  warRscReview?.rsc2AvReview < 4
+                ? "Good"
+                : warRscReview?.rsc2AvReview >= 4 &&
+                  warRscReview?.rsc2AvReview < 4.5
+                ? "Very Good"
+                : "Excellent"}
             </p>
             <div className="d-flex align-items-center">
-              <ReactStars
-                edit={false}
-                value={war?.resource1.ava_rating}
-                {...warRating}
-              />
+              {warRscReview && (
+                <ReactStars
+                  edit={false}
+                  value={warRscReview?.rsc2AvReview}
+                  {...warRating}
+                />
+              )}
+
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {war?.resource1.ava_rating}
+                {warRscReview?.rsc2AvReview}
               </p>
             </div>
             <p
               style={{ fontSize: "14px", color: "#CACACA" }}
               className="mt-2 text-start fw-bold"
             >
-              362 customers reviews
+              {warRscReview?.toalRsc2} customers reviews
             </p>
             <div className="d-flex flex-column gap-2 mt-3">
               <div className="d-flex flex-nowrap align-items-center gap-3">
@@ -1064,19 +1185,25 @@ const TrendingWarzone = () => {
           <div className="w-100 w-lg-75 mx-auto ms-lg-auto mt-5">
             <div className="reviews-rating-stars d-flex justify-content-lg-end">
               <PrettyRating
-                value={2.5}
+                value={rsc1Review.rate}
+                onChange={(e) => setRsc1Review({ ...rsc1Review, rate: e })}
                 icons={icons.star}
                 colors={colors.star}
               />
             </div>
+            {console.log(rsc1Review, "rsc1Review")}
             <form className="position-relative">
               <textarea
-                value={"Somthing"}
+                value={rsc1Review.comment}
+                onChange={(e) =>
+                  setRsc1Review({ ...rsc1Review, comment: e.target.value })
+                }
                 name="text"
                 className="form-control st-taetarea"
                 placeholder=" Enter your Review if you want"
               ></textarea>
               <button
+                onClick={() => submitRcc1Comment()}
                 style={{
                   backgroundColor: "#5F56C6",
                   right: "8px",
@@ -1093,19 +1220,27 @@ const TrendingWarzone = () => {
           <div className="w-100 w-lg-75 mt-5 mx-auto mx-lg-0">
             <div className="reviews-rating-stars d-flex">
               <PrettyRating
-                value={2.5}
+                value={rsc2Review.rate}
+                onChange={(e) => setRsc2Review({ ...rsc2Review, rate: e })}
                 icons={icons.star}
                 colors={colors.star}
               />
             </div>
             <form className="position-relative">
               <textarea
-                value={"Somthing"}
+                value={rsc2Review.comment}
                 name="text"
+                onChange={(e) =>
+                  setRsc2Review({
+                    ...rsc2Review,
+                    comment: e.target.value,
+                  })
+                }
                 className="form-control st-taetarea"
                 placeholder=" Enter your Review if you want"
               ></textarea>
               <button
+                onClick={() => submitRcc2Comment()}
                 style={{
                   backgroundColor: "#5F56C6",
                   right: "8px",
