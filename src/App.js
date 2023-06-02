@@ -168,7 +168,7 @@ function App() {
               element={<SendRequestResetPasswordComponent />}
             />
             <Route path="/loginplan" element={<Loginplan />} />
-            <Route path="/trending-warzone" element={<TrendingWarzone />} />
+            <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
           </Routes>
         </Layout>
       </MenuProvider>

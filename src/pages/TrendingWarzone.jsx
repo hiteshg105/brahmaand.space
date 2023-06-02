@@ -1,16 +1,11 @@
 import PrettyRating from "pretty-rating-react";
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { BsBookmark, BsFillBookmarkCheckFill } from "react-icons/bs";
-import Moment from "react-moment";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Label, Modal, ModalBody, ModalHeader } from "reactstrap";
 import ReactStars from "react-rating-stars-component";
+import { useParams } from "react-router-dom";
 
 //images
-import { AiFillEdit } from "react-icons/ai";
-import { MdCancelPresentation } from "react-icons/md";
-import { FaHeart, FaStar, FaRegHeart } from "react-icons/fa";
 import { BsFillStarFill } from "react-icons/bs";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
@@ -23,71 +18,37 @@ import formaticon from "../assets/icons/formaticon.png";
 import diffculty from "../assets/icons/diffculty.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
 import submiticon from "../assets/icons/submiticon.png";
-import reviewstar from "../assets/icons/reviewstra.png";
-import ratingstar from "../assets/icons/ratingstar.png";
 import createricon from "../assets/icons/createricon.png";
 import trophy from "../assets/icons/trophy.png";
 import loser from "../assets/icons/loser.png";
 import link from "../assets/icons/link.png";
 import ratings from "../assets/icons/ratings.png";
-import { async } from "@firebase/util";
 import instance from "../components/axiosConfig";
 import CountDown from "./CountDown";
 
 const TrendingWarzone = () => {
-  const [rating, setRating] = useState("");
+  const { id } = useParams();
+  // console.log(id, "id");
   const [war, setWar] = useState();
   const [warReview, setWarReview] = useState();
   const [warRscReview, setWarRscReview] = useState();
+  const [comment, setComment] = useState();
   const [rsc1Review, setRsc1Review] = useState({ rate: 0, comment: "" });
   const [rsc2Review, setRsc2Review] = useState({ rate: 0, comment: "" });
-
-  // console.log(warRscReview, "warRscReview");
-
-  // for (let i = 0; i < warRscReview?.rsc1Comment.length; i++) {
-  //   let Start1 = 0;
-  //   let Start2 = 0;
-  //   let Start3 = 0;
-  //   let Start4 = 0;
-  //   let Start5 = 0;
-
-  //   if (
-  //     warRscReview.rsc1Comment[i].rating > 0 &&
-  //     warRscReview.rsc1Comment[i].rating <= 1
-  //   ) {
-  //     Start1++;
-  //   }
-  //   if (
-  //     warRscReview.rsc1Comment[i].rating > 1 &&
-  //     warRscReview.rsc1Comment[i].rating <= 2
-  //   ) {
-  //     Start2++;
-  //   }
-  //   if (
-  //     warRscReview.rsc1Comment[i].rating > 2 &&
-  //     warRscReview.rsc1Comment[i].rating <= 3
-  //   ) {
-  //     Start3++;
-  //     console.log(Start3, "Start3");
-  //   }
-  //   if (
-  //     warRscReview.rsc1Comment[i].rating > 3 &&
-  //     warRscReview.rsc1Comment[i].rating <= 4
-  //   ) {
-  //     Start4++;
-  //   }
-  //   if (
-  //     warRscReview.rsc1Comment[i].rating > 4 &&
-  //     warRscReview.rsc1Comment[i].rating <= 5
-  //   ) {
-  //     Start5++;
-  //   }
-  //   // console.log(Start1, "Start1");
-  //   // console.log(Start2, "Start2");
-  //   // console.log(Start3, "Start3");
-  //   // console.log(Start4, "Start4");
-  //   // console.log(Start5, "Start5");
-  // }
+  const [rsc1Star, setRsc1Star] = useState({
+    star1: 0,
+    star2: 0,
+    star3: 0,
+    star4: 0,
+    star5: 0,
+  });
+  const [rsc2Star, setRsc2Star] = useState({
+    star1: 0,
+    star2: 0,
+    star3: 0,
+    star4: 0,
+    star5: 0,
+  });
 
   const icons = {
     star: {
@@ -101,21 +62,6 @@ const TrendingWarzone = () => {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
 
-  const secondExample = {
-    size: 50,
-    count: 5,
-    color: "#434b4d47",
-    activeColor: "#d9ad26",
-    value: 7.5,
-    a11y: true,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    onChange: (newValue) => {
-      setRating(newValue);
-    },
-  };
-
   const warRating = {
     size: 30,
     count: 5,
@@ -126,36 +72,123 @@ const TrendingWarzone = () => {
     isHalf: true,
     emptyIcon: <i className="far fa-star" />,
     halfIcon: <i className="fa fa-star-half-alt" />,
-    onChange: (newValue) => {
-      setRating(newValue);
-    },
   };
   // console.log(instance)
   const getSingleWar = async () => {
-    const data = await instance.get(
-      `/get/single/warzone/6476da36304297648d94da9b`
-    );
+    const data = await instance.get(`/get/single/warzone/${id}`);
     // console.log(data.data.war);
     setWar(data.data.war);
   };
 
   const getWarReview = async () => {
-    const data = await instance.get(
-      `/get/review/warzone/6476da36304297648d94da9b`
-    );
+    const data = await instance.get(`/get/review/warzone/${id}`);
     // console.log(data.data);
     setWarReview(data.data);
   };
 
   const getWarRscReview = async () => {
-    const data = await instance.get(
-      `/get/allreview/warzone/resource/6476da36304297648d94da9b`
-    );
+    const data = await instance.get(`/get/allreview/warzone/resource/${id}`);
     // console.log(data.data);
     setWarRscReview(data.data);
+    let Start1R1 = 0;
+    let Start2R1 = 0;
+    let Start3R1 = 0;
+    let Start4R1 = 0;
+    let Start5R1 = 0;
+    let Start1R2 = 0;
+    let Start2R2 = 0;
+    let Start3R2 = 0;
+    let Start4R2 = 0;
+    let Start5R2 = 0;
+    for (let i = 0; i < data.data?.rsc1Comment.length; i++) {
+      if (
+        data.data.rsc1Comment[i].rating > 0 &&
+        data.data.rsc1Comment[i].rating <= 1
+      ) {
+        Start1R1++;
+      }
+      if (
+        data.data.rsc1Comment[i].rating > 1 &&
+        data.data.rsc1Comment[i].rating <= 2
+      ) {
+        Start2R1++;
+      }
+      if (
+        data.data.rsc1Comment[i].rating > 2 &&
+        data.data.rsc1Comment[i].rating <= 3
+      ) {
+        Start3R1++;
+      }
+      if (
+        data.data.rsc1Comment[i].rating > 3 &&
+        data.data.rsc1Comment[i].rating <= 4
+      ) {
+        Start4R1++;
+      }
+      if (
+        data.data.rsc1Comment[i].rating > 4 &&
+        data.data.rsc1Comment[i].rating <= 5
+      ) {
+        Start5R1++;
+      }
+    }
+
+    setRsc1Star({
+      star1: (Start1R1 * 100) / data.data?.rsc1Comment.length + "%",
+      star2: (Start2R1 * 100) / data.data?.rsc1Comment.length + "%",
+      star3: (Start3R1 * 100) / data.data?.rsc1Comment.length + "%",
+      star4: (Start4R1 * 100) / data.data?.rsc1Comment.length + "%",
+      star5: (Start5R1 * 100) / data.data?.rsc1Comment.length + "%",
+    });
+    for (let i = 0; i < data.data?.rsc2Comment.length; i++) {
+      if (
+        data.data.rsc2Comment[i].rating > 0 &&
+        data.data.rsc2Comment[i].rating <= 1
+      ) {
+        Start1R2++;
+      }
+      if (
+        data.data.rsc2Comment[i].rating > 1 &&
+        data.data.rsc2Comment[i].rating <= 2
+      ) {
+        Start2R2++;
+      }
+      if (
+        data.data.rsc2Comment[i].rating > 2 &&
+        data.data.rsc2Comment[i].rating <= 3
+      ) {
+        Start3R2++;
+      }
+      if (
+        data.data.rsc2Comment[i].rating > 3 &&
+        data.data.rsc2Comment[i].rating <= 4
+      ) {
+        Start4R2++;
+      }
+      if (
+        data.data.rsc2Comment[i].rating > 4 &&
+        data.data.rsc2Comment[i].rating <= 5
+      ) {
+        Start5R2++;
+      }
+    }
+    setRsc2Star({
+      star1: (Start1R2 * 100) / data.data?.rsc2Comment.length + "%",
+      star2: (Start2R2 * 100) / data.data?.rsc2Comment.length + "%",
+      star3: (Start3R2 * 100) / data.data?.rsc2Comment.length + "%",
+      star4: (Start4R2 * 100) / data.data?.rsc2Comment.length + "%",
+      star5: (Start5R2 * 100) / data.data?.rsc2Comment.length + "%",
+    });
   };
 
-  const submitRcc1Comment = async () => {
+  const getComment = async () => {
+    const data = await instance.get(`/get/comment/warzone/${id}`);
+    // console.log(data.data);
+    setComment(data.data);
+  };
+
+  const submitRcc1Comment = async (e) => {
+    e.preventDefault();
     try {
       const userid = localStorage.getItem("userId");
       const data = await instance.post(`user/add_Comment`, {
@@ -178,7 +211,8 @@ const TrendingWarzone = () => {
     }
   };
 
-  const submitRcc2Comment = async () => {
+  const submitRcc2Comment = async (e) => {
+    e.preventDefault();
     try {
       const userid = localStorage.getItem("userId");
       const data = await instance.post(`user/add_Comment`, {
@@ -205,6 +239,7 @@ const TrendingWarzone = () => {
     getSingleWar();
     getWarReview();
     getWarRscReview();
+    getComment();
   }, []);
 
   return (
@@ -391,6 +426,7 @@ const TrendingWarzone = () => {
                   className="mx-auto"
                   style={{ height: "400px" }}
                   src={war?.resource1.img}
+                  alt=""
                 />
               </div>
             )}
@@ -419,6 +455,7 @@ const TrendingWarzone = () => {
                   className="mx-auto"
                   style={{ height: "400px" }}
                   src={war?.resource1.img}
+                  alt=""
                 />
               </div>
             )}
@@ -467,7 +504,7 @@ const TrendingWarzone = () => {
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {warReview?.rsc1AvReview}
+                {warReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
             <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
@@ -506,7 +543,7 @@ const TrendingWarzone = () => {
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {warReview?.rsc2AvReview}
+                {warReview?.rsc2AvReview?.toFixed(2)}
               </p>
             </div>
             <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
@@ -552,7 +589,7 @@ const TrendingWarzone = () => {
                   <div className="mid-1-b">
                     <p>Submitted by:</p>
                     <h4 className="fw-bold">
-                      {war?.resource1.userid.username}
+                      {war?.resource1.userid?.username}
                     </h4>
                   </div>
                 </div>
@@ -653,7 +690,9 @@ const TrendingWarzone = () => {
                       className="d-flex align-items-center"
                     >
                       <BsFillStarFill size={20} />
-                      <span className="ms-2">{war?.resource1.ava_rating}</span>
+                      <span className="ms-2">
+                        {warRscReview?.rsc1AvReview?.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -709,7 +748,7 @@ const TrendingWarzone = () => {
                   <div className="mid-1-b">
                     <p>Submitted by:</p>
                     <h4 className="fw-bold">
-                      {war?.resource2.userid.username}
+                      {war?.resource2.userid?.username}
                     </h4>
                   </div>
                 </div>
@@ -784,19 +823,17 @@ const TrendingWarzone = () => {
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Year:</p>
-                    {["2022"].map((lang) => (
-                      <Link
-                        style={{
-                          borderWidth: "0.5px",
-                          borderColor: "#494949",
-                          color: "#494949",
-                          fontWeight: 500,
-                          backgroundColor: "#F1F1F1",
-                        }}
-                      >
-                        {war?.resource2.relYear[0].yrName}
-                      </Link>
-                    ))}
+                    <Link
+                      style={{
+                        borderWidth: "0.5px",
+                        borderColor: "#494949",
+                        color: "#494949",
+                        fontWeight: 500,
+                        backgroundColor: "#F1F1F1",
+                      }}
+                    >
+                      {war?.resource2.relYear[0].yrName}
+                    </Link>
                   </div>
                 </div>
               </Col>
@@ -812,7 +849,9 @@ const TrendingWarzone = () => {
                       className="d-flex align-items-center"
                     >
                       <BsFillStarFill size={20} />
-                      <span className="ms-2"> {war?.resource2.ava_rating}</span>
+                      <span className="ms-2">
+                        {warRscReview?.rsc2AvReview?.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -903,7 +942,7 @@ const TrendingWarzone = () => {
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {warRscReview?.rsc1AvReview}
+                {warRscReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
             <p
@@ -929,7 +968,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc1Star.star5,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -950,7 +992,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc1Star.star4,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -971,7 +1016,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc1Star.star3,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -992,7 +1040,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc1Star.star2,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1013,7 +1064,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc1Star.star1,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1054,7 +1108,7 @@ const TrendingWarzone = () => {
                 style={{ fontSize: "22px", fontWeight: "600" }}
                 className="ms-2"
               >
-                {warRscReview?.rsc2AvReview}
+                {warRscReview?.rsc2AvReview?.toFixed(2)}
               </p>
             </div>
             <p
@@ -1080,7 +1134,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc2Star.star5,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1101,7 +1158,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc2Star.star4,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1122,7 +1182,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc2Star.star3,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1143,7 +1206,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc2Star.star2,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1164,7 +1230,10 @@ const TrendingWarzone = () => {
                   className="rounded-2 position-relative"
                 >
                   <span
-                    style={{ backgroundColor: "#FDB800", width: "69%" }}
+                    style={{
+                      backgroundColor: "#FDB800",
+                      width: rsc2Star.star1,
+                    }}
                     className="position-absolute start-0 h-100 rounded-2"
                   ></span>
                 </div>
@@ -1191,7 +1260,7 @@ const TrendingWarzone = () => {
                 colors={colors.star}
               />
             </div>
-            {console.log(rsc1Review, "rsc1Review")}
+            {/* {console.log(rsc1Review, "rsc1Review")} */}
             <form className="position-relative">
               <textarea
                 value={rsc1Review.comment}
@@ -1203,7 +1272,7 @@ const TrendingWarzone = () => {
                 placeholder=" Enter your Review if you want"
               ></textarea>
               <button
-                onClick={() => submitRcc1Comment()}
+                onClick={(e) => submitRcc1Comment(e)}
                 style={{
                   backgroundColor: "#5F56C6",
                   right: "8px",
@@ -1240,7 +1309,7 @@ const TrendingWarzone = () => {
                 placeholder=" Enter your Review if you want"
               ></textarea>
               <button
-                onClick={() => submitRcc2Comment()}
+                onClick={(e) => submitRcc2Comment(e)}
                 style={{
                   backgroundColor: "#5F56C6",
                   right: "8px",
@@ -1262,119 +1331,87 @@ const TrendingWarzone = () => {
         >
           REVIEWS
         </p>
-        <Col style={{ padding: "40px 16px 16px" }} className="border-top">
-          {[
-            {
-              userid: {
-                username: "Nai bataunga",
-                profileImg:
-                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
-              },
-              comment:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-              createdAt: "Atayare j",
-            },
-          ].map((value) => (
-            <div
-              style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-              className="d-flex flex-column p-3 rounded-4"
-            >
-              <div className="re-list d-flex align-items-center gap-4">
-                <div style={{ width: "50px" }}>
-                  <img
-                    className="w-100 h-auto rounded-circle"
-                    src={value?.userid?.profileImg}
-                    alt="UserImage"
-                  />
-                </div>
-                <div className="re-listcont w-100 d-flex justify-content-between">
-                  <div>
-                    <h5>{value?.userid?.username}</h5>
-                    <div className="star-1">
-                      <PrettyRating
-                        value={2}
-                        icons={icons.star}
-                        colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                      />
-                    </div>
-                  </div>
-                  <span>
-                    {/* <Moment format="ll"></Moment> */}
-                    {value?.createdAt}
-                  </span>
-                </div>
-              </div>
-              <p className="fw-bold">
-                There're so many choices in their menu. I appreciated that it
-                also showed the calories. Good to know about that. Then I chose
-                the one with lower calories:)
-              </p>
-            </div>
-          ))}
-        </Col>
-
         <Col
           style={{ padding: "40px 16px 16px" }}
           className="content-box border-top d-flex flex-column gap-3"
         >
-          {[
-            {
-              userid: {
-                username: "Nai bataunga",
-                profileImg:
-                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
-              },
-              comment:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-              createdAt: "Atayare j",
-            },
-            {
-              userid: {
-                username: "Nai bataunga",
-                profileImg:
-                  "https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-11640168385tqosatnrny.png",
-              },
-              comment:
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut tempore provident natus vitae labore culpa pariatur, unde, aut fugiat facilis dolore nemo magni. Aut voluptatum dignissimos eius, dolorum quo dolores.",
-              createdAt: "Atayare j",
-            },
-          ].map((value) => (
-            <div
-              style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-              className="d-flex flex-column p-3 rounded-4"
-            >
-              <div className="re-list d-flex align-items-center gap-4">
-                <div style={{ width: "50px" }}>
-                  <img
-                    className="w-100 h-auto rounded-circle"
-                    src={value?.userid?.profileImg}
-                    alt="UserImage"
-                  />
-                </div>
-                <div className="re-listcont w-100 d-flex justify-content-between">
-                  <div>
-                    <h5>{value?.userid?.username}</h5>
-                    <div className="star-1">
-                      <PrettyRating
-                        value={2}
-                        icons={icons.star}
-                        colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                      />
-                    </div>
+          {comment?.newData &&
+            comment?.newData.map((value) => (
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg?.[0]}
+                      timeLine
+                      alt="UserImage"
+                    />
                   </div>
-                  <span>
-                    {/* <Moment format="ll"></Moment> */}
-                    {value?.createdAt}
-                  </span>
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          value={value.rating}
+                          edit={false}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
                 </div>
+                <p className="fw-bold">{value.comment}</p>
               </div>
-              <p className="fw-bold">
-                There're so many choices in their menu. I appreciated that it
-                also showed the calories. Good to know about that. Then I chose
-                the one with lower calories:)
-              </p>
-            </div>
-          ))}
+            ))}
+        </Col>
+        <Col
+          style={{ padding: "40px 16px 16px" }}
+          className="content-box border-top d-flex flex-column gap-3"
+        >
+          {/* {console.log(comment?.newData2)} */}
+          {comment?.newData2 &&
+            comment?.newData2.map((value) => (
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg[0]}
+                      alt="UserImage"
+                    />
+                  </div>
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          edit={false}
+                          value={value.rating}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
+                </div>
+                <p className="fw-bold">{value.comment}</p>
+              </div>
+            ))}
         </Col>
       </Row>
     </Container>
