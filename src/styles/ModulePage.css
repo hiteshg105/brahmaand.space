@@ -999,13 +999,10 @@ svg.bsplaybutton {
 
 .swiper-button-next,
 .swiper-button-prev {
-  /* margin-top: 30px !important; */
   background: none;
   width: 55px !important;
   top: 25% !important;
-
   width: calc(var(--swiper-navigation-size) / 44 * 27);
-  /* height: var(--swiper-navigation-size); */
   margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
   z-index: 10;
   cursor: pointer;
@@ -1038,13 +1035,11 @@ svg.bsplaybutton {
 .swiper-container-rtl .swiper-button-next {
   left: 15px;
   right: auto;
-  /* margin-top: 10px; */
   width: 52px;
   float: left;
   font-weight: bolder;
   font-size: 35px;
   color: rgb(250, 250, 250);
-  /* margin-left: 64px;  */
   background-color: #00000063;
   padding: 8px 16px;
   border-radius: 8px;
@@ -1068,11 +1063,6 @@ svg.bsplaybutton {
 
 .swiper-button-next:after,
 .swiper-container-rtl .swiper-button-prev:after {
-  /* content: "next";
-  font-weight: bolder;
-  font-size: 35px;
-  color: rgb(250, 250, 250); */
-
   content: "next";
   font-weight: bolder;
   font-size: 35px;
