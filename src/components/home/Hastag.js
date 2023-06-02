@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import swal from "sweetalert";
@@ -23,34 +23,46 @@ import newsletter from "../../images/newsletter.png";
 import { useNavigate } from "react-router-dom";
 import emoji from "../../images/emoji.png";
 import emoji2 from "../../images/emoji2.png";
+import arrowNext from "../../images/arrow-next.png";
+import arrowPrev from "../../images/arrow-prev.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import youtubevideo from "../../images/youtubevideo.jpg";
 import edu from "../../images/edu.jpg";
 import rate from "../../images/rate.jpg";
 import socialnetwork from "../../images/socialnetwork.jpg";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ModalVideo from "react-modal-video";
 import Moment from "react-moment";
 import "swiper/css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import "../../styles/ModulePage.css";
 import "../../styles/Hastag.scss";
+
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+
 
 import { Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
+import PrettyRating from "pretty-rating-react";
 
 function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
   const [newslettervid, setNewslettervid] = useState([]);
   const [rating, setRating] = useState("");
+  const swiperRef = useRef();
+  const prevBtnRef = useRef();
+  const nextBtnRef = useRef();
 
   const navigate = useNavigate();
 
   const secondExample = {
-    size: 30,
+    size: 20,
     count: 5,
     color: "#434b4d47",
     activeColor: "#d9ad26",
@@ -64,6 +76,19 @@ function Hastag() {
       setRating(newValue);
     },
   };
+  const icons = {
+    star: {
+      complete: faStar,
+      half: faStarHalfAlt,
+      empty: farStar,
+    },
+  };
+
+  const colors = {
+    star: ["#d9ad26", "#d9ad26", "#434b4d"],
+  };
+
+
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
@@ -71,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -100,7 +125,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   const [email, setEmail] = useState("");
@@ -122,7 +147,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   function isValidEmail(email) {
     const expression =
@@ -224,16 +249,16 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                      <button
-                        key={trendingtopics._id}
-                        onClick={() =>
-                          (handlehastagtopic(trendingtopics?.topics),gaEventTracker(`${trendingtopics?.topics}`))
-                        }
-                        className="btn1"
-                      >
-                        {trendingtopics?.topics}
-                      </button>
-                    ))
+                    <button
+                      key={trendingtopics._id}
+                      onClick={() =>
+                        (handlehastagtopic(trendingtopics?.topics), gaEventTracker(`${trendingtopics?.topics}`))
+                      }
+                      className="btn1"
+                    >
+                      {trendingtopics?.topics}
+                    </button>
+                  ))
                   : null}
               </div>
             </div>
@@ -243,149 +268,251 @@ function Hastag() {
           </div>
         </section>
       </Container>
-      {/* <Container>
-        <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
-        <Swiper
-          breakpoints={{
-            1084: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            980: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            910: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            780: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
+      <Container>
+        <Row className="d-flex justify-content-center">
+          <p className="Trending">
+            <img className="mb-5" src={has1} alt="img" width="45px" />
+            Trending Warzone
+          </p>
+        </Row>
+        <div className="position-relative">
+          <Swiper
+            breakpoints={{
+              1084: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              980: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              910: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              820: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              820: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              780: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
 
-            768: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            640: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            320: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            240: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-          }}
-          className="sld-1"
-          modules={[Navigation, Pagination, Scrollbar]}
-          spaceBetween={80}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
-        >
-          {feature?.map((features) => (
-            <SwiperSlide className="swiperslidescutom" key={features?._id}>
-              <div className="mb-3">
+              768: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              320: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              240: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+            }}
+            ref={swiperRef}
+            className="sld-1"
+            modules={[Navigation, Pagination]}
+            spaceBetween={40}
+            slidesPerView={3}
+            allowTouchMove={false}
+          >
+            {feature?.map((features) => (
+              <SwiperSlide className="swiperslidescutom" key={features?._id}>
+                {/* <div className="mb-3">
                 <h4>{features.title}</h4>
-              </div>
-              <div className="ifram warzone">
-                <div>
-                  <Row className="rowmainheading">
-                    <Col lg="">
-                      <div className="iframmainhead">
+              </div> */}
+                <Row
+                  style={{ border: "2px solid #BAB8B8", width: "fit-content" }}
+                  className="rounded-2 py-2 flex-nowrap mx-auto mb-4"
+                >
+                  <Col className="px-2">
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                        whiteSpace: "nowrap",
+                      }}
+                      className="text-center p-0"
+                    >
+                      69
+                    </p>
+                    <p
+                      style={{ fontSize: "8px", fontWeight: "bold" }}
+                      className="text-center p-0"
+                    >
+                      Days
+                    </p>
+                  </Col>
+                  <Col className="px-2">
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                        whiteSpace: "nowrap",
+                      }}
+                      className="text-center p-0"
+                    >
+                      69
+                    </p>
+                    <p
+                      style={{ fontSize: "8px", fontWeight: "bold" }}
+                      className="text-center p-0"
+                    >
+                      hours
+                    </p>
+                  </Col>
+                  <Col className="px-2">
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                        whiteSpace: "nowrap",
+                      }}
+                      className="text-center p-0"
+                    >
+                      69
+                    </p>
+                    <p
+                      style={{ fontSize: "8px", fontWeight: "bold" }}
+                      className="text-center p-0"
+                    >
+                      minutes
+                    </p>
+                  </Col>
+                  <Col className="px-2">
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "bold",
+                        whiteSpace: "nowrap",
+                      }}
+                      className="text-center p-0"
+                    >
+                      69
+                    </p>
+                    <p
+                      style={{ fontSize: "8px", fontWeight: "bold" }}
+                      className="text-center p-0"
+                    >
+                      Seconds
+                    </p>
+                  </Col>
+                </Row>
+                <div className="ifram warzone">
+                  <div>
+                    <Row className="rowmainheading">
+                      <Col>
+                        <div className="iframmainhead">
+                          <iframe
+                            allowfullscreen="true"
+                            className="iframesetdata"
+                            width="300px"
+                            // height="300px"
+                            style={{ borderRadius: "12px" }}
+                            src={`https://www.youtube.com/embed/${features?.resource1.link}`}
+                          // src={features?.resource1.link}
+                          ></iframe>
+                        </div>
+                      </Col>
+                      <Col lg="2" style={{ left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} className="imagehead position-absolute">
+                        <div className="imagemainhead">
+                          <img
+                            className="imageimg"
+                            src={versus}
+                            alt="img"
+                          />
+                        </div>
+                      </Col>
+                      <Col lg="">
                         <iframe
                           allowfullscreen="true"
                           className="iframesetdata"
                           width="300px"
                           // height="300px"
                           style={{ borderRadius: "12px" }}
-                          src={`https://www.youtube.com/embed/${features?.resource1.link}`}
-                          // src={features?.resource1.link}
-                        ></iframe>
-                      </div>
-                    </Col>
-                    <Col lg="2" className="imagehead">
-                      <div className="middlebox">
-                        <div className="imagemain">
-                          <div
-                            className="borderimage"
-                            style={{
-                              borderRadius: "50%",
-                              background: "#5F56C6",
-                            }}
-                          >
-                            <div className="imagemainhead">
-                              <img
-                                // style={{ marginLeft: "20px" }}
-                                className="imageimg"
-                                src={versus}
-                                alt="img"
-                              />
-                            </div>{" "}
-                          </div>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col lg="">
-                      <iframe
-                        allowfullscreen="true"
-                        className="iframesetdata"
-                        width="300px"
-                        // height="300px"
-                        style={{ borderRadius: "12px" }}
-                        src={`https://www.youtube.com/embed/${features?.resource2.link}`}
+                          src={`https://www.youtube.com/embed/${features?.resource2.link}`}
                         // src={features?.resource2.link}
-                      ></iframe>
+                        ></iframe>
+                      </Col>
+                    </Row>
+                  </div>
+
+                  <Row>
+                    <Col><h4>Carry Minati</h4>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                          <PrettyRating
+                            value={3}
+                            icons={icons.star}
+                            colors={colors.star}
+                          />
+                          <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
+                        </div>
+                        <Button
+                          style={{ borderRadius: "4px" }}
+                          size="sm"
+                          className="btlisting m-0 border-0"
+                        >
+                          Rate Now
+                        </Button>
+                      </div>
+                    </Col>
+                    <Col><h4>Carry Minati</h4>
+                      <div className="d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center">
+                          <PrettyRating
+                            value={3}
+                            icons={icons.star}
+                            colors={colors.star}
+                          />
+                          <span style={{ fontSize: "12px" }} className="ms-1">(4.00)</span>
+                        </div>
+                        <Button
+                          style={{ borderRadius: "4px" }}
+                          size="sm"
+                          className="btlisting m-0 border-0"
+                        >
+                          Rate Now
+                        </Button>
+                      </div>
                     </Col>
                   </Row>
                 </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-                <div>
-                  <h4>Carry Minati (4.00)</h4>
-                  <p>
-                    <ReactStars {...secondExample} />
-                  </p>
-                  <div className="mb-3">
-                    <Button
-                      style={{ borderRadius: "10px" }}
-                      size="sm"
-                      className="btlisting"
-                    >
-                      Rate Now
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Container> */}
+          {/* <span style={{ top: 0, zIndex: 69 }} ref={prevBtnRef} className="position-absolute swiper_arrow_prev h-100 d-flex" onClick={() => swiperRef.current.swiper.slidePrev()}>
+            <img src={arrowPrev} alt="" />
+          </span>
+          <span style={{ top: 0, right: 0, zIndex: 69 }} ref={nextBtnRef} className="position-absolute h-100 swiper_arrow_next d-flex" onClick={() => swiperRef.current.swiper.slideNext()}>
+            <img src={arrowNext} alt="Next Arrow" />
+          </span> */}
+        </div>
+
+      </Container >
+
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -398,7 +525,7 @@ function Hastag() {
                       <img className="imgCol" src={value?.cat_img} alt="img" />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting" onClick={()=>gaEventTracker('Listing')}>
+                          <Button className="btlisting" onClick={() => gaEventTracker('Listing')}>
                             {value?.subCount} - Listing
                           </Button>
                         </Row>
@@ -432,7 +559,7 @@ function Hastag() {
           to="/allcategory"
           style={{ color: "white", textDecoration: "none" }}
         >
-          <Button to="/allcategory" className="viewall" size="lg" onClick={()=>gaEventTracker('VIEW All')}>
+          <Button to="/allcategory" className="viewall" size="lg" onClick={() => gaEventTracker('VIEW All')}>
             VIEW All
           </Button>
         </Link>
@@ -494,10 +621,9 @@ function Hastag() {
             },
           }}
           className="sld-1"
-          modules={[Navigation, Pagination, Scrollbar]}
+          modules={[Navigation, Pagination]}
           spaceBetween={70}
           slidesPerView={3}
-          navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
@@ -518,6 +644,16 @@ function Hastag() {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        <div className="px-5 absolute flex w-full justify-between top-[50%] -translate-y-[50%] z-10">
+          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slidePrev()}>
+            Next
+          </span>
+          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slideNext()}>
+            Prev
+          </span>
+        </div>
+
       </Container>
       <div className="container">
         <Container fluid className=" d-flex justify-content-center mt-3">
@@ -711,7 +847,7 @@ function Hastag() {
                           sm="3"
                           type="submit"
                           disabled={!performValidation()}
-                          onClick={() => (handleSubmit(),gaEventTracker('Subscribe'))}
+                          onClick={() => (handleSubmit(), gaEventTracker('Subscribe'))}
                           className=" d-flex justify-content-center subscribebtn col-md-4"
                         >
                           Subscribe
@@ -740,7 +876,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                            // onClick={() => setOpenone(true)}
+                          // onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">
@@ -820,15 +956,12 @@ function Hastag() {
               spaceBetween: 10,
             },
           }}
-          className=""
-          modules={[Navigation, Pagination, Scrollbar]}
+          modules={[Navigation, Pagination]}
           spaceBetween={70}
           slidesPerView={3}
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
         >
           {popblog?.map((value) => (
             <SwiperSlide key={value?._id}>
