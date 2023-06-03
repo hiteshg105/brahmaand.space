@@ -6,13 +6,18 @@
   border-radius: 20px;
   box-shadow: 0px 30px 70px rgba(2, 13, 46, 0.04);
   border-radius: 20px;
-
   margin-bottom: 21px;
+}
+
+.gradient{
+  background: linear-gradient(135deg, rgba(9, 21, 61, 0) 0%, #09153D 120.47%);
+  border-radius: 20px;
 }
 
 .rec_img img {
   width: 100%;
 }
+
 .popularimg img {
   width: 100%;
 }

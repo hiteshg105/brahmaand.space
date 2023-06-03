@@ -96,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -126,7 +126,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   function isValidEmail(email) {
     const expression =
@@ -261,17 +261,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                      <button
-                        key={trendingtopics._id}
-                        onClick={() => (
-                          handlehastagtopic(trendingtopics?.topics),
-                          gaEventTracker(`${trendingtopics?.topics}`)
-                        )}
-                        className="btn1"
-                      >
-                        {trendingtopics?.topics}
-                      </button>
-                    ))
+                    <button
+                      key={trendingtopics._id}
+                      onClick={() => (
+                        handlehastagtopic(trendingtopics?.topics),
+                        gaEventTracker(`${trendingtopics?.topics}`)
+                      )}
+                      className="btn1"
+                    >
+                      {trendingtopics?.topics}
+                    </button>
+                  ))
                   : null}
               </div>
             </div>
@@ -367,9 +367,8 @@ function Hastag() {
                               className="iframesetdata"
                               width="300px"
                               style={{ borderRadius: "12px" }}
-                              src={`https://www.youtube.com/embed/${
-                                features?.resource1.link.split("v=")[1]
-                              }`}
+                              src={`https://www.youtube.com/embed/${features?.resource1.link.split("v=")[1]
+                                }`}
                             ></iframe>
                           ) : (
                             <div className="d-flex">
@@ -403,9 +402,8 @@ function Hastag() {
                             className="iframesetdata"
                             width="300px"
                             style={{ borderRadius: "12px" }}
-                            src={`https://www.youtube.com/embed/${
-                              features?.resource2.link.split("v=")[1]
-                            }`}
+                            src={`https://www.youtube.com/embed/${features?.resource2.link.split("v=")[1]
+                              }`}
                           ></iframe>
                         ) : (
                           <div className="d-flex">
@@ -484,6 +482,8 @@ function Hastag() {
       </Container>
 
       {/* category */}
+      <br />
+      <br />
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -492,10 +492,11 @@ function Hastag() {
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
-                    <div className="blackimage">
+                    <div className="blackimage position-relative">
+                      <div className="gradient position-absolute h-100 w-100"></div>
                       <img className="imgCol" src={value?.cat_img} alt="img" />
                       <div className=" d-flex content-bt newcontent">
-                        <Row className="  mt-2">
+                        <Row className=" mt-2">
                           <Button
                             className="btlisting"
                             onClick={() => gaEventTracker("Listing")}
@@ -795,7 +796,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                            // onClick={() => setOpenone(true)}
+                          // onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">
