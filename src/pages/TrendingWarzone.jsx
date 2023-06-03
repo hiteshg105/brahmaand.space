@@ -484,7 +484,7 @@ const TrendingWarzone = () => {
               {warReview?.rsc1AvReview < 2
                 ? "Bad"
                 : warReview?.rsc1AvReview >= 2 && warReview?.rsc1AvReview < 3
-                ? "Everage"
+                ? "Average"
                 : warReview?.rsc1AvReview >= 3 && warReview?.rsc1AvReview < 4
                 ? "Good"
                 : warReview?.rsc1AvReview >= 4 && warReview?.rsc1AvReview < 4.5
@@ -524,7 +524,7 @@ const TrendingWarzone = () => {
               {warReview?.rsc2AvReview < 2
                 ? "Bad"
                 : warReview?.rsc2AvReview >= 2 && warReview?.rsc2AvReview < 3
-                ? "Everage"
+                ? "Average"
                 : warReview?.rsc2AvReview >= 3 && warReview?.rsc2AvReview < 4
                 ? "Good"
                 : warReview?.rsc2AvReview >= 4 && warReview?.rsc2AvReview < 4.5
@@ -922,7 +922,7 @@ const TrendingWarzone = () => {
                 ? "Bad"
                 : warRscReview?.rsc1AvReview >= 2 &&
                   warRscReview?.rsc1AvReview < 3
-                ? "Everage"
+                ? "Average"
                 : warRscReview?.rsc1AvReview >= 3 &&
                   warRscReview?.rsc1AvReview < 4
                 ? "Good"
@@ -1088,7 +1088,7 @@ const TrendingWarzone = () => {
                 ? "Bad"
                 : warRscReview?.rsc2AvReview >= 2 &&
                   warRscReview?.rsc2AvReview < 3
-                ? "Everage"
+                ? "Average"
                 : warRscReview?.rsc2AvReview >= 3 &&
                   warRscReview?.rsc2AvReview < 4
                 ? "Good"

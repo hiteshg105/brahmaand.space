@@ -503,9 +503,9 @@ function Hastag() {
                       </div>
                     </div>
 
-                    <div className=" d-flex content-bt">
+                    <div className=" d-flex  content-bt">
                       <p
-                        className="d-flex contenttextcategory"
+                        className="d-flex justify-content-end text-right contenttextcategory"
                         style={{ color: "white" }}
                       >
                         {value?.title}
