@@ -117,6 +117,7 @@ function Hastag() {
     allcategory();
     monthlynewslettervid();
     featuredContent();
+    warContent();
   }, []);
   const allcategory = () => {
     axios
@@ -128,7 +129,7 @@ function Hastag() {
       .catch((error) => {});
   };
 
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
   function performValidation() {
@@ -178,13 +179,26 @@ function Hastag() {
 
   // featured content api integration
   const [feature, setFeature] = useState([]);
+  const [war, setWar] = useState([]);
 
   const featuredContent = () => {
     axiosConfig
+      .get(`/user/get_featured_cnt`)
+      .then((res) => {
+        console.log(res.data);
+        setFeature(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const warContent = () => {
+    axiosConfig
       .get(`/get/all/warzone`)
       .then((res) => {
-        // console.log(res.data.war);
-        setFeature(res.data.war);
+        console.log(res.data);
+        setWar(res.data.war);
       })
       .catch((err) => {
         console.log(err);
@@ -337,9 +351,8 @@ function Hastag() {
             slidesPerView={3}
             allowTouchMove={false}
           >
-            {feature?.map((features) => (
+            {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
-                {/* {console.log(features)} */}
                 <HomeCountDown endDate={features.endDate} />
 
                 <div className="ifram warzone">
@@ -352,12 +365,10 @@ function Hastag() {
                               allowfullscreen="true"
                               className="iframesetdata"
                               width="300px"
-                              // height="300px"
                               style={{ borderRadius: "12px" }}
                               src={`https://www.youtube.com/embed/${
                                 features?.resource1.link.split("v=")[1]
                               }`}
-                              // src={features?.resource1.link}
                             ></iframe>
                           ) : (
                             <div className="d-flex">
@@ -394,7 +405,6 @@ function Hastag() {
                             src={`https://www.youtube.com/embed/${
                               features?.resource2.link.split("v=")[1]
                             }`}
-                            // src={features?.resource1.link}
                           ></iframe>
                         ) : (
                           <div className="d-flex">
@@ -443,7 +453,6 @@ function Hastag() {
                             (4.00)
                           </span>
                         </div>
-                        {/* <Link /> */}
                       </div>
                     </Col>
                   </Row>
@@ -533,7 +542,7 @@ function Hastag() {
           </Button>
         </Link>
       </Container>
-      
+
       <Container>
         <h2 className="category2 mt-4 mb-4">Featured</h2>
         <Swiper
@@ -595,6 +604,7 @@ function Hastag() {
           spaceBetween={70}
           slidesPerView={3}
           pagination={{ clickable: true }}
+          navigation
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
@@ -614,20 +624,6 @@ function Hastag() {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="px-5 absolute flex w-full justify-between top-[50%] -translate-y-[50%] z-10">
-          <span
-            className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer"
-            onClick={() => swiperRef.current.swiper.slidePrev()}
-          >
-            Next
-          </span>
-          <span
-            className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer"
-            onClick={() => swiperRef.current.swiper.slideNext()}
-          >
-            Prev
-          </span>
-        </div>
       </Container>
       <div className="container">
         <Container fluid className=" d-flex justify-content-center mt-3">
