@@ -283,7 +283,7 @@ function Hastag() {
       </Container>
 
       {/* warzone */}
-      <Container>
+      {/* <Container>
         <Row className="d-flex justify-content-center">
           <p className="Trending">
             <img className="mb-5" src={has1} alt="img" width="45px" />
@@ -475,7 +475,7 @@ function Hastag() {
             ))}
           </Swiper>
         </div>
-      </Container>
+      </Container> */}
 
       {/* category */}
       <br />
