@@ -195,21 +195,21 @@ function LeaderBoard() {
                 <Row>
                   {planetposition !== ""
                     ? planetposition?.map((value) => (
-                        <Col key={value?._id} lg="4" md="4" className="mb-3">
-                          <div className="planet-1">
-                            <div className="planet-img">
-                              <img src={value?.img} alt="" />
-                            </div>
-                            <div className="planet-text">
-                              <h4>
-                                {value?.planet_name}
-                                <span>${value?.doller_rupees}</span>
-                              </h4>
-                              <p>{value?.point_range}</p>
-                            </div>
+                      <Col key={value?._id} lg="4" md="4" className="mb-3">
+                        <div className="planet-1">
+                          <div className="planet-img">
+                            <img src={value?.img} alt="" />
                           </div>
-                        </Col>
-                      ))
+                          <div className="planet-text">
+                            <h4>
+                              {value?.planet_name}
+                              <span>{value?.doller_rupees} INR</span>
+                            </h4>
+                            <p>{value?.point_range}</p>
+                          </div>
+                        </div>
+                      </Col>
+                    ))
                     : null}
 
                   {/* <Col lg="4" md="4" className="mb-3">
@@ -352,61 +352,61 @@ function LeaderBoard() {
           <Row className="  d-flex justify-content-center winnerone" lg="4">
             {currentmonth != null
               ? currentmonth?.map((currentmonth) => (
-                  <Col key={currentmonth?._id} className="maincol">
-                    <Row>
-                      <div className="maindiv">
-                        {/* {planet?.map((data) => ( */}
-                        <img
-                          src={currentmonth?.crntmnth_planetImg} // planet logo
-                          alt="img"
-                          height={70}
-                          width={70}
-                        />
-                        {/* ))} */}
-                      </div>
+                <Col key={currentmonth?._id} className="maincol">
+                  <Row>
+                    <div className="maindiv">
+                      {/* {planet?.map((data) => ( */}
+                      <img
+                        src={currentmonth?.crntmnth_planetImg} // planet logo
+                        alt="img"
+                        height={70}
+                        width={70}
+                      />
+                      {/* ))} */}
+                    </div>
 
-                      <div className="maindiv1">
-                        <h5
-                          className="points d-flex"
-                          style={{ color: "white" }}
-                        >
-                          {/* {currentmonth?.userid?.meteors} */}
-                          {currentmonth?.crrntMonth}
-                        </h5>
-                      </div>
-                    </Row>
-
-                    <Row className=" d-flex justify-content-center">
-                      <div className="justify-content-center imagecenter">
-                        <div className="images6 d-flex justify-content-center">
-                          <img
-                            style={{ borderRadius: "50%", height: "195px" }}
-                            src={currentmonth?.userid?.profileImg} // image of winner
-                            alt=""
-                            className="avatar"
-                          />
-                        </div>
-                        <span>
-                          <img
-                            src={currentmonth?.crntmnth_winnerImg} //winner tag need to change
-                            alt="ist winner"
-                            className="first"
-                            height={90}
-                            width={90}
-                          />
-                        </span>
-                      </div>
-                    </Row>
-
-                    <Row className="mt-2">
-                      <h3>{currentmonth?.userid?.username}</h3>
-                      <h5>
-                        {/* {currentmonth?.meteors} */}
-                        {currentmonth?.userid?.meteors}
+                    <div className="maindiv1">
+                      <h5
+                        className="points d-flex"
+                        style={{ color: "white" }}
+                      >
+                        {/* {currentmonth?.userid?.meteors} */}
+                        {currentmonth?.crrntMonth}
                       </h5>
-                    </Row>
-                  </Col>
-                ))
+                    </div>
+                  </Row>
+
+                  <Row className=" d-flex justify-content-center">
+                    <div className="justify-content-center imagecenter">
+                      <div className="images6 d-flex justify-content-center">
+                        <img
+                          style={{ borderRadius: "50%", height: "195px" }}
+                          src={currentmonth?.userid?.profileImg} // image of winner
+                          alt=""
+                          className="avatar"
+                        />
+                      </div>
+                      <span>
+                        <img
+                          src={currentmonth?.crntmnth_winnerImg} //winner tag need to change
+                          alt="ist winner"
+                          className="first"
+                          height={90}
+                          width={90}
+                        />
+                      </span>
+                    </div>
+                  </Row>
+
+                  <Row className="mt-2">
+                    <h3>{currentmonth?.userid?.username}</h3>
+                    <h5>
+                      {/* {currentmonth?.meteors} */}
+                      {currentmonth?.userid?.meteors}
+                    </h5>
+                  </Row>
+                </Col>
+              ))
               : null}
 
             {/* <Col className="maincol">
@@ -589,59 +589,59 @@ function LeaderBoard() {
           <Row className="  d-flex justify-content-center winnerone" lg="3">
             {alltime !== "" && alltime !== null
               ? alltime?.map((value) => (
-                  <Col className="maincol">
-                    <Row>
-                      <div className="maindiv">
+                <Col className="maincol">
+                  <Row>
+                    <div className="maindiv">
+                      <img
+                        src={value?.planetImg} //image of planet
+                        alt=" planetimg"
+                        height={80}
+                        width={80}
+                      />
+                    </div>
+
+                    <div className="maindiv1">
+                      <h5
+                        className="points d-flex"
+                        style={{ color: "white" }}
+                      >
+                        {/* {value} */}
+                        {value?.meteors}
+                      </h5>
+                    </div>
+                  </Row>
+
+                  <Row className=" d-flex justify-content-center">
+                    <div className="justify-content-center imagecenter">
+                      <div className="images6 d-flex justify-content-center">
                         <img
-                          src={value?.planetImg} //image of planet
-                          alt=" planetimg"
-                          height={80}
-                          width={80}
+                          style={{ borderRadius: "50%", height: "190px" }}
+                          src={value?.profileImg} // image of winner
+                          // src={avatar1} // image of winner
+                          alt="User Image "
+                          className="avatar"
                         />
                       </div>
+                      <span>
+                        <img
+                          src={value?.winnerImg} // winner one logo
+                          alt="winner"
+                          style={{ borderRadius: "50%" }}
+                          className="first"
+                          height={90}
+                          width={90}
+                        />
+                      </span>
+                    </div>
+                  </Row>
 
-                      <div className="maindiv1">
-                        <h5
-                          className="points d-flex"
-                          style={{ color: "white" }}
-                        >
-                          {/* {value} */}
-                          {value?.meteors}
-                        </h5>
-                      </div>
-                    </Row>
-
-                    <Row className=" d-flex justify-content-center">
-                      <div className="justify-content-center imagecenter">
-                        <div className="images6 d-flex justify-content-center">
-                          <img
-                            style={{ borderRadius: "50%", height: "190px" }}
-                            src={value?.profileImg} // image of winner
-                            // src={avatar1} // image of winner
-                            alt="User Image "
-                            className="avatar"
-                          />
-                        </div>
-                        <span>
-                          <img
-                            src={value?.winnerImg} // winner one logo
-                            alt="winner"
-                            style={{ borderRadius: "50%" }}
-                            className="first"
-                            height={90}
-                            width={90}
-                          />
-                        </span>
-                      </div>
-                    </Row>
-
-                    <Row className="mt-2">
-                      <h3>{value?.username}</h3>
-                      <h5>{value?.meteors}</h5>
-                      {/* <h5>3752</h5> */}
-                    </Row>
-                  </Col>
-                ))
+                  <Row className="mt-2">
+                    <h3>{value?.username}</h3>
+                    <h5>{value?.meteors}</h5>
+                    {/* <h5>3752</h5> */}
+                  </Row>
+                </Col>
+              ))
               : null}
             {/* <Col className="maincol">
               <Row>
