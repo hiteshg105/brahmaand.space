@@ -275,7 +275,7 @@ function Hastag() {
             Trending Warzone
           </p>
         </Row>
-        <div className="position-relative">
+        <div className="trending-warzone-main position-relative">
           <Swiper
             breakpoints={{
               1084: {
@@ -459,8 +459,8 @@ function Hastag() {
                   </div>
 
                   <Row>
-                    <Col><h4>Carry Minati</h4>
-                      <div className="d-flex align-items-center justify-content-between">
+                    <Col><h4 className="text-center">Carry Minati</h4>
+                      <div className="d-flex align-items-center justify-content-center">
                         <div className="d-flex align-items-center">
                           <PrettyRating
                             value={3}
@@ -469,34 +469,29 @@ function Hastag() {
                           />
                           <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
                         </div>
-                        <Button
-                          style={{ borderRadius: "4px" }}
-                          size="sm"
-                          className="btlisting m-0 border-0"
-                        >
-                          Rate Now
-                        </Button>
                       </div>
                     </Col>
-                    <Col><h4>Carry Minati</h4>
-                      <div className="d-flex align-items-center justify-content-between">
+                    <Col><h4 className="text-center">Carry Minati</h4>
+                      <div className="d-flex align-items-center justify-content-center">
                         <div className="d-flex align-items-center">
                           <PrettyRating
                             value={3}
                             icons={icons.star}
                             colors={colors.star}
                           />
-                          <span style={{ fontSize: "12px" }} className="ms-1">(4.00)</span>
+                          <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
                         </div>
-                        <Button
-                          style={{ borderRadius: "4px" }}
-                          size="sm"
-                          className="btlisting m-0 border-0"
-                        >
-                          Rate Now
-                        </Button>
                       </div>
                     </Col>
+                  </Row>
+                  <Row>
+                    <Button
+                      style={{ borderRadius: "4px", width: "fit-content" }}
+                      size="sm"
+                      className="btlisting m-0 border-0 mx-auto"
+                    >
+                      Rate Now
+                    </Button>
                   </Row>
                 </div>
               </SwiperSlide>
@@ -644,16 +639,6 @@ function Hastag() {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <div className="px-5 absolute flex w-full justify-between top-[50%] -translate-y-[50%] z-10">
-          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slidePrev()}>
-            Next
-          </span>
-          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slideNext()}>
-            Prev
-          </span>
-        </div>
-
       </Container>
       <div className="container">
         <Container fluid className=" d-flex justify-content-center mt-3">
@@ -676,7 +661,6 @@ function Hastag() {
                 src={emoji2}
                 alt="img"
               />
-
               <div className="content-emoji1">
                 <p>
                   <Container>
