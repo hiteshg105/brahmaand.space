@@ -241,7 +241,6 @@ function Hastag() {
   }
 
   const [isOpenone, setOpenone] = useState(false);
-  const [isOpen, setOpen] = useState(false);
 
   const gaEventTracker = useAnalyticsEventTracker("Hastag");
   return (
@@ -282,6 +281,8 @@ function Hastag() {
           </div>
         </section>
       </Container>
+
+      {/* warzone */}
       <Container>
         <Row className="d-flex justify-content-center">
           <p className="Trending">
@@ -482,6 +483,7 @@ function Hastag() {
         </div>
       </Container>
 
+      {/* category */}
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -526,7 +528,6 @@ function Hastag() {
           </Row>
         </Container>
       </Container>
-
       <Container className="d-flex justify-content-center ">
         <Link
           to="/allcategory"
@@ -543,6 +544,7 @@ function Hastag() {
         </Link>
       </Container>
 
+      {/* Featured */}
       <Container>
         <h2 className="category2 mt-4 mb-4">Featured</h2>
         <Swiper
