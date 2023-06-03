@@ -349,7 +349,6 @@ p.category3 {
   width: 100%;
   /* margin-bottom: 18px; */
   height: 250px;
-  opacity: 0.4;
   border-radius: 18px;
   /* padding: 6px; */
 }
@@ -1325,6 +1324,7 @@ input[type="range"] {
 
 .swiper-button-next,
 .swiper-button-prev {
+  height: 100% !important;
   background: none;
   width: 55px !important;
   top: 25% !important;

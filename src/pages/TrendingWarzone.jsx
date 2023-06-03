@@ -26,6 +26,8 @@ import ratings from "../assets/icons/ratings.png";
 import instance from "../components/axiosConfig";
 import CountDown from "./CountDown";
 
+import swal from "sweetalert";
+
 const TrendingWarzone = () => {
   const { id } = useParams();
   // console.log(id, "id");
@@ -199,14 +201,14 @@ const TrendingWarzone = () => {
       });
       // console.log(data.data);
       if (data.data.message === "success") {
-        alert("Added Successfully..");
+        swal("Added Successfully");
       }
       if (data.data.msg === "waiting for admin approvel") {
-        alert("waiting for admin approvel");
+        swal("waiting for admin approvel");
       }
     } catch (error) {
       if (error.response.status === 403) {
-        alert("Comment Exist");
+        swal("Comment Exist");
       }
     }
   };
@@ -223,14 +225,14 @@ const TrendingWarzone = () => {
       });
       // console.log(data.data);
       if (data.data.message === "success") {
-        alert("Added Successfully..");
+        swal("Added Successfully..");
       }
       if (data.data.msg === "waiting for admin approvel") {
-        alert("waiting for admin approvel");
+        swal("waiting for admin approvel");
       }
     } catch (error) {
       if (error.response.status === 403) {
-        alert("Comment Exist");
+        swal("Comment Exist");
       }
     }
   };
