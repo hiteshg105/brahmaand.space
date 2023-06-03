@@ -83,7 +83,7 @@ function App() {
   useEffect(() => {
     ReactGA.pageview(location.pathname + location.search);
   }, [location]);
-  console.log(location.pathname)
+  // console.log(location.pathname)
 
   return (
     // <div className="App">
@@ -168,7 +168,7 @@ function App() {
               element={<SendRequestResetPasswordComponent />}
             />
             <Route path="/loginplan" element={<Loginplan />} />
-            <Route path="/tranding-warzone" element={<TrendingWarzone />} />
+            <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
           </Routes>
         </Layout>
       </MenuProvider>
