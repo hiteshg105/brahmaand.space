@@ -31,7 +31,7 @@ import youtubevideo from "../../images/youtubevideo.jpg";
 import edu from "../../images/edu.jpg";
 import rate from "../../images/rate.jpg";
 import socialnetwork from "../../images/socialnetwork.jpg";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ModalVideo from "react-modal-video";
 import Moment from "react-moment";
@@ -429,12 +429,12 @@ function Hastag() {
                       <div className="d-flex align-items-center justify-content-center">
                         <div className="d-flex align-items-center">
                           <PrettyRating
-                            value={3}
+                            value={features?.resource1.ava_rating}
                             icons={icons.star}
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "14px" }} className="ms-1">
-                            (4.00)
+                            {features?.resource1.ava_rating}
                           </span>
                         </div>
                       </div>
@@ -446,12 +446,12 @@ function Hastag() {
                       <div className="d-flex align-items-center justify-content-center">
                         <div className=" d-flex align-items-center">
                           <PrettyRating
-                            value={3}
+                            value={features?.resource2.ava_rating}
                             icons={icons.star}
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "12px" }} className="ms-1">
-                            (4.00)
+                            {features?.resource2.ava_rating}
                           </span>
                         </div>
                       </div>
@@ -545,148 +545,93 @@ function Hastag() {
       </Container>
 
       {/* Featured */}
-      <Container>
-        <h2 className="category2 mt-4 mb-4">Featured</h2>
-        <Swiper
-          breakpoints={{
-            1084: {
-              slidesPerView: 3,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            980: {
-              slidesPerView: 3,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            910: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 3,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            780: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
 
-            768: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            640: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            320: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            240: {
-              slidesPerView: 1,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-          }}
-          className="sld-1"
-          modules={[Navigation, Pagination]}
-          spaceBetween={70}
-          slidesPerView={3}
-          pagination={{ clickable: true }}
-          navigation
-          scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
-        >
-          {feature?.map((features) => (
-            <SwiperSlide key={features?._id}>
-              <div className="ifram">
-                <iframe
-                  allowfullscreen="true"
-                  className="iframesetdata"
-                  // width="auto"
-                  // height="300px"
-                  style={{ borderRadius: "12px" }}
-                  src={`https://www.youtube.com/embed/${features?.video_link}`}
-                ></iframe>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Container>
       <div className="container">
-        <Container fluid className=" d-flex justify-content-center mt-3">
-          <Row>
-            <Col lg="6" md="6" sm="12">
-              <img className="imgCol1" src={emoji} alt="img" />
-              <div className="content-emoji">
-                <p>
-                  <Container>
-                    Content is scattered all over the web and finding quality,
-                    best content is a challenge. People waste their time and
-                    money consuming irrelevant, unauthentic resources.
-                  </Container>
-                </p>
-              </div>
-            </Col>
-            <Col lg="6" md="6" sm="12">
-              <img
-                className="imgCol2 d-flex justify-content-center"
-                src={emoji2}
-                alt="img"
-              />
+        <Container>
+          <h2 className="category2 mt-4 mb-4">Featured</h2>
+          <Swiper
+            breakpoints={{
+              1084: {
+                slidesPerView: 3,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              980: {
+                slidesPerView: 3,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              910: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              820: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              820: {
+                slidesPerView: 3,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              780: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
 
-              <div className="content-emoji1">
-                <p>
-                  <Container>
-                    Brahmaand.Space features a selection of top-rated, community
-                    and expert-approved content links in all categories
-                    including tutorials, courses, articles, blogs, and vlogs.
-                  </Container>
-                </p>
-              </div>
-            </Col>
-          </Row>
+              768: {
+                slidesPerView: 2,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              640: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              320: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+              240: {
+                slidesPerView: 1,
+                direction: "horizontal",
+                spaceBetween: 10,
+              },
+            }}
+            className="sld-1"
+            modules={[Navigation, Pagination, Scrollbar]}
+            spaceBetween={70}
+            slidesPerView={3}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+          >
+            {feature?.map((features) => (
+              <SwiperSlide key={features?._id}>
+                <div className="ifram">
+                  <iframe
+                    allowfullscreen="true"
+                    className="iframesetdata"
+                    // width="auto"
+                    // height="300px"
+                    style={{ borderRadius: "12px" }}
+                    src={`https://www.youtube.com/embed/${features?.video_link}`}
+                  ></iframe>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Container>
       </div>
-      {/* <div>
-        <Container>
-          <Row className="mt-5">
-            <Col lg="12" md="12" sm="12" className="">
-              <div
-                className="rs-1"
-                style={{
-                  backgroundImage: `url(${youtubevideo})`,
-                  width: "100%",
-                  backgroundSize: "cover",
-                }}
-              >
-                <div className="rs-bg">
-                  <h3>
-                    Are you a Youtube content creator and want to <br></br>
-                    promote your content and earn money.
-                  </h3>
-                  <Link to="/signup">JOIN US !</Link>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div> */}
 
+      {/* How does Brahmaand works */}
       <div className="container">
         <p className="category3">How does Brahmaand works?</p>
         <Row>
@@ -873,6 +818,7 @@ function Hastag() {
         </div>
       </div>
 
+      {/* blogs */}
       <div className="container">
         <p className="category3">Latest Blogs</p>
 

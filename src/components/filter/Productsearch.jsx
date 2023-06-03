@@ -121,7 +121,7 @@ function Productsearch(args) {
   const [Filtertype, setFiltertype] = useState("");
 
   const handlefilter = (filtertype) => {
-    console.log("contentyear Id<<<<<<<<<?????", filtertype);
+    // console.log("contentyear Id<<<<<<<<<?????", filtertype);
 
     setFiltertype(filtertype);
 
@@ -134,7 +134,7 @@ function Productsearch(args) {
         format: format,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCategry(res.data.data);
       })
       .catch((err) => {
@@ -187,7 +187,7 @@ function Productsearch(args) {
         });
     }
   };
-  console.log(Producdetail, "Searching Product");
+  // console.log(Producdetail, "Searching Product");
   const handleeditcomment = (id) => {
     axios
       .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
