@@ -36,19 +36,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ModalVideo from "react-modal-video";
 import Moment from "react-moment";
 import "swiper/css";
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "../../styles/ModulePage.css";
 import "../../styles/Hastag.scss";
 
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 
-
 import { Input, Button, CardMedia } from "reactstrap";
 import { InputGroup } from "react-bootstrap";
 import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
 import PrettyRating from "pretty-rating-react";
+import CountDown from "../../pages/CountDown";
+import HomeCountDown from "./HomeCountDown";
 
 function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
@@ -88,7 +89,6 @@ function Hastag() {
     star: ["#d9ad26", "#d9ad26", "#434b4d"],
   };
 
-
   const gettrendingdata = () => {
     axios
       .get(`https://backend.brahmaand.space/admin/getTrending`)
@@ -96,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -125,7 +125,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -147,7 +147,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -229,8 +229,7 @@ function Hastag() {
   const [isOpenone, setOpenone] = useState(false);
   const [isOpen, setOpen] = useState(false);
 
-
-  const gaEventTracker = useAnalyticsEventTracker('Hastag')
+  const gaEventTracker = useAnalyticsEventTracker("Hastag");
   return (
     <>
       <Container>
@@ -249,16 +248,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                    <button
-                      key={trendingtopics._id}
-                      onClick={() =>
-                        (handlehastagtopic(trendingtopics?.topics), gaEventTracker(`${trendingtopics?.topics}`))
-                      }
-                      className="btn1"
-                    >
-                      {trendingtopics?.topics}
-                    </button>
-                  ))
+                      <button
+                        key={trendingtopics._id}
+                        onClick={() => (
+                          handlehastagtopic(trendingtopics?.topics),
+                          gaEventTracker(`${trendingtopics?.topics}`)
+                        )}
+                        className="btn1"
+                      >
+                        {trendingtopics?.topics}
+                      </button>
+                    ))
                   : null}
               </div>
             </div>
@@ -339,164 +339,125 @@ function Hastag() {
           >
             {feature?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
-                {/* <div className="mb-3">
-                <h4>{features.title}</h4>
-              </div> */}
-                <Row
-                  style={{ border: "2px solid #BAB8B8", width: "fit-content" }}
-                  className="rounded-2 py-2 flex-nowrap mx-auto mb-4"
-                >
-                  <Col className="px-2">
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        whiteSpace: "nowrap",
-                      }}
-                      className="text-center p-0"
-                    >
-                      69
-                    </p>
-                    <p
-                      style={{ fontSize: "8px", fontWeight: "bold" }}
-                      className="text-center p-0"
-                    >
-                      Days
-                    </p>
-                  </Col>
-                  <Col className="px-2">
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        whiteSpace: "nowrap",
-                      }}
-                      className="text-center p-0"
-                    >
-                      69
-                    </p>
-                    <p
-                      style={{ fontSize: "8px", fontWeight: "bold" }}
-                      className="text-center p-0"
-                    >
-                      hours
-                    </p>
-                  </Col>
-                  <Col className="px-2">
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        whiteSpace: "nowrap",
-                      }}
-                      className="text-center p-0"
-                    >
-                      69
-                    </p>
-                    <p
-                      style={{ fontSize: "8px", fontWeight: "bold" }}
-                      className="text-center p-0"
-                    >
-                      minutes
-                    </p>
-                  </Col>
-                  <Col className="px-2">
-                    <p
-                      style={{
-                        fontSize: "14px",
-                        fontWeight: "bold",
-                        whiteSpace: "nowrap",
-                      }}
-                      className="text-center p-0"
-                    >
-                      69
-                    </p>
-                    <p
-                      style={{ fontSize: "8px", fontWeight: "bold" }}
-                      className="text-center p-0"
-                    >
-                      Seconds
-                    </p>
-                  </Col>
-                </Row>
+                {/* {console.log(features)} */}
+                <HomeCountDown endDate={features.endDate} />
+
                 <div className="ifram warzone">
                   <div>
                     <Row className="rowmainheading">
                       <Col>
                         <div className="iframmainhead">
+                          {features.resource1.format === "Video" ? (
+                            <iframe
+                              allowfullscreen="true"
+                              className="iframesetdata"
+                              width="300px"
+                              // height="300px"
+                              style={{ borderRadius: "12px" }}
+                              src={`https://www.youtube.com/embed/${
+                                features?.resource1.link.split("v=")[1]
+                              }`}
+                              // src={features?.resource1.link}
+                            ></iframe>
+                          ) : (
+                            <div className="d-flex">
+                              <img
+                                className="mx-auto"
+                                style={{ height: "300px" }}
+                                src={features?.resource1.img}
+                                alt=""
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </Col>
+                      <Col
+                        lg="2"
+                        style={{
+                          left: "50%",
+                          top: "50%",
+                          transform: "translate(-50%,-50%)",
+                        }}
+                        className="imagehead position-absolute"
+                      >
+                        <div className="imagemainhead">
+                          <img className="imageimg" src={versus} alt="img" />
+                        </div>
+                      </Col>
+                      <Col lg="">
+                        {features.resource2.format === "Video" ? (
                           <iframe
                             allowfullscreen="true"
                             className="iframesetdata"
                             width="300px"
-                            // height="300px"
                             style={{ borderRadius: "12px" }}
-                            src={`https://www.youtube.com/embed/${features?.resource1.link}`}
-                          // src={features?.resource1.link}
+                            src={`https://www.youtube.com/embed/${
+                              features?.resource2.link.split("v=")[1]
+                            }`}
+                            // src={features?.resource1.link}
                           ></iframe>
-                        </div>
-                      </Col>
-                      <Col lg="2" style={{ left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} className="imagehead position-absolute">
-                        <div className="imagemainhead">
-                          <img
-                            className="imageimg"
-                            src={versus}
-                            alt="img"
-                          />
-                        </div>
-                      </Col>
-                      <Col lg="">
-                        <iframe
-                          allowfullscreen="true"
-                          className="iframesetdata"
-                          width="300px"
-                          // height="300px"
-                          style={{ borderRadius: "12px" }}
-                          src={`https://www.youtube.com/embed/${features?.resource2.link}`}
-                        // src={features?.resource2.link}
-                        ></iframe>
+                        ) : (
+                          <div className="d-flex">
+                            <img
+                              className="mx-auto"
+                              style={{ height: "300px" }}
+                              src={features?.resource2.img}
+                              alt=""
+                            />
+                          </div>
+                        )}
                       </Col>
                     </Row>
                   </div>
 
                   <Row>
-                    <Col><h4>Carry Minati</h4>
-                      <div className="d-flex align-items-center justify-content-between">
+                    <Col>
+                      <h4 className="text-center">
+                        {features?.resource1.creatorName}
+                      </h4>
+                      <div className="d-flex align-items-center justify-content-center">
                         <div className="d-flex align-items-center">
                           <PrettyRating
                             value={3}
                             icons={icons.star}
                             colors={colors.star}
                           />
-                          <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
+                          <span style={{ fontSize: "14px" }} className="ms-1">
+                            (4.00)
+                          </span>
                         </div>
-                        <Button
-                          style={{ borderRadius: "4px" }}
-                          size="sm"
-                          className="btlisting m-0 border-0"
-                        >
-                          Rate Now
-                        </Button>
                       </div>
                     </Col>
-                    <Col><h4>Carry Minati</h4>
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="d-flex align-items-center">
+                    <Col>
+                      <h4 className="text-center">
+                        {features?.resource2.creatorName}
+                      </h4>
+                      <div className="d-flex align-items-center justify-content-center">
+                        <div className=" d-flex align-items-center">
                           <PrettyRating
                             value={3}
                             icons={icons.star}
                             colors={colors.star}
                           />
-                          <span style={{ fontSize: "12px" }} className="ms-1">(4.00)</span>
+                          <span style={{ fontSize: "12px" }} className="ms-1">
+                            (4.00)
+                          </span>
                         </div>
-                        <Button
-                          style={{ borderRadius: "4px" }}
-                          size="sm"
-                          className="btlisting m-0 border-0"
-                        >
-                          Rate Now
-                        </Button>
+                        {/* <Link /> */}
                       </div>
                     </Col>
+                  </Row>
+                  <Row>
+                    <Button
+                      onClick={() =>
+                        navigate(`/trending-warzone/${features._id}`)
+                      }
+                      style={{ borderRadius: "4px", width: "fit-content" }}
+                      size="sm"
+                      className="mx-auto btlisting m-0 border-0"
+                    >
+                      Rate Now
+                    </Button>
                   </Row>
                 </div>
               </SwiperSlide>
@@ -510,14 +471,13 @@ function Hastag() {
             <img src={arrowNext} alt="Next Arrow" />
           </span> */}
         </div>
-
-      </Container >
+      </Container>
 
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
           <Row className="m-3 mb-4">
-            {categry?.slice(0, 8).map((value) => (
+            {categry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?._id}>
                 <Link to={`/subcategory/${value?._id}`}>
                   <div className="bg-1">
@@ -525,7 +485,10 @@ function Hastag() {
                       <img className="imgCol" src={value?.cat_img} alt="img" />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting" onClick={() => gaEventTracker('Listing')}>
+                          <Button
+                            className="btlisting"
+                            onClick={() => gaEventTracker("Listing")}
+                          >
                             {value?.subCount} - Listing
                           </Button>
                         </Row>
@@ -554,18 +517,25 @@ function Hastag() {
           </Row>
         </Container>
       </Container>
+
       <Container className="d-flex justify-content-center ">
         <Link
           to="/allcategory"
           style={{ color: "white", textDecoration: "none" }}
         >
-          <Button to="/allcategory" className="viewall" size="lg" onClick={() => gaEventTracker('VIEW All')}>
+          <Button
+            to="/allcategory"
+            className="viewall"
+            size="lg"
+            onClick={() => gaEventTracker("VIEW All")}
+          >
             VIEW All
           </Button>
         </Link>
       </Container>
+      
       <Container>
-        <h2 className="category2 mt-4 mb-4">Featured</h2>+
+        <h2 className="category2 mt-4 mb-4">Featured</h2>
         <Swiper
           breakpoints={{
             1084: {
@@ -644,16 +614,20 @@ function Hastag() {
             </SwiperSlide>
           ))}
         </Swiper>
-
         <div className="px-5 absolute flex w-full justify-between top-[50%] -translate-y-[50%] z-10">
-          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slidePrev()}>
+          <span
+            className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer"
+            onClick={() => swiperRef.current.swiper.slidePrev()}
+          >
             Next
           </span>
-          <span className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer" onClick={() => swiperRef.current.swiper.slideNext()}>
+          <span
+            className="w-[22px] sm:w-[33px] lg:w-[44px] swiper_arrow_prev cursor-pointer"
+            onClick={() => swiperRef.current.swiper.slideNext()}
+          >
             Prev
           </span>
         </div>
-
       </Container>
       <div className="container">
         <Container fluid className=" d-flex justify-content-center mt-3">
@@ -847,7 +821,9 @@ function Hastag() {
                           sm="3"
                           type="submit"
                           disabled={!performValidation()}
-                          onClick={() => (handleSubmit(), gaEventTracker('Subscribe'))}
+                          onClick={() => (
+                            handleSubmit(), gaEventTracker("Subscribe")
+                          )}
                           className=" d-flex justify-content-center subscribebtn col-md-4"
                         >
                           Subscribe
@@ -876,7 +852,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                          // onClick={() => setOpenone(true)}
+                            // onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">
