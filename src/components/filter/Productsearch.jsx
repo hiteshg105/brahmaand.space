@@ -329,6 +329,7 @@ function Productsearch(args) {
   };
 
   const handlesearchdescription = () => {
+    localStorage.setItem("searchdata", searchitem);
     axios
       .post(`https://backend.brahmaand.space/user/search_topic_title`, {
         searchinput: searchitem,

@@ -283,7 +283,7 @@ function Hastag() {
       </Container>
 
       {/* warzone */}
-      {/* <Container>
+      <Container>
         <Row className="d-flex justify-content-center">
           <p className="Trending">
             <img className="mb-5" src={has1} alt="img" width="45px" />
@@ -351,6 +351,7 @@ function Hastag() {
             spaceBetween={40}
             slidesPerView={3}
             allowTouchMove={false}
+            centeredSlides={war.length === 1 && true}
           >
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
@@ -473,14 +474,12 @@ function Hastag() {
               </SwiperSlide>
             ))}
           </Swiper>
-
-   
         </div>
-      </Container> */}
+      </Container>
 
       {/* category */}
-      {/* <br />
-      <br /> */}
+      <br />
+      <br />
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
