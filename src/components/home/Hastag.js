@@ -435,7 +435,7 @@ function Hastag() {
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "14px" }} className="ms-1">
-                            {features?.resource1.ava_rating.toFixed(2)}
+                            {features?.resource1.ava_rating?.toFixed(2)}
                           </span>
                         </div>
                       </div>
@@ -452,7 +452,7 @@ function Hastag() {
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "12px" }} className="ms-1">
-                            {features?.resource2.ava_rating.toFixed(2)}
+                            {features?.resource2.ava_rating?.toFixed(2)}
                           </span>
                         </div>
                       </div>
