@@ -298,11 +298,7 @@ function CustomNavbar(args) {
       </Navbar.Brand>
 
       <Link to="/leaderboard">
-        <button
-          className="btn rbutton mobile"
-          type="submit"
-          onClick={() => gaEventTracker("LeaderBoard")}
-        >
+        <button className="btn rbutton mobile" type="submit">
           <h4 className="rText">LeaderBoard</h4>
         </button>
       </Link>
@@ -315,8 +311,8 @@ function CustomNavbar(args) {
         <Nav className="ms-auto navbar-nav">
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
@@ -933,8 +929,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>

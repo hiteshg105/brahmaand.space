@@ -75,6 +75,7 @@ import ProductHastag from "./components/filter/ProductHastag";
 import Loginplan from "./planable.io/Loginplan";
 import TrendingWarzone from "./pages/TrendingWarzone";
 import Category from "./pages/Category";
+import ContentCreators from "./pages/ContentCreators";
 
 ReactGA.initialize("UA-250944909-1");
 // ReactGA.initialize("UA-250944909-1");
@@ -171,6 +172,7 @@ function App() {
             <Route path="/loginplan" element={<Loginplan />} />
             <Route path="/category" element={<Category />} />
             <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
+            <Route path="/content-creators" element={<ContentCreators />} />
           </Routes>
         </Layout>
       </MenuProvider>

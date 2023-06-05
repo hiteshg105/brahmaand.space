@@ -183,23 +183,8 @@ function ContactUs() {
                 color="#FC9358"
               />
               <h5>OUR LOCATION</h5>
-              <p> PO Box 97845 Baker st. 567,</p>
               <p> Bengaluru, India</p>
-              <p> Made with love</p>
-              <p> World's 1st Content aggregator platform</p>
-            </div>
-          </Col>
 
-          <Col className="searchtwo ">
-            <div className="searchone">
-              <FaBlogger
-                className="lacation d-flex justify-content-center mb-2"
-                size={55}
-                color="#FC9358"
-              />
-              <h5>WRITE SOMETHING</h5>
-              <p>WRITE something below,</p>
-              <p>... </p>
             </div>
           </Col>
 

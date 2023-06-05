@@ -52,6 +52,7 @@ export const AuthProvider = ({ children }) => {
     const temp_auth = await getUser();
     setUser(temp_auth["user"]);
   }, []);
+
   // useEffect(() => {
   //   ReactGA.pageview(location.pathname + location.search);
   // }, [location]);

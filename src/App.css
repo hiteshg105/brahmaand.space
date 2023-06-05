@@ -58,6 +58,7 @@
 
 .category-main .common-swipers .swiper .swiper-button-prev,
 .category-main .common-swipers .swiper .swiper-button-next {
+  margin-top: 0 !important;
   height: 100% !important;
   position: absolute;
   top: 0;
@@ -88,4 +89,104 @@
 
 .category-main .common-swipers .swiper .swiper-button-disabled {
   display: none !important;
+}
+
+/* Content Creators */
+
+.content-creator-main .toggle {
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-creator-main .toggle input[type="checkbox"] {
+  position: relative;
+  appearance: none;
+  width: 333px;
+  height: 50px;
+  background-color: #FEE6D9;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+
+.content-creator-main .toggle input[type="checkbox"]::after {
+  position: absolute;
+  content: "";
+  left: 5px;
+  top: 50%;
+  width: 50%;
+  height: 80%;
+  background-color: #FC9357;
+  border-radius: 50px;
+  transform: translateY(-50%);
+  transition: all 0.4s;
+}
+
+.content-creator-main .toggle input:checked[type="checkbox"]::after {
+  left: calc(50% - 5px);
+}
+
+.content-creator-main .toggle label {
+  position: absolute;
+  pointer-events: none;
+  color: #fff;
+  transition: all 0.4s;
+}
+
+.content-creator-main .toggle input~label.l {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: black;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content-creator-main .toggle input~label.r {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  color: black;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.content-creator-main .toggle input:checked~label.r {
+  color: white;
+}
+
+.content-creator-main .toggle input:not(:checked)~label.l {
+  color: white;
+}
+
+.content-creator-main .grid-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.content-creator-main .grid-main .item {
+  width: calc(33.33% - 20px);
+  min-width: 300px;
+  border: 1px solid #011D2B;
+  border-radius: 10px;
+}
+
+@media (max-width:992px) {
 }

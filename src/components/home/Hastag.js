@@ -382,7 +382,7 @@ function Hastag() {
           >
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
-                <p>{features?.category.title}</p>
+                <h4 className="text-center fw-bold">{features?.category.title}</h4>
                 <HomeCountDown endDate={features.endDate} />
 
                 <div className="ifram warzone">
@@ -421,10 +421,10 @@ function Hastag() {
                         className="imagehead position-absolute"
                       >
                         <div className="imagemainhead">
-                          <img className="imageimg" src={versus} alt="img" />
+                          <img style={{ maxWidth: "100px" }} className="imageimg" src={versus} alt="img" />
                         </div>
                       </Col>
-                      <Col lg="">
+                      <Col lg="" className="d-flex justify-content-center align-items-center">
                         {features.resource2.format === "Video" ? (
                           <iframe
                             allowfullscreen="true"
@@ -435,10 +435,9 @@ function Hastag() {
                               }`}
                           ></iframe>
                         ) : (
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-center align-items-center">
                             <img
-                              className="mx-auto"
-                              style={{ height: "300px" }}
+                              className="m-auto h-auto"
                               src={features?.resource2.img}
                               alt=""
                             />
