@@ -185,7 +185,7 @@ function Hastag() {
     axiosConfig
       .get(`/user/get_featured_cnt`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setFeature(res.data.data);
       })
       .catch((err) => {
@@ -197,7 +197,7 @@ function Hastag() {
     axiosConfig
       .get(`/get/all/warzone`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setWar(res.data.war);
       })
       .catch((err) => {
@@ -283,7 +283,7 @@ function Hastag() {
       </Container>
 
       {/* warzone */}
-      {/* <Container>
+      <Container>
         <Row className="d-flex justify-content-center">
           <p className="Trending">
             <img className="mb-5" src={has1} alt="img" width="45px" />
@@ -475,7 +475,7 @@ function Hastag() {
             ))}
           </Swiper>
         </div>
-      </Container> */}
+      </Container>
 
       {/* category */}
       <br />
@@ -607,8 +607,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
