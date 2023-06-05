@@ -33,12 +33,13 @@ function LeaderBoard() {
   const [planetposition, setPlanetposition] = useState([]);
   const [currentmonth, setCurrentmonth] = useState([]);
   const [alltime, setAlltime] = useState([]);
+  const [calculatedata, setCalculatedata] = useState([]);
 
   const getcurrentmonthdata = () => {
     axios
       .get(`https://backend.brahmaand.space/user/karma_crrnt_month`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCurrentmonth(res.data.data);
       })
       .catch((err) => {
@@ -49,7 +50,7 @@ function LeaderBoard() {
     axios
       .get(`https://backend.brahmaand.space/user/all_time_karma`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setAlltime(res.data.data);
       })
       .catch((err) => {
@@ -68,10 +69,24 @@ function LeaderBoard() {
         console.log(err.data.data);
       });
   };
+
+  const getCalculatedata = () => {
+    // change the Id 
+    axios
+      .get(`http://localhost:9000/user/user_calculate/6457a5cec4c9cb7557f39f4f`)
+      .then((res) => {
+        setCalculatedata(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getcurrentmonthdata();
     getallmonthdata();
     getallplanetpostion();
+    getCalculatedata();
   }, []);
 
   return (
@@ -137,7 +152,7 @@ function LeaderBoard() {
                     </Col>
                     <Col lg="8">
                       <h4> Rating </h4>
-                      <h3 style={{ color: "#5F56C6" }}> 2 meteors</h3>
+                      <h3 style={{ color: "#5F56C6" }}> {calculatedata.rating} meteors</h3>
                     </Col>
                   </Row>
                 </Col>
@@ -160,7 +175,7 @@ function LeaderBoard() {
                     </Col>
                     <Col lg="8">
                       <h4> Review </h4>
-                      <h3 style={{ color: "#F35F5F" }}>5 meteors</h3>
+                      <h3 style={{ color: "#F35F5F" }}>{calculatedata.comment} meteors</h3>
                     </Col>
                   </Row>
                 </Col>
