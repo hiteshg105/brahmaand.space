@@ -185,7 +185,7 @@ function Hastag() {
     axiosConfig
       .get(`/user/get_featured_cnt`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setFeature(res.data.data);
       })
       .catch((err) => {
@@ -197,7 +197,7 @@ function Hastag() {
     axiosConfig
       .get(`/get/all/warzone`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setWar(res.data.war);
       })
       .catch((err) => {
@@ -281,40 +281,6 @@ function Hastag() {
           </div>
         </section>
       </Container>
-      {/* <Container>
-        <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
-        <Swiper
-          breakpoints={{
-            1084: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            980: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            910: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            820: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
-            780: {
-              slidesPerView: 2,
-              direction: "horizontal",
-              spaceBetween: 10,
-            },
 
       {/* warzone */}
       <Container>
@@ -385,9 +351,11 @@ function Hastag() {
             spaceBetween={40}
             slidesPerView={3}
             allowTouchMove={false}
+            centeredSlides={war.length === 1 && true}
           >
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
+                <h4 className="text-center fw-bold">{features?.category.title}</h4>
                 <HomeCountDown endDate={features.endDate} />
 
                 <div className="ifram warzone">
@@ -426,10 +394,10 @@ function Hastag() {
                         className="imagehead position-absolute"
                       >
                         <div className="imagemainhead">
-                          <img className="imageimg" src={versus} alt="img" />
+                          <img style={{ maxWidth: "100px" }} className="imageimg" src={versus} alt="img" />
                         </div>
                       </Col>
-                      <Col lg="">
+                      <Col lg="" className="d-flex justify-content-center align-items-center">
                         {features.resource2.format === "Video" ? (
                           <iframe
                             allowfullscreen="true"
@@ -440,10 +408,9 @@ function Hastag() {
                               }`}
                           ></iframe>
                         ) : (
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-center align-items-center">
                             <img
-                              className="mx-auto"
-                              style={{ height: "300px" }}
+                              className="m-auto h-auto"
                               src={features?.resource2.img}
                               alt=""
                             />
@@ -466,7 +433,7 @@ function Hastag() {
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "14px" }} className="ms-1">
-                            {features?.resource1.ava_rating}
+                            {features?.resource1.ava_rating?.toFixed(2)}
                           </span>
                         </div>
                       </div>
@@ -483,7 +450,7 @@ function Hastag() {
                             colors={colors.star}
                           />
                           <span style={{ fontSize: "12px" }} className="ms-1">
-                            {features?.resource2.ava_rating}
+                            {features?.resource2.ava_rating?.toFixed(2)}
                           </span>
                         </div>
                       </div>
@@ -502,11 +469,15 @@ function Hastag() {
                     </Button>
                   </Row>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Container> */}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </Container>
+
+      {/* category */}
+      <br />
+      <br />
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -530,9 +501,9 @@ function Hastag() {
                       </div>
                     </div>
 
-                    <div className=" d-flex content-bt">
+                    <div className=" d-flex  content-bt">
                       <p
-                        className="d-flex contenttextcategory"
+                        className="d-flex justify-content-end text-right contenttextcategory"
                         style={{ color: "white" }}
                       >
                         {value?.title}
@@ -634,8 +605,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -663,7 +634,7 @@ function Hastag() {
             <Card>
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
-                <p>Search for the top content in any niche ... (e.g. Java)</p>
+                <p>Search for the top content on any subject ... (e.g. Java)</p>
 
                 <ShowMore
                   className="showmore"

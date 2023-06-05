@@ -58,6 +58,7 @@
 
 .category-main .common-swipers .swiper .swiper-button-prev,
 .category-main .common-swipers .swiper .swiper-button-next {
+  margin-top: 0 !important;
   height: 100% !important;
   position: absolute;
   top: 0;
