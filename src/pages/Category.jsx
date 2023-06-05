@@ -79,7 +79,7 @@ const Category = () => {
                 alt="bg"
               />
             </div>
-            <h3 className="my-4 fw-bold">{ele[0].category.title}</h3>
+            <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
             <Swiper
               breakpoints={{
                 1084: {
@@ -166,7 +166,11 @@ const Category = () => {
                               <div className="d-flex align-items-center justify-content-center">
                                 <div className="d-flex align-items-center">
                                   <PrettyRating
-                                    value={slides?.resource1.ava_rating}
+                                    value={
+                                      slides?.resource1.ava_rating === null
+                                        ? 0
+                                        : slides?.resource1.ava_rating
+                                    }
                                     icons={icons.star}
                                     colors={colors.star}
                                   />
@@ -174,7 +178,13 @@ const Category = () => {
                                     style={{ fontSize: "14px" }}
                                     className="ms-1"
                                   >
-                                    ({slides?.resource1.ava_rating?.toFixed(2)})
+                                    (
+                                    {slides?.resource1.ava_rating === null
+                                      ? 0
+                                      : slides?.resource1.ava_rating?.toFixed(
+                                          2
+                                        )}
+                                    )
                                   </span>
                                 </div>
                               </div>
@@ -216,7 +226,11 @@ const Category = () => {
                               <div className="d-flex align-items-center justify-content-center">
                                 <div className="d-flex align-items-center">
                                   <PrettyRating
-                                    value={slides?.resource2.ava_rating}
+                                    value={
+                                      slides?.resource1.ava_rating === null
+                                        ? 0
+                                        : slides?.resource1.ava_rating
+                                    }
                                     icons={icons.star}
                                     colors={colors.star}
                                   />
@@ -224,7 +238,13 @@ const Category = () => {
                                     style={{ fontSize: "14px" }}
                                     className="ms-1"
                                   >
-                                    ({slides?.resource2.ava_rating?.toFixed(2)})
+                                    (
+                                    {slides?.resource1.ava_rating === null
+                                      ? 0
+                                      : slides?.resource2.ava_rating?.toFixed(
+                                          2
+                                        )}
+                                    )
                                   </span>
                                 </div>
                               </div>
