@@ -32,9 +32,9 @@ function Work() {
           <Row className="mt-2 mb-2">
             <br />
             <br />
-            <h3 className="mt-4 mb-2"> How we use your information</h3>
+            <h3 className="mt-4 mb-2"> How Brahmaand.Space works?</h3>
             <p>
-              We use the information we collect in various ways, including to:
+              
             </p>
 
             {howworks?.map((value) => (

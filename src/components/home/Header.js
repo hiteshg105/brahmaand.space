@@ -138,7 +138,7 @@ function Header() {
                 <div className="py-20">
                   <h1>Struggling to Find Relevant Content ?</h1>
                   <h5 className=" mx-30 ">
-                    Find the best quality content across the universe with our
+                    Find best quality content across the universe with our
                     community-driven database and AI-based search engine.
                   </h5>
                 </div>
@@ -177,7 +177,7 @@ function Header() {
 
             <input
               type="text"
-              placeholder="Search for the top resources on any subject ... (e.g. Java) "
+              placeholder="Search for the top content in any niche ... (e.g. Java) "
               className="search"
               onKeyDown={handleEnter}
               value={searchdata}

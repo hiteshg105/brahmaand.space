@@ -52,9 +52,10 @@ export const AuthProvider = ({ children }) => {
     const temp_auth = await getUser();
     setUser(temp_auth["user"]);
   }, []);
-  // useEffect(() => {
-  //   ReactGA.pageview(location.pathname + location.search);
-  // }, [location]);
+
+  useEffect(() => {
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
 
   const login = async (body) => {
     const config = {

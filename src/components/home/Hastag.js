@@ -281,6 +281,40 @@ function Hastag() {
           </div>
         </section>
       </Container>
+      {/* <Container>
+        <h2 className="category2 mt-4 mb-4">Trending Warzone</h2>
+        <Swiper
+          breakpoints={{
+            1084: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            980: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            910: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            820: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
+            780: {
+              slidesPerView: 2,
+              direction: "horizontal",
+              spaceBetween: 10,
+            },
 
       {/* warzone */}
       <Container>
@@ -468,22 +502,11 @@ function Hastag() {
                     </Button>
                   </Row>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          {/* <span style={{ top: 0, zIndex: 69 }} ref={prevBtnRef} className="position-absolute swiper_arrow_prev h-100 d-flex" onClick={() => swiperRef.current.swiper.slidePrev()}>
-            <img src={arrowPrev} alt="" />
-          </span>
-          <span style={{ top: 0, right: 0, zIndex: 69 }} ref={nextBtnRef} className="position-absolute h-100 swiper_arrow_next d-flex" onClick={() => swiperRef.current.swiper.slideNext()}>
-            <img src={arrowNext} alt="Next Arrow" />
-          </span> */}
-        </div>
-      </Container>
-
-      {/* category */}
-      <br />
-      <br />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container> */}
       <Container className="mt-3">
         <p className="category">Top Categories</p>
         <Container className=" ">
@@ -640,7 +663,7 @@ function Hastag() {
             <Card>
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
-                <p>Search for the top content on any subject ... (e.g. Java)</p>
+                <p>Search for the top content in any niche ... (e.g. Java)</p>
 
                 <ShowMore
                   className="showmore"
