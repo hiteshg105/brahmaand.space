@@ -15,6 +15,7 @@ import { useState } from "react";
 import HomeCountDown from "../components/home/HomeCountDown";
 import { useNavigate } from "react-router-dom";
 import axiosConfig from "../components/axiosConfig";
+
 const Category = () => {
   const [allWarData, setAllWarData] = useState();
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ const Category = () => {
       </Row>
 
       <Row className="common-swipers ps-5 position-relative">
-        {allWarData?.map((ele, i) => (
+        {allWarData?.map((ele) => (
           <>
             <div
               style={{ top: 0 }}
@@ -268,7 +269,7 @@ const Category = () => {
               })}
             </Swiper>
             <div
-              className={`swiper_pagination ${i} d-flex justify-content-center gap-3 py-4 z-1`}
+              className={`swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
             ></div>
           </>
         ))}
