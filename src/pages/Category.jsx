@@ -13,8 +13,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import HomeCountDown from "../components/home/HomeCountDown";
+import { useNavigate } from "react-router-dom";
 
 const Category = () => {
+
+    const navigate = useNavigate();
 
     const [allWarData, setAllWarData] = useState()
     const icons = {
@@ -137,11 +140,11 @@ const Category = () => {
                                                             <div className="d-flex align-items-center justify-content-center">
                                                                 <div className="d-flex align-items-center">
                                                                     <PrettyRating
-                                                                        value={3}
+                                                                        value={slides?.resource1.ava_rating}
                                                                         icons={icons.star}
                                                                         colors={colors.star}
                                                                     />
-                                                                    <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
+                                                                    <span style={{ fontSize: "14px" }} className="ms-1">({slides?.resource1.ava_rating?.toFixed(2)})</span>
                                                                 </div>
                                                             </div>
                                                         </Row>
@@ -178,11 +181,11 @@ const Category = () => {
                                                             <div className="d-flex align-items-center justify-content-center">
                                                                 <div className="d-flex align-items-center">
                                                                     <PrettyRating
-                                                                        value={3}
+                                                                        value={slides?.resource2.ava_rating}
                                                                         icons={icons.star}
                                                                         colors={colors.star}
                                                                     />
-                                                                    <span style={{ fontSize: "14px" }} className="ms-1">(4.00)</span>
+                                                                    <span style={{ fontSize: "14px" }} className="ms-1">({slides?.resource2.ava_rating?.toFixed(2)})</span>
                                                                 </div>
                                                             </div>
                                                         </Row>
@@ -193,6 +196,9 @@ const Category = () => {
                                                 </Row>
                                                 <Row>
                                                     <Button
+                                                        onClick={() =>
+                                                            navigate(`/trending-warzone/${slides._id}`)
+                                                        }
                                                         style={{ borderRadius: "4px", width: "fit-content", backgroundColor: "#5F56C6" }}
                                                         size="sm"
                                                         className="m-0 border-0 mx-auto text-white px-3"
