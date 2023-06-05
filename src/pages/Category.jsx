@@ -14,6 +14,7 @@ import axios from "axios";
 import { useState } from "react";
 import HomeCountDown from "../components/home/HomeCountDown";
 import { useNavigate } from "react-router-dom";
+import axiosConfig from "../components/axiosConfig";
 
 const Category = () => {
   const [allWarData, setAllWarData] = useState();
@@ -32,7 +33,7 @@ const Category = () => {
   };
 
   const getallWar = async () => {
-    const responce = await axios.get(`http://localhost:9000/get/warzone`);
+    const responce = await axiosConfig.get(`/get/warzone`);
     // console.log(responce.data.data)
     setAllWarData(responce.data.data);
   };
