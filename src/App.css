@@ -91,6 +91,10 @@
   display: none !important;
 }
 
+.category-main .common-swipers .top-main{
+  max-height: 300px;
+}
+
 /* Content Creators */
 
 .content-creator-main .toggle {
