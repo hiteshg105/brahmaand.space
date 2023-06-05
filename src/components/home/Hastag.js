@@ -284,7 +284,7 @@ function Hastag() {
 
       {/* warzone */}
       <Container>
-        <Row
+        {/* <Row
           className="d-flex justify-content-center"
           style={{ alignItems: "center" }}
         >
@@ -303,7 +303,7 @@ function Hastag() {
               <span style={{ font: "larger" }}> SEE All</span>
             </Link>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* <center>
           <Link
@@ -320,7 +320,7 @@ function Hastag() {
             </Button>
           </Link>
         </center> */}
-        <div className="trending-warzone-main position-relative">
+        {/* <div className="trending-warzone-main position-relative">
           <Swiper
             breakpoints={{
               1084: {
@@ -514,7 +514,7 @@ function Hastag() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div> */}
       </Container>
 
       {/* category */}
