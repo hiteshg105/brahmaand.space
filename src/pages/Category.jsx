@@ -68,7 +68,7 @@ const Category = () => {
 
 
             <Row className="common-swipers ps-5 position-relative">
-                {allWarData?.map((ele, i) => <>
+                {allWarData?.map(ele => <>
                     <div style={{ top: 0 }} className="position-absolute d-flex h-100 w-100">
                         <img className="w-100 object-fit-contain" src="/trending-bg.png" alt="bg" />
                     </div>
@@ -237,7 +237,7 @@ const Category = () => {
                             </>
                         })}
                     </Swiper>
-                    <div className={`swiper_pagination ${i} d-flex justify-content-center gap-3 py-4 z-1`}>
+                    <div className={`swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}>
                     </div>
                 </>
                 )}
