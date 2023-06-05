@@ -96,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -126,7 +126,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -261,17 +261,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                    <button
-                      key={trendingtopics._id}
-                      onClick={() => (
-                        handlehastagtopic(trendingtopics?.topics),
-                        gaEventTracker(`${trendingtopics?.topics}`)
-                      )}
-                      className="btn1"
-                    >
-                      {trendingtopics?.topics}
-                    </button>
-                  ))
+                      <button
+                        key={trendingtopics._id}
+                        onClick={() => (
+                          handlehastagtopic(trendingtopics?.topics),
+                          gaEventTracker(`${trendingtopics?.topics}`)
+                        )}
+                        className="btn1"
+                      >
+                        {trendingtopics?.topics}
+                      </button>
+                    ))
                   : null}
               </div>
             </div>
@@ -284,8 +284,11 @@ function Hastag() {
 
       {/* warzone */}
       <Container>
-        <Row className="d-flex justify-content-center" style={{ alignItems: "center" }} >
-          <Col >
+        <Row
+          className="d-flex justify-content-center"
+          style={{ alignItems: "center" }}
+        >
+          <Col>
             <p className="Trending">
               <img className="mb-5" src={has1} alt="img" width="45px" />
               Trending Warzone
@@ -295,11 +298,11 @@ function Hastag() {
             <Link
               to="/category"
               style={{ color: "black", textDecoration: "none" }}
-            > <span style={{font: "larger" }} > SEARCH All</span>
+            >
+              {" "}
+              <span style={{ font: "larger" }}> SEE All</span>
             </Link>
           </Col>
-
-
         </Row>
 
         {/* <center>
@@ -382,7 +385,9 @@ function Hastag() {
           >
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
-                <h4 className="text-center fw-bold">{features?.category.title}</h4>
+                <h4 className="text-center fw-bold">
+                  {features?.category.title}
+                </h4>
                 <HomeCountDown endDate={features.endDate} />
 
                 <div className="ifram warzone">
@@ -396,8 +401,9 @@ function Hastag() {
                               className="iframesetdata"
                               width="300px"
                               style={{ borderRadius: "12px" }}
-                              src={`https://www.youtube.com/embed/${features?.resource1.link.split("v=")[1]
-                                }`}
+                              src={`https://www.youtube.com/embed/${
+                                features?.resource1.link.split("v=")[1]
+                              }`}
                             ></iframe>
                           ) : (
                             <div className="d-flex">
@@ -421,18 +427,27 @@ function Hastag() {
                         className="imagehead position-absolute"
                       >
                         <div className="imagemainhead">
-                          <img style={{ maxWidth: "100px" }} className="imageimg" src={versus} alt="img" />
+                          <img
+                            style={{ maxWidth: "100px" }}
+                            className="imageimg"
+                            src={versus}
+                            alt="img"
+                          />
                         </div>
                       </Col>
-                      <Col lg="" className="d-flex justify-content-center align-items-center">
+                      <Col
+                        lg=""
+                        className="d-flex justify-content-center align-items-center"
+                      >
                         {features.resource2.format === "Video" ? (
                           <iframe
                             allowfullscreen="true"
                             className="iframesetdata"
                             width="300px"
                             style={{ borderRadius: "12px" }}
-                            src={`https://www.youtube.com/embed/${features?.resource2.link.split("v=")[1]
-                              }`}
+                            src={`https://www.youtube.com/embed/${
+                              features?.resource2.link.split("v=")[1]
+                            }`}
                           ></iframe>
                         ) : (
                           <div className="d-flex justify-content-center align-items-center">
@@ -632,8 +647,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -817,7 +832,7 @@ function Hastag() {
                             size={75}
                             style={{ backgroundColor: "white" }}
                             type="submit"
-                          // onClick={() => setOpenone(true)}
+                            // onClick={() => setOpenone(true)}
                           />
                         </div>
                         <div className="modalvideo">
