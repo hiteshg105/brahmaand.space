@@ -355,6 +355,7 @@ function Hastag() {
           >
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
+                <p>{features?.category.title}</p>
                 <HomeCountDown endDate={features.endDate} />
 
                 <div className="ifram warzone">
