@@ -37,6 +37,7 @@ import UserPage from "./UserPage";
 import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
+import axiosConfig from "../components/axiosConfig";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -59,6 +60,20 @@ function CustomNavbar(args) {
   const [selectedFile, setSelectedFile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isContentCreatorModel, setIsContentCreatorModel] = useState(false)
+  const [creatorName, setCreatorName] = useState()
+  const [linkData, setLinkData] = useState([])
+  const [phoneNo, setPhoneNo] = useState()
+  const [email, setEmail] = useState()
+  const [category, setCategory] = useState()
+  const [sub_category, setSub_category] = useState()
+  const [format, setFormat] = useState()
+  const [level, setLevel] = useState()
+  const [language, setLanguage] = useState()
+  const [topics, setTopics] = useState()
+  const [descriptionData, setDescriptionData] = useState()
+  const [images, setImages] = useState()
+  // userid: "",
+
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
@@ -176,10 +191,10 @@ function CustomNavbar(args) {
   const [subctgry, setSubctgry] = useState([]);
 
   useEffect(() => {
-    const params = catgry;
+    const params = catgry ? catgry : category;
     axios
 
-      .get(`https://backend.brahmaand.space/admin/listbycategory/${catgry}`)
+      .get(`https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category}`)
       .then((response) => {
         // console.log(response.data.data);
         setSubctgry(response.data.data);
@@ -187,7 +202,7 @@ function CustomNavbar(args) {
       .catch((error) => {
         // console.log(error.response.data);
       });
-  }, [catgry]);
+  }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
@@ -279,6 +294,44 @@ function CustomNavbar(args) {
 
   const gaEventTracker = useAnalyticsEventTracker("CustomNavbar");
 
+
+  // console.log(creatorName, "creatorName")
+  // console.log(linkData, "linkData")
+  // console.log(phoneNo, "phoneNo")
+  // console.log(email, "email")
+  // console.log(category, "category")
+  // console.log(format, "format")
+  // console.log(sub_category, "sub_category")
+  // console.log(language, "language")
+  // console.log(topics, "topics")
+  // console.log(descriptionData, "descriptionData")
+
+
+
+  const NewContentCrete = async () => {
+    const responce = await axiosConfig.post(`/user/content/creator`, {
+      creatorName: creatorName,
+      link: linkData,
+      phoneNo: phoneNo,
+      email: email,
+      category: category,
+      sub_category: sub_category,
+      format: format,
+      language: language,
+      topics: topics,
+      desc: descriptionData,
+      // userid:userid,
+      // img:img,
+      // status:status,
+    })
+
+    console.log(responce.data.data)
+    if (responce.data.success === true) {
+      swal("Content Creator profile added succesfully.")
+      setIsContentCreatorModel(false)
+    }
+  }
+
   return (
     <Navbar
       bg="light"
@@ -341,11 +394,25 @@ function CustomNavbar(args) {
                 <form className="mt-5">
                   <div className="form-group mb-4">
                     <label for="Creator name" style={{ fontSize: "20px" }} className="text-black mb-2">Creator name</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Creator name" placeholder="" />
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      value={creatorName}
+                      onChange={(e) => setCreatorName(e.target.value)}
+                      type="text"
+                      className="form-control border-0"
+                      id="Creator name"
+                      placeholder="" />
                   </div>
                   <div className="form-group">
                     <label for="Profile Link" style={{ fontSize: "20px" }} className="text-black mb-2">Profile Link</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Profile Link" placeholder="YouTube" />
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={linkData}
+                      onChange={(e) => setLinkData(e.target.value)}
+                      className="form-control border-0"
+                      id="Profile Link"
+                      placeholder="YouTube" />
                   </div>
                   <Button className="w-100 border-0 d-flex justify-content-center py-2">
                     <div style={{ height: 20, width: 20 }} className="me-4">
@@ -360,48 +427,150 @@ function CustomNavbar(args) {
                     <Col>
                       <div className="form-group mb-4">
                         <label for="Phone Number" style={{ fontSize: "20px" }} className="text-black mb-2">Phone Number</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Phone Number" placeholder="+91" />
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          value={phoneNo}
+                          onChange={(e) => setPhoneNo(e.target.value)}
+                          className="form-control border-0"
+                          id="Phone Number"
+                          placeholder="+91" />
                       </div>
                       <div className="form-group mb-4">
                         <label for="Category" style={{ fontSize: "20px" }} className="text-black mb-2">Category</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Category" placeholder="Select Category" />
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={category}
+                          onChange={(e) => setCategory(e.target.value)}
+                          className="form-control border-0"
+                          id="Category"
+                          placeholder="Select Category">
+
+                          <option>Select Category</option>
+                          {allcatego?.map((allCategory) => {
+                            return (
+                              <option
+                                value={allCategory?._id}
+                                key={allCategory?._id}
+                              >
+                                {allCategory?.title}
+                              </option>
+                            );
+                          })}</Input>
                       </div>
-                      <div className="form-group">
+                      <div className="form-group mb-4">
                         <label for="Format" style={{ fontSize: "20px" }} className="text-black mb-2">Format</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Format" placeholder="Select Format" />
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={format}
+                          onChange={(e) => setFormat(e.target.value)}
+                          className="form-control border-0"
+                          id="Format"
+                          placeholder="Select Format">
+                          <option>Select Format </option>
+                          <option value="Video">Video</option>
+                          <option value="Text">Text</option>
+                          <option value="Video & Text">Video & Text</option>
+                        </Input>
                       </div>
                     </Col>
                     <Col>
                       <div className="form-group mb-4">
                         <label for="Email ID" style={{ fontSize: "20px" }} className="text-black mb-2">Email ID</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Email ID" placeholder="abc@gmail.com" />
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="form-control border-0"
+                          id="Email ID"
+                          placeholder="abc@gmail.com" />
                       </div>
                       <div className="form-group mb-4">
                         <label for="Sub Category" style={{ fontSize: "20px" }} className="text-black mb-2">Sub Category</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Sub Category" placeholder="Select Sub Category" />
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={sub_category}
+                          onChange={(e) => setSub_category(e.target.value)}
+                          className="form-control border-0"
+                          id="Sub Category"
+                          placeholder="Select Sub Category">
+                          <option>Select Sub-Category</option>
+                          {subctgry?.map((subctgry) => {
+                            { console.log(subctgry?._id) }
+                            return (
+                              <option
+                                value={subctgry?._id}
+                                key={subctgry?._id}
+                              >
+                                {subctgry?.title}
+                              </option>
+                            );
+                          })}
+                        </Input>
                       </div>
-                      <div className="form-group">
-                        <p style={{ fontSize: "20px" }} className="text-black mb-2">Level</p>
-                        <div className="levels d-flex gap-4">
-                          <input id="fk" type="radio" name="level" />
-                          <label style={{ backgroundColor: "#F1F1F1", padding: "10px 20px" }} className="text-black rounded-3" htmlFor="fk">
-                            Beginner
-                          </label>
-                          <input id="tk" type="radio" name="level" />
-                          <label style={{ backgroundColor: "#F1F1F1", padding: "10px 20px" }} className="text-black rounded-3" htmlFor="tk">
-                            Advanced
-                          </label>
-                        </div>
+                      <div className="form-group mb-4">
+                        <label for="Format" style={{ fontSize: "20px" }} className="text-black mb-2">Level</label>
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={level}
+                          onChange={(e) => setLevel(e.target.value)}
+                          className="form-control border-0"
+                          id="Format"
+                          placeholder="Select Format">
+                          <option>Select Level </option>
+                          <option value="Video">Beginner</option>
+                          <option value="Text">Advanced</option>
+                        </Input>
                       </div>
                     </Col>
                   </Row>
                   <div className="form-group mb-4">
                     <label for="Language of content" style={{ fontSize: "20px" }} className="text-black mb-2">Language of content</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Language of content" placeholder="Select language" />
+                    <Input
+                      style={{ background: "#F1F1F1" }}
+                      type="select"
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                      className="form-control border-0"
+                      id="Language of content"
+                      placeholder="Select language" >
+                      <option>Select language</option>
+                      {lngage.map((lang) => {
+                        return (
+                          <option
+                            value={lang._id}
+                          >
+                            {lang.language}
+                          </option>
+                        );
+                      })}
+                    </Input>
+
+                    {/* <Multiselect
+                      style={{ background: "#F1F1F1" }}
+                      placeholder="Select language"
+                      className="form-control border-0"
+                      options={lngage}
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                      displayValue="language"
+                    /> */}
                   </div>
                   <div className="form-group mb-4">
                     <label for="Topic" style={{ fontSize: "20px" }} className="text-black mb-2">Topic</label>
-                    <textarea style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Topic" placeholder="Java script, react, native" />
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={topics}
+                      onChange={(e) => setTopics(e.target.value)}
+                      className="form-control border-0"
+                      id="Topic"
+                      placeholder="Java script, react, native" />
                   </div>
                   <div className="form-group mb-4">
                     <label for="Upload Image of related content" style={{ fontSize: "20px" }} className="text-black mb-2">Upload Image of related content</label>
@@ -409,13 +578,24 @@ function CustomNavbar(args) {
                   </div>
                   <div className="form-group mb-4">
                     <label for="Description" style={{ fontSize: "20px" }} className="text-black mb-2">Description</label>
-                    <textarea style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Description" placeholder="Describe the topic in few sentence, topic it covers?" />
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={descriptionData}
+                      onChange={(e) => setDescriptionData(e.target.value)}
+                      className="form-control border-0"
+                      id="Description"
+                      placeholder="Describe the topic in few sentence, topic it covers?" />
                   </div>
                   <div className="d-flex gap-4 justify-content-end">
                     <Button style={{ border: "1px solid #919191", background: "#F1F1F1", color: "#919191" }} className="py-2 px-4">
                       Discard
                     </Button>
-                    <Button style={{ borderColor: "transparent" }} className="py-2 px-4">
+                    <Button
+                      style={{ borderColor: "transparent" }}
+                      className="py-2 px-4"
+                      onClick={(e) => NewContentCrete(e)}
+                    >
                       Submit
                     </Button>
 
