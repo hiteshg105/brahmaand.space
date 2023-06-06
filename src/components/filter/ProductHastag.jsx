@@ -121,8 +121,8 @@ function ProductHastag(args) {
 
     setFiltertype(filtertype);
 
-    axios
-      .post(`https://backend.brahmaand.space/user/keyword_search_filter`, {
+    axiosConfig
+      .post(`/user/keyword_search_filter`, {
         searchinput: hastagdata,
         language: language,
         relYear: contentyear,
@@ -138,8 +138,8 @@ function ProductHastag(args) {
       });
     // }
 
-    axios
-      .post(`https://backend.brahmaand.space/user/promotion_search_filter`, {
+    axiosConfig
+      .post(`/user/promotion_search_filter`, {
         searchinput: hastagdata,
         language: language,
         relYear: contentyear,
@@ -167,8 +167,8 @@ function ProductHastag(args) {
     console.log(rating);
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
+      axiosConfig
+        .post(`/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -186,8 +186,8 @@ function ProductHastag(args) {
   };
 
   const handleeditcomment = (id) => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
+    axiosConfig
+      .get(`/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -202,7 +202,7 @@ function ProductHastag(args) {
   //   if (language !== "" && language !== undefined) {
   //     axios
   //       .get(
-  //         `https://backend.brahmaand.space/user/filterbyLanguage/${Params.id}/${language}`
+  //         `/user/filterbyLanguage/${Params.id}/${language}`
   //       )
   //       .then((res) => {
   //         setCategry(res.data.data);
@@ -219,8 +219,8 @@ function ProductHastag(args) {
     const hastagdata = localStorage.getItem("hastag");
 
     if (hastagdata !== "hastag")
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+      axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: hastagdata,
         })
         .then((res) => {
@@ -230,8 +230,8 @@ function ProductHastag(args) {
           }
         })
         .catch((err) => {});
-    axios
-      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+    axiosConfig
+      .post(`/user/search_promotion`, {
         searchinput: hastagdata,
       })
       .then((res) => {
@@ -245,8 +245,8 @@ function ProductHastag(args) {
   };
 
   const getYear = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allYear`)
+    axiosConfig
+      .get(`/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -276,7 +276,7 @@ function ProductHastag(args) {
   //   if (contentyear !== "") {
   //     axios
   //       .get(
-  //         `https://backend.brahmaand.space/user/filterbyyear/${Params.id}/${contentyear}`
+  //         `/user/filterbyyear/${Params.id}/${contentyear}`
   //       )
   //       .then((res) => {
   //         setCategry(res.data.data);
@@ -294,8 +294,8 @@ function ProductHastag(args) {
     const searchdata = localStorage.getItem("searchdata");
     // console.log(searchdata);
     if (searchdata !== "" && searchdata !== null)
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+      axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -312,8 +312,8 @@ function ProductHastag(args) {
 
   const handlesearchdescription = () => {
     localStorage.setItem("searchdata", searchitem);
-    axios
-      .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+    axiosConfig
+      .post(`/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -332,8 +332,8 @@ function ProductHastag(args) {
   };
 
   const getLanguage = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allLang`)
+    axiosConfig
+      .get(`/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);
@@ -404,10 +404,8 @@ function ProductHastag(args) {
   };
 
   const hadlestatusbookmark = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
-      )
+    axiosConfig
+      .get(`/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
         // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -433,9 +431,7 @@ function ProductHastag(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axios
-        .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
-        )
+        .get(`/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -451,10 +447,8 @@ function ProductHastag(args) {
         .catch((err) => {
           // console.log(err.data.data);
         });
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/average_rating/${promotionId}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${promotionId}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -463,8 +457,8 @@ function ProductHastag(args) {
           // console.log(err);
         });
 
-      axios
-        .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
+      axiosConfig
+        .get(`/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
           console.log(res.data.data);
@@ -476,7 +470,7 @@ function ProductHastag(args) {
   };
   // const promotionadmin = () => {
   //   axios
-  //     .get(`https://backend.brahmaand.space/user/Promotions`)
+  //     .get(`/user/Promotions`)
   //     .then((res) => {
   //       setPromotion(res.data.data);
   //       // console.log(res.data.data);
@@ -534,38 +528,37 @@ function ProductHastag(args) {
     }
     if (myId !== null && myId !== undefined && myId !== "") {
       const selectedId = Producdetail._id;
+      if (!(!text && rating !== 0)) {
+        axiosConfig
+          .post(`/user/add_Comment`, {
+            submitresrcId: id,
+            userid: myId,
+            comment: text,
+            rating: rating,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.message == "success") {
+              swal("Your Review Submitted Successfully!");
+            } else if (res.data.msg == "not able to comment") {
+              swal("User can't Review own Resource");
+            }
 
-      axios
-        .post(`https://backend.brahmaand.space/user/add_Comment`, {
-          submitresrcId: id,
-          userid: myId,
-          comment: text,
-          rating: rating,
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message == "success") {
-            swal("Your Review Submitted Successfully!");
-          } else if (res.data.msg == "not able to comment") {
-            swal("User can't Review own Resource");
-          }
-
-          if (res.data.msg == "waiting for admin approvel") {
-            swal("Already commented On it wait for aprroval");
-          }
-        })
-        .catch((err) => {
-          // console.log(err.response.data.message == "already exists");
-          if (err.response.data.message == "already exists") {
-            swal("You already Commented On It");
-          }
-        });
-      settText("");
-      setRating("");
-      // }
-      // else {
-      //   swal(" Please Enter review and Rating");
-      // }
+            if (res.data.msg == "waiting for admin approvel") {
+              swal("Already commented On it wait for aprroval");
+            }
+          })
+          .catch((err) => {
+            // console.log(err.response.data.message == "already exists");
+            if (err.response.data.message == "already exists") {
+              swal("You already Commented On It");
+            }
+          });
+        settText("");
+        setRating("");
+      } else {
+        swal(" Please Enter review and Rating");
+      }
     }
     // else {
     //   swal("you need to Login first");
@@ -581,11 +574,9 @@ function ProductHastag(args) {
 
     if (selectedId === _id) {
       setProductdes(selectedId);
-      axios
+      axiosConfig
 
-        .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${selectedId}`
-        )
+        .get(`/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           if (
             res.data.data._id !== "" ||
@@ -600,10 +591,8 @@ function ProductHastag(args) {
           // console.log(err.data.data);
         });
 
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/average_rating/${productdes}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${productdes}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -613,8 +602,8 @@ function ProductHastag(args) {
         });
     }
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
+    axiosConfig
+      .get(`/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -629,13 +618,11 @@ function ProductHastag(args) {
     setProductdetail("");
 
     var selectedId = _id;
-
+    console.log(selectedId, "selectedId");
     if (selectedId === _id) {
       setProductdes(selectedId);
-      axios
-        .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${productdes}`
-        )
+      axiosConfig
+        .get(`/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
@@ -653,10 +640,8 @@ function ProductHastag(args) {
           // console.log(err.data.data);
         });
 
-      axios
-        .get(
-          `https://backend.brahmaand.space/user/average_rating/${productdes}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${productdes}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -666,8 +651,8 @@ function ProductHastag(args) {
         });
     }
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
+    axiosConfig
+      .get(`/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -752,10 +737,8 @@ function ProductHastag(args) {
 
   const [typelength, setTypelength] = useState([]);
   const gettypefilter = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filter_type/${Params.id}/${type}`
-      )
+    axiosConfig
+      .get(`/user/filter_type/${Params.id}/${type}`)
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -768,10 +751,8 @@ function ProductHastag(args) {
 
   const [formatelength, setFormatelength] = useState([]);
   const getformatfilter = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filterbyFormat/${Params.id}/${format}`
-      )
+    axiosConfig
+      .get(`/user/filterbyFormat/${Params.id}/${format}`)
       .then((res) => {
         // console.log(res.data.data);
         setCategry(res.data.data);
@@ -783,10 +764,8 @@ function ProductHastag(args) {
   };
   const getsearchbyratingfilter = () => {
     // console.log(searchrating);
-    axios
-      .get(
-        `https://backend.brahmaand.space/user/filterByRating/${searchrating}`
-      )
+    axiosConfig
+      .get(`/user/filterByRating/${searchrating}`)
       .then((res) => {
         // console.log(res.data.data);
         // setCategry(res.data.data);
@@ -800,8 +779,8 @@ function ProductHastag(args) {
     const hastagdata = localStorage.getItem("hastagdata");
     setSearchitem(hastagdata);
     if (hastagdata !== "" && hastagdata !== null)
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+      axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: hastagdata,
         })
         .then((res) => {
@@ -813,8 +792,8 @@ function ProductHastag(args) {
         .catch((err) => {
           // console.log(err);
         });
-    axios
-      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+    axiosConfig
+      .post(`/user/search_promotion`, {
         searchinput: hastagdata,
       })
       .then((res) => {
@@ -828,7 +807,7 @@ function ProductHastag(args) {
     // console.log("you are searching");
     // axios
     //   .get(
-    //     `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+    //     `/admin/listbysubcategory/${Params.id}`
     //   )
     //   .then((response) => {
     //     setCategry(response.data.data);
@@ -842,13 +821,11 @@ function ProductHastag(args) {
   };
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
-    axios
-      .get(
-        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
-      )
+    axiosConfig
+      .get(`/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setSuggested(response.data.data);
-        // console.log(response.data.data);
+        console.log(response.data.data);
       })
       .catch((error) => {
         // console.log(error.response.data);
@@ -2076,7 +2053,7 @@ function ProductHastag(args) {
                                         width="100%"
                                         height={160}
                                       /> */}
-{/* {console.log(Producdetail,"Searching Product")} */}
+                                      {/* {console.log(Producdetail,"Searching Product")} */}
                                       <Modal
                                         key={Producdetail?._id}
                                         className="mdlg"

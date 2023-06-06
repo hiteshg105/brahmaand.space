@@ -105,7 +105,7 @@ function TopBar() {
       });
     setModal(false);
   };
-  const gaEventTracker = useAnalyticsEventTracker('TopBar')
+  const gaEventTracker = useAnalyticsEventTracker("TopBar");
   return (
     <section className="mt-200">
       <section
@@ -180,8 +180,8 @@ function TopBar() {
             </div>
             <button
               className="btn rbutton mobile"
-              type="submit"
-              onClick={() =>(toggle, gaEventTracker('Edit your Profile'))}
+              type="button"
+              onClick={(e) => (toggle(e), gaEventTracker("Edit your Profile"))}
             >
               <h4 className="rText">Edit your Profile</h4>
             </button>
@@ -268,7 +268,9 @@ function TopBar() {
                         <Col></Col>
                         <Col>
                           <Button
-                            onClick={() => (setModal(false), gaEventTracker('Discard'))}
+                            onClick={() => (
+                              setModal(false), gaEventTracker("Discard")
+                            )}
                             color="danger"
                             className="m-1"
                           >
@@ -276,9 +278,11 @@ function TopBar() {
                           </Button>
 
                           <Button
-                            type="submit"
+                            type="button"
                             color="success"
-                            onClick={() => (handleLoginSubmit(), gaEventTracker('SUBMIT'))}
+                            onClick={(e) => (
+                              handleLoginSubmit(e), gaEventTracker("SUBMIT")
+                            )}
                             className="m-1"
                           >
                             SUBMIT

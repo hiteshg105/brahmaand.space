@@ -17,17 +17,21 @@ const SendRequestResetPasswordComponent = () => {
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // const [email, setEmail] = useState("");
+  // console.log(emailcheck,"emailcheck")
 
   const handleEmail = (e) => {
-    setEmailcheck(e.target.value);
-    var expression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const sanitizedValue = e.target.value.trim();
+    console.log(sanitizedValue, "sanitizedValue");
+    setEmailcheck(sanitizedValue);
+    var expression =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var regex = new RegExp(expression);
 
     var res = "";
     if (e.target.value.match(regex)) {
       setErr("This looks like Valid Email");
       res = "Valid Email Id";
-      setEmail(e.target.value);
+      setEmail(sanitizedValue);
     } else {
       setErr("Please Enter Valid Email");
     }
@@ -65,7 +69,9 @@ const SendRequestResetPasswordComponent = () => {
     // swal("Password sent to your mail, please check your mail ");
   };
 
-  const gaEventTracker = useAnalyticsEventTracker('SendRequestResetPasswordComponent')
+  const gaEventTracker = useAnalyticsEventTracker(
+    "SendRequestResetPasswordComponent"
+  );
 
   return (
     <Container className="login-container mt-4 mx-15 resetpasswordotp">
@@ -134,7 +140,7 @@ const SendRequestResetPasswordComponent = () => {
                     // disabled={!performValidation()}
                     className="login-button"
                     type="submit"
-                    onClick={()=>gaEventTracker('Send')}
+                    onClick={() => gaEventTracker("Send")}
                   >
                     Send
                   </Button>

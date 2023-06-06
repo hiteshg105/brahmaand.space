@@ -423,9 +423,9 @@ function Productsearch(args) {
   };
 
   const hadlestatusbookmark = () => {
-    axios
+    axiosConfig
       .get(
-        `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
+        `/user/getone_mylikes/${myId}/${liked}`
       )
       .then((res) => {
         // console.log(res.data.data);
@@ -442,9 +442,9 @@ function Productsearch(args) {
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
-      axios
+      axiosConfig
         .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
+          `/admin/getone_reslist/${promotionId}`
         )
         .then((res) => {
           // console.log(res.data.data._id);
@@ -461,9 +461,9 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err.data.data);
         });
-      axios
+        axiosConfig
         .get(
-          `https://backend.brahmaand.space/user/average_rating/${promotionId}`
+          `/user/average_rating/${promotionId}`
         )
         .then((res) => {
           // console.log(res.data);
@@ -472,8 +472,8 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err);
         });
-      axios
-        .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
+      axiosConfig
+        .get(`/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
           console.log(res.data.data);
@@ -546,33 +546,37 @@ function Productsearch(args) {
     if (myId !== null && myId !== undefined && myId !== "") {
       const selectedId = Producdetail._id;
 
-      axios
-        .post(`https://backend.brahmaand.space/user/add_Comment`, {
-          submitresrcId: id,
-          userid: myId,
-          comment: text,
-          rating: rating,
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message == "success") {
-            swal("Your Review Submitted Successfully!");
-          } else if (res.data.msg == "not able to comment") {
-            swal("User can't Review own Resource");
-          }
+      if (!(!text && rating !== 0)) {
+        axiosConfig
+          .post(`/user/add_Comment`, {
+            submitresrcId: id,
+            userid: myId,
+            comment: text,
+            rating: rating,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.status == true) {
+              swal("Your Review Submitted Successfully!");
+            } else if (res.data.msg == "not able to comment") {
+              swal("User can't Review own Resource");
+            }
 
-          if (res.data.msg == "waiting for admin approvel") {
-            swal("Already commented On it wait for aprroval");
-          }
-        })
-        .catch((err) => {
-          // console.log(err.response.data.message == "already exists");
-          if (err.response.data.message == "already exists") {
-            swal("You already Commented On It");
-          }
-        });
-      settText("");
-      setRating("");
+            if (res.data.msg == "waiting for admin approvel") {
+              swal("Already commented On it wait for aprroval");
+            }
+          })
+          .catch((err) => {
+            // console.log(err.response.data.message == "already exists");
+            if (err.response.data.message == "already exists") {
+              swal("You already Commented On It");
+            }
+          });
+        settText("");
+        setRating("");
+      } else {
+        swal("Please Enter Rating and Comment");
+      }
     }
   };
 

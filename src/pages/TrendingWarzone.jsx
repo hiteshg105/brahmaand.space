@@ -297,70 +297,108 @@ const TrendingWarzone = () => {
             </Col> */}
       </Row>
 
-      <Row className="m-0 mt-0 mt-lg-4">
-        <Col lg={6} className="border-top border-bottom p-0">
-          <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-            <div
-              style={{ border: "3px solid #6BE585", width: "fit-content" }}
-              className="d-flex align-items-center px-4 py-2"
-            >
-              <span className="me-3">
-                <img src={trophy} width={25} alt="" />
-              </span>
-              <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-                WINNER
-              </span>
-            </div>
+      {war?.winner ? (
+        <Row className="m-0 mt-0 mt-lg-4">
+          <Col lg={6} className="border-top border-bottom p-0">
+            {war?.winner === war?.resource1._id ? (
+              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+                <div
+                  style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={trophy} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                    WINNER
+                  </span>
+                </div>
+              </Col>
+            ) : (
+              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+                <div
+                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={loser} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                    LOSER
+                  </span>
+                </div>
+              </Col>
+            )}
+
+            <Row className="py-3 pe-4 ps-4 ps-lg-0">
+              <p
+                style={{ fontSize: "24px", fontWeight: "bold" }}
+                className="col-lg-10 mb-3"
+              >
+                {war?.resource1.desc}
+              </p>
+              <div className="d-flex align-items-center">
+                <Link className="me-3" to="#">
+                  <img src={mdicon1} alt="" width={24} />
+                </Link>
+                <Link to="#">
+                  <img src={mdicon2} alt="" width={24} />
+                </Link>
+              </div>
+            </Row>
           </Col>
-          <Row className="py-3 pe-4 ps-4 ps-lg-0">
-            <p
-              style={{ fontSize: "24px", fontWeight: "bold" }}
-              className="col-lg-10 mb-3"
-            >
-              {war?.resource1.desc}
-            </p>
-            <div className="d-flex align-items-center">
-              <Link className="me-3" to="#">
-                <img src={mdicon1} alt="" width={24} />
-              </Link>
-              <Link to="#">
-                <img src={mdicon2} alt="" width={24} />
-              </Link>
-            </div>
-          </Row>
-        </Col>
-        <Col lg={6} className="content-box border-top border-bottom p-0">
-          <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-            <div
-              style={{ border: "3px solid #B62E17", width: "fit-content" }}
-              className="d-flex align-items-center px-4 py-2"
-            >
-              <span className="me-3">
-                <img src={loser} width={25} alt="" />
-              </span>
-              <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                LOSER
-              </span>
-            </div>
+
+          <Col lg={6} className="content-box border-top border-bottom p-0">
+            {war?.winner === war?.resource2._id ? (
+              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+                <div
+                  style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={trophy} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                    WINNER
+                  </span>
+                </div>
+              </Col>
+            ) : (
+              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+                <div
+                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={loser} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                    LOSER
+                  </span>
+                </div>
+              </Col>
+            )}
+            <Row className="py-3 ps-4">
+              <p
+                style={{ fontSize: "24px", fontWeight: "bold" }}
+                className="col-lg-10 mb-3"
+              >
+                {war?.resource2.desc}
+              </p>
+              <div className="d-flex align-items-center">
+                <Link className="me-3" to="#">
+                  <img src={mdicon1} alt="" width={24} />
+                </Link>
+                <Link to="#">
+                  <img src={mdicon2} alt="" width={24} />
+                </Link>
+              </div>
+            </Row>
           </Col>
-          <Row className="py-3 ps-4">
-            <p
-              style={{ fontSize: "24px", fontWeight: "bold" }}
-              className="col-lg-10 mb-3"
-            >
-              {war?.resource2.desc}
-            </p>
-            <div className="d-flex align-items-center">
-              <Link className="me-3" to="#">
-                <img src={mdicon1} alt="" width={24} />
-              </Link>
-              <Link to="#">
-                <img src={mdicon2} alt="" width={24} />
-              </Link>
-            </div>
-          </Row>
-        </Col>
-      </Row>
+        </Row>
+      ) : (
+        ""
+      )}
       <Row>
         <p
           style={{ fontSize: "20px", fontWeight: "bold" }}

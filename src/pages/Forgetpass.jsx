@@ -52,7 +52,7 @@ function Forgetpass() {
           }
         })
         .then((err) => {
-          console.log(err.response.data);
+          console.log(err);
         });
     } else {
       swal("Enter OTP First");

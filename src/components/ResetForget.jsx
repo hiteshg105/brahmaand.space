@@ -88,7 +88,7 @@ function ResetForget() {
     }
   };
 
-  const gaEventTracker = useAnalyticsEventTracker('ResetForget')
+  const gaEventTracker = useAnalyticsEventTracker("ResetForget");
   return (
     <>
       <Container className="container">
@@ -140,7 +140,7 @@ function ResetForget() {
                       type="text"
                       style={{ background: "#F1F1F1" }}
                       className="form-control"
-                      placeholder="Enter Your Display Name "
+                      placeholder="Enter Password"
                       value={newpass}
                       onChange={(e) => setNewpass(e.target.value)}
                     />
@@ -175,7 +175,7 @@ function ResetForget() {
                       type="text"
                       style={{ background: "#F1F1F1" }}
                       className="form-control"
-                      placeholder="write something about you"
+                      placeholder="Enter Confirm Password"
                       value={confirmpass}
                       onChange={(e) => setconfirmpass(e.target.value)}
                     />
@@ -228,7 +228,9 @@ function ResetForget() {
                     <Button
                       type="submit"
                       color="success"
-                      onClick={() =>(handleLoginSubmit(),gaEventTracker('Update'))}
+                      onClick={() => (
+                        handleLoginSubmit(), gaEventTracker("Update")
+                      )}
                       className="m-1"
                     >
                       Update

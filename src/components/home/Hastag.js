@@ -284,7 +284,7 @@ function Hastag() {
 
       {/* warzone */}
       <Container>
-        {/* <Row
+        <Row
           className="d-flex justify-content-center"
           style={{ alignItems: "center" }}
         >
@@ -303,24 +303,9 @@ function Hastag() {
               <span style={{ font: "larger" }}> SEE All</span>
             </Link>
           </Col>
-        </Row> */}
+        </Row>
 
-        {/* <center>
-          <Link
-            to="/category"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            <Button
-              to="/category"
-              className="viewall "
-              size="lg"
-              onClick={() => gaEventTracker("VIEW All")}
-            >
-              SEARCH All
-            </Button>
-          </Link>
-        </center> */}
-        {/* <div className="trending-warzone-main position-relative">
+        <div className="trending-warzone-main position-relative">
           <Swiper
             breakpoints={{
               1084: {
@@ -386,7 +371,7 @@ function Hastag() {
             {war?.map((features) => (
               <SwiperSlide className="swiperslidescutom" key={features?._id}>
                 <h4 className="text-center fw-bold">
-                  {features?.category.title}
+                  {features?.category?.title}
                 </h4>
                 <HomeCountDown endDate={features.endDate} />
 
@@ -514,7 +499,7 @@ function Hastag() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div> */}
+        </div>
       </Container>
 
       {/* category */}
