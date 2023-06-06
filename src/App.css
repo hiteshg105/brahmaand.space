@@ -201,8 +201,12 @@
   max-width: 50% !important;
 }
 
-.levels input[type=radio] {
+/* .levels input[type=radio] {
   display: none;
+} */
+
+.levels label {
+  cursor: pointer;
 }
 
 .levels input:checked+label {
@@ -223,3 +227,20 @@
 }
 
 /* Content Creator Model */
+
+/* New Design */
+
+.newdesign-main .swiper-pagination-bullet {
+  display: inline-block !important;
+  width: 25px;
+  height: 25px;
+  border: 1px solid #E9987B !important;
+  background-color: transparent !important;
+  opacity: 1 !important;
+}
+
+.newdesign-main .swiper-pagination-bullet-active {
+  background-color: #E7977C !important;
+}
+
+/* New Design */
