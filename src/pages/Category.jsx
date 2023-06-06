@@ -94,13 +94,9 @@ const Category = () => {
                 820: {
                   slidesPerView: 2,
                 },
-                820: {
-                  slidesPerView: 2,
-                },
                 780: {
                   slidesPerView: 2,
                 },
-
                 768: {
                   slidesPerView: 2,
                 },
