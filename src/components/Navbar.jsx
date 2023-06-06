@@ -58,7 +58,7 @@ function CustomNavbar(args) {
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isContentCreatorModel, setIsContentCreatorModel] = useState(false)
+  const [isContentCreatorModel, setIsContentCreatorModel] = useState(false);
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
@@ -310,12 +310,14 @@ function CustomNavbar(args) {
       />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto navbar-nav">
-
           <Nav.Link as={NavLink} className="navbar-link">
             <button
               className="btn rbutton mobile"
               type="submit"
-              onClick={(e) => (setIsContentCreatorModel(!isContentCreatorModel), gaEventTracker("+Content Creator"))}
+              onClick={(e) => (
+                setIsContentCreatorModel(!isContentCreatorModel),
+                gaEventTracker("+Content Creator")
+              )}
             >
               <h4 className="rText">+Content Creator</h4>
             </button>
@@ -335,21 +337,56 @@ function CustomNavbar(args) {
                     size={30}
                   />
                 </div>
-                <p style={{ color: "#494949", fontSize: "18px" }}>Found a cool <Link style={{ color: "#4095FF" }} to="/">content creator?</Link></p>
-                <p style={{ color: "#494949", fontSize: "18px" }}>Send it to us and we will add it to the database!</p>
+                <p style={{ color: "#494949", fontSize: "18px" }}>
+                  Found a cool{" "}
+                  <Link style={{ color: "#4095FF" }} to="/">
+                    content creator?
+                  </Link>
+                </p>
+                <p style={{ color: "#494949", fontSize: "18px" }}>
+                  Send it to us and we will add it to the database!
+                </p>
 
                 <form className="mt-5">
                   <div className="form-group mb-4">
-                    <label for="Creator name" style={{ fontSize: "20px" }} className="text-black mb-2">Creator name</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Creator name" placeholder="" />
+                    <label
+                      for="Creator name"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Creator name
+                    </label>
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Creator name"
+                      placeholder=""
+                    />
                   </div>
                   <div className="form-group">
-                    <label for="Profile Link" style={{ fontSize: "20px" }} className="text-black mb-2">Profile Link</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Profile Link" placeholder="YouTube" />
+                    <label
+                      for="Profile Link"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Profile Link
+                    </label>
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Profile Link"
+                      placeholder="YouTube"
+                    />
                   </div>
                   <Button className="w-100 border-0 d-flex justify-content-center py-2">
                     <div style={{ height: 20, width: 20 }} className="me-4">
-                      <img className="h-auto w-100" src="/plus-icon.png" alt="add" />
+                      <img
+                        className="h-auto w-100"
+                        src="/plus-icon.png"
+                        alt="add"
+                      />
                     </div>
                     <div>
                       <span style={{ fontSize: "18px" }}>Add more links</span>
@@ -359,77 +396,226 @@ function CustomNavbar(args) {
                   <Row className="my-4">
                     <Col>
                       <div className="form-group mb-4">
-                        <label for="Phone Number" style={{ fontSize: "20px" }} className="text-black mb-2">Phone Number</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Phone Number" placeholder="+91" />
+                        <label
+                          for="Phone Number"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          className="form-control border-0"
+                          id="Phone Number"
+                          placeholder="+91"
+                        />
                       </div>
                       <div className="form-group mb-4">
-                        <label for="Category" style={{ fontSize: "20px" }} className="text-black mb-2">Category</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Category" placeholder="Select Category" />
+                        <label
+                          for="Category"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Category
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          className="form-control border-0"
+                          id="Category"
+                          placeholder="Select Category"
+                        />
                       </div>
                       <div className="form-group">
-                        <label for="Format" style={{ fontSize: "20px" }} className="text-black mb-2">Format</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Format" placeholder="Select Format" />
+                        <label
+                          for="Format"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Format
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          className="form-control border-0"
+                          id="Format"
+                          placeholder="Select Format"
+                        />
                       </div>
                     </Col>
                     <Col>
                       <div className="form-group mb-4">
-                        <label for="Email ID" style={{ fontSize: "20px" }} className="text-black mb-2">Email ID</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Email ID" placeholder="abc@gmail.com" />
+                        <label
+                          for="Email ID"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Email ID
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          className="form-control border-0"
+                          id="Email ID"
+                          placeholder="abc@gmail.com"
+                        />
                       </div>
                       <div className="form-group mb-4">
-                        <label for="Sub Category" style={{ fontSize: "20px" }} className="text-black mb-2">Sub Category</label>
-                        <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Sub Category" placeholder="Select Sub Category" />
+                        <label
+                          for="Sub Category"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Sub Category
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="text"
+                          className="form-control border-0"
+                          id="Sub Category"
+                          placeholder="Select Sub Category"
+                        />
                       </div>
                       <div className="form-group">
-                        <p style={{ fontSize: "20px" }} className="text-black mb-2">Level</p>
+                        <p
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Level
+                        </p>
                         <div className="levels d-flex gap-4">
-                          <input id="fk" type="radio" name="level" />
-                          <label style={{ backgroundColor: "#F1F1F1", padding: "10px 20px" }} className="text-black rounded-3" htmlFor="fk">
-                            Beginner
-                          </label>
-                          <input id="tk" type="radio" name="level" />
-                          <label style={{ backgroundColor: "#F1F1F1", padding: "10px 20px" }} className="text-black rounded-3" htmlFor="tk">
-                            Advanced
-                          </label>
+                          <div>
+                            <input
+                              id="beginner"
+                              type="radio"
+                              name="level"
+                              value="Beginner"
+                            />
+                            <label
+                              style={{
+                                backgroundColor: "#F1F1F1",
+                                padding: "10px 20px",
+                              }}
+                              className="text-black rounded-3"
+                              htmlFor="beginner"
+                            >
+                              Beginner
+                            </label>
+                          </div>
+                          <div>
+                            <input
+                              id="advanced"
+                              type="radio"
+                              name="level"
+                              value="Advanced"
+                            />
+                            <label
+                              style={{
+                                backgroundColor: "#F1F1F1",
+                                padding: "10px 20px",
+                              }}
+                              className="text-black rounded-3"
+                              htmlFor="advanced"
+                            >
+                              Advanced
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </Col>
                   </Row>
                   <div className="form-group mb-4">
-                    <label for="Language of content" style={{ fontSize: "20px" }} className="text-black mb-2">Language of content</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Language of content" placeholder="Select language" />
+                    <label
+                      for="Language of content"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Language of content
+                    </label>
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Language of content"
+                      placeholder="Select language"
+                    />
                   </div>
                   <div className="form-group mb-4">
-                    <label for="Topic" style={{ fontSize: "20px" }} className="text-black mb-2">Topic</label>
-                    <textarea style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Topic" placeholder="Java script, react, native" />
+                    <label
+                      for="Topic"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Topic
+                    </label>
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Topic"
+                      placeholder="Java script, react, native"
+                    />
                   </div>
                   <div className="form-group mb-4">
-                    <label for="Upload Image of related content" style={{ fontSize: "20px" }} className="text-black mb-2">Upload Image of related content</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Upload Image of related content" placeholder="Choose file  |  No file chosen" />
+                    <label
+                      for="Upload Image of related content"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Upload Image of related content
+                    </label>
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Upload Image of related content"
+                      placeholder="Choose file  |  No file chosen"
+                    />
                   </div>
                   <div className="form-group mb-4">
-                    <label for="Description" style={{ fontSize: "20px" }} className="text-black mb-2">Description</label>
-                    <textarea style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Description" placeholder="Describe the topic in few sentence, topic it covers?" />
+                    <label
+                      for="Description"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      className="form-control border-0"
+                      id="Description"
+                      placeholder="Describe the topic in few sentence, topic it covers?"
+                    />
                   </div>
                   <div className="d-flex gap-4 justify-content-end">
-                    <Button style={{ border: "1px solid #919191", background: "#F1F1F1", color: "#919191" }} className="py-2 px-4">
+                    <Button
+                      style={{
+                        border: "1px solid #919191",
+                        background: "#F1F1F1",
+                        color: "#919191",
+                      }}
+                      className="py-2 px-4"
+                    >
                       Discard
                     </Button>
-                    <Button style={{ borderColor: "transparent" }} className="py-2 px-4">
+                    <Button
+                      style={{ borderColor: "transparent" }}
+                      className="py-2 px-4"
+                    >
                       Submit
                     </Button>
-
                   </div>
                 </form>
-
               </Modal>
             </Container>
           </Nav.Link>
 
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
@@ -1046,8 +1232,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>

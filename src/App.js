@@ -2,7 +2,6 @@ import "./App.css";
 import React, { useEffect } from "react";
 import ReactGA from "react-ga";
 
-
 // Fonts
 import "./assets/fonts/Arial/Arial.ttf";
 import "./assets/fonts/Arial/Arial Bold.ttf";
@@ -76,6 +75,7 @@ import Loginplan from "./planable.io/Loginplan";
 import TrendingWarzone from "./pages/TrendingWarzone";
 import Category from "./pages/Category";
 import ContentCreators from "./pages/ContentCreators";
+import NewDesign from "./pages/NewDesign";
 
 ReactGA.initialize("UA-250944909-1");
 // ReactGA.initialize("UA-250944909-1");
@@ -173,6 +173,7 @@ function App() {
             <Route path="/category" element={<Category />} />
             <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
             <Route path="/content-creators" element={<ContentCreators />} />
+            <Route path="/newdesign" element={<NewDesign />} />
           </Routes>
         </Layout>
       </MenuProvider>
