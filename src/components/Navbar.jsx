@@ -71,13 +71,14 @@ function CustomNavbar(args) {
   const [language, setLanguage] = useState();
   const [topics, setTopics] = useState();
   const [descriptionData, setDescriptionData] = useState();
-  const [images, setImages] = useState();
+  const [file, setFile] = useState();
   // userid: "",
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
     const files = e.target.files;
     const file = files[0];
+    console.log(file)
     imageToBase64(file);
     imageToBase64();
   };
@@ -193,8 +194,7 @@ function CustomNavbar(args) {
     axios
 
       .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${
-          catgry ? catgry : category
+        `https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category
         }`
       )
       .then((response) => {
@@ -307,25 +307,35 @@ function CustomNavbar(args) {
   // console.log(topics, "topics")
   // console.log(descriptionData, "descriptionData")
 
+
+
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
+
   const NewContentCrete = async () => {
     const userid = localStorage.getItem("userId");
-    const responce = await axiosConfig.post(`/user/content/creator`, {
-      creatorName: creatorName,
-      link: linkData,
-      phoneNo: phoneNo,
-      email: email,
-      category: category,
-      sub_category: sub_category,
-      format: format,
-      language: language,
-      topics: topics,
-      desc: descriptionData,
-      userid:userid,
-      img:selectedFile,
-      // status:status,
-    });
 
-    console.log(responce.data.data);
+    const formData = new FormData();
+    formData.append("img", file);
+    formData.append("creatorName", creatorName);
+    formData.append("link", linkData);
+    formData.append("phoneNo", phoneNo);
+    formData.append("email", email);
+    formData.append("category", category);
+    formData.append("sub_category", sub_category);
+    formData.append("format", format);
+    formData.append("language", language);
+    formData.append("topics", topics);
+    formData.append("desc", descriptionData);
+    formData.append("userid", userid);
+
+    console.log(formData)
+
+    const responce = await axiosConfig.post(`/user/content/creator`, formData);
+
+    // console.log(responce.data.data);
     if (responce.data.success === true) {
       swal("Content Creator profile added successfully👍.")
       setIsContentCreatorModel(false)
@@ -339,13 +349,38 @@ function CustomNavbar(args) {
       setLanguage("")
       setTopics("")
       setDescriptionData("")
-      setSelectedFile(null)
-    }else{
+      setFile(null)
+    } else {
       swal("Something went wrong, Try again");
       swal("Content Creator profile added succesfully.");
       setIsContentCreatorModel(false);
     }
   };
+
+
+  const DiscardContent = (e) => {
+
+    if (creatorName || file || topics || email || format || descriptionData || linkData || phoneNo || language) {
+      console.log("hello")
+      swal("Content are Discard 👍.")
+      setIsContentCreatorModel(false)
+      setCreatorName("")
+      setLinkData("")
+      setPhoneNo("")
+      setEmail("")
+      setCategory("")
+      setSub_category("")
+      setFormat("")
+      setLanguage("")
+      setTopics("")
+      setDescriptionData("")
+      setFile(null)
+    } else {
+      swal("Discard 👍.")
+      setIsContentCreatorModel(false)
+    }
+
+  }
 
   return (
     <Navbar
@@ -577,9 +612,6 @@ function CustomNavbar(args) {
                         >
                           <option>Select Sub-Category</option>
                           {subctgry?.map((subctgry) => {
-                            {
-                              console.log(subctgry?._id);
-                            }
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>
                                 {subctgry?.title}
@@ -670,23 +702,9 @@ function CustomNavbar(args) {
                     <input
                       style={{ background: "#F1F1F1" }}
                       type="file"
-                      onChange={fileUpload}
+                      onChange={handleChange}
                       className="form-control border-0" id="Upload Image of related content"
                       placeholder="Choose file  |  No file chosen" />
-                    <label
-                      for="Upload Image of related content"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Upload Image of related content
-                    </label>
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      className="form-control border-0"
-                      id="Upload Image of related content"
-                      placeholder="Choose file  |  No file chosen"
-                    />
                   </div>
                   <div className="form-group mb-4">
                     <label
@@ -714,6 +732,7 @@ function CustomNavbar(args) {
                         color: "#919191",
                       }}
                       className="py-2 px-4"
+                      onClick={(e) => DiscardContent(e)}
                     >
                       Discard
                     </Button>
@@ -732,8 +751,8 @@ function CustomNavbar(args) {
 
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
@@ -1350,8 +1369,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>
