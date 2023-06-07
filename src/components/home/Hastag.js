@@ -283,224 +283,226 @@ function Hastag() {
       </Container>
 
       {/* warzone */}
-      <Container>
-        <Row
-          className="d-flex justify-content-center"
-          style={{ alignItems: "center" }}
-        >
-          <Col>
-            <p className="Trending">
-              <img className="mb-5" src={has1} alt="img" width="45px" />
-              Trending Warzone
-            </p>
-            <div className="text-end">
-              <Link
-                to="/category"
-                style={{ color: "black", textDecoration: "none" }}
-              >
-                {" "}
-                <span style={{ font: "larger" }}> SEE All</span>
-              </Link>
-            </div>
-          </Col>
-        </Row>
-
-        <div className="trending-warzone-main position-relative">
-          <Swiper
-            breakpoints={{
-              1084: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              980: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              910: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              820: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              820: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              780: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-
-              768: {
-                slidesPerView: 2,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 1,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              320: {
-                slidesPerView: 1,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-              240: {
-                slidesPerView: 1,
-                direction: "horizontal",
-                spaceBetween: 10,
-              },
-            }}
-            ref={swiperRef}
-            className="sld-1"
-            modules={[Navigation, Pagination]}
-            spaceBetween={40}
-            slidesPerView={3}
-            allowTouchMove={false}
-            centeredSlides={war.length === 1 && true}
+      {war.length !== 0 && (
+        <Container>
+          <Row
+            className="d-flex justify-content-center"
+            style={{ alignItems: "center" }}
           >
-            {war?.map((features) => (
-              <SwiperSlide className="swiperslidescutom" key={features?._id}>
-                <h4 className="text-center fw-bold">
-                  {features?.category?.title}
-                </h4>
-                <HomeCountDown endDate={features.endDate} />
+            <Col>
+              <p className="Trending">
+                <img className="mb-5" src={has1} alt="img" width="45px" />
+                Trending Warzone
+              </p>
+              <div className="text-end">
+                <Link
+                  to="/category"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  {" "}
+                  <span style={{ font: "larger" }}> SEE All</span>
+                </Link>
+              </div>
+            </Col>
+          </Row>
 
-                <div className="ifram warzone">
-                  <div>
-                    <Row className="rowmainheading">
-                      <Col>
-                        <div className="iframmainhead">
-                          {features.resource1.format === "Video" ? (
+          <div className="trending-warzone-main position-relative">
+            <Swiper
+              breakpoints={{
+                1084: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                980: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                910: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                820: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                820: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                780: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+
+                768: {
+                  slidesPerView: 2,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 1,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                320: {
+                  slidesPerView: 1,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+                240: {
+                  slidesPerView: 1,
+                  direction: "horizontal",
+                  spaceBetween: 10,
+                },
+              }}
+              ref={swiperRef}
+              className="sld-1"
+              modules={[Navigation, Pagination]}
+              spaceBetween={40}
+              slidesPerView={3}
+              allowTouchMove={false}
+              centeredSlides={war.length === 1 && true}
+            >
+              {war?.map((features) => (
+                <SwiperSlide className="swiperslidescutom" key={features?._id}>
+                  <h4 className="text-center fw-bold">
+                    {features?.category?.title}
+                  </h4>
+                  <HomeCountDown endDate={features.endDate} />
+
+                  <div className="ifram warzone">
+                    <div>
+                      <Row className="rowmainheading">
+                        <Col>
+                          <div className="iframmainhead">
+                            {features.resource1.format === "Video" ? (
+                              <iframe
+                                allowfullscreen="true"
+                                className="iframesetdata"
+                                width="300px"
+                                style={{ borderRadius: "12px" }}
+                                src={`https://www.youtube.com/embed/${
+                                  features?.resource1.link.split("v=")[1]
+                                }`}
+                              ></iframe>
+                            ) : (
+                              <div className="d-flex">
+                                <img
+                                  className="mx-auto"
+                                  style={{ height: "300px" }}
+                                  src={features?.resource1.img}
+                                  alt=""
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </Col>
+                        <Col
+                          lg="2"
+                          style={{
+                            left: "50%",
+                            top: "50%",
+                            transform: "translate(-50%,-50%)",
+                          }}
+                          className="imagehead position-absolute"
+                        >
+                          <div className="imagemainhead">
+                            <img
+                              style={{ maxWidth: "100px" }}
+                              className="imageimg"
+                              src={versus}
+                              alt="img"
+                            />
+                          </div>
+                        </Col>
+                        <Col
+                          lg=""
+                          className="d-flex justify-content-center align-items-center"
+                        >
+                          {features.resource2.format === "Video" ? (
                             <iframe
                               allowfullscreen="true"
                               className="iframesetdata"
                               width="300px"
                               style={{ borderRadius: "12px" }}
                               src={`https://www.youtube.com/embed/${
-                                features?.resource1.link.split("v=")[1]
+                                features?.resource2.link.split("v=")[1]
                               }`}
                             ></iframe>
                           ) : (
-                            <div className="d-flex">
+                            <div className="d-flex justify-content-center align-items-center">
                               <img
-                                className="mx-auto"
-                                style={{ height: "300px" }}
-                                src={features?.resource1.img}
+                                className="m-auto h-auto"
+                                src={features?.resource2.img}
                                 alt=""
                               />
                             </div>
                           )}
-                        </div>
-                      </Col>
-                      <Col
-                        lg="2"
-                        style={{
-                          left: "50%",
-                          top: "50%",
-                          transform: "translate(-50%,-50%)",
-                        }}
-                        className="imagehead position-absolute"
-                      >
-                        <div className="imagemainhead">
-                          <img
-                            style={{ maxWidth: "100px" }}
-                            className="imageimg"
-                            src={versus}
-                            alt="img"
-                          />
-                        </div>
-                      </Col>
-                      <Col
-                        lg=""
-                        className="d-flex justify-content-center align-items-center"
-                      >
-                        {features.resource2.format === "Video" ? (
-                          <iframe
-                            allowfullscreen="true"
-                            className="iframesetdata"
-                            width="300px"
-                            style={{ borderRadius: "12px" }}
-                            src={`https://www.youtube.com/embed/${
-                              features?.resource2.link.split("v=")[1]
-                            }`}
-                          ></iframe>
-                        ) : (
-                          <div className="d-flex justify-content-center align-items-center">
-                            <img
-                              className="m-auto h-auto"
-                              src={features?.resource2.img}
-                              alt=""
+                        </Col>
+                      </Row>
+                    </div>
+
+                    <Row>
+                      <Col>
+                        <h4 className="text-center">
+                          {features?.resource1.creatorName}
+                        </h4>
+                        <div className="d-flex align-items-center justify-content-center">
+                          <div className="d-flex align-items-center">
+                            <PrettyRating
+                              value={features?.resource1.ava_rating}
+                              icons={icons.star}
+                              colors={colors.star}
                             />
+                            <span style={{ fontSize: "14px" }} className="ms-1">
+                              {features?.resource1.ava_rating?.toFixed(2)}
+                            </span>
                           </div>
-                        )}
+                        </div>
+                      </Col>
+                      <Col>
+                        <h4 className="text-center">
+                          {features?.resource2.creatorName}
+                        </h4>
+                        <div className="d-flex align-items-center justify-content-center">
+                          <div className=" d-flex align-items-center">
+                            <PrettyRating
+                              value={features?.resource2.ava_rating}
+                              icons={icons.star}
+                              colors={colors.star}
+                            />
+                            <span style={{ fontSize: "12px" }} className="ms-1">
+                              {features?.resource2.ava_rating?.toFixed(2)}
+                            </span>
+                          </div>
+                        </div>
                       </Col>
                     </Row>
+                    <Row>
+                      <Button
+                        onClick={() =>
+                          navigate(`/trending-warzone/${features._id}`)
+                        }
+                        style={{ borderRadius: "4px", width: "fit-content" }}
+                        size="sm"
+                        className="mx-auto btlisting m-0 border-0"
+                      >
+                        Rate Now
+                      </Button>
+                    </Row>
                   </div>
-
-                  <Row>
-                    <Col>
-                      <h4 className="text-center">
-                        {features?.resource1.creatorName}
-                      </h4>
-                      <div className="d-flex align-items-center justify-content-center">
-                        <div className="d-flex align-items-center">
-                          <PrettyRating
-                            value={features?.resource1.ava_rating}
-                            icons={icons.star}
-                            colors={colors.star}
-                          />
-                          <span style={{ fontSize: "14px" }} className="ms-1">
-                            {features?.resource1.ava_rating?.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col>
-                      <h4 className="text-center">
-                        {features?.resource2.creatorName}
-                      </h4>
-                      <div className="d-flex align-items-center justify-content-center">
-                        <div className=" d-flex align-items-center">
-                          <PrettyRating
-                            value={features?.resource2.ava_rating}
-                            icons={icons.star}
-                            colors={colors.star}
-                          />
-                          <span style={{ fontSize: "12px" }} className="ms-1">
-                            {features?.resource2.ava_rating?.toFixed(2)}
-                          </span>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Button
-                      onClick={() =>
-                        navigate(`/trending-warzone/${features._id}`)
-                      }
-                      style={{ borderRadius: "4px", width: "fit-content" }}
-                      size="sm"
-                      className="mx-auto btlisting m-0 border-0"
-                    >
-                      Rate Now
-                    </Button>
-                  </Row>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </Container>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </Container>
+      )}
 
       {/* category */}
       <br />
