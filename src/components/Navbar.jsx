@@ -99,7 +99,6 @@ function CustomNavbar(args) {
     };
   };
 
-  const userid = localStorage.getItem("userId");
 
   function urlPatternValidation(link) {
     const regex = new RegExp(
@@ -309,6 +308,7 @@ function CustomNavbar(args) {
 
 
   const NewContentCrete = async () => {
+    const userid = localStorage.getItem("userId");
     const responce = await axiosConfig.post(`/user/content/creator`, {
       creatorName: creatorName,
       link: linkData,
@@ -320,15 +320,28 @@ function CustomNavbar(args) {
       language: language,
       topics: topics,
       desc: descriptionData,
-      // userid:userid,
-      // img:img,
+      userid:userid,
+      img:selectedFile,
       // status:status,
     })
 
     console.log(responce.data.data)
     if (responce.data.success === true) {
-      swal("Content Creator profile added succesfully.")
+      swal("Content Creator profile added successfully👍.")
       setIsContentCreatorModel(false)
+      setCreatorName("")
+      setLinkData("")
+      setPhoneNo("")
+      setEmail("")
+      setCategory("")
+      setSub_category("")
+      setFormat("")
+      setLanguage("")
+      setTopics("")
+      setDescriptionData("")
+      setSelectedFile(null)
+    }else{
+      swal("Something went wrong, Try again");
     }
   }
 
@@ -574,7 +587,12 @@ function CustomNavbar(args) {
                   </div>
                   <div className="form-group mb-4">
                     <label for="Upload Image of related content" style={{ fontSize: "20px" }} className="text-black mb-2">Upload Image of related content</label>
-                    <input style={{ background: "#F1F1F1" }} type="text" className="form-control border-0" id="Upload Image of related content" placeholder="Choose file  |  No file chosen" />
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="file"
+                      onChange={fileUpload}
+                      className="form-control border-0" id="Upload Image of related content"
+                      placeholder="Choose file  |  No file chosen" />
                   </div>
                   <div className="form-group mb-4">
                     <label for="Description" style={{ fontSize: "20px" }} className="text-black mb-2">Description</label>
