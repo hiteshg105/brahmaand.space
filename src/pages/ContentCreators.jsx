@@ -10,8 +10,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 
-// const base_URL = "https://backend.brahmaand.space/"
-const base_URL = "http://localhost:9000"
+const base_URL = "https://backend.brahmaand.space/"
+// const base_URL = "http://localhost:9000"
 
 
 
