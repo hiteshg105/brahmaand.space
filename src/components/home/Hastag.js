@@ -300,7 +300,7 @@ function Hastag() {
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   {" "}
-                  <span style={{ font: "larger" }}> SEE All</span>
+                  <span style={{ font: "larger" }}></span>
                 </Link>
               </div>
             </Col>
