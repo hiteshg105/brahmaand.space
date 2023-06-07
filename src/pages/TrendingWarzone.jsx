@@ -192,19 +192,23 @@ const TrendingWarzone = () => {
   const submitRcc1Comment = async (e) => {
     e.preventDefault();
     try {
-      const userid = localStorage.getItem("userId");
-      const data = await instance.post(`user/add_Comment`, {
-        submitresrcId: war.resource1._id,
-        userid: userid,
-        comment: rsc1Review.comment,
-        rating: rsc1Review.rate,
-      });
-      // console.log(data.data);
-      if (data.data.message === "success") {
-        swal("Added Successfully");
-      }
-      if (data.data.msg === "waiting for admin approvel") {
-        swal("waiting for admin approvel");
+      if (!(rsc1Review.comment.length === 0 && rsc1Review.rate === 0)) {
+        const userid = localStorage.getItem("userId");
+        const data = await instance.post(`user/add_Comment`, {
+          submitresrcId: war.resource1._id,
+          userid: userid,
+          comment: rsc1Review.comment,
+          rating: rsc1Review.rate,
+        });
+        // console.log(data.data);
+        if (data.data.message === "success") {
+          swal("Added Successfully");
+        }
+        if (data.data.msg === "waiting for admin approvel") {
+          swal("waiting for admin approvel");
+        }
+      } else {
+        swal("Please Enter Comment And Rating");
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -216,19 +220,23 @@ const TrendingWarzone = () => {
   const submitRcc2Comment = async (e) => {
     e.preventDefault();
     try {
-      const userid = localStorage.getItem("userId");
-      const data = await instance.post(`user/add_Comment`, {
-        submitresrcId: war.resource2._id,
-        userid: userid,
-        comment: rsc2Review.comment,
-        rating: rsc2Review.rate,
-      });
-      // console.log(data.data);
-      if (data.data.message === "success") {
-        swal("Added Successfully..");
-      }
-      if (data.data.msg === "waiting for admin approvel") {
-        swal("waiting for admin approvel");
+      if (!(rsc2Review.comment.length === 0 && rsc2Review.rate === 0)) {
+        const userid = localStorage.getItem("userId");
+        const data = await instance.post(`user/add_Comment`, {
+          submitresrcId: war.resource2._id,
+          userid: userid,
+          comment: rsc2Review.comment,
+          rating: rsc2Review.rate,
+        });
+        // console.log(data.data);
+        if (data.data.message === "success") {
+          swal("Added Successfully..");
+        }
+        if (data.data.msg === "waiting for admin approvel") {
+          swal("waiting for admin approvel");
+        }
+      } else {
+        swal("Please Enter Comment And Rating");
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -252,7 +260,7 @@ const TrendingWarzone = () => {
         </h1>
       </Col>
       <Row className="justify-content-between">
-        <Col className="d-none d-lg-flex justify-content-center mt-5">
+        {/* <Col className="d-none d-lg-flex justify-content-center mt-5">
           <div
             style={{ border: "3px solid #6BE585", width: "fit-content" }}
             className="d-flex align-items-center px-4 py-2"
@@ -262,7 +270,7 @@ const TrendingWarzone = () => {
             </span>
             <span style={{ color: "#6BE585", fontWeight: "bold" }}>WINNER</span>
           </div>
-        </Col>
+        </Col> */}
         <Col>
           <CountDown endDate={war && war.endDate} />
         </Col>
@@ -270,7 +278,7 @@ const TrendingWarzone = () => {
           style={{ top: "-16px", right: "-12px" }}
           className="h-100 text-end position-absolute d-sm-block d-lg-none"
         ></Col>
-        <Col className="d-none d-lg-flex align-items-center">
+        {/* <Col className="d-none d-lg-flex align-items-center">
           <Col className="h-100 d-flex align-items-end">
             <div
               style={{ border: "3px solid #B62E17", width: "fit-content" }}
@@ -284,7 +292,7 @@ const TrendingWarzone = () => {
               </span>
             </div>
           </Col>
-        </Col>
+        </Col> */}
       </Row>
       <Row className="d-flex d-lg-none border-top mt-4">
         {/* <Col className="h-100 d-flex justify-content-center border-start py-4">
@@ -297,108 +305,105 @@ const TrendingWarzone = () => {
             </Col> */}
       </Row>
 
-      {war?.winner ? (
-        <Row className="m-0 mt-0 mt-lg-4">
-          <Col lg={6} className="border-top border-bottom p-0">
-            {war?.winner === war?.resource1._id ? (
-              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div
-                  style={{ border: "3px solid #6BE585", width: "fit-content" }}
-                  className="d-flex align-items-center px-4 py-2"
-                >
-                  <span className="me-3">
-                    <img src={trophy} width={25} alt="" />
-                  </span>
-                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-                    WINNER
-                  </span>
-                </div>
-              </Col>
-            ) : (
-              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div
-                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
-                  className="d-flex align-items-center px-4 py-2"
-                >
-                  <span className="me-3">
-                    <img src={loser} width={25} alt="" />
-                  </span>
-                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                    LOSER
-                  </span>
-                </div>
-              </Col>
-            )}
-
-            <Row className="py-3 pe-4 ps-4 ps-lg-0">
-              <p
-                style={{ fontSize: "24px", fontWeight: "bold" }}
-                className="col-lg-10 mb-3"
+      <Row className="m-0 mt-0 mt-lg-4">
+        <Col lg={6} className="border-top border-bottom p-0">
+          {/* { war?.winner === war?.resource1._id ? (
+            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+              <div
+                style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                className="d-flex align-items-center px-4 py-2"
               >
-                {war?.resource1.desc}
-              </p>
-              <div className="d-flex align-items-center">
-                <Link className="me-3" to="#">
-                  <img src={mdicon1} alt="" width={24} />
-                </Link>
-                <Link to="#">
-                  <img src={mdicon2} alt="" width={24} />
-                </Link>
+                <span className="me-3">
+                  <img src={trophy} width={25} alt="" />
+                </span>
+                <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                  WINNER
+                </span>
               </div>
-            </Row>
-          </Col>
-
-          <Col lg={6} className="content-box border-top border-bottom p-0">
-            {war?.winner === war?.resource2._id ? (
-              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div
-                  style={{ border: "3px solid #6BE585", width: "fit-content" }}
-                  className="d-flex align-items-center px-4 py-2"
-                >
-                  <span className="me-3">
-                    <img src={trophy} width={25} alt="" />
-                  </span>
-                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-                    WINNER
-                  </span>
-                </div>
-              </Col>
-            ) : (
-              <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-                <div
-                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
-                  className="d-flex align-items-center px-4 py-2"
-                >
-                  <span className="me-3">
-                    <img src={loser} width={25} alt="" />
-                  </span>
-                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                    LOSER
-                  </span>
-                </div>
-              </Col>
-            )}
-            <Row className="py-3 ps-4">
-              <p
-                style={{ fontSize: "24px", fontWeight: "bold" }}
-                className="col-lg-10 mb-3"
+            </Col>
+          ) : (
+            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+              <div
+                style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                className="d-flex align-items-center px-4 py-2"
               >
-                {war?.resource2.desc}
-              </p>
-              <div className="d-flex align-items-center">
-                <Link className="me-3" to="#">
-                  <img src={mdicon1} alt="" width={24} />
-                </Link>
-                <Link to="#">
-                  <img src={mdicon2} alt="" width={24} />
-                </Link>
+                <span className="me-3">
+                  <img src={loser} width={25} alt="" />
+                </span>
+                <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                  LOSER
+                </span>
               </div>
-            </Row>
-          </Col>
-        </Row>
-      ) : (
-        ""
-      )}
+            </Col>
+          )} */}
+
+          <Row className="py-3 pe-4 ps-4 ps-lg-0">
+            <p
+              style={{ fontSize: "24px", fontWeight: "bold" }}
+              className="col-lg-10 mb-3"
+            >
+              {war?.resource1.desc}
+            </p>
+            <div className="d-flex align-items-center">
+              <Link className="me-3" to="#">
+                <img src={mdicon1} alt="" width={24} />
+              </Link>
+              <Link to="#">
+                <img src={mdicon2} alt="" width={24} />
+              </Link>
+            </div>
+          </Row>
+        </Col>
+
+        <Col lg={6} className="content-box border-top border-bottom p-0">
+          {/* {war?.winner === war?.resource2._id ? (
+            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+              <div
+                style={{ border: "3px solid #6BE585", width: "fit-content" }}
+                className="d-flex align-items-center px-4 py-2"
+              >
+                <span className="me-3">
+                  <img src={trophy} width={25} alt="" />
+                </span>
+                <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                  WINNER
+                </span>
+              </div>
+            </Col>
+          ) : (
+            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+              <div
+                style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                className="d-flex align-items-center px-4 py-2"
+              >
+                <span className="me-3">
+                  <img src={loser} width={25} alt="" />
+                </span>
+                <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                  LOSER
+                </span>
+              </div>
+            </Col>
+          )} */}
+          <Row className="py-3 ps-4">
+            <p
+              style={{ fontSize: "24px", fontWeight: "bold" }}
+              className="col-lg-10 mb-3"
+            >
+              {war?.resource2.desc}
+            </p>
+            <div className="d-flex align-items-center">
+              <Link className="me-3" to="#">
+                <img src={mdicon1} alt="" width={24} />
+              </Link>
+              <Link to="#">
+                <img src={mdicon2} alt="" width={24} />
+              </Link>
+            </div>
+          </Row>
+        </Col>
+      </Row>
+
       <Row>
         <p
           style={{ fontSize: "20px", fontWeight: "bold" }}
@@ -518,17 +523,23 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2"
           >
-            <p style={{ fontSize: "24px", fontWeight: "600" }}>
-              {warReview?.rsc1AvReview < 2
-                ? "Bad"
-                : warReview?.rsc1AvReview >= 2 && warReview?.rsc1AvReview < 3
-                ? "Average"
-                : warReview?.rsc1AvReview >= 3 && warReview?.rsc1AvReview < 4
-                ? "Good"
-                : warReview?.rsc1AvReview >= 4 && warReview?.rsc1AvReview < 4.5
-                ? "Very Good"
-                : "Excellent"}
-            </p>
+            {warReview?.toalRsc1 === 0 ? (
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
+            ) : (
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>
+                {warReview?.rsc1AvReview < 2
+                  ? "Bad"
+                  : warReview?.rsc1AvReview >= 2 && warReview?.rsc1AvReview < 3
+                  ? "Average"
+                  : warReview?.rsc1AvReview >= 3 && warReview?.rsc1AvReview < 4
+                  ? "Good"
+                  : warReview?.rsc1AvReview >= 4 &&
+                    warReview?.rsc1AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
+              </p>
+            )}
+
             <p className="my-3">Based on {warReview?.toalRsc1} reviews</p>
             <div className="d-flex align-items-center">
               {/* {console.log(warReview?.rsc1AvReview)} */}
@@ -558,17 +569,22 @@ const TrendingWarzone = () => {
             style={{ width: "69%" }}
             className="shadow-lg mx-auto mx-lg-0 ps-4 py-2"
           >
-            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-              {warReview?.rsc2AvReview < 2
-                ? "Bad"
-                : warReview?.rsc2AvReview >= 2 && warReview?.rsc2AvReview < 3
-                ? "Average"
-                : warReview?.rsc2AvReview >= 3 && warReview?.rsc2AvReview < 4
-                ? "Good"
-                : warReview?.rsc2AvReview >= 4 && warReview?.rsc2AvReview < 4.5
-                ? "Very Good"
-                : "Excellent"}
-            </p>
+            {warReview?.toalRsc2 === 0 ? (
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
+            ) : (
+              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                {warReview?.rsc2AvReview < 2
+                  ? "Bad"
+                  : warReview?.rsc2AvReview >= 2 && warReview?.rsc2AvReview < 3
+                  ? "Average"
+                  : warReview?.rsc2AvReview >= 3 && warReview?.rsc2AvReview < 4
+                  ? "Good"
+                  : warReview?.rsc2AvReview >= 4 &&
+                    warReview?.rsc2AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
+              </p>
+            )}
             <p className="my-3">Based on {warReview?.toalRsc2} reviews</p>
             <div className="d-flex align-items-center">
               {warReview && (
@@ -927,7 +943,9 @@ const TrendingWarzone = () => {
             style={{ color: "#737373" }}
             className="text-center mx-auto border-top"
           >
-            {war?.resource1.res_desc}
+            {war?.resource1.res_desc
+              ? war?.resource1.res_desc
+              : "No Description Found"}
           </p>
         </Col>
         <Col lg={6} className="content-box px-0">
@@ -935,7 +953,9 @@ const TrendingWarzone = () => {
             style={{ color: "#737373" }}
             className="text-center mx-auto border-top"
           >
-            {war?.resource2.res_desc}
+            {war?.resource2.res_desc
+              ? war?.resource2.res_desc
+              : "No Description Found"}
           </p>
         </Col>
       </Row>
@@ -955,20 +975,27 @@ const TrendingWarzone = () => {
             style={{ width: "fit-content" }}
             className="mx-0 ms-lg-auto me-0 me-lg-4"
           >
-            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-              {warRscReview?.rsc1AvReview < 2
-                ? "Bad"
-                : warRscReview?.rsc1AvReview >= 2 &&
-                  warRscReview?.rsc1AvReview < 3
-                ? "Average"
-                : warRscReview?.rsc1AvReview >= 3 &&
-                  warRscReview?.rsc1AvReview < 4
-                ? "Good"
-                : warRscReview?.rsc1AvReview >= 4 &&
-                  warRscReview?.rsc1AvReview < 4.5
-                ? "Very Good"
-                : "Excellent"}
-            </p>
+            {warRscReview?.toalRsc1 === 0 ? (
+              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                Not Rated
+              </p>
+            ) : (
+              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                {warRscReview?.rsc1AvReview < 2
+                  ? "Bad"
+                  : warRscReview?.rsc1AvReview >= 2 &&
+                    warRscReview?.rsc1AvReview < 3
+                  ? "Average"
+                  : warRscReview?.rsc1AvReview >= 3 &&
+                    warRscReview?.rsc1AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc1AvReview >= 4 &&
+                    warRscReview?.rsc1AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
+              </p>
+            )}
+
             <div className="d-flex align-items-center">
               {warRscReview && (
                 <ReactStars
@@ -1121,20 +1148,26 @@ const TrendingWarzone = () => {
           className="content-box border-top d-flex justify-content-center text-end p-3"
         >
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
-            <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-              {warRscReview?.rsc2AvReview < 2
-                ? "Bad"
-                : warRscReview?.rsc2AvReview >= 2 &&
-                  warRscReview?.rsc2AvReview < 3
-                ? "Average"
-                : warRscReview?.rsc2AvReview >= 3 &&
-                  warRscReview?.rsc2AvReview < 4
-                ? "Good"
-                : warRscReview?.rsc2AvReview >= 4 &&
-                  warRscReview?.rsc2AvReview < 4.5
-                ? "Very Good"
-                : "Excellent"}
-            </p>
+            {warRscReview?.toalRsc2 === 0 ? (
+              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                Not Rated
+              </p>
+            ) : (
+              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                {warRscReview?.rsc2AvReview < 2
+                  ? "Bad"
+                  : warRscReview?.rsc2AvReview >= 2 &&
+                    warRscReview?.rsc2AvReview < 3
+                  ? "Average"
+                  : warRscReview?.rsc2AvReview >= 3 &&
+                    warRscReview?.rsc2AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc2AvReview >= 4 &&
+                    warRscReview?.rsc2AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
+              </p>
+            )}
             <div className="d-flex align-items-center">
               {warRscReview && (
                 <ReactStars
@@ -1375,83 +1408,85 @@ const TrendingWarzone = () => {
           style={{ padding: "40px 16px 16px" }}
           className="content-box border-top d-flex flex-column gap-3"
         >
-          {comment?.newData &&
-            comment?.newData.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg?.[0]}
-                      timeLine
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          value={value.rating}
-                          edit={false}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
+          {comment?.newData && comment?.newData.length === 0
+            ? "No Review Found"
+            : comment?.newData.map((value) => (
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
+                >
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg?.[0]}
+                        timeLine
+                        alt="UserImage"
+                      />
                     </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            value={value.rating}
+                            edit={false}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
                   </div>
+                  <p className="fw-bold">{value.comment}</p>
                 </div>
-                <p className="fw-bold">{value.comment}</p>
-              </div>
-            ))}
+              ))}
         </Col>
         <Col
           style={{ padding: "40px 16px 16px" }}
           className="content-box border-top d-flex flex-column gap-3"
         >
           {/* {console.log(comment?.newData2)} */}
-          {comment?.newData2 &&
-            comment?.newData2.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg[0]}
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          edit={false}
-                          value={value.rating}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
+          {comment?.newData2 && comment?.newData.length === 0
+            ? "No Review Found"
+            : comment?.newData2.map((value) => (
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
+                >
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg[0]}
+                        alt="UserImage"
+                      />
                     </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            edit={false}
+                            value={value.rating}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
                   </div>
+                  <p className="fw-bold">{value.comment}</p>
                 </div>
-                <p className="fw-bold">{value.comment}</p>
-              </div>
-            ))}
+              ))}
         </Col>
       </Row>
     </Container>

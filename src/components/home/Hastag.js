@@ -293,15 +293,15 @@ function Hastag() {
               <img className="mb-5" src={has1} alt="img" width="45px" />
               Trending Warzone
             </p>
-          </Col>
-          <Col className="text-end">
-            <Link
-              to="/category"
-              style={{ color: "black", textDecoration: "none" }}
-            >
-              {" "}
-              <span style={{ font: "larger" }}> SEE All</span>
-            </Link>
+            <div className="text-end">
+              <Link
+                to="/category"
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                {" "}
+                <span style={{ font: "larger" }}> SEE All</span>
+              </Link>
+            </div>
           </Col>
         </Row>
 
