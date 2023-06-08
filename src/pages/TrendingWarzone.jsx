@@ -337,7 +337,7 @@ const TrendingWarzone = () => {
             </Col>
           )} */}
 
-          <Row className="py-3 pe-4 ps-4 ps-lg-0">
+          <Row className="py-3 pe-4 ps-4 justify-content-end ps-lg-0">
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3"
@@ -405,18 +405,20 @@ const TrendingWarzone = () => {
       </Row>
 
       <Row>
-        <p
-          style={{ fontSize: "20px", fontWeight: "bold" }}
-          className="text-center text-uppercase py-3"
-        >
-          Topics
-          <span className="me-3">
-            <img src={link} alt="" width={20} />
-          </span>
-        </p>
-        <Col lg={6} className="border-top border-bottom p-0 py-4">
-          <div className="d-flex justify-content-center">
-            <div className="d-flex flex-wrap tag-2">
+        <div className="py-3 d-flex align-items-center justify-content-center gap-3">
+          <p
+            style={{ fontSize: "20px", fontWeight: "bold" }}
+            className="text-center text-uppercase p-0"
+          >
+            Topics
+          </p>
+          <div>
+            <img src={link} alt="" />
+          </div>
+        </div>
+        <Col lg={6} className="border-top border-bottom py-4">
+          <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-end flex-wrap tag-2">
               {war?.resource1.topics[0].split(",").map((val) => (
                 <Link className="d-flex" to="#">
                   {val}
@@ -425,8 +427,12 @@ const TrendingWarzone = () => {
             </div>
           </div>
         </Col>
-        <Col lg={6} className="content-box border-top border-bottom p-0 py-4">
-          <div className="d-flex justify-content-center">
+        <Col
+          lg={6}
+          style={{ paddingLeft: "22px" }}
+          className="content-box border-top border-bottom py-4"
+        >
+          <div className="d-flex">
             <div className="d-flex flex-wrap tag-2">
               {war?.resource2.topics[0].split(",").map((val) => (
                 <Link className="d-flex" to="#">
@@ -450,7 +456,7 @@ const TrendingWarzone = () => {
           className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
         >
           <div>
-            <h4 style={{ fontSize: "30px" }} className="text-center">
+            <h4 style={{ fontSize: "30px" }} className="text-end mb-2">
               {war?.resource1.creatorName}
             </h4>
             {war?.resource1.format === "Video" ? (
@@ -482,7 +488,7 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
-            <h4 style={{ fontSize: "30px" }} className="text-center">
+            <h4 style={{ fontSize: "30px" }} className="mb-2">
               {war?.resource2.creatorName}
             </h4>
 
@@ -525,42 +531,54 @@ const TrendingWarzone = () => {
         >
           <div
             style={{ width: "69%" }}
-            className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2"
+            className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2 d-flex align-items-center justify-content-between"
           >
-            {warReview?.toalRsc1 === 0 ? (
-              <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
-            ) : (
-              <p style={{ fontSize: "24px", fontWeight: "600" }}>
-                {warReview?.rsc1AvReview < 2
-                  ? "Bad"
-                  : warReview?.rsc1AvReview >= 2 && warReview?.rsc1AvReview < 3
-                  ? "Average"
-                  : warReview?.rsc1AvReview >= 3 && warReview?.rsc1AvReview < 4
-                  ? "Good"
-                  : warReview?.rsc1AvReview >= 4 &&
-                    warReview?.rsc1AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
-              </p>
-            )}
-
-            <p className="my-3">Based on {warReview?.toalRsc1} reviews</p>
-            <div className="d-flex align-items-center">
-              {/* {console.log(warReview?.rsc1AvReview)} */}
-              {warReview && (
-                <ReactStars
-                  edit={false}
-                  value={warReview?.rsc1AvReview}
-                  {...warRating}
-                />
-              )}
-
-              <p
-                style={{ fontSize: "22px", fontWeight: "600" }}
-                className="ms-2"
-              >
+            <div className="w-50 text-center">
+              <p style={{ fontSize: "69px", fontWeight: "600" }}>
                 {warReview?.rsc1AvReview?.toFixed(2)}
               </p>
+            </div>
+            <div className="pe-4 w-50">
+              {warReview?.toalRsc1 === 0 ? (
+                <p
+                  className="text-end"
+                  style={{ fontSize: "24px", fontWeight: "600" }}
+                >
+                  Not Rated
+                </p>
+              ) : (
+                <p
+                  className="text-end"
+                  style={{ fontSize: "24px", fontWeight: "600" }}
+                >
+                  {warReview?.rsc1AvReview < 2
+                    ? "Bad"
+                    : warReview?.rsc1AvReview >= 2 &&
+                      warReview?.rsc1AvReview < 3
+                    ? "Average"
+                    : warReview?.rsc1AvReview >= 3 &&
+                      warReview?.rsc1AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc1AvReview >= 4 &&
+                      warReview?.rsc1AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
+                </p>
+              )}
+
+              <p className="my-3 text-end">
+                Based on {warReview?.toalRsc1} reviews
+              </p>
+              <div className="d-flex align-items-center justify-content-end">
+                {/* {console.log(warReview?.rsc1AvReview)} */}
+                {warReview && (
+                  <ReactStars
+                    edit={false}
+                    value={warReview?.rsc1AvReview}
+                    {...warRating}
+                  />
+                )}
+              </div>
             </div>
             {/* <p style={{ fontWeight: "bold" }}>Satisfied Review</p> */}
           </div>
@@ -571,36 +589,41 @@ const TrendingWarzone = () => {
         >
           <div
             style={{ width: "69%" }}
-            className="shadow-lg mx-auto mx-lg-0 ps-4 py-2"
+            className="shadow-lg mx-auto mx-lg-0 ps-4 py-2 d-flex justify-content-between align-items-center"
           >
-            {warReview?.toalRsc2 === 0 ? (
-              <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
-            ) : (
-              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
-                {warReview?.rsc2AvReview < 2
-                  ? "Bad"
-                  : warReview?.rsc2AvReview >= 2 && warReview?.rsc2AvReview < 3
-                  ? "Average"
-                  : warReview?.rsc2AvReview >= 3 && warReview?.rsc2AvReview < 4
-                  ? "Good"
-                  : warReview?.rsc2AvReview >= 4 &&
-                    warReview?.rsc2AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
-              </p>
-            )}
-            <p className="my-3">Based on {warReview?.toalRsc2} reviews</p>
-            <div className="d-flex align-items-center">
-              {warReview && (
-                <ReactStars
-                  edit={false}
-                  value={warReview?.rsc2AvReview}
-                  {...warRating}
-                />
+            <div className="w-50">
+              {warReview?.toalRsc2 === 0 ? (
+                <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
+              ) : (
+                <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                  {warReview?.rsc2AvReview < 2
+                    ? "Bad"
+                    : warReview?.rsc2AvReview >= 2 &&
+                      warReview?.rsc2AvReview < 3
+                    ? "Average"
+                    : warReview?.rsc2AvReview >= 3 &&
+                      warReview?.rsc2AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc2AvReview >= 4 &&
+                      warReview?.rsc2AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
+                </p>
               )}
-
+              <p className="my-3">Based on {warReview?.toalRsc2} reviews</p>
+              <div className="d-flex align-items-center">
+                {warReview && (
+                  <ReactStars
+                    edit={false}
+                    value={warReview?.rsc2AvReview}
+                    {...warRating}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="w-50 text-center">
               <p
-                style={{ fontSize: "22px", fontWeight: "600" }}
+                style={{ fontSize: "69px", fontWeight: "600" }}
                 className="ms-2"
               >
                 {warReview?.rsc2AvReview?.toFixed(2)}
@@ -628,8 +651,8 @@ const TrendingWarzone = () => {
               {war?.resource1.link}
             </Link>
           </Row>
-          <Row className="justify-content-center justify-content-lg-start">
-            <Row className="gap-3 mb-3">
+          <Row className="justify-content-between justify-content-lg-start">
+            <Row className="gap-3 mb-3 m-0">
               <Col className="shadow-lg px-0">
                 <div className="mid-1">
                   <div className="mid-1-a">
@@ -656,41 +679,47 @@ const TrendingWarzone = () => {
               </Col>
             </Row>
 
-            <Row className="gap-3 mb-3">
-              <Col className="shadow-lg px-0">
+            <div className="d-flex flex-wrap gap-3">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={typeicon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Type:</p>
-                    <Link to="#">{war?.resource1.type}</Link>
+                    <Link to="#" className="text-nowrap">
+                      {war?.resource1.type}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={formaticon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Format:</p>
-                    <Link to="#">{war?.resource1.format}</Link>
+                    <Link to="#" className="text-nowrap">
+                      {war?.resource1.format}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={diffculty} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Category:</p>
-                    <Link>{war?.resource1.category.title}</Link>
+                    <Link className="text-nowrap">
+                      {war?.resource1.category.title}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={languageicon} alt="" width="25px" />
@@ -699,6 +728,7 @@ const TrendingWarzone = () => {
                     <p>Language:</p>
                     {war?.resource1.language.map((lang) => (
                       <Link
+                        className="text-nowrap"
                         key={lang._id}
                         style={{
                           borderWidth: "0.5px",
@@ -714,10 +744,7 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
-            </Row>
-
-            <Row className="gap-3 mb-3">
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={yearicon} alt="" width="35px" />
@@ -725,6 +752,7 @@ const TrendingWarzone = () => {
                   <div className="mid-1-b tt-1">
                     <p>Year:</p>
                     <Link
+                      className="text-nowrap"
                       style={{
                         borderWidth: "0.5px",
                         borderColor: "#494949",
@@ -738,42 +766,20 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
-
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={submiticon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Submitted:</p>
-                    <p className="text-black fw-bold">
+                    <p className="text-black fw-bold text-nowrap">
                       {war?.resource1.createdAt.toString().slice(0, 10)}
                     </p>
                   </div>
                 </div>
               </Col>
-              <Col></Col>
-              {/* <Col className="shadow-lg px-0">
-                <div className="mid-1 tt-2">
-                  <div className="me-3">
-                    <img src={ratings} alt="" width="25px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Ratings:</p>
-                    <div
-                      style={{ color: "#FCAF3B" }}
-                      className="d-flex align-items-center"
-                    >
-                      <BsFillStarFill size={20} />
-                      <span className="ms-2">
-                        {warRscReview?.rsc1AvReview?.toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
-              <Col className="px-0"></Col>
-            </Row>
+            </div>
           </Row>
         </Col>
 
@@ -790,7 +796,7 @@ const TrendingWarzone = () => {
             </Link>
           </Row>
           <Row className="justify-content-start justify-content-lg-end">
-            <Row className="gap-3 mb-3">
+            <Row className="gap-3 mb-3 m-0">
               <Col className="shadow-lg px-0">
                 <div className="mid-1">
                   <div className="mid-1-a">
@@ -817,41 +823,47 @@ const TrendingWarzone = () => {
               </Col>
             </Row>
 
-            <Row className="gap-3 mb-3">
-              <Col className="shadow-lg px-0">
+            <div className="d-flex flex-wrap gap-3">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={typeicon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Type:</p>
-                    <Link to="#">{war?.resource2.type}</Link>
+                    <Link className="text-nowrap" to="#">
+                      {war?.resource2.type}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={formaticon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Format:</p>
-                    <Link to="#">{war?.resource2.format}</Link>
+                    <Link className="text-nowrap" to="#">
+                      {war?.resource2.format}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={diffculty} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Category:</p>
-                    <Link>{war?.resource2.category.title}</Link>
+                    <Link className="text-nowrap">
+                      {war?.resource2.category.title}
+                    </Link>
                   </div>
                 </div>
               </Col>
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={languageicon} alt="" width="25px" />
@@ -860,6 +872,7 @@ const TrendingWarzone = () => {
                     <p>Language:</p>
                     {war?.resource2.language.map((lang) => (
                       <Link
+                        className="text-nowrap"
                         key={lang._id}
                         style={{
                           borderWidth: "0.5px",
@@ -875,10 +888,8 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
-            </Row>
 
-            <Row className="gap-3 mb-3">
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={yearicon} alt="" width="35px" />
@@ -886,6 +897,7 @@ const TrendingWarzone = () => {
                   <div className="mid-1-b tt-1">
                     <p>Year:</p>
                     <Link
+                      className="text-nowrap"
                       style={{
                         borderWidth: "0.5px",
                         borderColor: "#494949",
@@ -900,14 +912,14 @@ const TrendingWarzone = () => {
                 </div>
               </Col>
 
-              <Col className="shadow-lg px-0">
+              <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={submiticon} alt="" width="25px" />
                   </div>
                   <div className="mid-1-b tt-1">
                     <p>Submitted:</p>
-                    <p className="text-black fw-bold">
+                    <p className="text-black fw-bold text-nowrap">
                       {war?.resource2.createdAt.toString().slice(0, 10)}
                     </p>
                   </div>
@@ -934,7 +946,7 @@ const TrendingWarzone = () => {
                 </div>
               </Col> */}
               <Col className="px-0"></Col>
-            </Row>
+            </div>
           </Row>
         </Col>
       </Row>
@@ -948,8 +960,8 @@ const TrendingWarzone = () => {
         </p>
         <Col lg={6} className="px-0">
           <p
-            style={{ color: "#737373" }}
-            className="text-center mx-auto border-top"
+            style={{ color: "#737373", paddingRight: "20px" }}
+            className="text-end mx-auto border-top"
           >
             {war?.resource1.res_desc
               ? war?.resource1.res_desc
@@ -958,8 +970,8 @@ const TrendingWarzone = () => {
         </Col>
         <Col lg={6} className="content-box px-0">
           <p
-            style={{ color: "#737373" }}
-            className="text-center mx-auto border-top"
+            style={{ color: "#737373", paddingLeft: "20px" }}
+            className="mx-auto border-top"
           >
             {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -984,11 +996,11 @@ const TrendingWarzone = () => {
             className="mx-0 ms-lg-auto me-0 me-lg-4"
           >
             {warRscReview?.toalRsc1 === 0 ? (
-              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-end fw-bold">
                 Not Rated
               </p>
             ) : (
-              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-end fw-bold">
                 {warRscReview?.rsc1AvReview < 2
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
@@ -1004,7 +1016,7 @@ const TrendingWarzone = () => {
               </p>
             )}
 
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center justify-content-end">
               {warRscReview && (
                 <ReactStars
                   edit={false}
@@ -1015,14 +1027,14 @@ const TrendingWarzone = () => {
 
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
-                className="ms-2"
+                className="ms-2 text-end"
               >
                 {warRscReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
             <p
               style={{ fontSize: "14px", color: "#CACACA" }}
-              className="mt-2 text-start fw-bold"
+              className="mt-2 text-end fw-bold"
             >
               {warRscReview?.toalRsc1} customers reviews
             </p>
@@ -1151,10 +1163,7 @@ const TrendingWarzone = () => {
           </div>
         </Col>
 
-        <Col
-          lg={6}
-          className="content-box border-top d-flex justify-content-center text-end p-3"
-        >
+        <Col lg={6} className="content-box border-top d-flex text-end p-3">
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
             {warRscReview?.toalRsc2 === 0 ? (
               <p style={{ fontSize: "24px" }} className="text-start fw-bold">
