@@ -27,7 +27,7 @@ const HomeCountDown = ({ endDate }) => {
       style={{ border: "2px solid #BAB8B8", width: "fit-content" }}
       className="rounded-2 py-2 flex-nowrap mx-auto mb-4"
     >
-      {/* <CountDown endDate={features.endDate} /> */}
+      
       <Col className="px-2">
         <p
           style={{
@@ -37,7 +37,7 @@ const HomeCountDown = ({ endDate }) => {
           }}
           className="text-center p-0"
         >
-          {days}
+          {days} 
         </p>
         <p
           style={{ fontSize: "8px", fontWeight: "bold" }}
@@ -45,7 +45,8 @@ const HomeCountDown = ({ endDate }) => {
         >
           Days
         </p>
-      </Col>
+        
+      </Col> :
       <Col className="px-2">
         <p
           style={{
@@ -63,7 +64,7 @@ const HomeCountDown = ({ endDate }) => {
         >
           hours
         </p>
-      </Col>
+      </Col> : 
       <Col className="px-2">
         <p
           style={{
@@ -81,7 +82,7 @@ const HomeCountDown = ({ endDate }) => {
         >
           minutes
         </p>
-      </Col>
+      </Col> :
       <Col className="px-2">
         <p
           style={{
