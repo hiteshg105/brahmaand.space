@@ -229,7 +229,6 @@
 /* Content Creator Model */
 
 /* New Design */
-
 .newdesign-main .swiper-pagination-bullet {
   display: inline-block !important;
   width: 25px;
@@ -241,6 +240,101 @@
 
 .newdesign-main .swiper-pagination-bullet-active {
   background-color: #E7977C !important;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-prev,
+.newdesign-main .trending_warzone_swiper .swiper-button-next {
+  width: 60px !important;
+  height: 60px !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+  background-color: #011D2B;
+  border: 2px solid #011D2B !important;
+  border-radius: 100%;
+  opacity: 1 !important;
+  transition: all ease-in-out 200ms;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-prev::after,
+.newdesign-main .trending_warzone_swiper .swiper-button-next::after {
+  font-size: 20px !important;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-prev {
+  margin-right: 15px;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-next {
+  margin-left: 15px;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-disabled {
+  background-color: transparent;
+}
+
+.newdesign-main .trending_warzone_swiper .swiper-button-disabled::after {
+  color: #011D2B;
+}
+
+.newdesign-main .imgCol {
+  height: 300px;
+}
+
+.newdesign-main .feature_content_swiper_prev,
+.newdesign-main .feature_content_swiper_next {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: #011D2B;
+  border-radius: 100%;
+  border: 2px solid #011D2B;
+}
+
+.newdesign-main .feature_content_swiper_next::after,
+.newdesign-main .feature_content_swiper_prev::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'swiper-icons';
+  color: white;
+  cursor: pointer;
+}
+
+.newdesign-main .feature_content_swiper_prev::after {
+  content: 'prev';
+}
+
+.newdesign-main .feature_content_swiper_next::after {
+  content: 'next';
+}
+
+.newdesign-main .feature_content_swiper_button-disabled {
+  background-color: transparent;
+}
+
+.newdesign-main .feature_content_swiper_button-disabled::after {
+  color: #011D2B;
+}
+
+.walk-through {
+  color: #6E757C;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.walk-through span {
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background-color: #579AFF;
 }
 
 /* New Design */

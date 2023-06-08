@@ -76,6 +76,7 @@ import TrendingWarzone from "./pages/TrendingWarzone";
 import Category from "./pages/Category";
 import ContentCreators from "./pages/ContentCreators";
 import NewDesign from "./pages/NewDesign";
+import ProductsearchNew from "./pages/Productsearch";
 
 ReactGA.initialize("UA-250944909-1");
 // ReactGA.initialize("UA-250944909-1");
@@ -174,6 +175,7 @@ function App() {
             <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
             <Route path="/content-creators" element={<ContentCreators />} />
             <Route path="/newdesign" element={<NewDesign />} />
+            <Route path="/productsearch" element={<ProductsearchNew />} />
           </Routes>
         </Layout>
       </MenuProvider>
