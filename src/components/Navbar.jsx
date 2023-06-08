@@ -61,7 +61,7 @@ function CustomNavbar(args) {
   const [isLoading, setIsLoading] = useState(false);
   const [isContentCreatorModel, setIsContentCreatorModel] = useState(false);
   const [creatorName, setCreatorName] = useState();
-  const [linkData, setLinkData] = useState([]);
+  const [linkData, setLinkData] = useState();
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [category, setCategory] = useState();
@@ -257,6 +257,7 @@ function CustomNavbar(args) {
   const navigate = useNavigate();
   const [selectedList, setSelectedList] = useState([]);
   const [selectedItem, setSelectedItem] = useState([]);
+  const [fillPlease, setFillPlease] = useState();
 
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
@@ -314,6 +315,20 @@ function CustomNavbar(args) {
   }
 
 
+  // if (isContentCreatorModel === false) {
+  //   setCreatorName("")
+  //   setLinkData("")
+  //   setPhoneNo("")
+  //   setEmail("")
+  //   setCategory("")
+  //   setSub_category("")
+  //   setFormat("")
+  //   setLanguage("")
+  //   setTopics("")
+  //   setDescriptionData("")
+  // }
+
+
   const NewContentCrete = async () => {
     const userid = localStorage.getItem("userId");
 
@@ -331,30 +346,34 @@ function CustomNavbar(args) {
     formData.append("desc", descriptionData);
     formData.append("userid", userid);
 
-    console.log(formData)
+    if (creatorName && linkData && category && sub_category) {
 
-    const responce = await axiosConfig.post(`/user/content/creator`, formData);
+      const responce = await axiosConfig.post(`/user/content/creator`, formData);
 
-    // console.log(responce.data.data);
-    if (responce.data.success === true) {
-      swal("Content Creator profile added successfully👍.")
-      setIsContentCreatorModel(false)
-      setCreatorName("")
-      setLinkData("")
-      setPhoneNo("")
-      setEmail("")
-      setCategory("")
-      setSub_category("")
-      setFormat("")
-      setLanguage("")
-      setTopics("")
-      setDescriptionData("")
-      setFile(null)
+      // console.log(responce.data.data);
+      if (responce.data.success === true) {
+        swal("Content Creator profile added successfully👍.")
+        setIsContentCreatorModel(false)
+        setCreatorName("")
+        setLinkData("")
+        setPhoneNo("")
+        setEmail("")
+        setCategory("")
+        setSub_category("")
+        setFormat("")
+        setLanguage("")
+        setTopics("")
+        setDescriptionData("")
+        setFile(null)
+      } else {
+        swal("Something went wrong, Try again");
+        setIsContentCreatorModel(false);
+      }
     } else {
-      swal("Something went wrong, Try again");
-      swal("Content Creator profile added succesfully.");
-      setIsContentCreatorModel(false);
+      setFillPlease("define")
+      swal("Field Are mendory");
     }
+
   };
 
 
@@ -457,7 +476,7 @@ function CustomNavbar(args) {
                       style={{ fontSize: "20px" }}
                       className="text-black mb-2"
                     >
-                      Creator name
+                      Creator Name
                     </label>
                     <input
                       style={{ background: "#F1F1F1" }}
@@ -468,6 +487,7 @@ function CustomNavbar(args) {
                       id="Creator name"
                       placeholder=""
                     />
+                    {creatorName ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
                   </div>
                   <div className="form-group">
                     <label
@@ -486,6 +506,7 @@ function CustomNavbar(args) {
                       id="Profile Link"
                       placeholder="YouTube"
                     />
+                    {linkData ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
                   </div>
                   <Button className="w-100 border-0 d-flex justify-content-center py-2">
                     <div style={{ height: 20, width: 20 }} className="me-4">
@@ -549,6 +570,7 @@ function CustomNavbar(args) {
                             );
                           })}
                         </Input>
+                        {category ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
                       </div>
                       <div className="form-group mb-4">
                         <label
@@ -619,6 +641,7 @@ function CustomNavbar(args) {
                             );
                           })}
                         </Input>
+                        {sub_category ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
                       </div>
                       <div className="form-group mb-4">
                         <label
