@@ -23,7 +23,6 @@ const CountDown = ({ endDate }) => {
   const hours = countdown > 0 ? Math.floor((countdown % 86400) / 3600) : 0;
   const minutes = countdown > 0 ? Math.floor((countdown % 3600) / 60) : 0;
   const seconds = countdown > 0 ? Math.floor(countdown % 60) : 0;
-
   return (
     <div className="d-flex justify-content-center">
       {/* <p
@@ -32,7 +31,8 @@ const CountDown = ({ endDate }) => {
       >
         Ends In:
       </p> */}
-      <div style={{ border: "3px solid #000" }}
+      <div
+        style={{ border: "3px solid #000" }}
         className="mt-5 rounded-2 px-5 py-4"
       >
         <Row>
@@ -44,9 +44,10 @@ const CountDown = ({ endDate }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {days}
+              {days.toString().length === 1 ? `${days}0` : days}
             </p>
-          </Col> : 
+          </Col>{" "}
+          :
           <Col>
             <p
               style={{
@@ -55,9 +56,10 @@ const CountDown = ({ endDate }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {hours}
+              {hours.toString().length === 1 ? `0${hours}` : hours}
             </p>
-          </Col> :
+          </Col>{" "}
+          :
           <Col>
             <p
               style={{
@@ -66,9 +68,10 @@ const CountDown = ({ endDate }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {minutes}
+              {minutes.toString().length === 1 ? `0${minutes}` : minutes}
             </p>
-          </Col> :
+          </Col>{" "}
+          :
           <Col>
             <p
               style={{
@@ -77,7 +80,7 @@ const CountDown = ({ endDate }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              {seconds}
+              {seconds.toString().length === 1 ? `0${seconds}` : seconds}
             </p>
           </Col>
         </Row>

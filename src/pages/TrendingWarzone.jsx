@@ -200,7 +200,7 @@ const TrendingWarzone = () => {
           comment: rsc1Review.comment,
           rating: rsc1Review.rate,
         });
-        console.log(data.data);
+        // console.log(data.data);
         if (data.data.status === true) {
           swal("Added Successfully");
         }
