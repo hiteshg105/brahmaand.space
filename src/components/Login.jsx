@@ -166,7 +166,7 @@ function Login() {
         }
 
         if (localStorage.getItem("userId")) {
-          navigate("/topbar");
+          navigate("/");
         } else navigate("/login");
       })
       .catch((error) => {

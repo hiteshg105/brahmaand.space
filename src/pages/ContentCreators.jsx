@@ -1,6 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap"
 import PrettyRating from "pretty-rating-react";
-
 import img from '../images/creator-img.png';
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
@@ -17,13 +16,15 @@ const base_URL = "http://localhost:9000"
 
 const ContentCreators = () => {
     const [content, setContent] = useState("Content")
+    // let [page,setPage] = useState(1);
+    let [limit,setLimit] = useState(9);
     let [val, setVal] = useState([]);
     const icons = {
         star: {
             complete: faStar,
             half: faStarHalfAlt,
             empty: farStar,
-        },
+            },
     };
 
     const handleContentClick = (event) => {
@@ -33,28 +34,34 @@ const ContentCreators = () => {
             setContent("Content")
         }
     };
-    const handleContent = async (data) => {
+    const seeMore =()=>{
+
+        //   setPage(page+1);
+          setLimit(limit+9);
+    }
+  
+    console.log(limit,"limit")
+    const handleContent = async (data,l1) => {
         if (data === "Content") {
-            const data = await axiosClient.get('/user/get_all_active_resrc_lsit');
-            // console.log(data.data.data);
+            const data = await axiosClient.get(`/user/get_all_active_resrc_lsit?limit=${l1}`);
+            console.log(data.data.data);
             setVal(data.data.data);
         }
         if (data === "Content Creators") {
             const data = await axiosClient.get('/get_all/content/creator');
-            // console.log(data.data.data);
             setVal(data.data.data)
         }
     }
-
-
 
     const colors = {
         star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
     };
 
     useEffect(() => {
-        handleContent(content)
-    }, [content])
+        handleContent(content,limit)
+    }, [content,limit])
+
+
     return (
         <Container className="content-creator-main mt-5" >
             <Row className="d-flex justify-content-between">
@@ -85,7 +92,7 @@ const ContentCreators = () => {
                         const formattedDate = date.toLocaleDateString("en-US", options);
                         return (
                             <>
-                                {console.log(item.img)}
+                                {/* {console.log(item.img)} */}
                                 <div className="item" key={item._id}>
                                     <Col>
                                         <div style={{ maxHeight: "300px" }}>
@@ -121,7 +128,7 @@ const ContentCreators = () => {
             </div>
 
             <Row>
-                <button style={{ width: "fit-content", margin: "30px auto 0", backgroundColor: "#FC9357", fontSize: "24px" }} className="text-white fw-bold border-0 rounded-5 py-2 px-4">
+                <button style={{ width: "fit-content", margin: "30px auto 0", backgroundColor: "#FC9357", fontSize: "24px" }} className="text-white fw-bold border-0 rounded-5 py-2 px-4" onClick={()=>seeMore()}>
                     See More
                 </button>
             </Row>

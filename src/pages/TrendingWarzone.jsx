@@ -81,7 +81,7 @@ const TrendingWarzone = () => {
     // console.log(data.data.war);
     setWar(data.data.war);
   };
-
+console.log(war)
   const getWarReview = async () => {
     const data = await instance.get(`/get/review/warzone/${id}`);
     // console.log(data.data);
@@ -446,15 +446,19 @@ const TrendingWarzone = () => {
           style={{ fontSize: "20px", fontWeight: "bold" }}
           className="text-center text-uppercase py-3"
         >
-          comparison
+          Image
         </p>
         <Col
           lg={6}
           className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
         >
+            
           <div>
+          <h4 className="text-center">
+            {war?.resource1.creatorName}
+          </h4>
             {war?.resource1.format === "Video" ? (
-              <iframe
+               <iframe
                 style={{ height: "400px" }}
                 className="w-100"
                 src={`https://www.youtube.com/embed/${
@@ -465,6 +469,7 @@ const TrendingWarzone = () => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
+             
             ) : (
               <div className="d-flex">
                 <img
@@ -482,6 +487,10 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
+          <h4 className="text-center">
+            {war?.resource2.creatorName}
+            </h4>
+
             {war?.resource2.format === "Video" ? (
               <iframe
                 style={{ height: "400px" }}
@@ -558,7 +567,7 @@ const TrendingWarzone = () => {
                 {warReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
-            <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
+            {/* <p style={{ fontWeight: "bold" }}>Satisfied Review</p> */}
           </div>
         </Col>
         <Col
@@ -602,7 +611,7 @@ const TrendingWarzone = () => {
                 {warReview?.rsc2AvReview?.toFixed(2)}
               </p>
             </div>
-            <p style={{ fontWeight: "bold" }}>Satisfied Review</p>
+            {/* <p style={{ fontWeight: "bold" }}>Satisfied Review</p> */}
           </div>
         </Col>
       </Row>
@@ -612,7 +621,7 @@ const TrendingWarzone = () => {
           style={{ fontSize: "20px", fontWeight: "bold" }}
           className="text-uppercase text-center border-bottom py-3"
         >
-          Links
+          Details
         </p>
 
         <Col lg={6} className="border-top border-bottom border-right py-4">
@@ -734,7 +743,22 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
+             
               <Col className="shadow-lg px-0">
+                <div className="mid-1 tt-2">
+                  <div className="me-3">
+                    <img src={submiticon} alt="" width="25px" />
+                  </div>
+                  <div className="mid-1-b tt-1">
+                    <p>Submitted:</p>
+                    <p className="text-black fw-bold">
+                      {war?.resource1.createdAt.toString().slice(0, 10)}
+                    </p>
+                  </div>
+                </div>
+              </Col>
+              <Col></Col>
+              {/* <Col className="shadow-lg px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={ratings} alt="" width="25px" />
@@ -752,20 +776,7 @@ const TrendingWarzone = () => {
                     </div>
                   </div>
                 </div>
-              </Col>
-              <Col className="shadow-lg px-0">
-                <div className="mid-1 tt-2">
-                  <div className="me-3">
-                    <img src={submiticon} alt="" width="25px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Submitted:</p>
-                    <p className="text-black fw-bold">
-                      {war?.resource1.createdAt.toString().slice(0, 10)}
-                    </p>
-                  </div>
-                </div>
-              </Col>
+              </Col> */}
               <Col className="px-0"></Col>
             </Row>
           </Row>
@@ -893,7 +904,22 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
+              
               <Col className="shadow-lg px-0">
+                <div className="mid-1 tt-2">
+                  <div className="me-3">
+                    <img src={submiticon} alt="" width="25px" />
+                  </div>
+                  <div className="mid-1-b tt-1">
+                    <p>Submitted:</p>
+                    <p className="text-black fw-bold">
+                      {war?.resource2.createdAt.toString().slice(0, 10)}
+                    </p>
+                  </div>
+                </div>
+              </Col>
+              <Col></Col>
+              {/* <Col className="shadow-lg px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
                     <img src={ratings} alt="" width="25px" />
@@ -911,20 +937,7 @@ const TrendingWarzone = () => {
                     </div>
                   </div>
                 </div>
-              </Col>
-              <Col className="shadow-lg px-0">
-                <div className="mid-1 tt-2">
-                  <div className="me-3">
-                    <img src={submiticon} alt="" width="25px" />
-                  </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Submitted:</p>
-                    <p className="text-black fw-bold">
-                      {war?.resource2.createdAt.toString().slice(0, 10)}
-                    </p>
-                  </div>
-                </div>
-              </Col>
+              </Col> */}
               <Col className="px-0"></Col>
             </Row>
           </Row>
