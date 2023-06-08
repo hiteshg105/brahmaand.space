@@ -26,20 +26,20 @@ const CountDown = ({ endDate }) => {
 
   return (
     <div className="d-flex justify-content-center">
-      <p
+      {/* <p
         style={{ fontSize: "20px", fontWeight: "bold" }}
         className="d-flex align-items-center me-4 text-uppercase text-nowrap"
       >
         Ends In:
-      </p>
+      </p> */}
       <div style={{ border: "3px solid #000" }}
-        className="rounded-2 px-3 py-2"
+        className="mt-5 rounded-2 px-5 py-4"
       >
         <Row>
           <Col>
             <p
               style={{
-                fontSize: "24px",
+                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -50,7 +50,7 @@ const CountDown = ({ endDate }) => {
           <Col>
             <p
               style={{
-                fontSize: "24px",
+                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -61,7 +61,7 @@ const CountDown = ({ endDate }) => {
           <Col>
             <p
               style={{
-                fontSize: "24px",
+                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -72,7 +72,7 @@ const CountDown = ({ endDate }) => {
           <Col>
             <p
               style={{
-                fontSize: "24px",
+                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}

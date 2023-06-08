@@ -81,7 +81,7 @@ const TrendingWarzone = () => {
     // console.log(data.data.war);
     setWar(data.data.war);
   };
-console.log(war)
+  console.log(war);
   const getWarReview = async () => {
     const data = await instance.get(`/get/review/warzone/${id}`);
     // console.log(data.data);
@@ -254,11 +254,11 @@ console.log(war)
 
   return (
     <Container>
-      <Col className="mb-4 mt-5">
+      {/* <Col className="mb-4 mt-5">
         <h1 style={{ fontSize: "40px", textAlign: "center" }}>
           Trending Warzone
         </h1>
-      </Col>
+      </Col> */}
       <Row className="justify-content-between">
         {/* <Col className="d-none d-lg-flex justify-content-center mt-5">
           <div
@@ -409,13 +409,13 @@ console.log(war)
           style={{ fontSize: "20px", fontWeight: "bold" }}
           className="text-center text-uppercase py-3"
         >
-          ALL-Topics
+          Topics
+          <span className="me-3">
+            <img src={link} alt="" width={20} />
+          </span>
         </p>
         <Col lg={6} className="border-top border-bottom p-0 py-4">
           <div className="d-flex justify-content-center">
-            <span className="me-3">
-              <img src={link} alt="" width={20} />
-            </span>
             <div className="d-flex flex-wrap tag-2">
               {war?.resource1.topics[0].split(",").map((val) => (
                 <Link className="d-flex" to="#">
@@ -427,9 +427,6 @@ console.log(war)
         </Col>
         <Col lg={6} className="content-box border-top border-bottom p-0 py-4">
           <div className="d-flex justify-content-center">
-            <span className="me-3">
-              <img src={link} alt="" width={20} />
-            </span>
             <div className="d-flex flex-wrap tag-2">
               {war?.resource2.topics[0].split(",").map((val) => (
                 <Link className="d-flex" to="#">
@@ -452,13 +449,12 @@ console.log(war)
           lg={6}
           className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
         >
-            
           <div>
-          <h4 className="text-center">
-            {war?.resource1.creatorName}
-          </h4>
+            <h4 style={{ fontSize: "30px" }} className="text-center">
+              {war?.resource1.creatorName}
+            </h4>
             {war?.resource1.format === "Video" ? (
-               <iframe
+              <iframe
                 style={{ height: "400px" }}
                 className="w-100"
                 src={`https://www.youtube.com/embed/${
@@ -469,7 +465,6 @@ console.log(war)
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen
               ></iframe>
-             
             ) : (
               <div className="d-flex">
                 <img
@@ -487,9 +482,7 @@ console.log(war)
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
-          <h4 className="text-center">
-            {war?.resource2.creatorName}
-            </h4>
+            <h4 style={{ fontSize: "30px" }} className="text-center">{war?.resource2.creatorName}</h4>
 
             {war?.resource2.format === "Video" ? (
               <iframe
@@ -743,7 +736,7 @@ console.log(war)
                   </div>
                 </div>
               </Col>
-             
+
               <Col className="shadow-lg px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
@@ -904,7 +897,7 @@ console.log(war)
                   </div>
                 </div>
               </Col>
-              
+
               <Col className="shadow-lg px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
