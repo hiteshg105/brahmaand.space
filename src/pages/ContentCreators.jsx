@@ -8,8 +8,8 @@ import axiosClient from "../components/axiosConfig";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const base_URL = "https://backend.brahmaand.space/";
-// const base_URL = "http://localhost:9000"
+// const base_URL = "https://backend.brahmaand.space/"
+const base_URL = "http://localhost:9000";
 
 const ContentCreators = () => {
   const [content, setContent] = useState("Content");
@@ -66,37 +66,10 @@ const ContentCreators = () => {
           <h3 className="fw-bold">Showing Results</h3>
         </Col>
         <Col>
-          <div style={{ maxHeight: "300px" }}>
-            <img
-              style={{ borderRadius: "10px" }}
-              className="w-100"
-              height={300}
-              src={
-                item.img.includes("https")
-                  ? item.img
-                  : `${base_URL + "/" + item.img}`
-              }
-              alt=""
-            />
-          </div>
-          <div className="py-3 px-3">
-            <h3 className="fw-bold">{item?.creatorName}</h3>
-            <p className="mb-2">User since: {formattedDate}</p>
-            <div className="d-flex justify-content-sm-between">
-              <div className="d-flex align-items-center">
-                <PrettyRating
-                  value={2.5}
-                  icons={icons.star}
-                  colors={colors.star}
-                />
-                <span style={{ color: "#FCAF3B" }} className="ms-2 fw-bold">
-                  (4.5)
-                </span>
-              </div>
-              <p style={{ color: "#5F56C6" }} className="fw-bold">
-                12.2k Reviews
-              </p>
-            </div>
+          <div className="toggle">
+            <input type="checkbox" onChange={(e) => handleContentClick(e)} />
+            <label className="l">Content</label>
+            <label className="r">Content Creators</label>
           </div>
         </Col>
       </Row>
