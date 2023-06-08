@@ -122,7 +122,7 @@ function Productsearch(args) {
 
   const handlefilter = (filtertype) => {
     // console.log("contentyear Id<<<<<<<<<?????", filtertype);
-
+    // console.log(filtertype, "filtertype")
     setFiltertype(filtertype);
 
     axios
@@ -134,7 +134,6 @@ function Productsearch(args) {
         format: format,
       })
       .then((res) => {
-        // console.log(res.data.data);
         setCategry(res.data.data);
       })
       .catch((err) => {
@@ -156,18 +155,18 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
 
   const editcomment = (id, dataid, oldrating) => {
-    console.log(oldrating);
+    // console.log(oldrating);
     if (rating == "") {
       setRating(oldrating);
     }
-    console.log(rating);
+    // console.log(rating);
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
       axios
@@ -178,7 +177,7 @@ function Productsearch(args) {
           rating: rating,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           swal("Submitted Successfully");
           toggleedit();
         })
@@ -192,7 +191,7 @@ function Productsearch(args) {
     axios
       .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setUpcom(res.data.data?.comment);
         toggleedit();
       })
@@ -256,7 +255,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -303,7 +302,7 @@ function Productsearch(args) {
           searchinput: searchdata,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             // localStorage.removeItem("searchdata");
@@ -318,13 +317,13 @@ function Productsearch(args) {
         searchinput: searchdata,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         if (res.data.data !== "" && res.data.data !== null) {
           setPromotion(res.data.data);
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
   };
 
@@ -351,7 +350,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const getLanguage = () => {
@@ -360,7 +359,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -372,7 +371,7 @@ function Productsearch(args) {
   };
 
   const removebookmark = (id) => {
-    console.log(id);
+    // console.log(id);
     setliked(id);
     if (myId !== "" && myId !== null) {
       axiosConfig
@@ -382,12 +381,12 @@ function Productsearch(args) {
           status: "false",
         })
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setActivelike(response.data.data.status);
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -395,7 +394,7 @@ function Productsearch(args) {
   };
 
   const addbookmark = (id) => {
-    console.log(id);
+    // console.log(id);
     setliked(id);
 
     if (myId !== "" && myId !== null) {
@@ -406,7 +405,7 @@ function Productsearch(args) {
           status: "true",
         })
         .then((response) => {
-          console.log(response.data.data);
+          // console.log(response.data.data);
           setActivelike(response.data.data.status);
           swal("You Bookmark it");
           hadlestatusbookmark();
@@ -549,7 +548,7 @@ function Productsearch(args) {
             rating: rating,
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.status == true) {
               swal("Your Review Submitted Successfully!");
             } else if (res.data.msg == "not able to comment") {
@@ -695,7 +694,7 @@ function Productsearch(args) {
         searchitem === "" &&
         hastagdata === "hastag" &&
         searchdata === "",
-      Filtertype === "")
+        Filtertype === "")
     ) {
       allsearchproduct();
     }
@@ -772,7 +771,7 @@ function Productsearch(args) {
           searchinput: searchdata,
         })
         .then((res) => {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           if (res.data.data !== "" && res.data.data !== null) {
             setCategry(res.data.data);
             // localStorage.removeItem("searchdata");
@@ -793,7 +792,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
     // axios
     //   .get(
@@ -878,10 +877,10 @@ function Productsearch(args) {
           }}
         ></div>
 
-        <div style={{padding:"0 80px"}}>
+        <div style={{ padding: "0 80px" }}>
           <div className="stt-main">
             <Row>
-              <Col lg="4" md="4">
+              <Col lg="3" md="3">
                 <div className="left-side">
                   <Row>
                     <Col lg="12" className="py-3">
@@ -1089,7 +1088,7 @@ function Productsearch(args) {
                   </Row>
                 </div>
               </Col>
-              <Col lg="8" md="8">
+              <Col lg="9" md="9">
                 <div className="right-side">
                   <h4>
                     Promotions
@@ -1173,9 +1172,8 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${
-                                                  promotion?.link?.split("=")[1]
-                                                }`}
+                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                                  }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1514,7 +1512,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                    0 ? (
+                                                      0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1640,9 +1638,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                      localStorage.getItem(
-                                                        "userId"
-                                                      ) ? (
+                                                        localStorage.getItem(
+                                                          "userId"
+                                                        ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1834,7 +1832,7 @@ function Productsearch(args) {
                     </Swiper>
                   </Row>
 
-                  <ContentCreators />
+                  <ContentCreators categry={categry} />
                 </div>
               </Col>
             </Row>
@@ -1892,317 +1890,317 @@ function Productsearch(args) {
                 onSwiper={(swiper) => console.log(swiper)}
                 scrollbar={{ draggable: true }}
                 className=" sld-1 justify-content-center swiper-button-show"
-                // className=" sld-1 swiper-button-show"
+              // className=" sld-1 swiper-button-show"
               >
                 {suggested !== ""
                   ? suggested?.map((categry) => (
-                      <SwiperSlide>
-                        <div class="product-grid8" key={categry._id}>
-                          <div class="product-image8">
-                            <Link
-                              key={categry._id}
-                              onClick={() => handlesuggSelection(categry?._id)}
-                              // onClick={togglesuggestion}
+                    <SwiperSlide>
+                      <div class="product-grid8" key={categry._id}>
+                        <div class="product-image8">
+                          <Link
+                            key={categry._id}
+                            onClick={() => handlesuggSelection(categry?._id)}
+                          // onClick={togglesuggestion}
+                          >
+                            <Modal
+                              key={Producdetail?._id}
+                              className="mdlg"
+                              isOpen={modalsuggestion}
+                              toggle={handleclosesuggestionmodal}
+                              {...args}
                             >
-                              <Modal
-                                key={Producdetail?._id}
-                                className="mdlg"
-                                isOpen={modalsuggestion}
-                                toggle={handleclosesuggestionmodal}
-                                {...args}
-                              >
-                                <ModalBody>
-                                  <Row>
-                                    <Col></Col>
+                              <ModalBody>
+                                <Row>
+                                  <Col></Col>
+                                  <Col
+                                    lg="1"
+                                    className="d-flex justify-content-right"
+                                  >
+                                    <MdCancelPresentation
+                                      className="cancelbuttondata"
+                                      onClick={handleclosesuggestionmodal}
+                                      size={30}
+                                    />
+                                  </Col>
+                                </Row>
+                                <div className="main-content">
+                                  <h2>
+                                    {ReactHtmlParser(
+                                      Producdetail?.desc?.slice(0, 80)
+                                    )}
+                                  </h2>
+                                  <Row className="top-icon">
+                                    <Col lg="10">
+                                      {" "}
+                                      <Link to="#">
+                                        <img src={mdicon1} alt="" />
+                                      </Link>
+                                      <Link to="#">
+                                        <img src={mdicon2} alt="" />
+                                      </Link>
+                                    </Col>
                                     <Col
-                                      lg="1"
-                                      className="d-flex justify-content-right"
+                                      style={{ textAlign: "right" }}
+                                      lg="2"
+                                      key={Producdetail?._id}
                                     >
-                                      <MdCancelPresentation
-                                        className="cancelbuttondata"
-                                        onClick={handleclosesuggestionmodal}
-                                        size={30}
-                                      />
+                                      {handlebookmark === "true" ? (
+                                        <BsFillBookmarkCheckFill
+                                          size={35}
+                                          key={Producdetail?._id}
+                                          className="addbookmark  "
+                                          color="#5f56c6"
+                                          onClick={() =>
+                                            removebookmark(Producdetail?._id)
+                                          }
+                                        />
+                                      ) : (
+                                        <BsBookmark
+                                          size={35}
+                                          key={Producdetail?._id}
+                                          onClick={() =>
+                                            addbookmark(Producdetail?._id)
+                                          }
+                                          className="addbookmark "
+                                          color="warning "
+                                        />
+                                      )}
                                     </Col>
                                   </Row>
-                                  <div className="main-content">
-                                    <h2>
-                                      {ReactHtmlParser(
-                                        Producdetail?.desc?.slice(0, 80)
-                                      )}
-                                    </h2>
-                                    <Row className="top-icon">
-                                      <Col lg="10">
-                                        {" "}
-                                        <Link to="#">
-                                          <img src={mdicon1} alt="" />
+                                  <div className="tag-list">
+                                    <div className="tag-1">
+                                      <h5>
+                                        <span>
+                                          <img
+                                            src={icons}
+                                            alt=""
+                                            width="30px"
+                                          />
+                                        </span>
+                                        Topic:
+                                      </h5>
+                                    </div>
+                                    <div className=" d-flex tag-2">
+                                      {Producdetail?.topics?.map((val) => (
+                                        <Link className="d-flex " to="#">
+                                          {val} &nbsp;
                                         </Link>
-                                        <Link to="#">
-                                          <img src={mdicon2} alt="" />
-                                        </Link>
+                                      ))}
+                                    </div>
+                                  </div>
+
+                                  <hr></hr>
+                                </div>
+
+                                <div className="mid">
+                                  <h5 className="mt-3">
+                                    Link :
+                                    {/* <Link>{Producdetail?.link}</Link> */}
+                                    <a
+                                      target="_blank"
+                                      href={Producdetail?.link}
+                                    >
+                                      {" "}
+                                      {Producdetail?.link}
+                                    </a>
+                                  </h5>
+                                  <div className="mid-content">
+                                    <Row>
+                                      <Col lg="6" md="6">
+                                        <div className="mid-1 mb-3">
+                                          <div className="mid-1-a">
+                                            <img src={createricon} alt="" />
+                                          </div>
+                                          <div className="mid-1-b">
+                                            <p>Creator:</p>
+                                            <h4>
+                                              {Producdetail?.creatorName}
+                                            </h4>
+                                          </div>
+                                        </div>
                                       </Col>
-                                      <Col
-                                        style={{ textAlign: "right" }}
-                                        lg="2"
-                                        key={Producdetail?._id}
-                                      >
-                                        {handlebookmark === "true" ? (
-                                          <BsFillBookmarkCheckFill
-                                            size={35}
-                                            key={Producdetail?._id}
-                                            className="addbookmark  "
-                                            color="#5f56c6"
-                                            onClick={() =>
-                                              removebookmark(Producdetail?._id)
-                                            }
-                                          />
-                                        ) : (
-                                          <BsBookmark
-                                            size={35}
-                                            key={Producdetail?._id}
-                                            onClick={() =>
-                                              addbookmark(Producdetail?._id)
-                                            }
-                                            className="addbookmark "
-                                            color="warning "
-                                          />
-                                        )}
+                                      <Col lg="6" md="6">
+                                        <div className="mid-1 mb-3 ">
+                                          <div className="mid-1-a">
+                                            <img src={usericon} alt="" />
+                                          </div>
+                                          <div className="mid-1-b">
+                                            <p>Submitted by:</p>
+                                            <h4>
+                                              {
+                                                Producdetail?.userid
+                                                  ?.display_name
+                                              }
+                                            </h4>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="3" md="3">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={typeicon}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Type:</p>
+                                            <Link to="#">
+                                              {Producdetail?.type}
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="3" md="3">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={formaticon}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Format:</p>
+                                            <Link to="#">
+                                              {Producdetail?.format}
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="3" md="3">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={diffculty}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Category:</p>
+                                            <Link>
+                                              {Producdetail?.category?.title}
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </Col>
+
+                                      <Col lg="3" md="3">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={yearicon}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Year:</p>
+
+                                            {Producdetail?.relYear?.map(
+                                              (year) => (
+                                                <Link>{year?.yrName}</Link>
+                                              )
+                                            )}
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="3" md="3">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={rating}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Ratings:</p>
+                                            <Link to="#">
+                                              [{Producdetail?.ava_rating}]
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="4" md="4">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={submiticon}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Submitted:</p>
+                                            <Link to="#">
+                                              <Moment format="ll">
+                                                {Producdetail?.createdAt}
+                                              </Moment>
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </Col>
+                                      <Col lg="4" md="4">
+                                        <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1-a">
+                                            <img
+                                              src={languageicon}
+                                              alt=""
+                                              width="35px"
+                                            />
+                                          </div>
+                                          <div className="mid-1-b tt-1">
+                                            <p>Language:</p>
+                                            {Producdetail?.language?.map(
+                                              (lang) => (
+                                                <span>{lang?.language} </span>
+                                              )
+                                            )}
+                                          </div>
+                                        </div>
                                       </Col>
                                     </Row>
-                                    <div className="tag-list">
-                                      <div className="tag-1">
-                                        <h5>
-                                          <span>
-                                            <img
-                                              src={icons}
-                                              alt=""
-                                              width="30px"
-                                            />
-                                          </span>
-                                          Topic:
-                                        </h5>
-                                      </div>
-                                      <div className=" d-flex tag-2">
-                                        {Producdetail?.topics?.map((val) => (
-                                          <Link className="d-flex " to="#">
-                                            {val} &nbsp;
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    </div>
-
-                                    <hr></hr>
                                   </div>
+                                </div>
 
-                                  <div className="mid">
-                                    <h5 className="mt-3">
-                                      Link :
-                                      {/* <Link>{Producdetail?.link}</Link> */}
-                                      <a
-                                        target="_blank"
-                                        href={Producdetail?.link}
-                                      >
-                                        {" "}
-                                        {Producdetail?.link}
-                                      </a>
-                                    </h5>
-                                    <div className="mid-content">
-                                      <Row>
-                                        <Col lg="6" md="6">
-                                          <div className="mid-1 mb-3">
-                                            <div className="mid-1-a">
-                                              <img src={createricon} alt="" />
-                                            </div>
-                                            <div className="mid-1-b">
-                                              <p>Creator:</p>
-                                              <h4>
-                                                {Producdetail?.creatorName}
-                                              </h4>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="6" md="6">
-                                          <div className="mid-1 mb-3 ">
-                                            <div className="mid-1-a">
-                                              <img src={usericon} alt="" />
-                                            </div>
-                                            <div className="mid-1-b">
-                                              <p>Submitted by:</p>
-                                              <h4>
-                                                {
-                                                  Producdetail?.userid
-                                                    ?.display_name
-                                                }
-                                              </h4>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={typeicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Type:</p>
-                                              <Link to="#">
-                                                {Producdetail?.type}
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={formaticon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Format:</p>
-                                              <Link to="#">
-                                                {Producdetail?.format}
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={diffculty}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Category:</p>
-                                              <Link>
-                                                {Producdetail?.category?.title}
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
+                                <hr></hr>
 
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={yearicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Year:</p>
+                                <div className="description mt-3 mb-3">
+                                  <h4>Description:</h4>
+                                  <p>{Producdetail?.desc}</p>
+                                </div>
 
-                                              {Producdetail?.relYear?.map(
-                                                (year) => (
-                                                  <Link>{year?.yrName}</Link>
-                                                )
-                                              )}
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={rating}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Ratings:</p>
-                                              <Link to="#">
+                                <hr></hr>
+
+                                <div className="rating-box">
+                                  <Row>
+                                    <Col lg="6">
+                                      <div className="rat-left mt-3">
+                                        <h4>Customer Rating</h4>
+                                        <div className="">
+                                          <PrettyRating
+                                            value={Producdetail?.ava_rating}
+                                            icons={icons.star}
+                                            colors={colors.star}
+                                          />
+                                          <span className="starratinginno">
+                                            {Producdetail?.ava_rating != 0 ? (
+                                              <>
                                                 [{Producdetail?.ava_rating}]
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="4" md="4">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={submiticon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Submitted:</p>
-                                              <Link to="#">
-                                                <Moment format="ll">
-                                                  {Producdetail?.createdAt}
-                                                </Moment>
-                                              </Link>
-                                            </div>
-                                          </div>
-                                        </Col>
-                                        <Col lg="4" md="4">
-                                          <div className="mid-1 mb-3 tt-2">
-                                            <div className="mid-1-a">
-                                              <img
-                                                src={languageicon}
-                                                alt=""
-                                                width="35px"
-                                              />
-                                            </div>
-                                            <div className="mid-1-b tt-1">
-                                              <p>Language:</p>
-                                              {Producdetail?.language?.map(
-                                                (lang) => (
-                                                  <span>{lang?.language} </span>
-                                                )
-                                              )}
-                                            </div>
-                                          </div>
-                                        </Col>
-                                      </Row>
-                                    </div>
-                                  </div>
+                                                of 5 Stars
+                                              </>
+                                            ) : null}
+                                          </span>
+                                          <br></br>
+                                          <span className="mt-3">
+                                            {getonecomment?.length}- Customers
+                                            Reviews
+                                          </span>
 
-                                  <hr></hr>
-
-                                  <div className="description mt-3 mb-3">
-                                    <h4>Description:</h4>
-                                    <p>{Producdetail?.desc}</p>
-                                  </div>
-
-                                  <hr></hr>
-
-                                  <div className="rating-box">
-                                    <Row>
-                                      <Col lg="6">
-                                        <div className="rat-left mt-3">
-                                          <h4>Customer Rating</h4>
-                                          <div className="">
-                                            <PrettyRating
-                                              value={Producdetail?.ava_rating}
-                                              icons={icons.star}
-                                              colors={colors.star}
-                                            />
-                                            <span className="starratinginno">
-                                              {Producdetail?.ava_rating != 0 ? (
-                                                <>
-                                                  [{Producdetail?.ava_rating}]
-                                                  of 5 Stars
-                                                </>
-                                              ) : null}
-                                            </span>
-                                            <br></br>
-                                            <span className="mt-3">
-                                              {getonecomment?.length}- Customers
-                                              Reviews
-                                            </span>
-
-                                            {/* <Row>
+                                          {/* <Row>
                                               <Col
                                                 className="d-flex justify-content-left mt-1"
                                                 style={{
@@ -2319,26 +2317,26 @@ function Productsearch(args) {
                                                 />
                                               </Col>
                                             </Row> */}
-                                          </div>
                                         </div>
-                                      </Col>
-                                      <Col lg="6">
-                                        <h4 className="mt-3">
-                                          Write your Review
-                                        </h4>
-                                        {/* <StarsRating
+                                      </div>
+                                    </Col>
+                                    <Col lg="6">
+                                      <h4 className="mt-3">
+                                        Write your Review
+                                      </h4>
+                                      {/* <StarsRating
                                           count={5}
                                           onChange={ratingChanged}
                                           size={40}
                                           color2={"#ffd700"}
                                         /> */}
-                                        <ReactStars {...secondExample} />
-                                      </Col>
-                                      <Row lg="12" key={Producdetail?._id}>
-                                        <div className="rat-right">
-                                          <Row>
-                                            <Col lg="6">
-                                              {/* <h4 className="mt-3">
+                                      <ReactStars {...secondExample} />
+                                    </Col>
+                                    <Row lg="12" key={Producdetail?._id}>
+                                      <div className="rat-right">
+                                        <Row>
+                                          <Col lg="6">
+                                            {/* <h4 className="mt-3">
                                                 Write your Review
                                               </h4>
                                               <StarsRating
@@ -2347,40 +2345,40 @@ function Productsearch(args) {
                                                 size={40}
                                                 color2={"#ffd700"}
                                               /> */}
-                                            </Col>
-                                          </Row>
+                                          </Col>
+                                        </Row>
 
-                                          <div className="">
-                                            <form key={Producdetail?._id}>
-                                              <textarea
-                                                key={Producdetail?._id}
-                                                value={text}
-                                                name="text"
-                                                onChange={onchangehandler}
-                                                className="form-control st-taetarea"
-                                                placeholder=" Enter your Review if you want"
-                                              ></textarea>
-                                              <Button
-                                                onClick={(e) =>
-                                                  handleSubmit(
-                                                    e,
-                                                    Producdetail?._id
-                                                  )
-                                                }
-                                                // onClick={handleSubmit}
-                                                className="bt-st reviewbutton mb-3"
-                                              >
-                                                Submit
-                                              </Button>
-                                            </form>
-                                          </div>
+                                        <div className="">
+                                          <form key={Producdetail?._id}>
+                                            <textarea
+                                              key={Producdetail?._id}
+                                              value={text}
+                                              name="text"
+                                              onChange={onchangehandler}
+                                              className="form-control st-taetarea"
+                                              placeholder=" Enter your Review if you want"
+                                            ></textarea>
+                                            <Button
+                                              onClick={(e) =>
+                                                handleSubmit(
+                                                  e,
+                                                  Producdetail?._id
+                                                )
+                                              }
+                                              // onClick={handleSubmit}
+                                              className="bt-st reviewbutton mb-3"
+                                            >
+                                              Submit
+                                            </Button>
+                                          </form>
                                         </div>
-                                      </Row>
+                                      </div>
                                     </Row>
-                                  </div>
-                                  <Row>
-                                    <Col lg="4"></Col>
-                                    {/* <Col lg="8" key={Producdetail?._id}>
+                                  </Row>
+                                </div>
+                                <Row>
+                                  <Col lg="4"></Col>
+                                  {/* <Col lg="8" key={Producdetail?._id}>
                                       {handlebookmark === "true" ? (
                                         <button
                                           key={Producdetail?._id}
@@ -2405,117 +2403,117 @@ function Productsearch(args) {
                                         </button>
                                       )}
                                     </Col> */}
-                                  </Row>
-                                  <hr></hr>
-                                  <div className="review-list mt-3  ">
-                                    <h4>Reviews:</h4>
-                                    {getonecomment?.map((value) => (
-                                      <div className="re-list">
-                                        <div className="re-listimg">
-                                          <img
-                                            src={value?.userid?.profileImg}
-                                            alt="UserImage"
+                                </Row>
+                                <hr></hr>
+                                <div className="review-list mt-3  ">
+                                  <h4>Reviews:</h4>
+                                  {getonecomment?.map((value) => (
+                                    <div className="re-list">
+                                      <div className="re-listimg">
+                                        <img
+                                          src={value?.userid?.profileImg}
+                                          alt="UserImage"
+                                        />
+                                      </div>
+                                      <div className="re-listcont">
+                                        <h5>
+                                          {value?.userid?.username}
+                                          <span>
+                                            <Moment format="ll">
+                                              {value?.createdAt}
+                                            </Moment>
+                                          </span>
+                                        </h5>
+                                        <div className="star-1">
+                                          <PrettyRating
+                                            value={value?.rating}
+                                            icons={icons.star}
+                                            colors={colors.star}
                                           />
                                         </div>
-                                        <div className="re-listcont">
-                                          <h5>
-                                            {value?.userid?.username}
-                                            <span>
-                                              <Moment format="ll">
-                                                {value?.createdAt}
-                                              </Moment>
-                                            </span>
-                                          </h5>
-                                          <div className="star-1">
-                                            <PrettyRating
-                                              value={value?.rating}
-                                              icons={icons.star}
-                                              colors={colors.star}
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="re-btext mt-3">
-                                          {/* <p>{value?.comment}</p> */}
-                                          <Row>
-                                            <Col lg="10"> {value?.comment}</Col>
-                                            <Col lg="2">
-                                              {value?.userid?._id ==
+                                      </div>
+                                      <div className="re-btext mt-3">
+                                        {/* <p>{value?.comment}</p> */}
+                                        <Row>
+                                          <Col lg="10"> {value?.comment}</Col>
+                                          <Col lg="2">
+                                            {value?.userid?._id ==
                                               localStorage.getItem("userId") ? (
-                                                <>
-                                                  <h6>
-                                                    <AiFillEdit
-                                                      onClick={() =>
-                                                        handleeditcomment(
-                                                          value?._id
-                                                        )
-                                                      }
-                                                      // onClick={
-                                                      //
-                                                      // }
-                                                      size="25px"
-                                                    />
-                                                  </h6>
-                                                  <Modal
-                                                    isOpen={editmodal}
+                                              <>
+                                                <h6>
+                                                  <AiFillEdit
+                                                    onClick={() =>
+                                                      handleeditcomment(
+                                                        value?._id
+                                                      )
+                                                    }
+                                                    // onClick={
+                                                    //
+                                                    // }
+                                                    size="25px"
+                                                  />
+                                                </h6>
+                                                <Modal
+                                                  isOpen={editmodal}
+                                                  toggle={toggleedit}
+                                                  {...args}
+                                                >
+                                                  <ModalHeader
                                                     toggle={toggleedit}
-                                                    {...args}
                                                   >
-                                                    <ModalHeader
-                                                      toggle={toggleedit}
-                                                    >
-                                                      Edit Your Comment
-                                                    </ModalHeader>
-                                                    <ModalBody>
-                                                      <Row>
-                                                        <Col>
-                                                          <Label>
-                                                            Edit Review
-                                                          </Label>
-                                                          <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            placeholder={
-                                                              value?.comment
-                                                            }
-                                                            value={upcom}
-                                                            onChange={(e) =>
-                                                              setUpcom(
-                                                                e.target.value
-                                                              )
-                                                            }
-                                                            aria-describedby="inputGroupPrepend"
-                                                            required
-                                                          />
-                                                        </Col>
-                                                        <Col>
-                                                          <ReactStars
-                                                            style={{
-                                                              size: "25px",
-                                                            }}
-                                                            {...secondExample}
-                                                          />
-                                                        </Col>
-                                                      </Row>
-
-                                                      <Col className="d-flex justify-content-center">
-                                                        <button
-                                                          style={{
-                                                            color: "white",
-                                                          }}
-                                                          onClick={() => {
-                                                            editcomment(
-                                                              value?._id,
-                                                              Producdetail?._id,
-                                                              value?.rating
-                                                            );
-                                                          }}
-                                                          class="btn success"
-                                                        >
-                                                          Edit your comment
-                                                        </button>
+                                                    Edit Your Comment
+                                                  </ModalHeader>
+                                                  <ModalBody>
+                                                    <Row>
+                                                      <Col>
+                                                        <Label>
+                                                          Edit Review
+                                                        </Label>
+                                                        <input
+                                                          type="text"
+                                                          className="form-control"
+                                                          placeholder={
+                                                            value?.comment
+                                                          }
+                                                          value={upcom}
+                                                          onChange={(e) =>
+                                                            setUpcom(
+                                                              e.target.value
+                                                            )
+                                                          }
+                                                          aria-describedby="inputGroupPrepend"
+                                                          required
+                                                        />
                                                       </Col>
-                                                    </ModalBody>
-                                                    {/* <ModalFooter>
+                                                      <Col>
+                                                        <ReactStars
+                                                          style={{
+                                                            size: "25px",
+                                                          }}
+                                                          {...secondExample}
+                                                        />
+                                                      </Col>
+                                                    </Row>
+
+                                                    <Col className="d-flex justify-content-center">
+                                                      <button
+                                                        style={{
+                                                          color: "white",
+                                                        }}
+                                                        onClick={() => {
+                                                          editcomment(
+                                                            value?._id,
+                                                            Producdetail?._id,
+                                                            value?.rating
+                                                          );
+                                                        }}
+                                                        class="btn success"
+                                                      >
+                                                        Edit your comment
+                                                      </button>
+                                                    </Col>
+                                                  </ModalBody>
+                                                  {/* <ModalFooter>
                                                               <Button
                                                                 color="primary"
                                                                 onClick={
@@ -2533,117 +2531,116 @@ function Productsearch(args) {
                                                                 Cancel
                                                               </Button>
                                                             </ModalFooter> */}
-                                                  </Modal>
-                                                </>
-                                              ) : null}
-                                            </Col>
-                                          </Row>
-                                        </div>
+                                                </Modal>
+                                              </>
+                                            ) : null}
+                                          </Col>
+                                        </Row>
                                       </div>
-                                    ))}
-                                  </div>
-                                </ModalBody>
-                              </Modal>
-                              {categry?.link.match(
-                                /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
-                              ) ? (
-                                <>
-                                  {categry?.link ? (
-                                    <>
-                                      <h2 style={{ color: "green" }}>
-                                        {categry[1]}
-                                      </h2>
-                                      <iframe
-                                        allowfullscreen="true"
-                                        width="100%"
-                                        height="auto"
-                                        style={{
-                                          borderRadius: "12px",
-                                        }}
-                                        src={`https://www.youtube.com/embed/${
-                                          categry?.link?.split("=")[1]
+                                    </div>
+                                  ))}
+                                </div>
+                              </ModalBody>
+                            </Modal>
+                            {categry?.link.match(
+                              /(?:youtu\.be\/|youtube\.com(?:\/embed\/|\/v\/|\/watch\?v=|\/user\/\S+|\/ytscreeningroom\?v=|\/sandalsResorts#\w\/\w\/.*\/))([^\/&]{10,12})/
+                            ) ? (
+                              <>
+                                {categry?.link ? (
+                                  <>
+                                    <h2 style={{ color: "green" }}>
+                                      {categry[1]}
+                                    </h2>
+                                    <iframe
+                                      allowfullscreen="true"
+                                      width="100%"
+                                      height="auto"
+                                      style={{
+                                        borderRadius: "12px",
+                                      }}
+                                      src={`https://www.youtube.com/embed/${categry?.link?.split("=")[1]
                                         }`}
-                                      ></iframe>
-                                    </>
-                                  ) : null}
-                                </>
-                              ) : (
-                                <img
-                                  style={{ borderRadius: "10px" }}
-                                  src={categry?.img}
-                                  alt="image"
-                                  width="100%"
-                                  height={160}
-                                />
-                              )}
-                              {/* <img
+                                    ></iframe>
+                                  </>
+                                ) : null}
+                              </>
+                            ) : (
+                              <img
+                                style={{ borderRadius: "10px" }}
+                                src={categry?.img}
+                                alt="image"
+                                width="100%"
+                                height={160}
+                              />
+                            )}
+                            {/* <img
                                 style={{ borderRadius: "12px" }}
                                 width="100%"
                                 height="260px"
                                 src={categry?.img}
                                 alt="image "
                               /> */}
-                            </Link>
+                          </Link>
+                        </div>
+                        <div
+                          key={categry._id}
+                          onClick={() => handlesuggSelection(categry?._id)}
+                          class="product-content"
+                        >
+                          <div className=" d-flex topicdatas">
+                            {" "}
+                            {categry?.topics.map((topic) => (
+                              <span
+                                className="d-flex display-inline topicsdata"
+                                style={{ color: "blue" }}
+                              >
+                                {topic} &nbsp;
+                              </span>
+                            ))}
                           </div>
-                          <div
-                            key={categry._id}
-                            onClick={() => handlesuggSelection(categry?._id)}
-                            class="product-content"
-                          >
-                            <div className=" d-flex topicdatas">
-                              {" "}
-                              {categry?.topics.map((topic) => (
-                                <span
-                                  className="d-flex display-inline topicsdata"
-                                  style={{ color: "blue" }}
-                                >
-                                  {topic} &nbsp;
-                                </span>
-                              ))}
-                            </div>
 
-                            <h3>{categry?.resTitle.slice(0, 80)}</h3>
-                            <h5>
-                              <span>By</span> {categry?.creatorName}
-                            </h5>
-                            <p>{categry?.desc?.slice(0, 45)}</p>
-                            <div className="">
-                              <Row>
-                                <Col lg="7">
-                                  <PrettyRating
-                                    value={categry?.ava_rating}
-                                    icons={icons.star}
-                                    colors={colors.star}
-                                  />
-                                </Col>
-                                <Col className="justify-content-left" lg="5">
-                                  {categry?.ava_rating == 0 ? null : (
-                                    <>{categry?.ava_rating}- Rating</>
-                                  )}
-                                </Col>
-                              </Row>
+                          <h3>{categry?.resTitle.slice(0, 80)}</h3>
+                          <h5>
+                            <span>By</span> {categry?.creatorName}
+                          </h5>
+                          <p>{categry?.desc?.slice(0, 45)}</p>
+                          <div className="">
+                            <Row>
+                              <Col lg="7">
+                                <PrettyRating
+                                  value={categry?.ava_rating}
+                                  icons={icons.star}
+                                  colors={colors.star}
+                                />
+                              </Col>
+                              <Col className="justify-content-left" lg="5">
+                                {categry?.ava_rating == 0 ? null : (
+                                  <>{categry?.ava_rating}- Rating</>
+                                )}
+                              </Col>
+                            </Row>
 
-                              <ul class="rating mt-2">
-                                <li>
-                                  {/* <Link to="#" className="tag">
+                            <ul class="rating mt-2">
+                              <li>
+                                {/* <Link to="#" className="tag">
                                     {categry?.relYear[0]?.yrName}
                                   </Link> */}
-                                  {categry?.relYear[0] !== "" ||
+                                {categry?.relYear[0] !== "" ||
                                   categry?.relYear[0] !== null
-                                    ? categry?.relYear?.map((data) => (
-                                        <Link to="#" className="tag">
-                                          {" "}
-                                          {data?.yrName}{" "}
-                                        </Link>
-                                      ))
-                                    : null}
-                                </li>
-                              </ul>
-                            </div>
+                                  ? categry?.relYear?.map((data) => (
+                                    <Link to="#" className="tag">
+                                      {" "}
+                                      {data?.yrName}{" "}
+                                    </Link>
+                                  ))
+                                  : null}
+                              </li>
+                            </ul>
                           </div>
                         </div>
-                      </SwiperSlide>
-                    ))
+                      </div>
+                    </SwiperSlide>
+                  ))
                   : null}
               </Swiper>
             </Row>
