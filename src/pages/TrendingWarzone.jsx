@@ -81,7 +81,7 @@ const TrendingWarzone = () => {
     // console.log(data.data.war);
     setWar(data.data.war);
   };
-  console.log(war);
+  // console.log(war);
   const getWarReview = async () => {
     const data = await instance.get(`/get/review/warzone/${id}`);
     // console.log(data.data);
@@ -200,8 +200,8 @@ const TrendingWarzone = () => {
           comment: rsc1Review.comment,
           rating: rsc1Review.rate,
         });
-        // console.log(data.data);
-        if (data.data.message === "success") {
+        console.log(data.data);
+        if (data.data.status === true) {
           swal("Added Successfully");
         }
         if (data.data.msg === "waiting for admin approvel") {
@@ -229,7 +229,7 @@ const TrendingWarzone = () => {
           rating: rsc2Review.rate,
         });
         // console.log(data.data);
-        if (data.data.message === "success") {
+        if (data.data.status === true) {
           swal("Added Successfully..");
         }
         if (data.data.msg === "waiting for admin approvel") {
@@ -482,7 +482,9 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
-            <h4 style={{ fontSize: "30px" }} className="text-center">{war?.resource2.creatorName}</h4>
+            <h4 style={{ fontSize: "30px" }} className="text-center">
+              {war?.resource2.creatorName}
+            </h4>
 
             {war?.resource2.format === "Video" ? (
               <iframe
