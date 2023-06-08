@@ -186,7 +186,7 @@
 }
 
 .content-creator-main .grid-main .item {
-  width: calc(33.33% - 20px);
+  width: calc(25% - 20px);
   min-width: 300px;
   border: 1px solid #011D2B;
   border-radius: 10px;
