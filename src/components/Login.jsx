@@ -172,7 +172,8 @@ function Login() {
       .catch((error) => {
         console.log(error.response.data);
         if (error.response.data.msg === "Incorrect Password") {
-          swal("User already Exists With this Mail");
+          //swal("User already Exists With this Mail");
+          swal("You have already register with email and password this email address. Please try to login with that");
         }
         // else if (error.response.data.msg === "Incorrect Password") {
         //   swal("you Entered Incorrect password ", "try again");

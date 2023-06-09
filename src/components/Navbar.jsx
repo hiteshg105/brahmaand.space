@@ -37,7 +37,7 @@ import UserPage from "./UserPage";
 import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
-import axiosConfig from "../components/axiosConfig";
+import axiosConfig from "./axiosConfig";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -561,14 +561,14 @@ function CustomNavbar(args) {
                             id={link.name}
                             placeholder={link.name.charAt(0).toUpperCase() + link.name.slice(1)}
                           />
-
-                          <ImCancelCircle
-                            style={{ cursor: "pointer" }}
-                            className="setmodelfalseicon linkCloseBtn"
-                            onClick={() => deleteLinkField(link.id)}
-                            size={30}
-                          />
-
+                          
+                            <ImCancelCircle
+                              style={{ cursor: "pointer" }}
+                              className="setmodelfalseicon linkCloseBtn"
+                              onClick={() => deleteLinkField(link.id)} 
+                              size={30}
+                            />
+                        
                         </div>
                       </div>
                     ))}
