@@ -54,6 +54,7 @@ function CustomNavbar(args) {
   const [relyear, setRelyear] = useState([]);
   const [selectedyear, setSelectedyear] = useState([]);
   const [Opcname, setOpcname] = useState("");
+  const [linkField, setLinkField] = useState("");
   const [Opdes, setOpdes] = useState("");
   const [Opcomm, setOpcomm] = useState("");
   const [error, setError] = useState(null);
@@ -112,6 +113,16 @@ function CustomNavbar(args) {
       "https?://(www.)?[-a-zA-Z0-9@:%._+~#=]{1,256}.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
     );
     return regex.test(link);
+  }
+
+  const closeModel =()=>{
+    setIsContentCreatorModel(false);
+    setLinkData([
+      { id: 1, name: 'youtube', value: '' },
+      { id: 2, name: 'instagram', value: '' },
+      { id: 3, name: 'linkedin', value: '' },
+      { id: 4, name: 'facebook', value: '' },
+    ])
   }
 
   const handleSubmitResource = (e) => {
@@ -326,17 +337,29 @@ function CustomNavbar(args) {
     ]);
   };
 
+  // const deleteLinkField = (id) => {
+  //   setLinkData((prevData) => {
+  //     const newData = prevData.map((link) => {
+  //       if (link.id === id) {
+  //         return { ...link, value: '' };
+  //       }
+  //       return link;
+  //     });
+  //     return newData;
+  //   });
+  // };
   const deleteLinkField = (id) => {
-    setLinkData((prevData) => {
-      const newData = prevData.map((link) => {
-        if (link.id === id) {
-          return { ...link, value: '' };
-        }
-        return link;
-      });
-      return newData;
-    });
+    if (linkData.length > 1) {
+
+      setLinkData((prevData) => prevData.filter((link) => link.id !== id));
+    }
+    else {
+
+      setLinkField("define");
+
+    }
   };
+
   const NewContentCrete = async () => {
     let linkNewData;
 
@@ -480,6 +503,7 @@ function CustomNavbar(args) {
               className="btn rbutton mobile"
               type="submit"
               onClick={(e) => (
+                closeModel(),
                 setIsContentCreatorModel(!isContentCreatorModel),
                 gaEventTracker("+Content Creator")
               )}
@@ -488,7 +512,7 @@ function CustomNavbar(args) {
             </button>
             <Container>
               <Modal
-                toggle={() => setIsContentCreatorModel(!isContentCreatorModel)}
+                toggle={() => (closeModel(),setIsContentCreatorModel(!isContentCreatorModel))}
                 {...args}
                 className="content-creator-model"
                 isOpen={isContentCreatorModel}
@@ -498,7 +522,7 @@ function CustomNavbar(args) {
                   <ImCancelCircle
                     style={{ cursor: "pointer" }}
                     className="setmodelfalseicon"
-                    onClick={() => setIsContentCreatorModel(false)}
+                    onClick={() => closeModel()}
                     size={30}
                   />
                 </div>
@@ -548,6 +572,7 @@ function CustomNavbar(args) {
                     >
                       Profile Link
                     </label>
+                    
                     {linkData?.map((link, index) => (
                       <div key={link.id}>
                         <div className="position-relative ">
@@ -561,18 +586,31 @@ function CustomNavbar(args) {
                             id={link.name}
                             placeholder={link.name.charAt(0).toUpperCase() + link.name.slice(1)}
                           />
-                          
-                            <ImCancelCircle
-                              style={{ cursor: "pointer" }}
-                              className="setmodelfalseicon linkCloseBtn"
-                              onClick={() => deleteLinkField(link.id)} 
-                              size={30}
-                            />
-                        
+
+                          <ImCancelCircle
+                            style={{ cursor: "pointer" }}
+                            className="setmodelfalseicon linkCloseBtn"
+                            onClick={() => deleteLinkField(link.id)}
+                            size={30}
+                          />
+
                         </div>
                       </div>
                     ))}
+                    {
+                      linkData.length >1 ? (
+                        ""
+                      ) : linkField === "define" ? (
+                        <p style={{ color: "red", fontSize: "12px" }}>
+                          One Field Mendatory
+                        </p>
+                      ) : (
+                        ""
+                      )
+                    }
                   </div>
+
+
                   <Button className="w-100 border-0 d-flex justify-content-center py-2"
                     onClick={addLinkField}>
                     <div style={{ height: 20, width: 20 }} className="me-4">
