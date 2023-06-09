@@ -424,9 +424,7 @@ function Productsearch(args) {
 
   const hadlestatusbookmark = () => {
     axiosConfig
-      .get(
-        `/user/getone_mylikes/${myId}/${liked}`
-      )
+      .get(`/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
         // console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -443,9 +441,7 @@ function Productsearch(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axiosConfig
-        .get(
-          `/admin/getone_reslist/${promotionId}`
-        )
+        .get(`/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           if (
@@ -461,10 +457,8 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err.data.data);
         });
-        axiosConfig
-        .get(
-          `/user/average_rating/${promotionId}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${promotionId}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -2056,146 +2050,160 @@ function Productsearch(args) {
                                                     </div>
                                                   </div>
                                                 </Col>
-                                                <Col lg="3" md="3">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={typeicon}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Type:</p>
-                                                      <Link to="#">
-                                                        {Producdetail?.type}
-                                                      </Link>
-                                                    </div>
-                                                  </div>
-                                                </Col>
-                                                <Col lg="3" md="3">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={formaticon}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Format:</p>
-                                                      <Link to="#">
-                                                        {Producdetail?.format}
-                                                      </Link>
+                                                <div className="d-flex flex-wrap gap-3 mt-3">
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={typeicon}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Type:</p>
+                                                        <Link
+                                                          className="text-nowrap"
+                                                          to="#"
+                                                        >
+                                                          {Producdetail?.type}
+                                                        </Link>
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </Col>
-                                                <Col lg="3" md="3">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={diffculty}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Category:</p>
-                                                      <Link>
-                                                        {
-                                                          Producdetail?.category
-                                                            ?.title
-                                                        }
-                                                      </Link>
-                                                    </div>
-                                                  </div>
-                                                </Col>
-
-                                                <Col lg="3" md="3">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={yearicon}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Year:</p>
-
-                                                      {Producdetail?.relYear?.map(
-                                                        (year) => (
-                                                          <Link>
-                                                            {year?.yrName}
-                                                          </Link>
-                                                        )
-                                                      )}
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={formaticon}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Format:</p>
+                                                        <Link
+                                                          className="text-nowrap"
+                                                          to="#"
+                                                        >
+                                                          {Producdetail?.format}
+                                                        </Link>
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </Col>
-                                                <Col lg="3" md="3">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={rating}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Ratings:</p>
-                                                      <Link to="#">
-                                                        [
-                                                        {
-                                                          Producdetail?.ava_rating
-                                                        }
-                                                        ]
-                                                      </Link>
-                                                    </div>
-                                                  </div>
-                                                </Col>
-                                                <Col lg="4" md="4">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={submiticon}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Submitted:</p>
-                                                      <Link to="#">
-                                                        <Moment format="ll">
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={diffculty}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Category:</p>
+                                                        <Link className="text-nowrap">
                                                           {
-                                                            Producdetail?.createdAt
+                                                            Producdetail
+                                                              ?.category?.title
                                                           }
-                                                        </Moment>
-                                                      </Link>
+                                                        </Link>
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </Col>
-                                                <Col lg="4" md="4">
-                                                  <div className="mid-1 mb-3 tt-2">
-                                                    <div className="mid-1-a">
-                                                      <img
-                                                        src={languageicon}
-                                                        alt=""
-                                                        width="35px"
-                                                      />
-                                                    </div>
-                                                    <div className="mid-1-b tt-1">
-                                                      <p>Language:</p>
-                                                      {Producdetail?.language?.map(
-                                                        (lang) => (
-                                                          <span>
-                                                            {lang?.language}{" "}
-                                                          </span>
-                                                        )
-                                                      )}
+
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={yearicon}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Year:</p>
+
+                                                        {Producdetail?.relYear?.map(
+                                                          (year) => (
+                                                            <Link className="text-nowrap">
+                                                              {year?.yrName}
+                                                            </Link>
+                                                          )
+                                                        )}
+                                                      </div>
                                                     </div>
                                                   </div>
-                                                </Col>
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={rating}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Ratings:</p>
+                                                        <Link
+                                                          className="text-nowrap"
+                                                          to="#"
+                                                        >
+                                                          [
+                                                          {
+                                                            Producdetail?.ava_rating
+                                                          }
+                                                          ]
+                                                        </Link>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={submiticon}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Submitted:</p>
+                                                        <Link
+                                                          className="text-nowrap"
+                                                          to="#"
+                                                        >
+                                                          <Moment format="ll">
+                                                            {
+                                                              Producdetail?.createdAt
+                                                            }
+                                                          </Moment>
+                                                        </Link>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div>
+                                                    <div className="mid-1 mb-3 tt-2 pe-4">
+                                                      <div className="mid-1-a">
+                                                        <img
+                                                          src={languageicon}
+                                                          alt=""
+                                                          width="35px"
+                                                        />
+                                                      </div>
+                                                      <div className="mid-1-b tt-1">
+                                                        <p>Language:</p>
+                                                        {Producdetail?.language?.map(
+                                                          (lang) => (
+                                                            <span className="text-nowrap">
+                                                              {lang?.language}{" "}
+                                                            </span>
+                                                          )
+                                                        )}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
                                               </Row>
                                             </div>
                                           </div>
@@ -2984,7 +2992,7 @@ function Productsearch(args) {
                                           </div>
                                         </Col>
                                         <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={typeicon}
@@ -3001,7 +3009,7 @@ function Productsearch(args) {
                                           </div>
                                         </Col>
                                         <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={formaticon}
@@ -3018,7 +3026,7 @@ function Productsearch(args) {
                                           </div>
                                         </Col>
                                         <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={diffculty}
@@ -3036,7 +3044,7 @@ function Productsearch(args) {
                                         </Col>
 
                                         <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={yearicon}
@@ -3056,7 +3064,7 @@ function Productsearch(args) {
                                           </div>
                                         </Col>
                                         <Col lg="3" md="3">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={rating}
@@ -3073,7 +3081,7 @@ function Productsearch(args) {
                                           </div>
                                         </Col>
                                         <Col lg="4" md="4">
-                                          <div className="mid-1 mb-3 tt-2">
+                                          <div className="mid-1 mb-3 tt-2 pe-4">
                                             <div className="mid-1-a">
                                               <img
                                                 src={submiticon}
