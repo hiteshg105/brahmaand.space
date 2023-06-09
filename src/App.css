@@ -338,3 +338,10 @@
 }
 
 /* New Design */
+
+
+.linkCloseBtn{
+  right:10px;
+  position: absolute;
+  bottom: 6px;
+}

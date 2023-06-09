@@ -37,7 +37,7 @@ import UserPage from "./UserPage";
 import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
-import axiosConfig from "../components/axiosConfig";
+import axiosConfig from "./axiosConfig";
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -61,7 +61,12 @@ function CustomNavbar(args) {
   const [isLoading, setIsLoading] = useState(false);
   const [isContentCreatorModel, setIsContentCreatorModel] = useState(false);
   const [creatorName, setCreatorName] = useState();
-  const [linkData, setLinkData] = useState();
+  const [linkData, setLinkData] = useState([
+    { id: 1, name: 'youtube', value: '' },
+    { id: 2, name: 'instagram', value: '' },
+    { id: 3, name: 'linkedin', value: '' },
+    { id: 4, name: 'facebook', value: '' },
+  ]);
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
   const [category, setCategory] = useState();
@@ -193,8 +198,7 @@ function CustomNavbar(args) {
     axios
 
       .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${
-          catgry ? catgry : category
+        `https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category
         }`
       )
       .then((response) => {
@@ -297,35 +301,45 @@ function CustomNavbar(args) {
 
   const gaEventTracker = useAnalyticsEventTracker("CustomNavbar");
 
-  // console.log(creatorName, "creatorName")
-  // console.log(linkData, "linkData")
-  // console.log(phoneNo, "phoneNo")
-  // console.log(email, "email")
-  // console.log(category, "category")
-  // console.log(format, "format")
-  // console.log(sub_category, "sub_category")
-  // console.log(language, "language")
-  // console.log(topics, "topics")
-  // console.log(descriptionData, "descriptionData")
 
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
 
-  // if (isContentCreatorModel === false) {
-  //   setCreatorName("")
-  //   setLinkData("")
-  //   setPhoneNo("")
-  //   setEmail("")
-  //   setCategory("")
-  //   setSub_category("")
-  //   setFormat("")
-  //   setLanguage("")
-  //   setTopics("")
-  //   setDescriptionData("")
-  // }
+  const handleInputChange = (event, id) => {
+    const { value } = event.target;
+    setLinkData((prevData) => {
+      const newData = prevData.map((link) => {
+        if (link.id === id) {
+          return { ...link, value: value };
+        }
+        return link;
+      });
+      return newData;
+    });
+  };
 
+  const addLinkField = () => {
+    const newId = linkData.length + 1;
+    setLinkData((prevData) => [
+      ...prevData,
+      { id: newId, name: '', value: '' },
+    ]);
+  };
+
+  const deleteLinkField = (id) => {
+    setLinkData((prevData) => {
+      const newData = prevData.map((link) => {
+        if (link.id === id) {
+          return { ...link, value: '' };
+        }
+        return link;
+      });
+      return newData;
+    });
+  };
   const NewContentCrete = async () => {
+    // const linkNewData = linkData?.map(e => e.value)
     const userid = localStorage.getItem("userId");
 
     const formData = new FormData();
@@ -404,6 +418,10 @@ function CustomNavbar(args) {
       setIsContentCreatorModel(false);
     }
   };
+
+
+
+
 
   return (
     <Navbar
@@ -509,53 +527,33 @@ function CustomNavbar(args) {
                     >
                       Profile Link
                     </label>
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={linkData}
-                      onChange={(e) => setLinkData(e.target.value)}
-                      className="form-control border-0 mb-2"
-                      id="Profile Link"
-                      placeholder="YouTube"
-                    />
-                    {linkData ? (
-                      ""
-                    ) : fillPlease === "define" ? (
-                      <p style={{ color: "red", fontSize: "12px" }}>
-                        Fill This Field
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={linkData}
-                      onChange={(e) => setLinkData(e.target.value)}
-                      className="form-control border-0 mb-2"
-                      id="Profile Link"
-                      placeholder="YouTube"
-                    />
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={linkData}
-                      onChange={(e) => setLinkData(e.target.value)}
-                      className="form-control border-0 mb-2"
-                      id="Profile Link"
-                      placeholder="YouTube"
-                    />
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={linkData}
-                      onChange={(e) => setLinkData(e.target.value)}
-                      className="form-control border-0 mb-2"
-                      id="Profile Link"
-                      placeholder="YouTube"
-                    />
+                    {linkData?.map((link, index) => (
+                      <div key={link.id}>
+                        <div className="position-relative ">
+                          <input
+                            style={{ background: "#F1F1F1" }}
+                            type="text"
+                            name={link.name}
+                            value={link.value}
+                            onChange={(event) => handleInputChange(event, link.id)}
+                            className="form-control border-0 mb-2"
+                            id={link.name}
+                            placeholder={link.name.charAt(0).toUpperCase() + link.name.slice(1)}
+                          />
+                          
+                            <ImCancelCircle
+                              style={{ cursor: "pointer" }}
+                              className="setmodelfalseicon linkCloseBtn"
+                              onClick={() => deleteLinkField(link.id)} 
+                              size={30}
+                            />
+                        
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <Button className="w-100 border-0 d-flex justify-content-center py-2">
+                  <Button className="w-100 border-0 d-flex justify-content-center py-2"
+                    onClick={addLinkField}>
                     <div style={{ height: 20, width: 20 }} className="me-4">
                       <img
                         className="h-auto w-100"
@@ -845,8 +843,8 @@ function CustomNavbar(args) {
 
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
@@ -1217,7 +1215,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <textarea
-                              style={{ background: "rgb(241, 241, 241)" }}
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
@@ -1236,7 +1234,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <input
-                              style={{ background: "rgb(241, 241, 241)" }}
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 type="file"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control imageuserupload"
@@ -1249,7 +1247,7 @@ function CustomNavbar(args) {
                             <Label style={{ font: "GT Walsheim Pro" }}></Label>
 
                             <Input
-                            style={{ background: "rgb(241, 241, 241)" }}
+                              style={{ background: "rgb(241, 241, 241)" }}
                               type="select"
                               className="form-control"
                               name="yrName"
@@ -1474,8 +1472,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-          localStorage.getItem("userId") !== null &&
-          localStorage.getItem("userId") !== undefined ? (
+            localStorage.getItem("userId") !== null &&
+            localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>
