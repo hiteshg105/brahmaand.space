@@ -99,7 +99,6 @@ function CustomNavbar(args) {
 
     base64code = fileString;
   };
-  console.log(selectedFile, "selectedFile");
   const imageToBase64 = (file) => {
     let reader = new FileReader();
     reader.onload = () => {
