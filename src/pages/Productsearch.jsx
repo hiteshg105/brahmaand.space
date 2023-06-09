@@ -1295,6 +1295,7 @@ function Productsearch(args) {
                                             <h5>
                                               Link :
                                               <a
+                                                style={{ wordBreak: "break-word" }}
                                                 target="_blank"
                                                 href={promotiondata?.link}
                                               >
