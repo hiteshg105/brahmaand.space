@@ -78,7 +78,7 @@ function CustomNavbar(args) {
     // setCat_img(e.target.files[0]);
     const files = e.target.files;
     const file = files[0];
-    console.log(file)
+    console.log(file);
     imageToBase64(file);
     imageToBase64();
   };
@@ -98,7 +98,6 @@ function CustomNavbar(args) {
       onLoad(reader.result);
     };
   };
-
 
   function urlPatternValidation(link) {
     const regex = new RegExp(
@@ -194,7 +193,8 @@ function CustomNavbar(args) {
     axios
 
       .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category
+        `https://backend.brahmaand.space/admin/listbycategory/${
+          catgry ? catgry : category
         }`
       )
       .then((response) => {
@@ -308,12 +308,9 @@ function CustomNavbar(args) {
   // console.log(topics, "topics")
   // console.log(descriptionData, "descriptionData")
 
-
-
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
-
 
   // if (isContentCreatorModel === false) {
   //   setCreatorName("")
@@ -327,7 +324,6 @@ function CustomNavbar(args) {
   //   setTopics("")
   //   setDescriptionData("")
   // }
-
 
   const NewContentCrete = async () => {
     const userid = localStorage.getItem("userId");
@@ -347,59 +343,67 @@ function CustomNavbar(args) {
     formData.append("userid", userid);
 
     if (creatorName && linkData && category && sub_category) {
-
-      const responce = await axiosConfig.post(`/user/content/creator`, formData);
+      const responce = await axiosConfig.post(
+        `/user/content/creator`,
+        formData
+      );
 
       // console.log(responce.data.data);
       if (responce.data.success === true) {
-        swal("Content Creator profile added successfully👍.")
-        setIsContentCreatorModel(false)
-        setCreatorName("")
-        setLinkData("")
-        setPhoneNo("")
-        setEmail("")
-        setCategory("")
-        setSub_category("")
-        setFormat("")
-        setLanguage("")
-        setTopics("")
-        setDescriptionData("")
-        setFile(null)
+        swal("Content Creator profile added successfully👍.");
+        setIsContentCreatorModel(false);
+        setCreatorName("");
+        setLinkData("");
+        setPhoneNo("");
+        setEmail("");
+        setCategory("");
+        setSub_category("");
+        setFormat("");
+        setLanguage("");
+        setTopics("");
+        setDescriptionData("");
+        setFile(null);
       } else {
         swal("Something went wrong, Try again");
         setIsContentCreatorModel(false);
       }
     } else {
-      setFillPlease("define")
+      setFillPlease("define");
       swal("Field Are mendory");
     }
-
   };
 
-
   const DiscardContent = (e) => {
-
-    if (creatorName || file || topics || email || format || descriptionData || linkData || phoneNo || language) {
-      console.log("hello")
-      swal("Content are Discard 👍.")
-      setIsContentCreatorModel(false)
-      setCreatorName("")
-      setLinkData("")
-      setPhoneNo("")
-      setEmail("")
-      setCategory("")
-      setSub_category("")
-      setFormat("")
-      setLanguage("")
-      setTopics("")
-      setDescriptionData("")
-      setFile(null)
+    if (
+      creatorName ||
+      file ||
+      topics ||
+      email ||
+      format ||
+      descriptionData ||
+      linkData ||
+      phoneNo ||
+      language
+    ) {
+      console.log("hello");
+      swal("Content are Discard 👍.");
+      setIsContentCreatorModel(false);
+      setCreatorName("");
+      setLinkData("");
+      setPhoneNo("");
+      setEmail("");
+      setCategory("");
+      setSub_category("");
+      setFormat("");
+      setLanguage("");
+      setTopics("");
+      setDescriptionData("");
+      setFile(null);
     } else {
-      swal("Discard 👍.")
-      setIsContentCreatorModel(false)
+      swal("Discard 👍.");
+      setIsContentCreatorModel(false);
     }
-
-  }
+  };
 
   return (
     <Navbar
@@ -487,7 +491,15 @@ function CustomNavbar(args) {
                       id="Creator name"
                       placeholder=""
                     />
-                    {creatorName ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
+                    {creatorName ? (
+                      ""
+                    ) : fillPlease === "define" ? (
+                      <p style={{ color: "red", fontSize: "12px" }}>
+                        Fill This Field
+                      </p>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className="form-group">
                     <label
@@ -502,11 +514,46 @@ function CustomNavbar(args) {
                       type="text"
                       value={linkData}
                       onChange={(e) => setLinkData(e.target.value)}
-                      className="form-control border-0"
+                      className="form-control border-0 mb-2"
                       id="Profile Link"
                       placeholder="YouTube"
                     />
-                    {linkData ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
+                    {linkData ? (
+                      ""
+                    ) : fillPlease === "define" ? (
+                      <p style={{ color: "red", fontSize: "12px" }}>
+                        Fill This Field
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={linkData}
+                      onChange={(e) => setLinkData(e.target.value)}
+                      className="form-control border-0 mb-2"
+                      id="Profile Link"
+                      placeholder="YouTube"
+                    />
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={linkData}
+                      onChange={(e) => setLinkData(e.target.value)}
+                      className="form-control border-0 mb-2"
+                      id="Profile Link"
+                      placeholder="YouTube"
+                    />
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={linkData}
+                      onChange={(e) => setLinkData(e.target.value)}
+                      className="form-control border-0 mb-2"
+                      id="Profile Link"
+                      placeholder="YouTube"
+                    />
                   </div>
                   <Button className="w-100 border-0 d-flex justify-content-center py-2">
                     <div style={{ height: 20, width: 20 }} className="me-4">
@@ -570,7 +617,15 @@ function CustomNavbar(args) {
                             );
                           })}
                         </Input>
-                        {category ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
+                        {category ? (
+                          ""
+                        ) : fillPlease === "define" ? (
+                          <p style={{ color: "red", fontSize: "12px" }}>
+                            Fill This Field
+                          </p>
+                        ) : (
+                          ""
+                        )}
                       </div>
                       <div className="form-group mb-4">
                         <label
@@ -641,7 +696,15 @@ function CustomNavbar(args) {
                             );
                           })}
                         </Input>
-                        {sub_category ? "" : fillPlease === "define" ? <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p> : ""}
+                        {sub_category ? (
+                          ""
+                        ) : fillPlease === "define" ? (
+                          <p style={{ color: "red", fontSize: "12px" }}>
+                            Fill This Field
+                          </p>
+                        ) : (
+                          ""
+                        )}
                       </div>
                       <div className="form-group mb-4">
                         <label
@@ -721,13 +784,21 @@ function CustomNavbar(args) {
                     />
                   </div>
                   <div className="form-group mb-4">
-                    <label for="Upload Image of related content" style={{ fontSize: "20px" }} className="text-black mb-2">Upload Image of related content</label>
+                    <label
+                      for="Upload Image of related content"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Upload Image of related content
+                    </label>
                     <input
                       style={{ background: "#F1F1F1" }}
                       type="file"
                       onChange={handleChange}
-                      className="form-control border-0" id="Upload Image of related content"
-                      placeholder="Choose file  |  No file chosen" />
+                      className="form-control border-0"
+                      id="Upload Image of related content"
+                      placeholder="Choose file  |  No file chosen"
+                    />
                   </div>
                   <div className="form-group mb-4">
                     <label
@@ -774,8 +845,8 @@ function CustomNavbar(args) {
 
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               <button
                 className="btn rbutton mobile"
@@ -851,6 +922,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <input
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 required
                                 type="url"
                                 value={link}
@@ -901,6 +973,7 @@ function CustomNavbar(args) {
                                 </b> */}
                               </Label>
                               <Input
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 required
                                 type="select"
                                 name="catgry"
@@ -938,6 +1011,7 @@ function CustomNavbar(args) {
                                 )}
                               </Label>
                               <select
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 required
                                 type="select"
                                 name="title"
@@ -985,6 +1059,7 @@ function CustomNavbar(args) {
                                 </b> */}
                               </Label>
                               <select
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 onChange={(e) => setType(e.target.value)}
                                 className="form-control"
                               >
@@ -1018,6 +1093,7 @@ function CustomNavbar(args) {
                                 </b> */}
                               </Label>
                               <select
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 onChange={(e) => setformate(e.target.value)}
                                 className="form-control"
                               >
@@ -1053,7 +1129,9 @@ function CustomNavbar(args) {
                               </b> */}
                             </Label>
                             <Multiselect
-                              style={{ borderRadius: "14px" }}
+                              style={{
+                                borderRadius: "14px",
+                              }}
                               placeholder="Select language"
                               className="w-100%"
                               options={lngage}
@@ -1111,6 +1189,7 @@ function CustomNavbar(args) {
                             </Row> */}
                             <h5>
                               <textarea
+                                style={{ background: "rgb(241, 241, 241)" }}
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
@@ -1130,7 +1209,7 @@ function CustomNavbar(args) {
                               className="mt-4"
                               style={{ font: "GT Walsheim Pro" }}
                             >
-                              <b> Descriptions</b>
+                              <b>Descriptions</b>
                               {/* <b>
                                 Descriptions
                                 <span style={{ color: "red" }}>*</span>
@@ -1138,6 +1217,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <textarea
+                              style={{ background: "rgb(241, 241, 241)" }}
                                 type="text"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control"
@@ -1156,6 +1236,7 @@ function CustomNavbar(args) {
                             </Label>
                             <h5>
                               <input
+                              style={{ background: "rgb(241, 241, 241)" }}
                                 type="file"
                                 // style={{ background: "#F1F1F1" }}
                                 className="form-control imageuserupload"
@@ -1168,6 +1249,7 @@ function CustomNavbar(args) {
                             <Label style={{ font: "GT Walsheim Pro" }}></Label>
 
                             <Input
+                            style={{ background: "rgb(241, 241, 241)" }}
                               type="select"
                               className="form-control"
                               name="yrName"
@@ -1216,7 +1298,7 @@ function CustomNavbar(args) {
                                           </Label>
                                           <input
                                             type="text"
-                                            // style={{ background: "#F1F1F1" }}
+                                            style={{ background: "rgb(241, 241, 241)" }}
                                             className=" form-control mb-3"
                                             placeholder="Title of the resource?"
                                             onChange={(e) =>
@@ -1233,7 +1315,7 @@ function CustomNavbar(args) {
                                           </Label>
                                           <input
                                             type="text"
-                                            // style={{ background: "#F1F1F1" }}
+                                            style={{ background: "rgb(241, 241, 241)" }}
                                             className="form-control mb-3"
                                             placeholder="author of the resource?"
                                             onChange={(e) =>
@@ -1283,7 +1365,7 @@ function CustomNavbar(args) {
                                           <h5>
                                             <textarea
                                               type="text"
-                                              // style={{ background: "#F1F1F1" }}
+                                              style={{ background: "rgb(241, 241, 241)" }}
                                               className="form-control mb-3"
                                               placeholder="describe the resource in a few sentences, topics it covers?"
                                               onChange={(e) =>
@@ -1302,7 +1384,7 @@ function CustomNavbar(args) {
                                           <h5>
                                             <textarea
                                               type="text"
-                                              // style={{ background: "#F1F1F1" }}
+                                              style={{ background: "rgb(241, 241, 241)" }}
                                               className="form-control "
                                               placeholder="Add anything you want to let us know"
                                               onChange={(e) =>
@@ -1392,8 +1474,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>

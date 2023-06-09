@@ -1462,3 +1462,7 @@ input[type="range"] {
     width: 768px;
   }
 }
+
+.multiSelectContainer {
+  background: rgb(241, 241, 241);
+}
