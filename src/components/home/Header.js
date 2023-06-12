@@ -522,6 +522,7 @@ function Header(args) {
           width: "100%",
           padding: "0px 0px",
           backgroundSize: "cover",
+          zIndex:"-69"
         }}
       >
         {/* <section className="text_header ">

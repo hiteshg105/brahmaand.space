@@ -1518,7 +1518,7 @@ function CustomNavbar(args) {
           ) : (
             <Nav.Link as={NavLink} className="navbar-link">
               <Link to={`/signup`}>
-                <button
+                {/* <button
                   className="btn rbutton mobile"
                   onClick={() => {
                     gaEventTracker("+ Submit a Content");
@@ -1533,7 +1533,7 @@ function CustomNavbar(args) {
                   }}
                 >
                   <h4 className="rText">+ Submit a Content</h4>
-                </button>
+                </button> */}
               </Link>
             </Nav.Link>
           )}

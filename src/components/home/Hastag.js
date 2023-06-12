@@ -306,7 +306,7 @@ function Hastag() {
             </Col>
           </Row>
 
-          <div className="trending-warzone-main position-relative">
+          <div  className="trending-warzone-main position-relative">
             <Swiper
               breakpoints={{
                 1084: {
