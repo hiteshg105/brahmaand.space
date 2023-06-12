@@ -925,7 +925,6 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col>
-              <Col></Col>
               {/* <Col className="shadow-lg px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
@@ -945,7 +944,6 @@ const TrendingWarzone = () => {
                   </div>
                 </div>
               </Col> */}
-              <Col className="px-0"></Col>
             </div>
           </Row>
         </Col>

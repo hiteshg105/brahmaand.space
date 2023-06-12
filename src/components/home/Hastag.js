@@ -660,7 +660,7 @@ function Hastag() {
         <p className="category3">How does Brahmaand works?</p>
         <Row>
           <Col lg="4" md="6" sm="12" className="Card-Text">
-            <Card>
+            <Card className="h-100">
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
                 <p>Search for the top content on any subject ... (e.g. Java)</p>
@@ -682,7 +682,7 @@ function Hastag() {
           </Col>
 
           <Col lg="4" md="6" sm="12" className="Card-Text">
-            <Card>
+            <Card className="h-100">
               <Container>
                 <img height="140" className="imgCard" src={rate} alt="img" />
                 <p>
@@ -706,7 +706,7 @@ function Hastag() {
           </Col>
 
           <Col lg="4" md="6" sm="12" className="Card-Text">
-            <Card>
+            <Card className="h-100">
               <Container>
                 <img
                   height="140"
@@ -909,7 +909,7 @@ function Hastag() {
         >
           {popblog?.map((value) => (
             <SwiperSlide key={value?._id}>
-              <Card key={value?._id}>
+              <Card className="h-100 mb-0" key={value?._id}>
                 <Link key={value?._id} to={`/blogdescription/${value?._id}`}>
                   <div className="popularimg">
                     <CardImg
@@ -936,7 +936,7 @@ function Hastag() {
                       <ShowMore
                         className="showmore"
                         style={{ color: "black" }}
-                        lines={1}
+                        lines={2}
                         more="Show more"
                         less="Show less"
                         anchorClass=""

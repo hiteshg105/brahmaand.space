@@ -8,6 +8,8 @@ import { Container, Row, Col, Card, Button } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
+import { Pagination } from "swiper";
+import { SwiperSlide, Swiper } from "swiper/react";
 
 function Header() {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -44,12 +46,12 @@ function Header() {
     console.log(string, results);
   };
 
-  const handleOnHover = result => {
+  const handleOnHover = (result) => {
     // the item hovered
     console.log(result);
   };
 
-  const handleOnSelect = item => {
+  const handleOnSelect = (item) => {
     // the item selected
     console.log(item);
   };
@@ -58,7 +60,7 @@ function Header() {
     console.log("Focused");
   };
 
-  const formatResult = item => {
+  const formatResult = (item) => {
     console.log(newitem);
     return (
       <>
@@ -82,7 +84,7 @@ function Header() {
         .post(`https://backend.brahmaand.space/user/search_topic_title`, {
           searchinput: searchdata,
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.data.length == "0") {
             swal("No product found");
           } else {
@@ -92,7 +94,7 @@ function Header() {
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     }
@@ -101,7 +103,7 @@ function Header() {
     // const onedata = data.split(",");
   };
 
-  const handleEnter = event => {
+  const handleEnter = (event) => {
     if (event.key === "Enter") {
       handlesearchtopics();
     }
@@ -111,11 +113,11 @@ function Header() {
     handlesearchtopics();
     axios
       .get(`https://backend.brahmaand.space/admin/getallCategory`)
-      .then(res => {
+      .then((res) => {
         // console.log(res.data.data);
         setNewitem(res.data.data);
       })
-      .then(err => {
+      .then((err) => {
         // console.log(err);
       });
   }, []);
@@ -131,7 +133,7 @@ function Header() {
           backgroundSize: "cover",
         }}
       >
-        <section className="text_header ">
+        {/* <section className="text_header ">
           <Container>
             <Row>
               <Col md="6">
@@ -151,6 +153,144 @@ function Header() {
             </Row>
             <Row></Row>
           </Container>
+        </section> */}
+        <section className="newdesign-main">
+          <div className="hero-swiper">
+            <Swiper
+              modules={[Pagination]}
+              slidesPerView={1}
+              pagination={{
+                el: ".hero-swiper_swiper_pagination",
+                clickable: true,
+              }}
+            >
+              <SwiperSlide>
+                <div>
+                  <img src="/hero-img.png" alt="" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img src="/hero-img.png" alt="" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img src="/hero-img.png" alt="" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img src="/hero-img.png" alt="" />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img src="/hero-img.png" alt="" />
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+          <div
+            style={{
+              backgroundImage: "url(/bg.png)",
+              backgroundPosition: "center",
+            }}
+          >
+            <div
+              className={`hero-swiper_swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
+            ></div>
+            <h1 style={{ fontSize: "69px" }} className="text-center p-0 m-0">
+              Looking for best content across the world?
+            </h1>
+            <p
+              style={{ fontSize: "45px", letterSpacing: "0.5px" }}
+              className="text-center p-0 m-0 mt-3"
+            >
+              Finding the quality resources is not a hassle anymore
+            </p>
+            <div className="text-center p-0 m-0 mt-5 pb-4">
+              <button
+                style={{
+                  backgroundColor: "#FC9358",
+                  fontSize: "22px",
+                  borderRadius: "24px",
+                }}
+                className="border-0 text-white fw-bold px-2 pe-3 py-2 me-5 opacity-75"
+              >
+                <div>
+                  <span className="me-3">+</span>
+                  <span>Submit a content</span>
+                </div>
+              </button>
+              <button
+                style={{
+                  backgroundColor: "#FC9358",
+                  fontSize: "22px",
+                  borderRadius: "24px",
+                }}
+                className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
+              >
+                <div>
+                  <span className="me-3">+</span>
+                  <span>Submit a content creator</span>
+                </div>
+              </button>
+            </div>
+            {/* <div
+              style={{
+                maxWidth: "90%",
+                marginTop: "65px",
+                paddingBottom: "150px",
+              }}
+              className="mx-auto"
+            >
+              <div className="position-relative">
+                <input
+                  style={{
+                    padding: "40.5px 0 40.5px 105px",
+                    borderRadius: "66.5px",
+                    fontSize: "28px",
+                    color: "#5C5C5C",
+                  }}
+                  className="w-100 border-0"
+                  type="text"
+                  placeholder="Searching best quality content here . . . "
+                />
+                <div
+                  style={{
+                    left: "30px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                  className="position-absolute"
+                >
+                  <img src="/search-icon.png" alt="search" />
+                </div>
+                <div
+                  style={{
+                    right: "30px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                  className="h-100 position-absolute d-flex align-items-center"
+                >
+                  <button
+                    style={{
+                      backgroundColor: "#011D2B",
+                      height: "80%",
+                      fontSize: "28px",
+                      borderRadius: "55px",
+                      padding: "0 80px",
+                    }}
+                    className="text-white border-0"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div> */}
+          </div>
         </section>
       </div>
       <section>
@@ -181,7 +321,7 @@ function Header() {
               className="search"
               onKeyDown={handleEnter}
               value={searchdata}
-              onChange={e => {
+              onChange={(e) => {
                 setSearchdata(e.target.value);
               }}
             />
