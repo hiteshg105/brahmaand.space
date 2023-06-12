@@ -164,31 +164,19 @@ function Header() {
                 clickable: true,
               }}
             >
-              <SwiperSlide>
-                <div>
-                  <img src="/hero-img.png" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src="/hero-img.png" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src="/hero-img.png" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src="/hero-img.png" alt="" />
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div>
-                  <img src="/hero-img.png" alt="" />
-                </div>
-              </SwiperSlide>
+              {[
+                "/hero-img1.png",
+                "/hero-img2.png",
+                "/hero-img3.png",
+                "/hero-img4.png",
+                "/hero-img5.png",
+              ].map((imgPath) => (
+                <SwiperSlide>
+                  <div>
+                    <img src={imgPath} alt="hero-images" />
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
           <div
