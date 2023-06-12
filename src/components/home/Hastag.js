@@ -374,7 +374,9 @@ function Hastag() {
                   <h4 className="text-center fw-bold">
                     {features?.category?.title}
                   </h4>
-                  <HomeCountDown endDate={features.endDate} />
+                  {!features.winner && (
+                    <HomeCountDown endDate={features.endDate} />
+                  )}
 
                   <div className="ifram warzone">
                     <div>

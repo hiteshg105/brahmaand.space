@@ -260,39 +260,88 @@ const TrendingWarzone = () => {
         </h1>
       </Col> */}
       <Row className="justify-content-between">
-        {/* <Col className="d-none d-lg-flex justify-content-center mt-5">
-          <div
-            style={{ border: "3px solid #6BE585", width: "fit-content" }}
-            className="d-flex align-items-center px-4 py-2"
-          >
-            <span className="me-3">
-              <img src={trophy} width={25} alt="" />
-            </span>
-            <span style={{ color: "#6BE585", fontWeight: "bold" }}>WINNER</span>
-          </div>
-        </Col> */}
-        <Col>
-          <CountDown endDate={war && war.endDate} />
+        <Col className="align-items-end d-none d-lg-flex justify-content-center mt-5">
+          {war?.winner && (
+            <>
+              {" "}
+              {war?.winner === war?.resource1._id ? (
+                <div
+                  style={{
+                    border: "3px solid #6BE585",
+                    height: "fit-content",
+                    width: "fit-content",
+                  }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={trophy} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                    WINNER
+                  </span>
+                </div>
+              ) : (
+                <div
+                  style={{ border: "3px solid #B62E17", width: "fit-content" }}
+                  className="d-flex align-items-center px-4 py-2"
+                >
+                  <span className="me-3">
+                    <img src={loser} width={25} alt="" />
+                  </span>
+                  <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                    LOSER
+                  </span>
+                </div>
+              )}
+            </>
+          )}
         </Col>
+        <Col>{!war?.winner && <CountDown endDate={war && war.endDate} />}</Col>
         <Col
           style={{ top: "-16px", right: "-12px" }}
           className="h-100 text-end position-absolute d-sm-block d-lg-none"
         ></Col>
-        {/* <Col className="d-none d-lg-flex align-items-center">
+        <Col className="d-none d-lg-flex align-items-center">
           <Col className="h-100 d-flex align-items-end">
-            <div
-              style={{ border: "3px solid #B62E17", width: "fit-content" }}
-              className="d-flex align-items-center px-4 py-2"
-            >
-              <span className="me-3">
-                <img src={loser} width={25} alt="" />
-              </span>
-              <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                LOSER
-              </span>
-            </div>
+            {war?.winner && (
+              <>
+                {" "}
+                {war?.winner === war?.resource2._id ? (
+                  <div
+                    style={{
+                      border: "3px solid #6BE585",
+                      height: "fit-content",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={trophy} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                      WINNER
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      border: "3px solid #B62E17",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={loser} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                      LOSER
+                    </span>
+                  </div>
+                )}
+              </>
+            )}
           </Col>
-        </Col> */}
+        </Col>
       </Row>
       <Row className="d-flex d-lg-none border-top mt-4">
         {/* <Col className="h-100 d-flex justify-content-center border-start py-4">
@@ -307,44 +356,52 @@ const TrendingWarzone = () => {
 
       <Row className="m-0 mt-0 mt-lg-4">
         <Col lg={6} className="border-top border-bottom p-0">
-          {/* { war?.winner === war?.resource1._id ? (
-            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-              <div
-                style={{ border: "3px solid #6BE585", width: "fit-content" }}
-                className="d-flex align-items-center px-4 py-2"
-              >
-                <span className="me-3">
-                  <img src={trophy} width={25} alt="" />
-                </span>
-                <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-                  WINNER
-                </span>
-              </div>
-            </Col>
-          ) : (
-            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-              <div
-                style={{ border: "3px solid #B62E17", width: "fit-content" }}
-                className="d-flex align-items-center px-4 py-2"
-              >
-                <span className="me-3">
-                  <img src={loser} width={25} alt="" />
-                </span>
-                <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                  LOSER
-                </span>
-              </div>
-            </Col>
-          )} */}
+          <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+            {war?.winner && (
+              <>
+                {war?.winner === war?.resource1._id ? (
+                  <div
+                    style={{
+                      border: "3px solid #6BE585",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={trophy} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                      WINNER
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      border: "3px solid #B62E17",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={loser} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                      LOSER
+                    </span>
+                  </div>
+                )}
+              </>
+            )}
+          </Col>
 
-          <Row className="py-3 pe-4 ps-4 justify-content-end ps-lg-0">
+          <Row className="flex-column justify-content-between py-3 pe-4 ps-4 justify-content-end ps-lg-0">
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
-              className="col-lg-10 mb-3"
+              className="col-lg-10 mb-3 ms-auto"
             >
               {war?.resource1.desc}
             </p>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center justify-content-end">
               <Link className="me-3" to="#">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -356,43 +413,52 @@ const TrendingWarzone = () => {
         </Col>
 
         <Col lg={6} className="content-box border-top border-bottom p-0">
-          {/* {war?.winner === war?.resource2._id ? (
-            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-              <div
-                style={{ border: "3px solid #6BE585", width: "fit-content" }}
-                className="d-flex align-items-center px-4 py-2"
-              >
-                <span className="me-3">
-                  <img src={trophy} width={25} alt="" />
-                </span>
-                <span style={{ color: "#6BE585", fontWeight: "bold" }}>
-                  WINNER
-                </span>
-              </div>
-            </Col>
-          ) : (
-            <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-              <div
-                style={{ border: "3px solid #B62E17", width: "fit-content" }}
-                className="d-flex align-items-center px-4 py-2"
-              >
-                <span className="me-3">
-                  <img src={loser} width={25} alt="" />
-                </span>
-                <span style={{ color: "#B62E17", fontWeight: "bold" }}>
-                  LOSER
-                </span>
-              </div>
-            </Col>
-          )} */}
-          <Row className="py-3 ps-4">
+          <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
+            {war?.winne && (
+              <>
+                {war?.winner === war?.resource2._id ? (
+                  <div
+                    style={{
+                      border: "3px solid #6BE585",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={trophy} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#6BE585", fontWeight: "bold" }}>
+                      WINNER
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      border: "3px solid #B62E17",
+                      width: "fit-content",
+                    }}
+                    className="d-flex align-items-center px-4 py-2"
+                  >
+                    <span className="me-3">
+                      <img src={loser} width={25} alt="" />
+                    </span>
+                    <span style={{ color: "#B62E17", fontWeight: "bold" }}>
+                      LOSER
+                    </span>
+                  </div>
+                )}
+              </>
+            )}
+          </Col>
+
+          <Row className="h-100 py-3 ps-4 flex-column justify-content-between">
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3"
             >
               {war?.resource2.desc}
             </p>
-            <div className="d-flex align-items-center">
+            <div style={{ height: "fit-content" }} className="d-flex">
               <Link className="me-3" to="#">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
