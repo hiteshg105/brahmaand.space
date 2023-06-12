@@ -244,8 +244,8 @@
 /* New Design */
 .newdesign-main .swiper-pagination-bullet {
   display: inline-block !important;
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   border: 1px solid #e9987b !important;
   background-color: transparent !important;
   opacity: 1 !important;
