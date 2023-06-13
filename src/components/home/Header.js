@@ -10,7 +10,7 @@ import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import Multiselect from "multiselect-react-dropdown";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { ImCancelCircle } from "react-icons/im";
 import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
@@ -522,7 +522,7 @@ function Header(args) {
           width: "100%",
           padding: "0px 0px",
           backgroundSize: "cover",
-          zIndex:"-69"
+          zIndex: "-69",
         }}
       >
         {/* <section className="text_header ">
@@ -549,7 +549,8 @@ function Header(args) {
         <section className="newdesign-main">
           <div className="hero-swiper">
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
+              autoplay={true}
               slidesPerView={1}
               pagination={{
                 el: ".hero-swiper_swiper_pagination",
