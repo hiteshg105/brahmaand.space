@@ -498,7 +498,7 @@ function CustomNavbar(args) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ms-auto navbar-nav">
           <Nav.Link as={NavLink} className="navbar-link">
-            <button
+            {/* <button
               className="btn rbutton mobile"
               type="submit"
               onClick={(e) => (
@@ -508,7 +508,7 @@ function CustomNavbar(args) {
               )}
             >
               <h4 className="rText">+Content Creator</h4>
-            </button>
+            </button> */}
             <Container>
               <Modal
                 toggle={() => (closeModel(),setIsContentCreatorModel(!isContentCreatorModel))}
@@ -904,7 +904,7 @@ function CustomNavbar(args) {
             localStorage.getItem("userId") !== null &&
             localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
-              <button
+              {/* <button
                 className="btn rbutton mobile"
                 type="submit"
                 onClick={(e) => (
@@ -912,7 +912,7 @@ function CustomNavbar(args) {
                 )}
               >
                 <h4 className="rText">+Submit a Content</h4>
-              </button>
+              </button> */}
               <Container>
                 <Modal
                   toggle={toggle}
@@ -1518,7 +1518,7 @@ function CustomNavbar(args) {
           ) : (
             <Nav.Link as={NavLink} className="navbar-link">
               <Link to={`/signup`}>
-                <button
+                {/* <button
                   className="btn rbutton mobile"
                   onClick={() => {
                     gaEventTracker("+ Submit a Content");
@@ -1533,7 +1533,7 @@ function CustomNavbar(args) {
                   }}
                 >
                   <h4 className="rText">+ Submit a Content</h4>
-                </button>
+                </button> */}
               </Link>
             </Nav.Link>
           )}

@@ -126,7 +126,8 @@ function App() {
             <Route
               exact
               path="/productsearch/:id"
-              element={<Productsearch />}
+              element={<ProductsearchNew />} 
+              //  ProductsearchNew   Productsearch
             />
             <Route
               exact
