@@ -59,7 +59,9 @@ function AllSubCategory() {
           <Row className="m-3 mb-4">
             {subcatgry?.map((value) => (
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
-                <Link to={`/productList/${value._id}`}>
+                <Link
+                  to={`/productsearch/${value._id}`}
+                >
                   <div className="bg-1">
                     <div className="blackimage">
                       <img
@@ -69,7 +71,7 @@ function AllSubCategory() {
                       />
                       <div className=" d-flex content-bt newcontent">
                         <Row className="  mt-2">
-                          <Button className="btlisting" onClick={()=>gaEventTracker('Listing')}>
+                          <Button className="btlisting" onClick={() => gaEventTracker('Listing')}>
                             {value?.conent_count} - Listing
                           </Button>
                         </Row>
