@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import "moment-timezone";
 import swal from "sweetalert";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
@@ -123,9 +124,9 @@ function ResetPassword() {
           document.getElementById("messagesa").innerHTML =
             "**Strong Password** ";
 
-          axios
+            axiosConfig
             .post(
-              `https://backend.brahmaand.space/user/resetPassword/${userId}`,
+              `/user/resetPassword/${userId}`,
               {
                 oldpassword: oldpass,
                 password: newpass,

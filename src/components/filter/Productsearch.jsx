@@ -125,8 +125,8 @@ function Productsearch(args) {
 
     setFiltertype(filtertype);
 
-    axios
-      .post(`https://backend.brahmaand.space/user/keyword_search_filter`, {
+    axiosConfig
+      .post(`/user/keyword_search_filter`, {
         searchinput: searchdata,
         language: language,
         relYear: filtertype,
@@ -141,8 +141,8 @@ function Productsearch(args) {
         console.log(err);
       });
 
-    axios
-      .post(`https://backend.brahmaand.space/user/promotion_search_filter`, {
+      axiosConfig
+      .post(`/user/promotion_search_filter`, {
         searchinput: searchdata,
         language: language,
         relYear: filtertype,
@@ -170,8 +170,8 @@ function Productsearch(args) {
     console.log(rating);
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
+      axiosConfig
+        .post(`/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -189,8 +189,8 @@ function Productsearch(args) {
   };
   // console.log(Producdetail, "Searching Product");
   const handleeditcomment = (id) => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
+    axiosConfig
+      .get(`/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -251,8 +251,8 @@ function Productsearch(args) {
   };
 
   const getYear = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allYear`)
+    axiosConfig
+      .get(`/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
       })
@@ -298,8 +298,8 @@ function Productsearch(args) {
     const searchdata = localStorage.getItem("searchdata");
     setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+    axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -313,8 +313,8 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err);
         });
-    axios
-      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+        axiosConfig
+      .post(`/user/search_promotion`, {
         searchinput: searchdata,
       })
       .then((res) => {
@@ -330,8 +330,8 @@ function Productsearch(args) {
 
   const handlesearchdescription = () => {
     localStorage.setItem("searchdata", searchitem);
-    axios
-      .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+    axiosConfig
+      .post(`/user/search_topic_title`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -341,8 +341,8 @@ function Productsearch(args) {
         console.log(err);
       });
 
-    axios
-      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+      axiosConfig
+      .post(`/user/search_promotion`, {
         searchinput: searchitem,
       })
       .then((res) => {
@@ -355,8 +355,8 @@ function Productsearch(args) {
   };
 
   const getLanguage = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allLang`)
+    axiosConfig
+      .get(`/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
       })
@@ -519,8 +519,8 @@ function Productsearch(args) {
     promotionadmin();
   };
   const promotionadmin = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/Promotions`)
+    axiosConfig
+      .get(`/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
         // console.log(res.data.data);
@@ -583,10 +583,10 @@ function Productsearch(args) {
 
     if (selectedId === _id) {
       setProductdes(selectedId);
-      axios
+      axiosConfig
         // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
         .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${selectedId}`
+          `/admin/getone_reslist/${selectedId}`
         )
         .then((res) => {
           // console.log(res.data.data._id);
@@ -604,9 +604,9 @@ function Productsearch(args) {
           // console.log(err.data.data);
         });
 
-      axios
+        axiosConfig
         .get(
-          `https://backend.brahmaand.space/user/average_rating/${productdes}`
+          `/user/average_rating/${productdes}`
         )
         .then((res) => {
           // console.log(res.data);
@@ -617,8 +617,8 @@ function Productsearch(args) {
         });
     }
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
+    axiosConfig
+      .get(`/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -636,9 +636,9 @@ function Productsearch(args) {
 
     if (selectedId === _id) {
       setProductdes(selectedId);
-      axios
+      axiosConfig
         .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${productdes}`
+          `/admin/getone_reslist/${productdes}`
         )
         .then((res) => {
           // console.log(res.data.data._id);
@@ -657,9 +657,9 @@ function Productsearch(args) {
           // console.log(err.data.data);
         });
 
-      axios
+        axiosConfig
         .get(
-          `https://backend.brahmaand.space/user/average_rating/${productdes}`
+          `/user/average_rating/${productdes}`
         )
         .then((res) => {
           // console.log(res.data);
@@ -670,8 +670,8 @@ function Productsearch(args) {
         });
     }
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
+    axiosConfig
+      .get(`/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -767,8 +767,8 @@ function Productsearch(args) {
     const searchdata = localStorage.getItem("searchdata");
     setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+    axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -782,8 +782,8 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err);
         });
-    axios
-      .post(`https://backend.brahmaand.space/user/search_promotion`, {
+        axiosConfig
+      .post(`/user/search_promotion`, {
         searchinput: searchdata,
       })
       .then((res) => {
@@ -811,9 +811,9 @@ function Productsearch(args) {
   };
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
-    axios
+    axiosConfig
       .get(
-        `https://backend.brahmaand.space/admin/listbysubcategory/${Params.id}`
+        `/admin/listbysubcategory/${Params.id}`
       )
       .then((response) => {
         setSuggested(response.data.data);

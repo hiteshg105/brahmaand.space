@@ -88,8 +88,8 @@ const ContentCreators = ({ categry }) => {
     // console.log(rating);
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
+      axiosClient
+        .post(`/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -401,6 +401,7 @@ const ContentCreators = ({ categry }) => {
                 key={item._id}
                 onClick={() => handleSelection(item._id)}
               >
+                {console.log(item)}
                 <Col>
                   <div style={{ maxHeight: "300px" }}>
                     <img

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/ModulePage.css";
-import axios from "axios";
+
 import Head from "../../images/social-media-with-photo-frame-like-button-media-payer-pink-background-illustration 10.png";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ import {
   AccordionHeader,
   AccordionItem,
 } from "reactstrap";
-import axiosConfig from "../../components/axiosConfig";
+import axiosConfig from "../axiosConfig";
 
 function Header(args) {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -330,8 +330,8 @@ function Header(args) {
 
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getallCategory`)
+    axiosConfig
+      .get(`/admin/getallCategory`)
 
       .then((response) => {
         setAllcatego(response.data.data);
@@ -343,28 +343,28 @@ function Header(args) {
 
   const [subctgry, setSubctgry] = useState([]);
 
-  useEffect(() => {
-    const params = catgry ? catgry : category;
-    axios
+  // useEffect(() => {
+  //   const params = catgry ? catgry : category;
+  //   axiosConfig
 
-      .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${
-          catgry ? catgry : category
-        }`
-      )
-      .then((response) => {
-        // console.log(response.data.data);
-        setSubctgry(response.data.data);
-      })
-      .catch((error) => {
-        // console.log(error.response.data);
-      });
-  }, [catgry, category]);
+  //     .get(
+  //       `/admin/listbycategory/${
+  //         catgry ? catgry : category
+  //       }`
+  //     )
+  //     .then((response) => {
+  //       // console.log(response.data.data);
+  //       setSubctgry(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       // console.log(error.response.data);
+  //     });
+  // }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allYear`)
+    axiosConfig
+      .get(`/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -375,8 +375,8 @@ function Header(args) {
   };
 
   const getLanguage = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allLang`)
+    axiosConfig
+      .get(`/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);
@@ -514,8 +514,8 @@ function Header(args) {
     // console.log(searchdata);
     localStorage.setItem("searchdata", searchdata);
     if (searchdata !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+      axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
         .then((res) => {
@@ -545,8 +545,8 @@ function Header(args) {
   const [newitem, setNewitem] = useState([]);
   useEffect(() => {
     handlesearchtopics();
-    axios
-      .get(`https://backend.brahmaand.space/admin/getallCategory`)
+    axiosConfig
+      .get(`/admin/getallCategory`)
       .then((res) => {
         // console.log(res.data.data);
         setNewitem(res.data.data);

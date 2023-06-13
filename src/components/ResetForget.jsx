@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Modal, ModalBody, Label, FormGroup, Input, Alert } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import "moment-timezone";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
@@ -57,9 +58,9 @@ function ResetForget() {
         const forgetuserid = localStorage.getItem("forgetpassuserId");
         // console.log(forgetuserid);
         // console.log("password matched  so api is goint to hit");
-        axios
+        axiosConfig
           .post(
-            `https://backend.brahmaand.space/user/forgetpassword/${forgetuserid}`,
+            `/user/forgetpassword/${forgetuserid}`,
             {
               password: newpass,
             }

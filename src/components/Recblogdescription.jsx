@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -12,9 +13,9 @@ function Recblogdescription() {
   const Param = useParams();
 
   useEffect(() => {
-    axios
+    axiosConfig
 
-      .get(`https://backend.brahmaand.space/admin/viewoneBlog/${Param.id}`)
+      .get(`/admin/viewoneBlog/${Param.id}`)
 
       .then((res) => {
         setBlogdescription(res.data.data);

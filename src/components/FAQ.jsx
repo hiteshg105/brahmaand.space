@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import Accordion from "react-bootstrap/Accordion";
 
 function FAQ() {
@@ -10,8 +11,8 @@ function FAQ() {
   }, []);
 
   const freques = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/faq_list`)
+    axiosConfig
+      .get(`/admin/faq_list`)
       .then((res) => {
         setFaq(res.data.data);
         // console.log(res.data.data);

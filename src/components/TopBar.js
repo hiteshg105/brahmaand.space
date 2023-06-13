@@ -8,6 +8,7 @@ import imageToBase64 from "image-to-base64/browser";
 import { Link, NavLink } from "react-router-dom";
 import Glass from "../../src/images/Glass.png";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import swal from "sweetalert";
 import avatar1 from "../images/avatar1.png";
 import profile from "../images/1.png";
@@ -54,8 +55,8 @@ function TopBar() {
 
   const [userdata, setUserdata] = useState({});
   const getUserData = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
+    axiosConfig
+      .get(`/user/getoneUser/${id}`)
       .then((res) => {
         setUserdata(res.data.data);
 
@@ -82,9 +83,9 @@ function TopBar() {
 
     formData.append("display_name", display_name);
     formData.append("abt_us", abt_us);
-    axios
+    axiosConfig
       .post(
-        `https://backend.brahmaand.space/user/updateProfile/${id}`,
+        `/user/updateProfile/${id}`,
         formData
       )
       .then((response) => {

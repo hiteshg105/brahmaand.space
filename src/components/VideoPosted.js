@@ -66,8 +66,8 @@ function VideoPosted(args) {
 
     const user = localStorage.getItem("userId");
 
-    axios
-      .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
+    axiosConfig
+      .post(`/user/editCommentbyUser/${id}`, {
         submitresrcId: dataid,
         userid: user,
         comment: upcom,
@@ -86,8 +86,8 @@ function VideoPosted(args) {
   const [editnew, seteditnew] = useState({});
 
   const handleeditcomment = (id) => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
+    axiosConfig
+      .get(`/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -142,8 +142,8 @@ function VideoPosted(args) {
         const selectedId = Producdetail._id;
         // console.log(selectedId, userId, text, rating);
 
-        axios
-          .post(`https://backend.brahmaand.space/user/add_Comment`, {
+        axiosConfig
+          .post(`/user/add_Comment`, {
             submitresrcId: selectedId,
             userid: userId,
             comment: text,
@@ -241,9 +241,9 @@ function VideoPosted(args) {
       liked !== null &&
       liked !== undefined
     ) {
-      axios
+      axiosConfig
         .get(
-          `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
+          `/user/getone_mylikes/${myId}/${liked}`
         )
         .then((res) => {
           // console.log(res.data.data);
@@ -261,9 +261,9 @@ function VideoPosted(args) {
 
     if (selectedId === _id) {
       setProductdes(selectedId);
-      axios
+      axiosConfig
         .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${productdes}`
+          `/admin/getone_reslist/${productdes}`
         )
         .then((res) => {
           // console.log(res.data.data);
@@ -282,8 +282,8 @@ function VideoPosted(args) {
         });
     }
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${selectedId}`)
+    axiosConfig
+      .get(`/user/comment_list/${selectedId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res);
@@ -316,8 +316,8 @@ function VideoPosted(args) {
   const mylikehandler = () => {
     // console.log(myId);
     if (myId !== null) {
-      axios
-        .get(`https://backend.brahmaand.space/user/posted_by_me/${myId}`)
+      axiosConfig
+        .get(`/user/posted_by_me/${myId}`)
         .then((res) => {
           setMylikes(res.data.data);
           console.log(res.data.data);

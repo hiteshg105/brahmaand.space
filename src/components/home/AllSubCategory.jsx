@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosConfig from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "../../styles/ModulePage.css";
 import {
@@ -27,8 +28,8 @@ function AllSubCategory() {
   }, [Params]);
 
   const allsubcategory = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/listbycategory/${Params.id}`)
+    axiosConfig
+      .get(`/admin/listbycategory/${Params.id}`)
       .then((response) => {
         // console.log(response.data.data);
         if (response.data.data.length === 0) {

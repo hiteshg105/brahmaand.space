@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import ReactHtmlParser from "react-html-parser";
 
 const Privacy = () => {
@@ -10,8 +11,8 @@ const Privacy = () => {
   }, []);
 
   const privacypolicy = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getPrivcyPolicy`)
+    axiosConfig
+      .get(`/admin/getPrivcyPolicy`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import axiosConfig from "../axiosConfig";
 
 import {
   //Alert,
@@ -45,8 +46,8 @@ function ContactUs() {
     ) {
       swal("Please Enter details Correctly");
     } else {
-      axios
-        .post(`https://backend.brahmaand.space/user/add_contactus`, {
+      axiosConfig
+        .post(`/user/add_contactus`, {
           name: name,
           mobile: mobile,
           email: email,

@@ -83,8 +83,8 @@ function Allpromotion(args) {
     console.log(rating);
     const user = localStorage.getItem("userId");
     if (rating !== "" && upcom !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/editCommentbyUser/${id}`, {
+      axiosConfig
+        .post(`/user/editCommentbyUser/${id}`, {
           submitresrcId: dataid,
           userid: user,
           comment: upcom,
@@ -104,8 +104,8 @@ function Allpromotion(args) {
   const [editnew, seteditnew] = useState({});
 
   const handleeditcomment = (id) => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
+    axiosConfig
+      .get(`/admin/getone_coment_list/${id}`)
       .then((res) => {
         console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -184,9 +184,9 @@ function Allpromotion(args) {
     var promotionId = _id;
     if (promotionId === _id) {
       setPromotId(promotionId);
-      axios
+      axiosConfig
         .get(
-          `https://backend.brahmaand.space/admin/getone_reslist/${promotionId}`
+          `/admin/getone_reslist/${promotionId}`
         )
         .then((res) => {
           // console.log(res.data.data._id);
@@ -204,8 +204,8 @@ function Allpromotion(args) {
           // console.log(err.data.data);
         });
     }
-    axios
-      .get(`https://backend.brahmaand.space/user/average_rating/${promotionId}`)
+    axiosConfig
+      .get(`/user/average_rating/${promotionId}`)
       .then((res) => {
         // console.log(res.data);
         setAverageRating(res.data);
@@ -216,8 +216,8 @@ function Allpromotion(args) {
     // const selectedId = promotiondata._id;
     // console.log(selectedId, myId, text, rating);
 
-    axios
-      .get(`https://backend.brahmaand.space/user/comment_list/${promotionId}`)
+    axiosConfig
+      .get(`/user/comment_list/${promotionId}`)
       .then((res) => {
         setGetonecomment(res.data.data);
         // console.log(res.data.data);
@@ -228,9 +228,9 @@ function Allpromotion(args) {
   };
 
   const hadlestatusbookmark = () => {
-    axios
+    axiosConfig
       .get(
-        `https://backend.brahmaand.space/user/getone_mylikes/${myId}/${liked}`
+        `/user/getone_mylikes/${myId}/${liked}`
       )
       .then((res) => {
         // console.log(res.data.data);
@@ -264,8 +264,8 @@ function Allpromotion(args) {
     if (myId !== null && myId !== undefined && myId !== "") {
       const selectedId = Producdetail._id;
 
-      axios
-        .post(`https://backend.brahmaand.space/user/add_Comment`, {
+      axiosConfig
+        .post(`/user/add_Comment`, {
           submitresrcId: id,
           userid: myId,
           comment: text,
@@ -323,8 +323,8 @@ function Allpromotion(args) {
     promotionadmin();
   }, [handlebookmark, activelike, Producdetail, promotiondata]);
   const promotionadmin = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/Promotions`)
+    axiosConfig
+      .get(`/user/Promotions`)
       .then((res) => {
         setPromotion(res.data.data);
         console.log(res.data.data);

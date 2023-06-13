@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import Moment from "react-moment";
 import "moment-timezone";
 import axios from "axios";
+import axiosClient from "../components/axiosConfig";
 
 function Activity() {
   const [userdata, setUserData] = useState({});
   const id = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios
-      .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
+    axiosClient
+      .get(`/user/getoneUser/${id}`)
       .then((response) => {
         // console.log("getdata", response.data.data);
         setUserData(response.data.data);

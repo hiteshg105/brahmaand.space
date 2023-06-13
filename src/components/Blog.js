@@ -8,6 +8,7 @@ import "../components/blog.css";
 import ReactPaginate from "react-paginate";
 import blog from "../images/2.png";
 import axios from "axios";
+import axiosClient from "../components/axiosConfig";
 import swal from "sweetalert";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
@@ -53,8 +54,8 @@ function Blog() {
   }, []);
 
   const reconmendedblog = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/recomanded_Blog`)
+    axiosClient
+      .get(`/user/recomanded_Blog`)
 
       .then((response) => {
         console.log(response);
@@ -66,8 +67,8 @@ function Blog() {
   };
 
   const popularblog = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/popularBlog`)
+    axiosClient
+      .get(`/user/popularBlog`)
 
       .then((response) => {
         console.log(response);
