@@ -584,7 +584,7 @@ function Header(args) {
         <section className="newdesign-main">
           <div className="hero-swiper">
             <Swiper
-              modules={[Pagination,Autoplay]}
+              modules={[Pagination, Autoplay]}
               slidesPerView={1}
               pagination={{
                 el: ".hero-swiper_swiper_pagination",
@@ -596,7 +596,8 @@ function Header(args) {
                 "/hero-img1.png",
                 "/hero-img2.png",
                 "/hero-img3.png",
-                "/hero-img4.png",,
+                "/hero-img4.png",
+                ,
               ].map((imgPath) => (
                 <SwiperSlide>
                   <div>
