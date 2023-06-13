@@ -8,7 +8,7 @@ import { Container, Row, Col, Card, Button } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 
 function Header() {
@@ -157,12 +157,13 @@ function Header() {
         <section className="newdesign-main">
           <div className="hero-swiper">
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination,Autoplay]}
               slidesPerView={1}
               pagination={{
                 el: ".hero-swiper_swiper_pagination",
                 clickable: true,
               }}
+              autoplay={true}
             >
               {[
                 "/hero-img1.png",
