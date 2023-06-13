@@ -1140,8 +1140,8 @@ function Productsearch(args) {
                       className="sld-1 justify-content-center swiper-button-show"
                       modules={[Navigation, Scrollbar, A11y]}
                       navigation
-                      onSlideChange={() => console.log("slide change")}
-                      onSwiper={(swiper) => console.log(swiper)}
+                      // onSlideChange={() => console.log("slide change")}
+                      // onSwiper={(swiper) => console.log(swiper)}
                       scrollbar={{ draggable: true }}
                     >
                       {promotion?.length > 0 ? (

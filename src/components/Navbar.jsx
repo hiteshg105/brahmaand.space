@@ -1369,7 +1369,7 @@ function CustomNavbar(args) {
                                           <Label
                                             style={{ font: "GT Walsheim Pro" }}
                                           >
-                                            <b>Creator Name</b>
+                                            <b>Creator Name</b><span> *</span>
                                           </Label>
                                           <input
                                             type="text"

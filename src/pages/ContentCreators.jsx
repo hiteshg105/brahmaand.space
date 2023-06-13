@@ -55,7 +55,8 @@ const ContentCreators = ({ categry }) => {
   const [activelike, setActivelike] = useState("");
 
   const [rating, setRating] = useState("");
-
+  const [cmtRating, setCmtRating] = useState("");
+  const [cmtComment, setCmtComment] = useState("");
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
   const toggleedit = () => {
@@ -77,6 +78,7 @@ const ContentCreators = ({ categry }) => {
       setRating(newValue);
     },
   };
+  // console.log(contentCretorDetail, "contentCretorDetail");
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -111,12 +113,35 @@ const ContentCreators = ({ categry }) => {
     },
   };
 
+  const handleSubmitCreatorComment = async (e, id) => {
+    e.preventDefault();
+    const userid = localStorage.getItem("userId");
+    // console.log(userid)
+    // console.log(id)
+    const data = await axiosClient.post(`/user/add_creator_comment`, {
+      creatorResrcId: id,
+      userid: userid,
+      comment: cmtComment,
+      rating: cmtRating,
+    });
+    if (data.data.status) {
+      setCmtComment("");
+      swal("Comment Added");
+      handleSelection(id);
+      handleContent(content, limit);
+    } else {
+      swal("Comment Already Exist");
+    }
+    // console.log(data);
+  };
+
   const handleSelection = (id) => {
     if (content === "Content") {
       axios
         // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
         .get(`https://backend.brahmaand.space/admin/getone_reslist/${id}`)
         .then((res) => {
+          toggle();
           // console.log(res.data.data._id);
           // console.log(res);
           if (
@@ -131,8 +156,8 @@ const ContentCreators = ({ categry }) => {
           // console.log(err.data.data);
         });
 
-      axios
-        .get(`https://backend.brahmaand.space/user/comment_list/${id}`)
+      axiosClient
+        .get(`/user/comment_list/${id}`)
         .then((res) => {
           setGetonecomment(res.data.data);
           // console.log(res.data.data);
@@ -143,13 +168,12 @@ const ContentCreators = ({ categry }) => {
     }
 
     if (content === "Content Creators") {
-      console.log(id, "hello");
+      // console.log(id, "hello");
       axiosClient
-        .get(
-          `https://backend.brahmaand.space/content/creator/get_single_content_data/${id}`
-        )
+        .get(`/content/creator/get_single_content_data/${id}`)
         .then((res) => {
           // console.log(res.data.data._id);
+          toggle();
           // console.log(res);
           if (
             res.data.data._id !== "" ||
@@ -166,11 +190,11 @@ const ContentCreators = ({ categry }) => {
     //
   };
 
-  console.log(contentCretorDetail, "contentCreator");
+  // console.log(contentCretorDetail, "contentCreator");
 
-  useEffect(() => {
-    handleSelection(selectedItemId);
-  }, [selectedItemId]);
+  // useEffect(() => {
+  //   handleSelection(selectedItemId);
+  // }, [selectedItemId]);
 
   const removebookmark = (id) => {
     setliked(id);
@@ -320,7 +344,7 @@ const ContentCreators = ({ categry }) => {
       setVal(data.data.data);
     }
   };
-
+  // console.log(val);
   const colors = {
     star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
   };
@@ -334,7 +358,8 @@ const ContentCreators = ({ categry }) => {
   }, [categry]);
 
   const handleclosemodal = () => {
-    setModal(false);
+    // setModal(false);
+    toggle();
     setProductdetail("");
     setProductdes("");
   };
@@ -357,13 +382,15 @@ const ContentCreators = ({ categry }) => {
       <Row className="my-4">
         <h4 className="fw-bold">Content Creators</h4>
       </Row>
-
+      {/* {console.log(modal, "model")} */}
       <div className="grid-main">
         {val.map((item, i) => {
           const date = new Date(
             item.userid !== null ? item.userid?.createdAt : new Date()
           );
-
+          {
+            /* console.log(item); */
+          }
           const options = { day: "2-digit", month: "short", year: "numeric" };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
@@ -372,7 +399,7 @@ const ContentCreators = ({ categry }) => {
               <div
                 className="item"
                 key={item._id}
-                onClick={() => (setSelectedItemId(item._id), setModal(true))}
+                onClick={() => handleSelection(item._id)}
               >
                 <Col>
                   <div style={{ maxHeight: "300px" }}>
@@ -394,7 +421,7 @@ const ContentCreators = ({ categry }) => {
                     <div className="d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
                         <PrettyRating
-                          value={2.5}
+                          value={item?.ava_rating?.toFixed(2)}
                           icons={icons.star}
                           colors={colors.star}
                         />
@@ -402,11 +429,15 @@ const ContentCreators = ({ categry }) => {
                           style={{ color: "#FCAF3B" }}
                           className="ms-2 fw-bold"
                         >
-                          (4.5)
+                          (
+                          {item?.ava_rating
+                            ? item?.ava_rating?.toFixed(2)
+                            : 0.0}
+                          )
                         </span>
                       </div>
                       <p style={{ color: "#5F56C6" }} className="fw-bold">
-                        12.2k Reviews
+                        {item?.length} Reviews
                       </p>
                     </div>
                   </div>
@@ -416,6 +447,7 @@ const ContentCreators = ({ categry }) => {
           );
         })}
       </div>
+      {/* {console.log(modal)} */}
       {content && content === "Content" ? (
         <Modal
           key={Producdetail?._id}
@@ -705,9 +737,9 @@ const ContentCreators = ({ categry }) => {
                   <div className="d-flex justify-content-right">
                     {value?.userid?._id == localStorage.getItem("userId") ? (
                       <>
-                        <h6>
+                        {/* <h6>
                           <AiFillEdit onClick={handleeditcomment} size="25px" />
-                        </h6>
+                        </h6> */}
                       </>
                     ) : null}
                   </div>
@@ -729,7 +761,7 @@ const ContentCreators = ({ categry }) => {
                       />
                     </div>
                   </div>
-                  <div className="re-btext mt-3">
+                  {/* <div className="re-btext mt-3">
                     <Row>
                       <Col lg="10"> {value?.comment}</Col>
                       <Col lg="2">
@@ -850,7 +882,7 @@ const ContentCreators = ({ categry }) => {
                         </>
                       </div>
                     </Row>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -1100,8 +1132,15 @@ const ContentCreators = ({ categry }) => {
                   <Col lg="6">
                     {" "}
                     <h4 className="mt-3">Write your Review</h4>
-                    <ReactStars {...secondExample} />
+                    <ReactStars
+                      size={50}
+                      isHalf={true}
+                      value={cmtRating}
+                      onChange={(e) => setCmtRating(e)}
+                      // {...secondExample}
+                    />
                   </Col>
+                  {/* {console.log(cmtRating)} */}
                 </Row>
                 <Row>
                   <Col lg="12" key={contentCretorDetail?._id}>
@@ -1112,16 +1151,19 @@ const ContentCreators = ({ categry }) => {
                         <form key={contentCretorDetail?._id}>
                           <textarea
                             key={contentCretorDetail?._id}
-                            value={text}
+                            value={cmtComment}
                             name="text"
-                            onChange={onchangehandler}
+                            onChange={(e) => setCmtComment(e.target.value)}
                             className="form-control st-taetarea"
                             placeholder=" Enter your Review if you want"
                           ></textarea>
                           <Button
                             // onClick={handleSubmit}
                             onClick={(e) =>
-                              handleSubmit(e, contentCretorDetail?._id)
+                              handleSubmitCreatorComment(
+                                e,
+                                contentCretorDetail?._id
+                              )
                             }
                             className="bt-st reviewbutton mb-3"
                           >
@@ -1139,17 +1181,18 @@ const ContentCreators = ({ categry }) => {
               <hr></hr>
               <div className="review-list mt-3  ">
                 <h4>Reviews:</h4>
+                {/* {console.log(contentCretorDetail)} */}
                 {contentCretorDetail?.comment?.map((value) => (
                   <div className="re-list" key={value._id}>
                     <div className="d-flex justify-content-right">
                       {value?.userid?._id == localStorage.getItem("userId") ? (
                         <>
-                          <h6>
+                          {/* <h6>
                             <AiFillEdit
                               onClick={handleeditcomment}
                               size="25px"
                             />
-                          </h6>
+                          </h6> */}
                         </>
                       ) : null}
                     </div>
@@ -1171,7 +1214,7 @@ const ContentCreators = ({ categry }) => {
                         />
                       </div>
                     </div>
-                    <div className="re-btext mt-3">
+                    {/* <div className="re-btext mt-3">
                       <Row>
                         <Col lg="10"> {value?.comment}</Col>
                         <Col lg="2">
@@ -1297,7 +1340,7 @@ const ContentCreators = ({ categry }) => {
                           </>
                         </div>
                       </Row>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </div>
