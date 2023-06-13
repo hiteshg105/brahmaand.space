@@ -203,6 +203,7 @@ function Header(args) {
       swal(" * Fields are mandatory Please fill details");
     }
   };
+  console.log(localStorage.getItem("userId"),"userid")
   const NewContentCrete = async () => {
     console.log("hello")
     let linkNewData;
@@ -218,57 +219,61 @@ function Header(args) {
     const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
     console.log(userid, "hello")
-
-    const formData = new FormData();
-    formData.append("img", file);
-    formData.append("creatorName", creatorName);
-    linkNewData2.map((e) => formData.append("link", e));
-    formData.append("phoneNo", phoneNo);
-    formData.append("email", email);
-    formData.append("category", category);
-    formData.append("sub_category", sub_category);
-    formData.append("format", format);
-    formData.append("language", language);
-    formData.append("level", level)
-    formData.append("topics", topics);
-    formData.append("desc", descriptionData);
-    formData.append("userid", userid);
-
-    if (creatorName && linkData && category && sub_category) {
-      const responce = await axiosConfig.post(
-        `/user/content/creator`,
-        formData
-      );
-
-      // console.log(responce.data.data,"hello");
-      if (responce.data.success === true) {
-        swal("Content Creator profile added successfully👍.");
-        setIsContentCreatorModel(false);
-        setCreatorName("");
-        setLinkData([
-          { id: 1, name: "youtube", value: "" },
-          { id: 2, name: "instagram", value: "" },
-          { id: 3, name: "linkedin", value: "" },
-          { id: 4, name: "facebook", value: "" },
-        ]);
-        setPhoneNo("");
-        setEmail("");
-        setCategory("");
-        setSub_category("");
-        setFormat("");
-        setLanguage("");
-        setTopics("");
-        setDescriptionData("");
-        setFile(null);
-
-      } else {
-        swal("Something went wrong, Try again");
-        setIsContentCreatorModel(false);
-      }
+    if (userid === null) {
+      swal("Please Login OR Sign Up");
     } else {
-      setFillPlease("define");
-      swal("* Field Are mendory");
+      const formData = new FormData();
+      formData.append("img", file);
+      formData.append("creatorName", creatorName);
+      linkNewData2.map((e) => formData.append("link", e));
+      formData.append("phoneNo", phoneNo);
+      formData.append("email", email);
+      formData.append("category", category);
+      formData.append("sub_category", sub_category);
+      formData.append("format", format);
+      formData.append("language", language);
+      formData.append("level", level)
+      formData.append("topics", topics);
+      formData.append("desc", descriptionData);
+      formData.append("userid", userid);
+
+      if (creatorName && linkData && category && sub_category) {
+        const responce = await axiosConfig.post(
+          `/user/content/creator`,
+          formData
+        );
+
+        // console.log(responce.data.data,"hello");
+        if (responce.data.success === true) {
+          swal("Content Creator profile added successfully👍.");
+          setIsContentCreatorModel(false);
+          setCreatorName("");
+          setLinkData([
+            { id: 1, name: "youtube", value: "" },
+            { id: 2, name: "instagram", value: "" },
+            { id: 3, name: "linkedin", value: "" },
+            { id: 4, name: "facebook", value: "" },
+          ]);
+          setPhoneNo("");
+          setEmail("");
+          setCategory("");
+          setSub_category("");
+          setFormat("");
+          setLanguage("");
+          setTopics("");
+          setDescriptionData("");
+          setFile(null);
+
+        } else {
+          swal("Something went wrong, Try again");
+          setIsContentCreatorModel(false);
+        }
+      } else {
+        setFillPlease("define");
+        swal("* Field Are Mandatory");
+      }
     }
+
   };
   const DiscardContent = (e) => {
     if (
@@ -379,27 +384,27 @@ function Header(args) {
   };
 
 
-  const contentHandler =(e)=>{
-    const userid = localStorage.getItem("userId");
-    if(userid === null){
-      swal("Please Login or Signup");
-    }
-    else{
-      toggle(e)
-      gaEventTracker("+Submit a Content")
-    }
-  }
+  // const contentHandler = (e) => {
+  //   const userid = localStorage.getItem("userId");
+  //   if (userid === null) {
+  //     swal("Please Login or Signup");
+  //   }
+  //   else {
+  //     toggle(e)
+  //     gaEventTracker("+Submit a Content")
+  //   }
+  // }
 
-  const createContentHandler = () => {
-    const userid = localStorage.getItem("userId");
-    if (userid === null) {
-      swal("please login or signup.");
-    } else {
-      closeModel()
-      setIsContentCreatorModel(!isContentCreatorModel)
-      gaEventTracker("+Content Creator")
-    }
-  }
+  // const createContentHandler = () => {
+  //   const userid = localStorage.getItem("userId");
+  //   if (userid === null) {
+  //     swal("please login or signup.");
+  //   } else {
+  //     closeModel()
+  //     setIsContentCreatorModel(!isContentCreatorModel)
+  //     gaEventTracker("+Content Creator")
+  //   }
+  // }
 
   useEffect(() => {
     getYear();
@@ -626,7 +631,10 @@ function Header(args) {
             </p>
             <div className="text-center p-0 m-0 mt-5 pb-4">
               <button
-                onClick={(e) => (contentHandler())}
+                onClick={(e) => (
+                  toggle(e),
+                  gaEventTracker("+Submit a Content")
+                )}
                 style={{
                   backgroundColor: "#FC9358",
                   fontSize: "22px",
@@ -641,7 +649,10 @@ function Header(args) {
               </button>
 
               <button
-                onClick={(e) => (createContentHandler())}
+                onClick={(e) => (
+                  closeModel(),
+                  setIsContentCreatorModel(!isContentCreatorModel),
+                  gaEventTracker("+Content Creator"))}
                 style={{
                   backgroundColor: "#FC9358",
                   fontSize: "22px",
@@ -997,7 +1008,7 @@ function Header(args) {
                                         <Label
                                           style={{ font: "GT Walsheim Pro" }}
                                         >
-                                          <b>Creator Name</b>
+                                          <b>Creator's Name</b>
                                         </Label>
                                         <input
                                           type="text"
@@ -1143,7 +1154,7 @@ function Header(args) {
                       style={{ fontSize: "20px", color: "red" }}
                       className=" mb-2"
                     >
-                      Creator Name<span style={{ color: "red" }}>  *</span>
+                      Creator's Name<span style={{ color: "red" }}>  *</span>
                     </label>
                     <input
                       style={{ background: "#F1F1F1" }}
@@ -1287,7 +1298,7 @@ function Header(args) {
                           ""
                         )}
                       </div>
-                      <div className="form-group mb-4">
+                      {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -1309,7 +1320,7 @@ function Header(args) {
                           <option value="Text">Text</option>
                           <option value="Video & Text">Video & Text</option>
                         </Input>
-                      </div>
+                      </div> */}
                     </Col>
                     <Col>
                       <div className="form-group mb-4">
@@ -1366,7 +1377,7 @@ function Header(args) {
                           ""
                         )}
                       </div>
-                      <div className="form-group mb-4">
+                      {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -1387,7 +1398,7 @@ function Header(args) {
                           <option value="Video">Beginner</option>
                           <option value="Text">Advanced</option>
                         </Input>
-                      </div>
+                      </div> */}
                     </Col>
                   </Row>
                   <div className="form-group mb-4">
@@ -1475,7 +1486,7 @@ function Header(args) {
                       onChange={(e) => setDescriptionData(e.target.value)}
                       className="form-control border-0"
                       id="Description"
-                      placeholder="Describe the topic in few sentence, topic it covers?"
+                      placeholder="Describe the content creator in few sentence"
                     />
                   </div>
                   <div className="d-flex gap-4 justify-content-end">
@@ -1502,8 +1513,8 @@ function Header(args) {
               </Modal>
             </Container>
           </div>
-        </section>
-      </div>
+        </section >
+      </div >
       <section>
         <div className="searchbar">
           <div className="inputarea">
