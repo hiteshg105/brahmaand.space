@@ -115,24 +115,29 @@ const ContentCreators = ({ categry }) => {
   };
 
   const handleSubmitCreatorComment = async (e, id) => {
-    e.preventDefault();
-    const userid = localStorage.getItem("userId");
-    // console.log(userid)
-    // console.log(id)
-    const data = await axiosClient.post(`/user/add_creator_comment`, {
-      creatorResrcId: id,
-      userid: userid,
-      comment: cmtComment,
-      rating: cmtRating,
-    });
-    if (data.data.status) {
-      setCmtComment("");
-      swal("Comment Added");
-      handleSelection(id);
-      handleContent(content, limit);
-    } else {
-      swal("Comment Already Exist");
+    if (cmtComment && cmtRating){
+      e.preventDefault();
+      const userid = localStorage.getItem("userId");
+      // console.log(userid)
+      // console.log(id)
+      const data = await axiosClient.post(`/user/add_creator_comment`, {
+        creatorResrcId: id,
+        userid: userid,
+        comment: cmtComment,
+        rating: cmtRating,
+      });
+      if (data.data.status) {
+        setCmtComment("");
+        swal("Comment Added");
+        handleSelection(id);
+        handleContent(content, limit);
+      } else {
+        swal("Comment Already Exist");
+      }
+    } else{
+      swal("Please Enter Rating And Comment");
     }
+ 
     // console.log(data);
   };
 
