@@ -204,6 +204,7 @@ function Header(args) {
     }
   };
   const NewContentCrete = async () => {
+    console.log("hello")
     let linkNewData;
 
     // If linkData is already an array
@@ -216,18 +217,19 @@ function Header(args) {
 
     const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
+    console.log(userid, "hello")
 
     const formData = new FormData();
     formData.append("img", file);
     formData.append("creatorName", creatorName);
     linkNewData2.map((e) => formData.append("link", e));
-
     formData.append("phoneNo", phoneNo);
     formData.append("email", email);
     formData.append("category", category);
     formData.append("sub_category", sub_category);
     formData.append("format", format);
     formData.append("language", language);
+    formData.append("level", level)
     formData.append("topics", topics);
     formData.append("desc", descriptionData);
     formData.append("userid", userid);
@@ -238,7 +240,7 @@ function Header(args) {
         formData
       );
 
-      // console.log(responce.data.data);
+      // console.log(responce.data.data,"hello");
       if (responce.data.success === true) {
         swal("Content Creator profile added successfully👍.");
         setIsContentCreatorModel(false);
@@ -258,13 +260,14 @@ function Header(args) {
         setTopics("");
         setDescriptionData("");
         setFile(null);
+
       } else {
         swal("Something went wrong, Try again");
         setIsContentCreatorModel(false);
       }
     } else {
       setFillPlease("define");
-      swal("Field Are mendory");
+      swal("* Field Are mendory");
     }
   };
   const DiscardContent = (e) => {
@@ -280,7 +283,7 @@ function Header(args) {
       language
     ) {
       console.log("hello");
-      swal("Content are Discard 👍.");
+      swal("Content is Discard 👍.");
       setIsContentCreatorModel(false);
       setCreatorName("");
       setLinkData([
@@ -338,8 +341,7 @@ function Header(args) {
     axios
 
       .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${
-          catgry ? catgry : category
+        `https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category
         }`
       )
       .then((response) => {
@@ -375,6 +377,29 @@ function Header(args) {
         // console.log(error.response.data);
       });
   };
+
+
+  const contentHandler =(e)=>{
+    const userid = localStorage.getItem("userId");
+    if(userid === null){
+      swal("Please Login or Signup");
+    }
+    else{
+      toggle(e)
+      gaEventTracker("+Submit a Content")
+    }
+  }
+
+  const createContentHandler = () => {
+    const userid = localStorage.getItem("userId");
+    if (userid === null) {
+      swal("please login or signup.");
+    } else {
+      closeModel()
+      setIsContentCreatorModel(!isContentCreatorModel)
+      gaEventTracker("+Content Creator")
+    }
+  }
 
   useEffect(() => {
     getYear();
@@ -446,6 +471,16 @@ function Header(args) {
       { id: 3, name: "linkedin", value: "" },
       { id: 4, name: "facebook", value: "" },
     ]);
+    setCreatorName("");
+    setPhoneNo("");
+    setEmail("");
+    setCategory("");
+    setSub_category("");
+    setFormat("");
+    setLanguage("");
+    setTopics("");
+    setDescriptionData("");
+    setFile(null);
   };
   const handleOnFocus = () => {
     console.log("Focused");
@@ -592,9 +627,7 @@ function Header(args) {
             </p>
             <div className="text-center p-0 m-0 mt-5 pb-4">
               <button
-                onClick={(e) => (
-                  toggle(e), gaEventTracker("+Submit a Content")
-                )}
+                onClick={(e) => (contentHandler())}
                 style={{
                   backgroundColor: "#FC9358",
                   fontSize: "22px",
@@ -609,11 +642,7 @@ function Header(args) {
               </button>
 
               <button
-                onClick={(e) => (
-                  closeModel(),
-                  setIsContentCreatorModel(!isContentCreatorModel),
-                  gaEventTracker("+Content Creator")
-                )}
+                onClick={(e) => (createContentHandler())}
                 style={{
                   backgroundColor: "#FC9358",
                   fontSize: "22px",
@@ -1112,10 +1141,10 @@ function Header(args) {
                   <div className="form-group mb-4">
                     <label
                       for="Creator name"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className=" mb-2"
                     >
-                      Creator Name
+                      Creator Name<span style={{ color: "red" }}>  *</span>
                     </label>
                     <input
                       style={{ background: "#F1F1F1" }}
@@ -1139,10 +1168,10 @@ function Header(args) {
                   <div className="form-group">
                     <label
                       for="Profile Link"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className="mb-2"
                     >
-                      Profile Link
+                      Profile Link<span style={{ color: "red" }}>  *</span>
                     </label>
 
                     {linkData?.map((link, index) => (
@@ -1223,11 +1252,11 @@ function Header(args) {
                       <div className="form-group mb-4">
                         <label
                           for="Category"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
                         >
                           Category
-                        </label>
+                        </label><span style={{ color: "red" }}>  *</span>
                         <Input
                           style={{ background: "#F1F1F1" }}
                           type="select"
@@ -1305,11 +1334,11 @@ function Header(args) {
                       <div className="form-group mb-4">
                         <label
                           for="Sub Category"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
                         >
                           Sub Category
-                        </label>
+                        </label><span style={{ color: "red" }}>  *</span>
                         <Input
                           style={{ background: "#F1F1F1" }}
                           type="select"
@@ -1415,11 +1444,11 @@ function Header(args) {
                       placeholder="Java script, react, native"
                     />
                   </div>
-                  <div className="form-group mb-4">
+                  <div className="form-group mb-4  ">
                     <label
                       for="Upload Image of related content"
                       style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      className="text-black mb-2 "
                     >
                       Upload Image of related content
                     </label>
@@ -1427,7 +1456,7 @@ function Header(args) {
                       style={{ background: "#F1F1F1" }}
                       type="file"
                       onChange={handleChange}
-                      className="form-control border-0"
+                      className="form-control border-0 "
                       id="Upload Image of related content"
                       placeholder="Choose file  |  No file chosen"
                     />
