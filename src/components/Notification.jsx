@@ -53,7 +53,7 @@ function Notification() {
   };
   return (
     <>
-      <Container className="mb-3 mb-3">
+      <Container className="mb-3">
         <h3 className="d-flex justify-content-center mt-5 mb-3">
           Notifications
         </h3>

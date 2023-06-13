@@ -27,8 +27,8 @@ import ReactStars from "react-rating-stars-component";
 import { AiFillEdit } from "react-icons/ai";
 import swal from "sweetalert";
 
-const base_URL = "https://backend.brahmaand.space/";
-// const base_URL = "http://localhost:9000";
+// const base_URL = "https://backend.brahmaand.space/";
+const base_URL = "http://localhost:9000";
 
 const ContentCreators = ({ categry }) => {
   const params = useParams();
@@ -755,11 +755,13 @@ const ContentCreators = ({ categry }) => {
                       </span>
                     </h5>
                     <div className="star-1">
+                      {console.log(value)}
                       <PrettyRating
                         value={value?.rating}
                         icons={icons.star}
                         colors={colors.star}
                       />
+                      <p>{value?.comment}</p>
                     </div>
                   </div>
                   {/* <div className="re-btext mt-3">
@@ -1213,6 +1215,7 @@ const ContentCreators = ({ categry }) => {
                           icons={icons.star}
                           colors={colors.star}
                         />
+                        <p>{value?.comment}</p>
                       </div>
                     </div>
                     {/* <div className="re-btext mt-3">
