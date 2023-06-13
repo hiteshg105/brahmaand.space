@@ -10,7 +10,7 @@ import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import Multiselect from "multiselect-react-dropdown";
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { ImCancelCircle } from "react-icons/im";
 import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
@@ -561,8 +561,7 @@ function Header(args) {
                 "/hero-img1.png",
                 "/hero-img2.png",
                 "/hero-img3.png",
-                "/hero-img4.png",
-                "/hero-img5.png",
+                "/hero-img4.png",,
               ].map((imgPath) => (
                 <SwiperSlide>
                   <div>
@@ -600,11 +599,10 @@ function Header(args) {
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
-                className="border-0 text-white fw-bold px-2 pe-3 py-2 me-5 opacity-75"
+                className="border-0 text-white fw-bold px-3 py-2 me-5 opacity-75"
               >
                 <div>
-                  <span className="me-3">+</span>
-                  <span>Submit a content</span>
+                  <span>+Submit a content</span>
                 </div>
               </button>
 
@@ -622,8 +620,7 @@ function Header(args) {
                 className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
               >
                 <div>
-                  <span className="me-3">+</span>
-                  <span>Submit a content creator</span>
+                  <span>+Submit a content creator</span>
                 </div>
               </button>
             </div>

@@ -258,7 +258,7 @@ function Hastag() {
             </div>
 
             <div className=" row mt-3">
-              <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3">
+              <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
                       <button
@@ -299,14 +299,13 @@ function Hastag() {
                   to="/category"
                   style={{ color: "black", textDecoration: "none" }}
                 >
-                  {" "}
                   <span style={{ font: "larger" }}></span>
                 </Link>
               </div>
             </Col>
           </Row>
 
-          <div  className="trending-warzone-main position-relative">
+          <div className="trending-warzone-main position-relative">
             <Swiper
               breakpoints={{
                 1084: {
@@ -410,7 +409,7 @@ function Hastag() {
                           style={{
                             left: "50%",
                             top: "50%",
-                            transform: "translate(-50%,-50%)",
+                            transform: "translate(-50%,-70%)",
                           }}
                           className="imagehead position-absolute"
                         >
@@ -530,16 +529,22 @@ function Hastag() {
                           </Button>
                         </Row>
                       </div>
+                      <p
+                        style={{ bottom: 10, right: 10,fontSize:23 }}
+                        className="position-absolute text-white text-end"
+                      >
+                        {value?.title}
+                      </p>
                     </div>
 
-                    <div className=" d-flex  content-bt">
+                    {/* <div className="content-bt">
                       <p
                         className="d-flex justify-content-end text-right contenttextcategory"
                         style={{ color: "white" }}
                       >
                         {value?.title}
                       </p>
-                    </div>
+                    </div> */}
                     {/* <div className=" d-flex content-bt newcontent">
                       <Row className="  mt-2">
                         <Button className="btlisting">
@@ -574,7 +579,7 @@ function Hastag() {
 
       <div className="container">
         <Container>
-          <h2 className="category2 mt-4 mb-4">Featured</h2>
+          <h2 className="category2 mt-4 mb-4 text-center">Featured</h2>
           <Swiper
             breakpoints={{
               1084: {
@@ -849,6 +854,7 @@ function Hastag() {
         <p className="category3">Latest Blogs</p>
 
         <Swiper
+          className="latest-blog"
           breakpoints={{
             1084: {
               slidesPerView: 3,

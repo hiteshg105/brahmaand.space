@@ -1402,10 +1402,10 @@ const TrendingWarzone = () => {
           style={{ fontSize: "20px", fontWeight: "bold" }}
           className="text-uppercase text-center py-3"
         >
-          Write Your reviews
+          enter your review
         </p>
         <Col lg={6} className="p-3 pe-4 border-top">
-          <div className="w-100 w-lg-75 mx-auto ms-lg-auto mt-5">
+          <div className="w-100 w-lg-75 mx-auto ms-lg-auto">
             <div className="reviews-rating-stars d-flex justify-content-lg-end">
               <PrettyRating
                 value={rsc1Review.rate}
@@ -1440,7 +1440,7 @@ const TrendingWarzone = () => {
           </div>
         </Col>
         <Col lg={6} className="content-box p-3 ps-4 border-top">
-          <div className="w-100 w-lg-75 mt-5 mx-auto mx-lg-0">
+          <div className="w-100 w-lg-75 mx-auto mx-lg-0">
             <div className="reviews-rating-stars d-flex">
               <PrettyRating
                 value={rsc2Review.rate}
@@ -1487,7 +1487,7 @@ const TrendingWarzone = () => {
         </p>
         <Col
           style={{ padding: "40px 16px 16px" }}
-          className="content-box border-top d-flex flex-column gap-3"
+          className="border-top d-flex flex-column gap-3"
         >
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"

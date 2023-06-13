@@ -61,7 +61,8 @@ function AllSubCategory() {
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
                 <Link to={`/productList/${value._id}`}>
                   <div className="bg-1">
-                    <div className="blackimage">
+                    <div className="blackimage position-relative">
+                    <div class="gradient position-absolute h-100 w-100"></div>
                       <img
                         className="imgCol"
                         src={value?.Subcat_img}

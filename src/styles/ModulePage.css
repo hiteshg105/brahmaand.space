@@ -83,7 +83,7 @@ button.subscribebtn.col-md-4.btn.btn-secondary {
 
 button.viewall.btn.btn-secondary.btn-lg {
   background-color: black;
-  border-radius: none;
+  border-radius: 50px;
   padding: 14px 48px;
 }
 
@@ -587,7 +587,7 @@ button.btn.btn-success.btn.btn-secondary {
 
 .content-bt {
   width: 246px;
-  margin-top: -105px;
+  margin-top: -125px;
   position: absolute;
   margin-left: 23px;
   color: white;
@@ -1400,6 +1400,18 @@ input[type="range"] {
   padding: 8px 17px;
   border-radius: 8px;
 }
+
+.latest-blog .swiper-button-next:after,
+.latest-blog .swiper-button-prev:after {
+  padding: 6px 12px;
+  font-size: 30px;
+}
+
+.latest-blog .swiper-button-prev {
+  padding: 0;
+  width: auto !important;
+}
+
 
 .swiper-button-next.swiper-button-white,
 .swiper-button-prev.swiper-button-white {
