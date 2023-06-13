@@ -128,6 +128,7 @@ const ContentCreators = ({ categry }) => {
       setCmtComment("");
       swal("Comment Added");
       handleSelection(id);
+      handleContent(content, limit);
     } else {
       swal("Comment Already Exist");
     }
@@ -387,7 +388,9 @@ const ContentCreators = ({ categry }) => {
           const date = new Date(
             item.userid !== null ? item.userid?.createdAt : new Date()
           );
-
+          {
+            /* console.log(item); */
+          }
           const options = { day: "2-digit", month: "short", year: "numeric" };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
@@ -444,7 +447,7 @@ const ContentCreators = ({ categry }) => {
           );
         })}
       </div>
-      {console.log(modal)}
+      {/* {console.log(modal)} */}
       {content && content === "Content" ? (
         <Modal
           key={Producdetail?._id}
