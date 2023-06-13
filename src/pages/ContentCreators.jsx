@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
 import { MdCancelPresentation } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
 import createricon from "../assets/icons/createricon.png";
@@ -31,6 +31,7 @@ const base_URL = "https://backend.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
 const ContentCreators = ({ categry }) => {
+  const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
   let [limit, setLimit] = useState(12);
@@ -137,9 +138,9 @@ const ContentCreators = ({ categry }) => {
 
   const handleSelection = (id) => {
     if (content === "Content") {
-      axios
+      axiosClient
         // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
-        .get(`https://backend.brahmaand.space/admin/getone_reslist/${id}`)
+        .get(`/admin/getone_reslist/${id}`)
         .then((res) => {
           toggle();
           // console.log(res.data.data._id);
@@ -259,8 +260,8 @@ const ContentCreators = ({ categry }) => {
   };
 
   const handleeditcomment = (id) => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_coment_list/${id}`)
+    axiosClient
+      .get(`/admin/getone_coment_list/${id}`)
       .then((res) => {
         // console.log(res.data.data);
         setUpcom(res.data.data?.comment);
@@ -333,14 +334,17 @@ const ContentCreators = ({ categry }) => {
   };
   const handleContent = async (data, l1) => {
     if (data === "Content") {
-      const data = await axiosClient.get(
-        `/user/get_all_active_resrc_lsit?limit=${l1}`
+      const data = await axiosClient.post(
+        `/user/advancefilter?sub_category=${params.id}`
       );
+
       // console.log(data.data.data);
       setVal(data.data.data);
     }
     if (data === "Content Creators") {
-      const data = await axiosClient.get("/get_all/content/creator");
+      const data = await axiosClient.post(
+        `/content/advance_content_filter?sub_category=${params.id}`
+      );
       setVal(data.data.data);
     }
   };
@@ -352,10 +356,6 @@ const ContentCreators = ({ categry }) => {
   useEffect(() => {
     handleContent(content, limit);
   }, [content, limit]);
-
-  useEffect(() => {
-    setVal(categry);
-  }, [categry]);
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -766,7 +766,7 @@ const ContentCreators = ({ categry }) => {
                       <Col lg="10"> {value?.comment}</Col>
                       <Col lg="2">
                         {value?.userid?._id ==
-                        localStorage.getItem("userId") ? (
+                          localStorage.getItem("userId") ? (
                           <>
                             <h6>
                               <AiFillEdit
@@ -781,7 +781,7 @@ const ContentCreators = ({ categry }) => {
                               className="ccm"
                               isOpen={editmodal}
                               toggle={toggleedit}
-                              // {...args}
+                            // {...args}
                             >
                               <ModalHeader toggle={toggleedit}>
                                 Edit Your Comment
@@ -1219,7 +1219,7 @@ const ContentCreators = ({ categry }) => {
                         <Col lg="10"> {value?.comment}</Col>
                         <Col lg="2">
                           {value?.userid?._id ==
-                          localStorage.getItem("userId") ? (
+                            localStorage.getItem("userId") ? (
                             <>
                               <h6>
                                 <AiFillEdit
@@ -1234,7 +1234,7 @@ const ContentCreators = ({ categry }) => {
                                 className="ccm"
                                 isOpen={editmodal}
                                 toggle={toggleedit}
-                                // {...args}
+                              // {...args}
                               >
                                 <ModalHeader toggle={toggleedit}>
                                   Edit Your Comment
