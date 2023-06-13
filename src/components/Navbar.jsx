@@ -1551,8 +1551,7 @@ function CustomNavbar(args) {
                 exact
                 to="/signup"
                 as={NavLink}
-                className="navbar-link"
-                style={{ marginTop: 25 }}
+                className="navbar-link mt-0 d-flex align-items-center"
               >
                 <span className="text bSignUp" aria-current="page">
                   Sign up
@@ -1563,10 +1562,10 @@ function CustomNavbar(args) {
                 exact
                 to="/login"
                 as={NavLink}
-                className="navbar-link lText"
+                className="navbar-link lText mt-0 d-flex align-items-center"
               >
                 <button
-                  className="btn rLogin mobile"
+                  className="btn rLogin mobile mt-0"
                   type="submit"
                   onClick={() => gaEventTracker("LOGIN")}
                 >

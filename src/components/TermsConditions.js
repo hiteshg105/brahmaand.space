@@ -34,7 +34,7 @@ function TermsConditions() {
           <h2> Terms and Conditions</h2>
           <hr />
           {first?.map((first) => (
-            <h3 className="mt-3">{ReactHtmlParser(first.desc)}</h3>
+            <h3 style={{fontSize:"20px"}} className="mt-3">{ReactHtmlParser(first.desc)}</h3>
           ))}
         </Container>
       </div>
