@@ -576,7 +576,7 @@ function Header(args) {
                 "/hero-img2.png",
                 "/hero-img3.png",
                 "/hero-img4.png",
-                ,
+                "/hero-img5.png",
               ].map((imgPath) => (
                 <SwiperSlide>
                   <div>

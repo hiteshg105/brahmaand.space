@@ -28,7 +28,7 @@ function Footer() {
     <footer className="footer">
       <Container>
         <Row>
-          <Col lg="4" md="4" sm="6">
+          <Col lg="4" md="4" sm="6" className="text-center p-0 text-md-start">
             <div className="foot-1">
               <Link to="/">
                 <img src={logobottom} alt="" width="150px" />
@@ -56,7 +56,7 @@ function Footer() {
               </ul>
             </div>
           </Col>
-          <Col lg="3" md="3" sm="6">
+          <Col lg="3" md="3" sm="6" className="text-center p-0 text-md-start">
             <div className="foot-1">
               <h4>Popular Categories</h4>
               <ul>
@@ -75,7 +75,7 @@ function Footer() {
               </ul>
             </div>
           </Col>
-          <Col lg="3" md="3" sm="6">
+          <Col lg="3" md="3" sm="6" className="text-center p-0 text-md-start">
             <div className="foot-1">
               <h4>Quick Liks</h4>
               <ul>
@@ -92,7 +92,7 @@ function Footer() {
             </div>
           </Col>
 
-          <Col lg="2" md="2" sm="6">
+          <Col lg="2" md="2" sm="6" className="text-center p-0 text-md-start">
             <div className="foot-1">
               <h4>Support</h4>
               <ul>
@@ -112,11 +112,11 @@ function Footer() {
         <hr></hr>
         <Row>
           <div className="footer-bootom">
-            <Row>
-              <Col md="6">
+            <Row className="gap-3 gap-md-0">
+              <Col md="6" className="d-flex justify-content-center justify-content-md-start align-items-center">
                 <p>© brahmaand.space 2023 -2024. All rights reserved</p>
               </Col>
-              <Col md="6">
+              <Col md="6" className="d-flex justify-content-center justify-content-md-end">
                 <div className="icon">
                   <Link to="#">
                     <FaFacebook className="it-i" />

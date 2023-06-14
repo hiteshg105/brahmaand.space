@@ -2,7 +2,6 @@
   border-radius: 15px;
   background: #ffffffd4;
   padding: 25px;
-  margin-right: 20px;
 }
 
 .cancelbuttondata:hover {
@@ -526,3 +525,39 @@ div.ex1 {
   background-color: rgba(0, 0, 0, .25);
 
 } */
+
+
+.sidebarmain {
+  width: 100%;
+  max-width: 300px;
+}
+
+.right-main {
+  width: 100%;
+}
+
+@media (max-width:767px) {
+  .sidebarmain {
+    max-width: 100%;
+  }
+
+  .right-main {
+    width: 100%;
+  }
+}
+
+.productsearch-main {
+  padding: 0 80px;
+}
+
+@media (max-width:1199px) {
+  .productsearch-main {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width:767px) {
+  .productsearch-main {
+    padding: 0 20px;
+  }
+}

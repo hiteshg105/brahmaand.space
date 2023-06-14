@@ -115,7 +115,7 @@ const ContentCreators = ({ categry }) => {
   };
 
   const handleSubmitCreatorComment = async (e, id) => {
-    if (cmtComment && cmtRating){
+    if (cmtComment && cmtRating) {
       e.preventDefault();
       const userid = localStorage.getItem("userId");
       // console.log(userid)
@@ -134,10 +134,10 @@ const ContentCreators = ({ categry }) => {
       } else {
         swal("Comment Already Exist");
       }
-    } else{
+    } else {
       swal("Please Enter Rating And Comment");
     }
- 
+
     // console.log(data);
   };
 
@@ -370,13 +370,15 @@ const ContentCreators = ({ categry }) => {
   };
 
   return (
-    <Container className="ccm content-creator-main mt-5">
-      <Row className="d-flex justify-content-between">
+    <div className="ccm content-creator-main mt-5">
+      <Row className="d-flex justify-content-between flex-column flex-md-row gap-3 gap-md-0">
         <Col>
-          <h3 className="fw-bold">Showing Results</h3>
+          <h3 className="fw-bold text-center p-0 text-md-start">
+            Showing Results
+          </h3>
         </Col>
         <Col>
-          <div className="toggle">
+          <div className="toggle mx-auto ms-md-auto">
             <input type="checkbox" onChange={(e) => handleContentClick(e)} />
             <label className="l">Content</label>
             <label className="r">Content Creators</label>
@@ -385,7 +387,9 @@ const ContentCreators = ({ categry }) => {
       </Row>
 
       <Row className="my-4">
-        <h4 className="fw-bold">Content Creators</h4>
+        <h4 className="fw-bold text-center text-md-start p-0 ps-md-3">
+          Content Creators
+        </h4>
       </Row>
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
@@ -406,9 +410,8 @@ const ContentCreators = ({ categry }) => {
                 key={item._id}
                 onClick={() => handleSelection(item._id)}
               >
-                {console.log(item)}
                 <Col>
-                  <div style={{ maxHeight: "300px" }}>
+                  <div className="contentcreator-img-main" style={{ maxHeight: "300px" }}>
                     <img
                       style={{ borderRadius: "10px" }}
                       className="w-100"
@@ -422,7 +425,7 @@ const ContentCreators = ({ categry }) => {
                     />
                   </div>
                   <div className="py-3 px-3">
-                    <h3 className="fw-bold">{item?.creatorName}</h3>
+                    <h4 className="fw-bold">{item?.creatorName}</h4>
                     <p className="mb-2">User since: {formattedDate}</p>
                     <div className="d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
@@ -1372,7 +1375,7 @@ const ContentCreators = ({ categry }) => {
           See More
         </button>
       </Row>
-    </Container>
+    </div>
   );
 };
 

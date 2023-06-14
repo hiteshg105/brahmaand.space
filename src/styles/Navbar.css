@@ -2,15 +2,19 @@
   height: 102px;
   background: #011d2b !important;
 }
+
 .d-flex .loginboard :hover {
   background-color: none;
 }
+
 svg.setmodelfalseicon:hover {
   color: rgb(221, 119, 11);
 }
+
 b.mt-4 {
   color: none;
 }
+
 .searchWrapper {
   border: 1px solid #ccc;
   border-radius: 7px;
@@ -32,6 +36,7 @@ b.mt-4 {
   margin: 6px;
   cursor: pointer;
 }
+
 .loginboard .dropdown:hover {
   color: none;
   background-color: none;
@@ -57,6 +62,7 @@ b.mt-4 {
 .userboard {
   color: rgb(0, 0, 0);
 }
+
 /* hr {
   margin: 0rem 0;
   color: inherit;
@@ -69,6 +75,7 @@ b.mt-4 {
   color: inherit;
   background-color: currentColor;
 }
+
 .dropdown-menu {
   position: absolute;
   z-index: 1000;
@@ -85,13 +92,22 @@ b.mt-4 {
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
+
 .navbar-brand,
 .navbar-nav {
   padding-left: 90px;
   padding-right: 78px;
   /* z-index: 999999 !important; */
   position: relative;
-  background: #011d2b;
+}
+
+@media (max-width:1199px) {
+
+  .navbar-brand,
+  .navbar-nav {
+    padding-left: 60px;
+    padding-right: 40px;
+  }
 }
 
 .navbar-link {
@@ -131,6 +147,8 @@ b.mt-4 {
   width: 100%;
 }
 
+
+
 @media screen and (max-width: 578px) {
   .navbar {
     z-index: 999999;
@@ -141,9 +159,8 @@ b.mt-4 {
   }
 
   .navbar-brand-img {
-    width: 100%;
-    max-width: 200px;
-    height: 50px;
+    width: 115px;
+    height: 69px;
     margin-left: 25px !important;
   }
 
@@ -185,6 +202,7 @@ b.mt-4 {
 }
 
 .navbar-collapse {
+  z-index: 69;
   flex-basis: 100%;
   flex-grow: 1;
   align-items: left;
@@ -202,11 +220,13 @@ b.mt-4 {
   /* left: 84px;
       top: 26px; */
 }
+
 .rsugnup:hover {
   background-color: #fc9358;
   border-radius: 10px;
   height: 60px;
 }
+
 .rbutton {
   /* position: absolute; */
   margin: 8px;
@@ -218,6 +238,29 @@ b.mt-4 {
   box-shadow: 0px 0px 24px rgb(65 65 65 / 25%);
   border-radius: 7px;
 }
+
+@media (max-width:375px) {
+  .navbar-brand-img {
+    width: 86px;
+    height: 50px;
+    margin-left: 15px !important;
+  }
+
+  .navbar-toggle {
+    margin-right: 15px;
+    padding: 0;
+  }
+}
+
+@media (max-width:575px) {
+  .rbutton {
+    height: 40px;
+    margin: 4px;
+    padding: 0 6px;
+    width: auto;
+  }
+}
+
 .rText {
   font-size: 18px;
   font-family: "GT Walsheim Pro";
@@ -225,7 +268,14 @@ b.mt-4 {
   color: #ffffff;
 }
 
-dropdown-item {
+@media (max-width:575px) {
+
+  .rText {
+    font-size: 16px;
+  }
+}
+
+.dropdown-item {
   font-family: "GT Walsheim Pro";
 }
 
@@ -255,6 +305,7 @@ button.dropdown-toggle:hover {
 Multiselect.placeholder {
   font-size: 12px;
 }
+
 .rsugnup {
   text-align: center;
   width: 177px;
@@ -274,15 +325,18 @@ Multiselect.placeholder {
 ::before {
   box-sizing: border-box;
 }
+
 * {
   font-family: "GT Walsheim Pro";
 }
+
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
 button:not(:disabled) {
   cursor: pointer;
 }
+
 .rLogin {
   width: 133px;
   font-family: "GT Walsheim Pro";
@@ -294,6 +348,7 @@ button:not(:disabled) {
   margin-top: 10px;
   border-radius: 8px;
 }
+
 @media only screen and (min-width: 350px) {
   .navbar-collapse {
     flex-basis: 100%;
@@ -315,6 +370,7 @@ button:not(:disabled) {
     align-items: start;
     justify-items: end;
   }
+
   span.navbar-toggler-icon {
     background-color: #ffe9e9;
   }
@@ -357,6 +413,7 @@ button:not(:disabled) {
     color: #ffffff;
   }
 }
+
 .bSignUp {
   margin: 17px;
   font-size: 23px;
@@ -400,7 +457,7 @@ button:not(:disabled) {
 }
 
 /* nav css  */
-a.navbar-brand.navbar-brand img {
+/* a.navbar-brand.navbar-brand img {
   width: 135px !important;
   height: auto !important;
-}
+} */
