@@ -374,3 +374,35 @@
 }
 
 /* DROPDOWN CSS */
+
+/* Hero  */
+
+.hero-heading {
+  font-size: 69px;
+}
+
+.hero-subheading {
+  font-size: 45px;
+}
+
+@media (max-width:1400px) {
+  .hero-heading {
+    font-size: 40px;
+  }
+
+  .hero-subheading {
+    font-size: 25px;
+  }
+}
+
+@media (max-width:575px) {
+  .hero-heading {
+    font-size: 30px;
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+}
+
+/* Hero  */
