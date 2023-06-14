@@ -25,7 +25,7 @@ const HomeCountDown = ({ endDate }) => {
   return (
     <Row
       style={{ border: "2px solid #BAB8B8", width: "fit-content" }}
-      className="rounded-2 py-2 flex-nowrap mx-auto mb-4"
+      className="rounded-2 py-2 flex-nowrap mx-auto"
     >
       
       <Col className="px-2">

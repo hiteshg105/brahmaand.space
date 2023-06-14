@@ -373,9 +373,11 @@ function Hastag() {
                   <h4 className="text-center fw-bold">
                     {features?.category?.title}
                   </h4>
-                  {!features.winner && (
-                    <HomeCountDown endDate={features.endDate} />
-                  )}
+                  <div style={{ minHeight: "53px" }} className="mb-4">
+                    {!features.winner && (
+                      <HomeCountDown endDate={features.endDate} />
+                    )}
+                  </div>
 
                   <div className="ifram warzone">
                     <div>
@@ -530,7 +532,7 @@ function Hastag() {
                         </Row>
                       </div>
                       <p
-                        style={{ bottom: 10, right: 10,fontSize:23 }}
+                        style={{ bottom: 10, right: 10, fontSize: 23 }}
                         className="position-absolute text-white text-end"
                       >
                         {value?.title}
