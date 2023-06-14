@@ -576,7 +576,6 @@ function Header(args) {
                 el: ".hero-swiper_swiper_pagination",
                 clickable: true,
               }}
-              autoplay={true}
             >
               {[
                 "/hero-img1.png",
@@ -587,7 +586,23 @@ function Header(args) {
               ].map((imgPath) => (
                 <SwiperSlide>
                   <div>
-                    <img src={imgPath} alt="hero-images" />
+                    {imgPath === "/hero-img1.png" ? (
+                      <>
+                        <img src={imgPath} usemap="#image-map" />
+                        <map name="image-map">
+                          <area
+                            target=""
+                            alt="button"
+                            title="button"
+                            href="/#/signup"
+                            coords="346,535,163,465,838,657,1197,667,470,589,543,457,560,575,438,611,431,580,1116,643,953,355"
+                            shape=""
+                          />
+                        </map>
+                      </>
+                    ) : (
+                      <img src={imgPath} alt="hero-images" />
+                    )}
                   </div>
                 </SwiperSlide>
               ))}

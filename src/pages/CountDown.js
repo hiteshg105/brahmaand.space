@@ -33,7 +33,7 @@ const CountDown = ({ endDate }) => {
       </p> */}
       <div
         style={{ border: "3px solid #000" }}
-        className="mt-5 rounded-2 px-5 py-4"
+        className="mt-5 rounded-2 px-3 py-2 px-xl-5 py-xl-4"
       >
         <Row>
           <Col>
@@ -47,7 +47,6 @@ const CountDown = ({ endDate }) => {
               {days.toString().length === 1 ? `${days}0` : days}
             </p>
           </Col>{" "}
-          :
           <Col>
             <p
               style={{
@@ -59,7 +58,6 @@ const CountDown = ({ endDate }) => {
               {hours.toString().length === 1 ? `0${hours}` : hours}
             </p>
           </Col>{" "}
-          :
           <Col>
             <p
               style={{
@@ -71,7 +69,6 @@ const CountDown = ({ endDate }) => {
               {minutes.toString().length === 1 ? `0${minutes}` : minutes}
             </p>
           </Col>{" "}
-          :
           <Col>
             <p
               style={{

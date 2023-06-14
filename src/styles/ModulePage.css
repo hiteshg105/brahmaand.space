@@ -817,6 +817,12 @@ button.btlisting.btn.btn-secondary {
   float: left;
 }
 
+@media (max-width:575px) {
+  .tag-2 {
+    width: 100%;
+  }
+}
+
 .tag-2 a {
   background: #f1f1f1;
   margin-right: 10px;
@@ -1393,12 +1399,22 @@ input[type="range"] {
 .swiper-container-rtl .swiper-button-prev:after {
   content: "next";
   font-weight: bolder;
-  font-size: 35px;
+  font-size: 30px !important;
   color: rgb(250, 250, 250);
   margin-left: 64px;
   background-color: #00000063;
-  padding: 8px 17px;
+  padding: 6px 12px;
   border-radius: 8px;
+}
+
+.featured_swiper .swiper-button-prev:after {
+  font-size: 30px !important;
+  padding: 6px 12px !important;
+}
+
+.featured_swiper .swiper-button-prev {
+  padding: 0;
+  width: auto !important;
 }
 
 .latest-blog .swiper-button-next:after,
