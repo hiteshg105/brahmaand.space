@@ -414,7 +414,7 @@ const TrendingWarzone = () => {
 
         <Col lg={6} className="content-box border-top border-bottom p-0">
           <Col className="border-bottom d-flex d-lg-none justify-content-center py-4">
-            {war?.winne && (
+            {war?.winner && (
               <>
                 {war?.winner === war?.resource2._id ? (
                   <div
@@ -1120,7 +1120,7 @@ const TrendingWarzone = () => {
                 >
                   <span
                     style={{
-                      backgroundColor: "#FDB800",
+                      backgroundColor: "green",
                       width: rsc1Star.star5,
                     }}
                     className="position-absolute start-0 h-100 rounded-2"
@@ -1289,7 +1289,7 @@ const TrendingWarzone = () => {
                 >
                   <span
                     style={{
-                      backgroundColor: "#FDB800",
+                      backgroundColor: "green",
                       width: rsc2Star.star5,
                     }}
                     className="position-absolute start-0 h-100 rounded-2"

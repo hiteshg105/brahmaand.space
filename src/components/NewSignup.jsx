@@ -12,6 +12,7 @@ import Logo1 from "../images/Logo1.png";
 import logo from "../images/logo.png";
 import { faChessKing } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import { Container, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -39,8 +40,8 @@ function NewSignup() {
       password !== undefined
     ) {
       console.log("first");
-      axios
-        .post(`https://backend.brahmaand.space/user/signup`, {
+      axiosConfig
+        .post(`/user/signup`, {
           username: username,
           email: email,
           password: password,
@@ -145,8 +146,8 @@ function NewSignup() {
     const FirephotoURL = localStorage.getItem("FirephotoURL");
     const Fireemail = localStorage.getItem("Fireemail");
     const Firename = localStorage.getItem("Firename");
-    axios
-      .post(`https://backend.brahmaand.space/user/login`, {
+    axiosConfig
+      .post(`/user/login`, {
         username: Firename,
         email: Fireemail,
         password: Fireuid,
@@ -194,8 +195,8 @@ function NewSignup() {
     const Firename = localStorage.getItem("Firename");
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/signinwithgoogle`, {
+      axiosConfig
+        .post(`/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
           password: Fireuid,

@@ -1,6 +1,7 @@
 import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import swal from "sweetalert";
 import { Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
@@ -43,8 +44,8 @@ const SendRequestResetPasswordComponent = () => {
   const sendRequestResetPasswordHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    axios
-      .post(`https://backend.brahmaand.space/user/sendotp`, {
+    axiosConfig
+      .post(`/user/sendotp`, {
         email: email,
       })
       .then((res) => {

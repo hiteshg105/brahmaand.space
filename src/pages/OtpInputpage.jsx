@@ -1,6 +1,7 @@
 import { Card, Container, Button, Form } from "react-bootstrap";
 import "../styles/Login.css";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { Col, Row } from "reactstrap";
@@ -32,8 +33,8 @@ function OtpInputpage() {
     e.preventDefault();
     const email = localStorage.getItem("email");
     if (email !== "" && otp !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/verifyotp`, {
+      axiosConfig
+        .post(`/user/verifyotp`, {
           email: email,
           otp: otp,
         })

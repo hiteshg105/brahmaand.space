@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosConfig from "../../components/axiosConfig";
 import StarsRating from "stars-rating";
 import { render } from "react-dom";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
@@ -67,8 +68,8 @@ function Searchfiltermodel(...args) {
     // console.log(selectedId, userId, text, rating);
 
     if (selectedId == Producdetail._id && userId !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/add_blog_Comment`, {
+      axiosConfig
+        .post(`/user/add_blog_Comment`, {
           blogid: selectedId,
           userid: userId,
           desc: text,
@@ -95,8 +96,8 @@ function Searchfiltermodel(...args) {
   }, [Params]);
 
   const individualdata = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getone_reslist/${Params.id}`)
+    axiosConfig
+      .get(`/admin/getone_reslist/${Params.id}`)
       .then((res) => {
         setProductdetail(res.data.data);
         // console.log(res.data.data);

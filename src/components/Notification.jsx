@@ -8,6 +8,7 @@ import Notifications from "../css/Notifications.css";
 import { ImCancelCircle } from "react-icons/im";
 
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 
 function Notification() {
   const [notification, setNotification] = useState([]);
@@ -34,16 +35,16 @@ function Notification() {
 
   const deletenotification = (id) => {
     console.log(id);
-    axios
-      .post(`https://backend.brahmaand.space/admin/dlt_notification/${id}`)
+    axiosConfig
+      .post(`/admin/dlt_notification/${id}`)
       .then((res) => {
         console.log(res.response.data);
       })
       .catch((err) => console.log(err.response));
   };
   const notificationhandler = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/get_notification`)
+    axiosConfig
+      .get(`/admin/get_notification`)
       .then((res) => {
         setNotification(res.data.data);
         console.log(res.data.data);
@@ -52,7 +53,7 @@ function Notification() {
   };
   return (
     <>
-      <Container className="mb-3 mb-3">
+      <Container className="mb-3">
         <h3 className="d-flex justify-content-center mt-5 mb-3">
           Notifications
         </h3>

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { Input, InputGroup, Label } from "reactstrap";
 import swal from "sweetalert";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
 import { useForm } from "react-hook-form";
@@ -61,8 +62,8 @@ function Login() {
 
     e.preventDefault();
     console.log(email, password);
-    axios
-      .post(`https://backend.brahmaand.space/user/login`, {
+    axiosConfig
+      .post(`/user/login`, {
         username: email,
         email: email,
         password: password,
@@ -114,9 +115,9 @@ function Login() {
     const Firename = localStorage.getItem("Firename");
 
     if (Fireemail !== "" && Firename !== "" && Fireuid !== "") {
-      axios
+      axiosConfig
 
-        .post(`https://backend.brahmaand.space/user/signinwithgoogle`, {
+        .post(`/user/signinwithgoogle`, {
           username: Firename,
           email: Fireemail,
           password: Fireuid,
@@ -140,8 +141,8 @@ function Login() {
     const FirephotoURL = localStorage.getItem("FirephotoURL");
     const Fireemail = localStorage.getItem("Fireemail");
     const Firename = localStorage.getItem("Firename");
-    axios
-      .post(`https://backend.brahmaand.space/user/login`, {
+    axiosConfig
+      .post(`/user/login`, {
         username: Firename,
         email: Fireemail,
         password: Fireuid,

@@ -9,6 +9,7 @@ import {
   FaChartBar,
 } from "react-icons/fa";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import swal from "sweetalert";
 
 import {
@@ -30,8 +31,8 @@ function UserPage({ direction, ...args }) {
   const id = localStorage.getItem("userId");
 
   useEffect(() => {
-    axios
-      .get(`https://backend.brahmaand.space/user/getoneUser/${id}`)
+    axiosConfig
+      .get(`/user/getoneUser/${id}`)
       .then((response) => {
         // console.log("getdata", response.data.data);
         setUserData(response.data.data);

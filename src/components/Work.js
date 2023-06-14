@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import "moment-timezone";
 import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
@@ -8,8 +9,8 @@ import Moment from "react-moment";
 function Work() {
   const [howworks, sethowworks] = useState([]);
   useEffect(() => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/get_howWorks`)
+    axiosConfig
+      .get(`/admin/get_howWorks`)
       .then((response) => {
         sethowworks(response.data.data);
         // console.log(response.data.data);

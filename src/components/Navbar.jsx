@@ -188,40 +188,40 @@ function CustomNavbar(args) {
   // all category
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getallCategory`)
+    axiosConfig
+      .get(`/admin/getallCategory`)
 
       .then((response) => {
         setAllcatego(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        console.log(error);
       });
   };
 
   const [subctgry, setSubctgry] = useState([]);
 
-  useEffect(() => {
-    const params = catgry ? catgry : category;
-    axios
+  // useEffect(() => {
+  //   const params = catgry ? catgry : category;
+  //   axiosConfig
 
-      .get(
-        `https://backend.brahmaand.space/admin/listbycategory/${catgry ? catgry : category
-        }`
-      )
-      .then((response) => {
-        // console.log(response.data.data);
-        setSubctgry(response.data.data);
-      })
-      .catch((error) => {
-        // console.log(error.response.data);
-      });
-  }, [catgry, category]);
+  //     .get(
+  //       `/admin/listbycategory/${catgry ? catgry : category
+  //       }`
+  //     )
+  //     .then((response) => {
+  //       // console.log(response.data.data);
+  //       setSubctgry(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       // console.log(error.response.data);
+  //     });
+  // }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allYear`)
+    axiosConfig
+      .get(`/user/allYear`)
       .then((response) => {
         setRelyear(response.data.data);
         // console.log(response.data.data);
@@ -232,8 +232,8 @@ function CustomNavbar(args) {
   };
 
   const getLanguage = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/allLang`)
+    axiosConfig
+      .get(`/user/allLang`)
       .then((response) => {
         setLngage(response.data.data);
         // console.log(response.data.data);

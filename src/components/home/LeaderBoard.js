@@ -26,6 +26,7 @@ import uranus from "../../images/uranus.png";
 import naptune from "../../images/naptune.png";
 import earth from "../../images/earth.png";
 import axios from "axios";
+import axiosConfig from "../axiosConfig";
 
 import { FaBook, FaThumbsUp, FaInfinity, FaChartBar } from "react-icons/fa";
 
@@ -36,8 +37,8 @@ function LeaderBoard() {
   const [calculatedata, setCalculatedata] = useState([]);
 
   const getcurrentmonthdata = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/karma_crrnt_month`)
+    axiosConfig
+      .get(`/user/karma_crrnt_month`)
       .then((res) => {
         // console.log(res.data.data);
         setCurrentmonth(res.data.data);
@@ -47,8 +48,8 @@ function LeaderBoard() {
       });
   };
   const getallmonthdata = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/all_time_karma`)
+    axiosConfig
+      .get(`/user/all_time_karma`)
       .then((res) => {
         // console.log(res.data.data);
         setAlltime(res.data.data);
@@ -59,8 +60,8 @@ function LeaderBoard() {
   };
 
   const getallplanetpostion = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/user_planet_position`)
+    axiosConfig
+      .get(`/user/user_planet_position`)
       .then((res) => {
         setPlanetposition(res.data.data);
         // console.log(res.data.data);
@@ -72,8 +73,8 @@ function LeaderBoard() {
 
   const getCalculatedata = () => {
     // change the Id 
-    axios
-      .get(`http://localhost:9000/user/user_calculate/6457a5cec4c9cb7557f39f4f`)
+    axiosConfig
+      .get(`/user/user_calculate/6457a5cec4c9cb7557f39f4f`)
       .then((res) => {
         setCalculatedata(res.data.data);
       })

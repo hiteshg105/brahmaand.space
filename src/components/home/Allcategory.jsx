@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosConfig from "../../components/axiosConfig";
 import "../../components/Selectapp.css";
 import "../../styles/ModulePage.css";
 import { Container, Row, Button, Col } from "reactstrap";
@@ -14,8 +15,8 @@ function Allcategory() {
   }, []);
 
   const allcategory = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getallCategory`)
+    axiosConfig
+      .get(`/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);

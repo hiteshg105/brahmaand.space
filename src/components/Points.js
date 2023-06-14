@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import { Row, Col } from "reactstrap";
 
 function Points() {
@@ -10,8 +11,8 @@ function Points() {
   const [Userdata, setUserdata] = useState({});
   const earnpoints = () => {
     const userId = localStorage.getItem("userId");
-    axios
-      .get(`https://backend.brahmaand.space/user/getoneUser/${userId}`)
+    axiosConfig
+      .get(`/user/getoneUser/${userId}`)
       .then((res) => {
         setUserdata(res.data.data);
         console.log(res.data.data);
@@ -19,8 +20,8 @@ function Points() {
       .catch((err) => {
         console.log(err);
       });
-    axios
-      .get(`https://backend.brahmaand.space/user/my_content_meteros/${userId}`)
+      axiosConfig
+      .get(`/user/my_content_meteros/${userId}`)
       .then((res) => {
         setGetyourpoint(res.data);
         console.log(res.data);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "reactstrap";
 import axios from "axios";
+import axiosConfig from "../components/axiosConfig";
 import ReactHtmlParser from "react-html-parser";
 
 function TermsConditions() {
@@ -10,8 +11,8 @@ function TermsConditions() {
   }, []);
 
   const privacypolicy = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/get_term_cond`)
+    axiosConfig
+      .get(`/admin/get_term_cond`)
       .then((res) => {
         // console.log(res.data.data);
         setfirst(res.data.data);

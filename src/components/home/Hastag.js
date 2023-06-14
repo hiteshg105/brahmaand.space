@@ -90,8 +90,8 @@ function Hastag() {
   };
 
   const gettrendingdata = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getTrending`)
+    axiosConfig
+      .get(`/admin/getTrending`)
       .then((res) => {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
@@ -100,8 +100,8 @@ function Hastag() {
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
-    axios
-      .get(`https://backend.brahmaand.space/user/popularBlog`)
+    axiosConfig
+      .get(`/user/popularBlog`)
 
       .then((response) => {
         setPop(response.data.data);
@@ -120,8 +120,8 @@ function Hastag() {
     warContent();
   }, []);
   const allcategory = () => {
-    axios
-      .get(`https://backend.brahmaand.space/admin/getallCategory`)
+    axiosConfig
+      .get(`/admin/getallCategory`)
       .then((response) => {
         setCategry(response.data.data);
         // console.log(response.data.data);
@@ -139,8 +139,8 @@ function Hastag() {
     e.preventDefault();
     const userid = localStorage.getItem("userid");
 
-    axios
-      .post(`https://backend.brahmaand.space/user/add_news_ltr`, {
+    axiosConfig
+      .post(`/user/add_news_ltr`, {
         email: email,
         userid: userid,
       })
@@ -197,7 +197,7 @@ function Hastag() {
     axiosConfig
       .get(`/get/all/warzone`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setWar(res.data.war);
       })
       .catch((err) => {
@@ -213,8 +213,8 @@ function Hastag() {
     localStorage.setItem("hastag", hastag);
 
     if (hastag !== "") {
-      axios
-        .post(`https://backend.brahmaand.space/user/search_topic_title`, {
+      axiosConfig
+        .post(`/user/search_topic_title`, {
           searchinput: hastag,
         })
         .then((res) => {
