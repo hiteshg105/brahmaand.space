@@ -363,7 +363,7 @@ function Hastag() {
               ref={swiperRef}
               className="sld-1"
               modules={[Navigation, Pagination]}
-              spaceBetween={40}
+              spaceBetween={50}
               slidesPerView={3}
               allowTouchMove={false}
               centeredSlides={war.length === 1 && true}
@@ -383,30 +383,29 @@ function Hastag() {
                     <div>
                       <Row className="rowmainheading">
                         <Col>
-                          <div className="iframmainhead">
-                            {features.resource1.format === "Video" ? (
-                              <iframe
-                                allowfullscreen="true"
-                                className="iframesetdata obj"
-                                style={{
-                                  borderRadius: "12px",
-                                  width: 300,
-                                  height: 300,
-                                }}
-                                src={`https://www.youtube.com/embed/${
-                                  features?.resource1.link.split("v=")[1]
-                                }`}
-                              ></iframe>
-                            ) : (
-                              <div className="d-flex w-100" style={{maxWidth:250}}>
-                                <img
-                                  className="mx-auto w-100 h-auto"
-                                  src={features?.resource1.img}
-                                  alt=""
-                                />
-                              </div>
-                            )}
-                          </div>
+                          {features.resource1.format === "Video" ? (
+                            <iframe
+                              allowfullscreen="true"
+                              className="iframesetdata obj"
+                              style={{
+                                borderRadius: "12px",
+                                width: "100%",
+                                height: "100%",
+                              }}
+                              src={`https://www.youtube.com/embed/${
+                                features?.resource1.link.split("v=")[1]
+                              }`}
+                            ></iframe>
+                          ) : (
+                            <div className="w-100">
+                              <img
+                              style={{borderRadius:12}}
+                                className="w-100 h-auto object-cover"
+                                src={features?.resource1.img}
+                                alt=""
+                              />
+                            </div>
+                          )}
                         </Col>
                         <Col
                           lg="2"
@@ -434,16 +433,20 @@ function Hastag() {
                             <iframe
                               allowfullscreen="true"
                               className="iframesetdata"
-                              width="300px"
-                              style={{ borderRadius: "12px" }}
+                              style={{
+                                borderRadius: "12px",
+                                width: "100%",
+                                height: "100%",
+                              }}
                               src={`https://www.youtube.com/embed/${
                                 features?.resource2.link.split("v=")[1]
                               }`}
                             ></iframe>
                           ) : (
-                            <div className="d-flex justify-content-center align-items-center">
+                            <div className="w-100">
                               <img
-                                className="m-auto h-auto"
+                              style={{borderRadius:12}}
+                                className="w-100 h-auto object-cover"
                                 src={features?.resource2.img}
                                 alt=""
                               />
@@ -534,7 +537,7 @@ function Hastag() {
                         </Row>
                       </div>
                       <p
-                        style={{ bottom: 10, right: 10, fontSize: 23 }}
+                        style={{ bottom: 30, right: 10, fontSize: 23 }}
                         className="position-absolute text-white text-end"
                       >
                         {value?.title}
@@ -823,7 +826,10 @@ function Hastag() {
                     className="ty-3"
                   >
                     <div className="ty-2">
-                      <Nav.Link as={NavLink} className="navbar-link mt-0 text-center">
+                      <Nav.Link
+                        as={NavLink}
+                        className="navbar-link mt-0 text-center"
+                      >
                         <BsPlay
                           className="bsplaybutton"
                           size={75}

@@ -140,7 +140,7 @@ function Productsearch(args) {
         console.log(err);
       });
 
-      axiosConfig
+    axiosConfig
       .post(`/user/promotion_search_filter`, {
         searchinput: searchdata,
         language: language,
@@ -155,7 +155,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const navigate = useNavigate();
@@ -255,7 +255,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -297,7 +297,7 @@ function Productsearch(args) {
     const searchdata = localStorage.getItem("searchdata");
     setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
-    axiosConfig
+      axiosConfig
         .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
@@ -312,7 +312,7 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err);
         });
-        axiosConfig
+    axiosConfig
       .post(`/user/search_promotion`, {
         searchinput: searchdata,
       })
@@ -323,7 +323,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
   };
 
@@ -340,7 +340,7 @@ function Productsearch(args) {
         console.log(err);
       });
 
-      axiosConfig
+    axiosConfig
       .post(`/user/search_promotion`, {
         searchinput: searchitem,
       })
@@ -350,7 +350,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const getLanguage = () => {
@@ -359,7 +359,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -386,7 +386,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -584,9 +584,7 @@ function Productsearch(args) {
       setProductdes(selectedId);
       axiosConfig
         // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
-        .get(
-          `/admin/getone_reslist/${selectedId}`
-        )
+        .get(`/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res);
@@ -603,10 +601,8 @@ function Productsearch(args) {
           // console.log(err.data.data);
         });
 
-        axiosConfig
-        .get(
-          `/user/average_rating/${productdes}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${productdes}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -636,9 +632,7 @@ function Productsearch(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axiosConfig
-        .get(
-          `/admin/getone_reslist/${productdes}`
-        )
+        .get(`/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
@@ -656,10 +650,8 @@ function Productsearch(args) {
           // console.log(err.data.data);
         });
 
-        axiosConfig
-        .get(
-          `/user/average_rating/${productdes}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${productdes}`)
         .then((res) => {
           // console.log(res.data);
           setAverageRating(res.data);
@@ -694,7 +686,7 @@ function Productsearch(args) {
         searchitem === "" &&
         hastagdata === "hastag" &&
         searchdata === "",
-        Filtertype === "")
+      Filtertype === "")
     ) {
       allsearchproduct();
     }
@@ -766,7 +758,7 @@ function Productsearch(args) {
     const searchdata = localStorage.getItem("searchdata");
     setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
-    axiosConfig
+      axiosConfig
         .post(`/user/search_topic_title`, {
           searchinput: searchdata,
         })
@@ -781,7 +773,7 @@ function Productsearch(args) {
         .catch((err) => {
           // console.log(err);
         });
-        axiosConfig
+    axiosConfig
       .post(`/user/search_promotion`, {
         searchinput: searchdata,
       })
@@ -792,7 +784,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
     // axios
     //   .get(
@@ -811,9 +803,7 @@ function Productsearch(args) {
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
     axiosConfig
-      .get(
-        `/admin/listbysubcategory/${Params.id}`
-      )
+      .get(`/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setSuggested(response.data.data);
         // console.log(response.data.data);
@@ -877,10 +867,10 @@ function Productsearch(args) {
           }}
         ></div>
 
-        <div style={{ padding: "0 80px" }}>
+        <div className="productsearch-main">
           <div className="stt-main">
-            <Row>
-              <Col lg="3" md="3">
+            <div className="d-flex flex-column flex-md-row gap-4">
+              <div className="sidebarmain mx-auto mx-md-0">
                 <div className="left-side">
                   <Row>
                     <Col lg="12" className="py-3">
@@ -1087,8 +1077,8 @@ function Productsearch(args) {
                     </Col>
                   </Row>
                 </div>
-              </Col>
-              <Col lg="9" md="9">
+              </div>
+              <div className="right-main mx-auto mx-md-0">
                 <div className="right-side">
                   <h4>
                     Promotions
@@ -1172,8 +1162,9 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
-                                                  }`}
+                                                src={`https://www.youtube.com/embed/${
+                                                  promotion?.link?.split("=")[1]
+                                                }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1295,7 +1286,9 @@ function Productsearch(args) {
                                             <h5>
                                               Link :
                                               <a
-                                                style={{ wordBreak: "break-word" }}
+                                                style={{
+                                                  wordBreak: "break-word",
+                                                }}
                                                 target="_blank"
                                                 href={promotiondata?.link}
                                               >
@@ -1513,7 +1506,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                      0 ? (
+                                                    0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1639,9 +1632,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                        localStorage.getItem(
-                                                          "userId"
-                                                        ) ? (
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1835,8 +1828,8 @@ function Productsearch(args) {
 
                   <ContentCreators categry={categry} />
                 </div>
-              </Col>
-            </Row>
+              </div>
+            </div>
           </div>
 
           {/* <div className="sec-bottom">
@@ -1846,7 +1839,6 @@ function Productsearch(args) {
                 <Link to="/">See All</Link>
               </span> */}
           {/* </h4> */}
-
         </div>
         {/* </div> */}
       </section>

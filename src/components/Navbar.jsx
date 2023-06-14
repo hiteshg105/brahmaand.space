@@ -484,11 +484,11 @@ function CustomNavbar(args) {
       collapseOnSelect
       expand="lg"
     >
-      <Navbar.Brand exact to="/" as={NavLink} className="navbar-brand">
+      <Navbar.Brand exact to="/" as={NavLink} className="navbar-brand me-0">
         <img
           src={Logo}
-          width="150px"
-          height="90px"
+          width={150}
+          height={90}
           className="d-inline-block align-top navbar-brand-img"
           alt="React Bootstrap logo"
           onClick={() => setCurrentLinkHelper("Home")}
@@ -552,10 +552,10 @@ function CustomNavbar(args) {
         className="navbar-toggle"
         aria-controls="responsive-navbar-nav"
       />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ms-auto navbar-nav">
-          <Nav.Link as={NavLink} className="navbar-link">
-            {/* <button
+      <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+        <Nav className="navbar-nav ms-0">
+          {/* <Nav.Link as={NavLink} className="navbar-link">
+            <button
               className="btn rbutton mobile"
               type="submit"
               onClick={(e) => (
@@ -565,863 +565,15 @@ function CustomNavbar(args) {
               )}
             >
               <h4 className="rText">+Content Creator</h4>
-            </button> */}
-            <Container>
-            <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
-                <div className="p-3 w-100">
-                  <Row className=" justify-content-right canceltoggle">
-                    <Col lg="10" md="8">
-                      <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
-                        Submit a Content
-                      </h2>
-                    </Col>
-                    <Col
-                      style={{ justifyContent: "right" }}
-                      className="d-flex justify-content-right align-item-right"
-                      lg="2"
-                      md="4"
-                    >
-                      <ImCancelCircle
-                        className="setmodelfalseicon"
-                        onClick={() => setModal(false)}
-                        size={25}
-                      />
-                    </Col>
-                  </Row>
-                  <hr></hr>
-                  <p>
-                    You know a content of any niche (Education/Politics/General
-                    Affairs etc.) Post the content and we will publish it on our
-                    website which can be rated and reviewed by users and has
-                    potential to become viral. It will also help the content
-                    reach a global audience.
-                    <p>
-                      <b> Moreover it will help you win cool prizes daily.</b>
-                    </p>
-                  </p>
-                  <Link onClick={() => setModal(false)} to="/leaderboard">
-                    <h5 className="mt-2" style={{ color: "#5F56C6" }}>
-                      Checkout Leaderboard Here.
-                    </h5>
-                  </Link>
-
-                  <ModalBody>
-                    <Form>
-                      <div className="">
-                        <Row>
-                          <Label>
-                            {link != "" ? (
-                              <p>Link</p>
-                            ) : (
-                              <p style={{ color: "red" }}>
-                                Link <span style={{ color: "Red" }}>*</span>
-                              </p>
-                            )}
-                          </Label>
-                          <h5>
-                            <input
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              required
-                              type="url"
-                              value={link}
-                              className="form-control "
-                              placeholder="https://www. "
-                              onChange={validate}
-                            />
-                            <p
-                              className="mx-2 mt-3"
-                              style={{ color: "red", fontSize: "15px" }}
-                            >
-                              {err == "This looks like Valid URL" ? (
-                                <span
-                                  style={{ color: "green", fontSize: "12px" }}
-                                >
-                                  {err}
-                                </span>
-                              ) : (
-                                <span style={{ fontSize: "12px" }}>{err}</span>
-                              )}
-                            </p>
-                          </h5>
-                        </Row>
-                      </div>
-                      <div>
-                        <Row>
-                          <Col>
-                            <Label style={{ font: "GT Walsheim Pro" }}>
-                              {catgry !== "" ? (
-                                <p style={{ color: "black" }} className="mt-4">
-                                  Category
-                                </p>
-                              ) : (
-                                <p style={{ color: "red" }} className="mt-4">
-                                  Category
-                                  <span style={{ color: "red" }}>*</span>
-                                </p>
-                              )}
-                            </Label>
-                            <Input
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              required
-                              type="select"
-                              name="catgry"
-                              className="form-control"
-                              onChange={(e) => setCatgry(e.target.value)}
-                            >
-                              <option>Select Category</option>
-                              {allcatego?.map((allCategory) => {
-                                return (
-                                  <option
-                                    value={allCategory?._id}
-                                    key={allCategory?._id}
-                                  >
-                                    {allCategory?.title}
-                                  </option>
-                                );
-                              })}
-                            </Input>
-                          </Col>
-
-                          <Col>
-                            <Label style={{ font: "GT Walsheim Pro" }}>
-                              {subcatry !== "" ? (
-                                <p style={{ color: "black" }} className="mt-4">
-                                  Sub-Category
-                                </p>
-                              ) : (
-                                <p style={{ color: "red" }} className="mt-4">
-                                  Sub-Category
-                                  <span style={{ color: "red" }}>*</span>
-                                </p>
-                              )}
-                            </Label>
-                            <select
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              required
-                              type="select"
-                              name="title"
-                              className="form-control"
-                              onChange={(e) => setSubcatry(e.target.value)}
-                            >
-                              <option>Select Sub-Category</option>
-                              {subctgry?.map((subctgry) => {
-                                return (
-                                  <option
-                                    value={subctgry?._id}
-                                    key={subctgry?._id}
-                                  >
-                                    {subctgry?.title}
-                                  </option>
-                                );
-                              })}
-                            </select>
-                          </Col>
-                        </Row>
-
-                        <Row>
-                          <Col>
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b> Type</b>
-                            </Label>
-                            <select
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              onChange={(e) => setType(e.target.value)}
-                              className="form-control"
-                            >
-                              <option>Select Type</option>
-                              <option>Free</option>
-                              <option>Paid</option>
-                            </select>
-                          </Col>
-
-                          <Col>
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b> Format</b>
-                            </Label>
-                            <select
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              onChange={(e) => setformate(e.target.value)}
-                              className="form-control"
-                            >
-                              <option>Select Format</option>
-                              <option>Video</option>
-                              <option>Text</option>
-                              <option>Video & Text</option>
-                            </select>
-                          </Col>
-                        </Row>
-                      </div>
-
-                      <Row className="d-flex w-100%">
-                        <Col lg="12">
-                          <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b> Language of Content</b>
-                          </Label>
-                          <Multiselect
-                            style={{
-                              borderRadius: "14px",
-                            }}
-                            placeholder="Select language"
-                            className="w-100%"
-                            options={lngage}
-                            onSelect={onSelect}
-                            onRemove={onRemove}
-                            displayValue="language"
-                          />
-                        </Col>
-                      </Row>
-
-                      <div>
-                        <Row>
-                          <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b> Topic</b>
-                          </Label>
-
-                          <h5>
-                            <textarea
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              type="text"
-                              className="form-control"
-                              placeholder="like- javaScript, react, native"
-                              onChange={(e) => setTopic(e.target.value)}
-                            />
-                          </h5>
-                          <h6>
-                            Add Topics that covers Resource.Separate multiple
-                            topic with commas.
-                          </h6>
-                        </Row>
-                      </div>
-                      <div>
-                        <Row>
-                          <Label
-                            className="mt-4"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b>Descriptions</b>
-                          </Label>
-                          <h5>
-                            <textarea
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              type="text"
-                              className="form-control"
-                              placeholder=" Enter blog description here"
-                              onChange={(e) => setDesc(e.target.value)}
-                            />
-                          </h5>
-                        </Row>
-
-                        <Row>
-                          <Label
-                            className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
-                          >
-                            <b>Upload Image of Related Content </b>
-                          </Label>
-                          <h5>
-                            <input
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              type="file"
-                              className="form-control imageuserupload"
-                              onChange={fileUpload}
-                            />
-                          </h5>
-                        </Row>
-                        <b className="mt-1">Release year/last Updated</b>
-                        <Row className="mx-1">
-                          <Label style={{ font: "GT Walsheim Pro" }}></Label>
-
-                          <Input
-                            style={{ background: "rgb(241, 241, 241)" }}
-                            type="select"
-                            className="form-control"
-                            name="yrName"
-                            onChange={(e) => {
-                              setSelectedyear(e.target.value);
-                            }}
-                          >
-                            <option>Select Year</option>
-                            {relyear?.map((yr) => {
-                              return (
-                                <option value={yr?._id} key={yr?._id}>
-                                  {yr?.yrName}
-                                </option>
-                              );
-                            })}
-                          </Input>
-                        </Row>
-                        <p className=" mb-3">
-                          Which year was this resource Was released or last
-                          updated?
-                        </p>
-                      </div>
-                      <div>
-                        <Row>
-                          <Col lg="12">
-                            <FormGroup>
-                              <Label className="mt-3">
-                                <h6>
-                                  <b>Optional</b>
-                                </h6>
-                              </Label>
-
-                              <Accordion open={open} toggle={toggler}>
-                                <AccordionItem>
-                                  <AccordionHeader targetId="1">
-                                    Optional Fields
-                                  </AccordionHeader>
-
-                                  <AccordionBody accordionId="1">
-                                    <div>
-                                      <Row>
-                                        <Label
-                                          style={{ font: "GT Walsheim Pro" }}
-                                        >
-                                          <b>Title of your Resource</b>
-                                        </Label>
-                                        <input
-                                          type="text"
-                                          style={{
-                                            background: "rgb(241, 241, 241)",
-                                          }}
-                                          className=" form-control mb-3"
-                                          placeholder="Title of the resource?"
-                                          onChange={(e) =>
-                                            setOptitle(e.target.value)
-                                          }
-                                        />
-                                      </Row>
-
-                                      <Row>
-                                        <Label
-                                          style={{ font: "GT Walsheim Pro" }}
-                                        >
-                                          <b>Creator's Name</b>
-                                        </Label>
-                                        <input
-                                          type="text"
-                                          style={{
-                                            background: "rgb(241, 241, 241)",
-                                          }}
-                                          className="form-control mb-3"
-                                          placeholder="author of the resource?"
-                                          onChange={(e) =>
-                                            setOpcname(e.target.value)
-                                          }
-                                        />
-                                      </Row>
-
-                                      <Row>
-                                        <Label
-                                          style={{ font: "GT Walsheim Pro" }}
-                                        >
-                                          <b>Description</b>
-                                        </Label>
-                                        <h5>
-                                          <textarea
-                                            type="text"
-                                            style={{
-                                              background: "rgb(241, 241, 241)",
-                                            }}
-                                            className="form-control mb-3"
-                                            placeholder="describe the resource in a few sentences, topics it covers?"
-                                            onChange={(e) =>
-                                              setOpdes(e.target.value)
-                                            }
-                                          />
-                                        </h5>
-                                      </Row>
-
-                                      <Row>
-                                        <Label
-                                          style={{ font: "GT Walsheim Pro" }}
-                                        >
-                                          <b>Comments</b>
-                                        </Label>
-                                        <h5>
-                                          <textarea
-                                            type="text"
-                                            style={{
-                                              background: "rgb(241, 241, 241)",
-                                            }}
-                                            className="form-control "
-                                            placeholder="Add anything you want to let us know"
-                                            onChange={(e) =>
-                                              setOpcomm(e.target.value)
-                                            }
-                                          />
-                                        </h5>
-                                      </Row>
-
-                                      <h6>
-                                        Thesefields are optional, but it will
-                                        help others find the resource more
-                                        easily.
-                                      </h6>
-                                    </div>
-                                  </AccordionBody>
-                                </AccordionItem>
-                              </Accordion>
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </div>
-                      <div>
-                        <Row>
-                          <Col lg="8"></Col>
-                          {!isLoading ? (
-                            <>
-                              <Col>
-                                <Button
-                                  onClick={() => (
-                                    setModal(false), gaEventTracker("Discard")
-                                  )}
-                                  color="danger"
-                                  className="m-1"
-                                >
-                                  Discard
-                                </Button>
-                                <Button
-                                  color="success"
-                                  className="m-1"
-                                  onClick={(e) => (
-                                    handleSubmitResource(e),
-                                    gaEventTracker("Submit")
-                                  )}
-                                >
-                                  SUBMIT
-                                </Button>
-                              </Col>
-                            </>
-                          ) : (
-                            <>
-                              <div className="spinner-container d-flex justify-content-center">
-                                <div className="loading-spinner"></div>
-                              </div>
-                            </>
-                          )}
-                        </Row>
-                      </div>
-                    </Form>
-                  </ModalBody>
-                </div>
-              </Modal>
-            </Container>
-            <Container>
-              <Modal
-                toggle={() => (
-                  closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
-                )}
-                {...args}
-                className="content-creator-model"
-                isOpen={isContentCreatorModel}
-              >
-                <div className="mb-2 d-flex justify-content-between align-items-center">
-                  <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
-                  <ImCancelCircle
-                    style={{ cursor: "pointer" }}
-                    className="setmodelfalseicon"
-                    onClick={() => closeModel()}
-                    size={30}
-                  />
-                </div>
-                <p style={{ color: "#494949", fontSize: "18px" }}>
-                  Found a cool{" "}
-                  <Link style={{ color: "#4095FF" }} to="/">
-                    content creator?
-                  </Link>
-                </p>
-                <p style={{ color: "#494949", fontSize: "18px" }}>
-                  Send it to us and we will add it to the database!
-                </p>
-
-                <form className="mt-5">
-                  <div className="form-group mb-4">
-                    <label
-                      for="Creator name"
-                      style={{ fontSize: "20px", color: "red" }}
-                      className=" mb-2"
-                    >
-                      Creator's Name<span style={{ color: "red" }}>  *</span>
-                    </label>
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      value={creatorName}
-                      onChange={(e) => setCreatorName(e.target.value)}
-                      type="text"
-                      className="form-control border-0"
-                      id="Creator name"
-                      placeholder=""
-                    />
-                    {creatorName ? (
-                      ""
-                    ) : fillPlease === "define" ? (
-                      <p style={{ color: "red", fontSize: "12px" }}>
-                        Fill This Field
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label
-                      for="Profile Link"
-                      style={{ fontSize: "20px", color: "red" }}
-                      className="mb-2"
-                    >
-                      Profile Link<span style={{ color: "red" }}> *</span>
-                    </label>
-
-                    {linkData?.map((link, index) => (
-                      <div key={link.id}>
-                        <div className="position-relative ">
-                          <input
-                            style={{ background: "#F1F1F1" }}
-                            type="text"
-                            name={link.name}
-                            value={link.value}
-                            onChange={(event) =>
-                              handleInputChange(event, link.id)
-                            }
-                            className="form-control border-0 mb-2"
-                            id={link.name}
-                            placeholder={
-                              link.name.charAt(0).toUpperCase() +
-                              link.name.slice(1)
-                            }
-                          />
-
-                          <ImCancelCircle
-                            style={{ cursor: "pointer" }}
-                            className="setmodelfalseicon linkCloseBtn"
-                            onClick={() => deleteLinkField(link.id)}
-                            size={30}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    {linkData.length > 1 ? (
-                      ""
-                    ) : linkField === "define" ? (
-                      <p style={{ color: "red", fontSize: "12px" }}>
-                        One Field Mendatory
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-
-                  <Button
-                    className="w-100 border-0 d-flex justify-content-center py-2"
-                    onClick={addLinkField}
-                  >
-                    <div style={{ height: 20, width: 20 }} className="me-4">
-                      <img
-                        className="h-auto w-100"
-                        src="/plus-icon.png"
-                        alt="add"
-                      />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: "18px" }}>Add more links</span>
-                    </div>
-                  </Button>
-
-                  <Row className="my-4">
-                    <Col>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Phone Number"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Phone Number
-                        </label>
-                        <input
-                          style={{ background: "#F1F1F1" }}
-                          type="text"
-                          value={phoneNo}
-                          onChange={(e) => setPhoneNo(e.target.value)}
-                          className="form-control border-0"
-                          id="Phone Number"
-                          placeholder="+91"
-                        />
-                      </div>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Category"
-                          style={{ fontSize: "20px", color: "red" }}
-                          className=" mb-2"
-                        >
-                          Category
-                        </label>
-                        <span style={{ color: "red" }}> *</span>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={category}
-                          onChange={(e) => setCategory(e.target.value)}
-                          className="form-control border-0"
-                          id="Category"
-                          placeholder="Select Category"
-                        >
-                          <option>Select Category</option>
-                          {allcatego?.map((allCategory) => {
-                            return (
-                              <option
-                                value={allCategory?._id}
-                                key={allCategory?._id}
-                              >
-                                {allCategory?.title}
-                              </option>
-                            );
-                          })}
-                        </Input>
-                        {category ? (
-                          ""
-                        ) : fillPlease === "define" ? (
-                          <p style={{ color: "red", fontSize: "12px" }}>
-                            Fill This Field
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {/* <div className="form-group mb-4">
-                        <label
-                          for="Format"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Format
-                        </label>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={format}
-                          onChange={(e) => setFormat(e.target.value)}
-                          className="form-control border-0"
-                          id="Format"
-                          placeholder="Select Format"
-                        >
-                          <option>Select Format </option>
-                          <option value="Video">Video</option>
-                          <option value="Text">Text</option>
-                          <option value="Video & Text">Video & Text</option>
-                        </Input>
-                      </div> */}
-                    </Col>
-                    <Col>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Email ID"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Email ID
-                        </label>
-                        <input
-                          style={{ background: "#F1F1F1" }}
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="form-control border-0"
-                          id="Email ID"
-                          placeholder="abc@gmail.com"
-                        />
-                      </div>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Sub Category"
-                          style={{ fontSize: "20px", color: "red" }}
-                          className=" mb-2"
-                        >
-                          Sub Category
-                        </label>
-                        <span style={{ color: "red" }}> *</span>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={sub_category}
-                          onChange={(e) => setSub_category(e.target.value)}
-                          className="form-control border-0"
-                          id="Sub Category"
-                          placeholder="Select Sub Category"
-                        >
-                          <option>Select Sub-Category</option>
-                          {console.log(subctgry, "subctgry")}
-                          {subctgry?.map((subctgry) => {
-                            return (
-                              <option value={subctgry?._id} key={subctgry?._id}>
-                                {subctgry?.title}
-                              </option>
-                            );
-                          })}
-                        </Input>
-                        {sub_category ? (
-                          ""
-                        ) : fillPlease === "define" ? (
-                          <p style={{ color: "red", fontSize: "12px" }}>
-                            Fill This Field
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {/* <div className="form-group mb-4">
-                        <label
-                          for="Format"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Level
-                        </label>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={level}
-                          onChange={(e) => setLevel(e.target.value)}
-                          className="form-control border-0"
-                          id="Format"
-                          placeholder="Select Format"
-                        >
-                          <option>Select Level </option>
-                          <option value="Video">Beginner</option>
-                          <option value="Text">Advanced</option>
-                        </Input>
-                      </div> */}
-                    </Col>
-                  </Row>
-                  <div className="form-group mb-4">
-                    <label
-                      for="Language of content"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Language of content
-                    </label>
-                    <Input
-                      style={{ background: "#F1F1F1" }}
-                      type="select"
-                      value={language}
-                      onChange={(e) => setLanguage(e.target.value)}
-                      className="form-control border-0"
-                      id="Language of content"
-                      placeholder="Select language"
-                    >
-                      <option>Select language</option>
-                      {lngage.map((lang) => {
-                        return (
-                          <option value={lang._id}>{lang.language}</option>
-                        );
-                      })}
-                    </Input>
-
-                    {/* <Multiselect
-                      style={{ background: "#F1F1F1" }}
-                      placeholder="Select language"
-                      className="form-control border-0"
-                      options={lngage}
-                      value={language}
-                      onChange={(e) => setLanguage(e.target.value)}
-                      displayValue="language"
-                    /> */}
-                  </div>
-                  <div className="form-group mb-4">
-                    <label
-                      for="Topic"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Topic
-                    </label>
-                    <textarea
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={topics}
-                      onChange={(e) => setTopics(e.target.value)}
-                      className="form-control border-0"
-                      id="Topic"
-                      placeholder="Java script, react, native"
-                    />
-                  </div>
-                  <div className="form-group mb-4  ">
-                    <label
-                      for="Upload Image of related content"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2 "
-                    >
-                      Upload Image of related content
-                    </label>
-                    <input
-                      id="Upload Image of related content"
-                      style={{ background: "rgb(241, 241, 241)" }}
-                      type="file"
-                      className="form-control imageuserupload"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="form-group mb-4">
-                    <label
-                      for="Description"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={descriptionData}
-                      onChange={(e) => setDescriptionData(e.target.value)}
-                      className="form-control border-0"
-                      id="Description"
-                      placeholder="Describe the content creator in few sentence"
-                    />
-                  </div>
-                  <div className="d-flex gap-4 justify-content-end">
-                    <Button
-                      style={{
-                        border: "1px solid #919191",
-                        background: "#F1F1F1",
-                        color: "#919191",
-                      }}
-                      className="py-2 px-4"
-                      onClick={(e) => DiscardContent(e)}
-                    >
-                      Discard
-                    </Button>
-                    <Button
-                      style={{ borderColor: "transparent" }}
-                      className="py-2 px-4"
-                      onClick={(e) => NewContentCrete(e)}
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </form>
-              </Modal>
-            </Container>
+            </button>
+            <Container></Container>
           </Nav.Link>
 
-          {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
           localStorage.getItem("userId") !== null &&
           localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
-              {/* <button
+              <button
                 className="btn rbutton mobile"
                 type="submit"
                 onClick={(e) => (
@@ -1429,614 +581,13 @@ function CustomNavbar(args) {
                 )}
               >
                 <h4 className="rText">+Submit a Content</h4>
-              </button> */}
-              <Container>
-                <Modal
-                  toggle={toggle}
-                  {...args}
-                  className="mdlg"
-                  isOpen={modal}
-                >
-                  <div className="p-3 w-100">
-                    <Row className=" justify-content-right canceltoggle">
-                      <Col lg="10" md="8">
-                        <h2
-                          style={{ font: "GT Walsheim Pro", fontSize: "25px" }}
-                        >
-                          Submit a Content
-                        </h2>
-                      </Col>
-                      <Col
-                        style={{ justifyContent: "right" }}
-                        className="d-flex justify-content-right align-item-right"
-                        lg="2"
-                        md="4"
-                      >
-                        <ImCancelCircle
-                          className="setmodelfalseicon"
-                          onClick={() => setModal(false)}
-                          size={25}
-                        />
-                      </Col>
-                    </Row>
-                    <hr></hr>
-                    <p>
-                      You know a content of any niche
-                      (Education/Politics/General Affairs etc.) Post the content
-                      and we will publish it on our website which can be rated
-                      and reviewed by users and has potential to become viral.
-                      It will also help the content reach a global audience.
-                      <p>
-                        <b> Moreover it will help you win cool prizes daily.</b>
-                      </p>
-                    </p>
-                    <Link onClick={() => setModal(false)} to="/leaderboard">
-                      <h5 className="mt-2" style={{ color: "#5F56C6" }}>
-                        Checkout Leaderboard Here.
-                      </h5>
-                    </Link>
-
-                    <ModalBody>
-                      <Form
-                      // noValidate
-                      // validated={validated}
-                      // onSubmit={handleSubmit}
-                      >
-                        <div className="">
-                          <Row>
-                            <Label>
-                              {link != "" ? (
-                                <p>Link</p>
-                              ) : (
-                                <p style={{ color: "red" }}>
-                                  Link <span style={{ color: "Red" }}>*</span>
-                                </p>
-                              )}
-                            </Label>
-                            <h5>
-                              <input
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                required
-                                type="url"
-                                value={link}
-                                className="form-control "
-                                placeholder="https://www. "
-                                // onChange={(e) => setLink(e.target.value)}
-                                onChange={validate}
-                              />
-                              <p
-                                className="mx-2 mt-3"
-                                style={{ color: "red", fontSize: "15px" }}
-                              >
-                                {err == "This looks like Valid URL" ? (
-                                  <span
-                                    style={{ color: "green", fontSize: "12px" }}
-                                  >
-                                    {err}
-                                  </span>
-                                ) : (
-                                  <span style={{ fontSize: "12px" }}>
-                                    {err}
-                                  </span>
-                                )}
-                              </p>
-                            </h5>
-                          </Row>
-                        </div>
-                        <div>
-                          <Row>
-                            <Col>
-                              <Label style={{ font: "GT Walsheim Pro" }}>
-                                {catgry !== "" ? (
-                                  <p
-                                    style={{ color: "black" }}
-                                    className="mt-4"
-                                  >
-                                    Category
-                                  </p>
-                                ) : (
-                                  <p style={{ color: "red" }} className="mt-4">
-                                    Category
-                                    <span style={{ color: "red" }}>*</span>
-                                  </p>
-                                )}
-                                {/* <b className="mt-4">
-                                  Category
-                                  <span style={{ color: "red" }}>*</span>
-                                </b> */}
-                              </Label>
-                              <Input
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                required
-                                type="select"
-                                name="catgry"
-                                className="form-control"
-                                onChange={(e) => setCatgry(e.target.value)}
-                              >
-                                <option>Select Category</option>
-                                {allcatego?.map((allCategory) => {
-                                  return (
-                                    <option
-                                      value={allCategory?._id}
-                                      key={allCategory?._id}
-                                    >
-                                      {allCategory?.title}
-                                    </option>
-                                  );
-                                })}
-                              </Input>
-                            </Col>
-
-                            <Col>
-                              <Label style={{ font: "GT Walsheim Pro" }}>
-                                {subcatry !== "" ? (
-                                  <p
-                                    style={{ color: "black" }}
-                                    className="mt-4"
-                                  >
-                                    Sub-Category
-                                  </p>
-                                ) : (
-                                  <p style={{ color: "red" }} className="mt-4">
-                                    Sub-Category
-                                    <span style={{ color: "red" }}>*</span>
-                                  </p>
-                                )}
-                              </Label>
-                              <select
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                required
-                                type="select"
-                                name="title"
-                                className="form-control"
-                                onChange={(e) => setSubcatry(e.target.value)}
-                              >
-                                <option>Select Sub-Category</option>
-                                {subctgry?.map((subctgry) => {
-                                  return (
-                                    <option
-                                      value={subctgry?._id}
-                                      key={subctgry?._id}
-                                    >
-                                      {subctgry?.title}
-                                    </option>
-                                  );
-                                })}
-                              </select>
-                            </Col>
-                          </Row>
-
-                          <Row>
-                            <Col>
-                              <Label
-                                className="mt-3"
-                                style={{ font: "GT Walsheim Pro" }}
-                              >
-                                <b> Type</b>
-                                {/* {type !== "" ? (
-                                  <p
-                                    style={{ color: "black" }}
-                                    className="mt-4"
-                                  >
-                                    Type
-                                  </p>
-                                ) : (
-                                  <p style={{ color: "red" }} className="mt-4">
-                                    Type
-                                 
-                                  </p>
-                                )} */}
-
-                                {/* <b>
-                                  Type <span style={{ color: "red" }}>*</span>
-                                </b> */}
-                              </Label>
-                              <select
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                onChange={(e) => setType(e.target.value)}
-                                className="form-control"
-                              >
-                                <option>Select Type</option>
-                                <option>Free</option>
-                                <option>Paid</option>
-                              </select>
-                            </Col>
-
-                            <Col>
-                              <Label
-                                className="mt-3"
-                                style={{ font: "GT Walsheim Pro" }}
-                              >
-                                <b> Format</b>
-                                {/* {formate !== "" ? (
-                                  <p
-                                    style={{ color: "black" }}
-                                    className="mt-4"
-                                  >
-                                    Format
-                                  </p>
-                                ) : (
-                                  <p style={{ color: "red" }} className="mt-4">
-                                    Format
-                                   
-                                  </p>
-                                )} */}
-                                {/* <b>
-                                  Format <span style={{ color: "red" }}>*</span>
-                                </b> */}
-                              </Label>
-                              <select
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                onChange={(e) => setformate(e.target.value)}
-                                className="form-control"
-                              >
-                                <option>Select Format</option>
-                                <option>Video</option>
-                                <option>Text</option>
-                                <option>Video & Text</option>
-                              </select>
-                            </Col>
-                          </Row>
-                        </div>
-
-                        <Row className="d-flex w-100%">
-                          <Col lg="12">
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b> Language of Content</b>
-                              {/* {sellang !== "" &&
-                              sellang !== null &&
-                              sellang !== undefined ? (
-                                <p>Language of Content</p>
-                              ) : (
-                                <p style={{ color: "red" }}>
-                                  Language of Content
-                               
-                                </p>
-                              )} */}
-                              {/* <b>
-                                Language of Content
-                                <span style={{ color: "red" }}>*</span>
-                              </b> */}
-                            </Label>
-                            <Multiselect
-                              style={{
-                                borderRadius: "14px",
-                              }}
-                              placeholder="Select language"
-                              className="w-100%"
-                              options={lngage}
-                              onSelect={onSelect}
-                              onRemove={onRemove}
-                              displayValue="language"
-                            />
-                          </Col>
-                        </Row>
-
-                        <div>
-                          <Row>
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b> Topic</b>
-                              {/* {topic != "" ? (
-                                <p>Topic </p>
-                              ) : (
-                                <p style={{ color: "red" }}>
-                                  
-                              
-                                </p>
-                              )} */}
-                            </Label>
-                            {/* <Row className="mt-3 mb-3 textarea">
-                              <Form.Group controlId="validationCustomtopics">
-                                <Form.Label>
-                                  <b>
-                                    Topic{" "}
-                                    <span style={{ color: "red" }}>*</span>
-                                  </b>
-                                </Form.Label>
-                                <InputGroup hasValidation>
-                                  <textarea
-                                    className="form-control"
-                                    style={{
-                                      // width: "auto",
-                                      height: "120px",
-                                      borderRadius: "10px",
-                                    }}
-                                    type="text"
-                                    placeholder="topics "
-                                    // value={email}
-                                    // onChange={(e) => setEmail(e.target.value)}
-                                    aria-describedby="inputGroupPrepend"
-                                    required
-                                  />
-                                  <Form.Control.Feedback type="invalid">
-                                    Please choose at Least Five topics Topics.
-                                  </Form.Control.Feedback>
-                                </InputGroup>
-                              </Form.Group>
-                            </Row> */}
-                            <h5>
-                              <textarea
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                type="text"
-                                // style={{ background: "#F1F1F1" }}
-                                className="form-control"
-                                placeholder="like- javaScript, react, native"
-                                onChange={(e) => setTopic(e.target.value)}
-                              />
-                            </h5>
-                            <h6>
-                              Add Topics that covers Resource.Separate multiple
-                              topic with commas.
-                            </h6>
-                          </Row>
-                        </div>
-                        <div>
-                          <Row>
-                            <Label
-                              className="mt-4"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b>Descriptions</b>
-                              {/* <b>
-                                Descriptions
-                                <span style={{ color: "red" }}>*</span>
-                              </b> */}
-                            </Label>
-                            <h5>
-                              <textarea
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                type="text"
-                                // style={{ background: "#F1F1F1" }}
-                                className="form-control"
-                                placeholder=" Enter blog description here"
-                                onChange={(e) => setDesc(e.target.value)}
-                              />
-                            </h5>
-                          </Row>
-
-                          <Row>
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b>Upload Image of Related Content </b>
-                            </Label>
-                            <h5>
-                              <input
-                                style={{ background: "rgb(241, 241, 241)" }}
-                                type="file"
-                                // style={{ background: "#F1F1F1" }}
-                                className="form-control imageuserupload"
-                                onChange={fileUpload}
-                              />
-                            </h5>
-                          </Row>
-                          <b className="mt-1">Release year/last Updated</b>
-                          <Row className="mx-1">
-                            <Label style={{ font: "GT Walsheim Pro" }}></Label>
-
-                            <Input
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              type="select"
-                              className="form-control"
-                              name="yrName"
-                              onChange={(e) => {
-                                setSelectedyear(e.target.value);
-                              }}
-                            >
-                              <option>Select Year</option>
-                              {relyear?.map((yr) => {
-                                return (
-                                  <option value={yr?._id} key={yr?._id}>
-                                    {yr?.yrName}
-                                  </option>
-                                );
-                              })}
-                            </Input>
-                          </Row>
-                          <p className=" mb-3">
-                            Which year was this resource Was released or last
-                            updated?
-                          </p>
-                        </div>
-                        <div>
-                          <Row>
-                            <Col lg="12">
-                              <FormGroup>
-                                <Label className="mt-3">
-                                  <h6>
-                                    <b>Optional</b>
-                                  </h6>
-                                </Label>
-
-                                <Accordion open={open} toggle={toggler}>
-                                  <AccordionItem>
-                                    <AccordionHeader targetId="1">
-                                      Optional Fields
-                                    </AccordionHeader>
-
-                                    <AccordionBody accordionId="1">
-                                      <div>
-                                        <Row>
-                                          <Label
-                                            style={{ font: "GT Walsheim Pro" }}
-                                          >
-                                            <b>Title of your Resource</b>
-                                          </Label>
-                                          <input
-                                            type="text"
-                                            style={{
-                                              background: "rgb(241, 241, 241)",
-                                            }}
-                                            className=" form-control mb-3"
-                                            placeholder="Title of the resource?"
-                                            onChange={(e) =>
-                                              setOptitle(e.target.value)
-                                            }
-                                          />
-                                        </Row>
-
-                                        <Row>
-                                          <Label
-                                            style={{ font: "GT Walsheim Pro" }}
-                                          >
-                                            <b>Creator Name</b>
-                                            <span> *</span>
-                                          </Label>
-                                          <input
-                                            type="text"
-                                            style={{
-                                              background: "rgb(241, 241, 241)",
-                                            }}
-                                            className="form-control mb-3"
-                                            placeholder="author of the resource?"
-                                            onChange={(e) =>
-                                              setOpcname(e.target.value)
-                                            }
-                                          />
-                                        </Row>
-
-                                        {/* <Row>
-                                          <Label
-                                            style={{ font: "GT Walsheim Pro" }}
-                                          >
-                                            <b>Release year/last Updated</b>
-                                          </Label>
-                                          <Input
-                                            type="select"
-                                            className="form-control"
-                                            name="yrName"
-                                            onChange={(e) => {
-                                              setSelectedyear(e.target.value);
-                                            }}
-                                          >
-                                            <option>Select Year</option>
-                                            {relyear?.map((yr) => {
-                                              return (
-                                                <option
-                                                  value={yr?._id}
-                                                  key={yr?._id}
-                                                >
-                                                  {yr?.yrName}
-                                                </option>
-                                              );
-                                            })}
-                                          </Input>
-                                          <p className=" mb-3">
-                                            What year was this resource released
-                                            or last updated?
-                                          </p>
-                                        </Row> */}
-
-                                        <Row>
-                                          <Label
-                                            style={{ font: "GT Walsheim Pro" }}
-                                          >
-                                            <b>Description</b>
-                                          </Label>
-                                          <h5>
-                                            <textarea
-                                              type="text"
-                                              style={{
-                                                background:
-                                                  "rgb(241, 241, 241)",
-                                              }}
-                                              className="form-control mb-3"
-                                              placeholder="describe the resource in a few sentences, topics it covers?"
-                                              onChange={(e) =>
-                                                setOpdes(e.target.value)
-                                              }
-                                            />
-                                          </h5>
-                                        </Row>
-
-                                        <Row>
-                                          <Label
-                                            style={{ font: "GT Walsheim Pro" }}
-                                          >
-                                            <b>Comments</b>
-                                          </Label>
-                                          <h5>
-                                            <textarea
-                                              type="text"
-                                              style={{
-                                                background:
-                                                  "rgb(241, 241, 241)",
-                                              }}
-                                              className="form-control "
-                                              placeholder="Add anything you want to let us know"
-                                              onChange={(e) =>
-                                                setOpcomm(e.target.value)
-                                              }
-                                            />
-                                          </h5>
-                                        </Row>
-
-                                        <h6>
-                                          Thesefields are optional, but it will
-                                          help others find the resource more
-                                          easily.
-                                        </h6>
-                                      </div>
-                                    </AccordionBody>
-                                  </AccordionItem>
-                                </Accordion>
-                              </FormGroup>
-                            </Col>
-                          </Row>
-                        </div>
-                        <div>
-                          <Row>
-                            <Col lg="8"></Col>
-                            {!isLoading ? (
-                              <>
-                                <Col>
-                                  <Button
-                                    onClick={() => (
-                                      setModal(false), gaEventTracker("Discard")
-                                    )}
-                                    color="danger"
-                                    className="m-1"
-                                  >
-                                    Discard
-                                  </Button>
-                                  <Button
-                                    color="success"
-                                    className="m-1"
-                                    onClick={(e) => (
-                                      handleSubmitResource(e),
-                                      gaEventTracker("Submit")
-                                    )}
-                                  >
-                                    SUBMIT
-                                  </Button>
-                                </Col>
-                              </>
-                            ) : (
-                              <>
-                                <div className="spinner-container d-flex justify-content-center">
-                                  <div className="loading-spinner"></div>
-                                </div>
-                              </>
-                            )}
-                          </Row>
-                        </div>
-                      </Form>
-                    </ModalBody>
-                  </div>
-                </Modal>
-              </Container>
+              </button>
+              <Container></Container>
             </Nav.Link>
           ) : (
             <Nav.Link as={NavLink} className="navbar-link">
               <Link to={`/signup`}>
-                {/* <button
+                <button
                   className="btn rbutton mobile"
                   onClick={() => {
                     gaEventTracker("+ Submit a Content");
@@ -2051,10 +602,10 @@ function CustomNavbar(args) {
                   }}
                 >
                   <h4 className="rText">+ Submit a Content</h4>
-                </button> */}
+                </button>
               </Link>
             </Nav.Link>
-          )}
+          )} */}
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
@@ -2095,6 +646,922 @@ function CustomNavbar(args) {
         </Nav>
       </Navbar.Collapse>
       {/* <UserPage/> */}
+      <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
+        <div className="p-3 w-100">
+          <Row className=" justify-content-right canceltoggle">
+            <Col lg="10" md="8">
+              <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
+                Submit a Content
+              </h2>
+            </Col>
+            <Col
+              style={{ justifyContent: "right" }}
+              className="d-flex justify-content-right align-item-right"
+              lg="2"
+              md="4"
+            >
+              <ImCancelCircle
+                className="setmodelfalseicon"
+                onClick={() => setModal(false)}
+                size={25}
+              />
+            </Col>
+          </Row>
+          <hr></hr>
+          <p>
+            You know a content of any niche (Education/Politics/General Affairs
+            etc.) Post the content and we will publish it on our website which
+            can be rated and reviewed by users and has potential to become
+            viral. It will also help the content reach a global audience.
+            <p>
+              <b> Moreover it will help you win cool prizes daily.</b>
+            </p>
+          </p>
+          <Link onClick={() => setModal(false)} to="/leaderboard">
+            <h5 className="mt-2" style={{ color: "#5F56C6" }}>
+              Checkout Leaderboard Here.
+            </h5>
+          </Link>
+
+          <ModalBody>
+            <Form
+            // noValidate
+            // validated={validated}
+            // onSubmit={handleSubmit}
+            >
+              <div className="">
+                <Row>
+                  <Label>
+                    {link != "" ? (
+                      <p>Link</p>
+                    ) : (
+                      <p style={{ color: "red" }}>
+                        Link <span style={{ color: "Red" }}>*</span>
+                      </p>
+                    )}
+                  </Label>
+                  <h5>
+                    <input
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      required
+                      type="url"
+                      value={link}
+                      className="form-control "
+                      placeholder="https://www. "
+                      // onChange={(e) => setLink(e.target.value)}
+                      onChange={validate}
+                    />
+                    <p
+                      className="mx-2 mt-3"
+                      style={{ color: "red", fontSize: "15px" }}
+                    >
+                      {err == "This looks like Valid URL" ? (
+                        <span style={{ color: "green", fontSize: "12px" }}>
+                          {err}
+                        </span>
+                      ) : (
+                        <span style={{ fontSize: "12px" }}>{err}</span>
+                      )}
+                    </p>
+                  </h5>
+                </Row>
+              </div>
+              <div>
+                <Row>
+                  <Col>
+                    <Label style={{ font: "GT Walsheim Pro" }}>
+                      {catgry !== "" ? (
+                        <p style={{ color: "black" }} className="mt-4">
+                          Category
+                        </p>
+                      ) : (
+                        <p style={{ color: "red" }} className="mt-4">
+                          Category
+                          <span style={{ color: "red" }}>*</span>
+                        </p>
+                      )}
+                      {/* <b className="mt-4">
+                                  Category
+                                  <span style={{ color: "red" }}>*</span>
+                                </b> */}
+                    </Label>
+                    <Input
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      required
+                      type="select"
+                      name="catgry"
+                      className="form-control"
+                      onChange={(e) => setCatgry(e.target.value)}
+                    >
+                      <option>Select Category</option>
+                      {allcatego?.map((allCategory) => {
+                        return (
+                          <option
+                            value={allCategory?._id}
+                            key={allCategory?._id}
+                          >
+                            {allCategory?.title}
+                          </option>
+                        );
+                      })}
+                    </Input>
+                  </Col>
+
+                  <Col>
+                    <Label style={{ font: "GT Walsheim Pro" }}>
+                      {subcatry !== "" ? (
+                        <p style={{ color: "black" }} className="mt-4">
+                          Sub-Category
+                        </p>
+                      ) : (
+                        <p style={{ color: "red" }} className="mt-4">
+                          Sub-Category
+                          <span style={{ color: "red" }}>*</span>
+                        </p>
+                      )}
+                    </Label>
+                    <select
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      required
+                      type="select"
+                      name="title"
+                      className="form-control"
+                      onChange={(e) => setSubcatry(e.target.value)}
+                    >
+                      <option>Select Sub-Category</option>
+                      {subctgry?.map((subctgry) => {
+                        return (
+                          <option value={subctgry?._id} key={subctgry?._id}>
+                            {subctgry?.title}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                      <b> Type</b>
+                      {/* {type !== "" ? (
+                                  <p
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Type
+                                  </p>
+                                ) : (
+                                  <p style={{ color: "red" }} className="mt-4">
+                                    Type
+                                 
+                                  </p>
+                                )} */}
+
+                      {/* <b>
+                                  Type <span style={{ color: "red" }}>*</span>
+                                </b> */}
+                    </Label>
+                    <select
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      onChange={(e) => setType(e.target.value)}
+                      className="form-control"
+                    >
+                      <option>Select Type</option>
+                      <option>Free</option>
+                      <option>Paid</option>
+                    </select>
+                  </Col>
+
+                  <Col>
+                    <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                      <b> Format</b>
+                      {/* {formate !== "" ? (
+                                  <p
+                                    style={{ color: "black" }}
+                                    className="mt-4"
+                                  >
+                                    Format
+                                  </p>
+                                ) : (
+                                  <p style={{ color: "red" }} className="mt-4">
+                                    Format
+                                   
+                                  </p>
+                                )} */}
+                      {/* <b>
+                                  Format <span style={{ color: "red" }}>*</span>
+                                </b> */}
+                    </Label>
+                    <select
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      onChange={(e) => setformate(e.target.value)}
+                      className="form-control"
+                    >
+                      <option>Select Format</option>
+                      <option>Video</option>
+                      <option>Text</option>
+                      <option>Video & Text</option>
+                    </select>
+                  </Col>
+                </Row>
+              </div>
+
+              <Row className="d-flex w-100%">
+                <Col lg="12">
+                  <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                    <b> Language of Content</b>
+                    {/* {sellang !== "" &&
+                              sellang !== null &&
+                              sellang !== undefined ? (
+                                <p>Language of Content</p>
+                              ) : (
+                                <p style={{ color: "red" }}>
+                                  Language of Content
+                               
+                                </p>
+                              )} */}
+                    {/* <b>
+                                Language of Content
+                                <span style={{ color: "red" }}>*</span>
+                              </b> */}
+                  </Label>
+                  <Multiselect
+                    style={{
+                      borderRadius: "14px",
+                    }}
+                    placeholder="Select language"
+                    className="w-100%"
+                    options={lngage}
+                    onSelect={onSelect}
+                    onRemove={onRemove}
+                    displayValue="language"
+                  />
+                </Col>
+              </Row>
+
+              <div>
+                <Row>
+                  <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                    <b> Topic</b>
+                    {/* {topic != "" ? (
+                                <p>Topic </p>
+                              ) : (
+                                <p style={{ color: "red" }}>
+                                  
+                              
+                                </p>
+                              )} */}
+                  </Label>
+                  {/* <Row className="mt-3 mb-3 textarea">
+                              <Form.Group controlId="validationCustomtopics">
+                                <Form.Label>
+                                  <b>
+                                    Topic{" "}
+                                    <span style={{ color: "red" }}>*</span>
+                                  </b>
+                                </Form.Label>
+                                <InputGroup hasValidation>
+                                  <textarea
+                                    className="form-control"
+                                    style={{
+                                      // width: "auto",
+                                      height: "120px",
+                                      borderRadius: "10px",
+                                    }}
+                                    type="text"
+                                    placeholder="topics "
+                                    // value={email}
+                                    // onChange={(e) => setEmail(e.target.value)}
+                                    aria-describedby="inputGroupPrepend"
+                                    required
+                                  />
+                                  <Form.Control.Feedback type="invalid">
+                                    Please choose at Least Five topics Topics.
+                                  </Form.Control.Feedback>
+                                </InputGroup>
+                              </Form.Group>
+                            </Row> */}
+                  <h5>
+                    <textarea
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      type="text"
+                      // style={{ background: "#F1F1F1" }}
+                      className="form-control"
+                      placeholder="like- javaScript, react, native"
+                      onChange={(e) => setTopic(e.target.value)}
+                    />
+                  </h5>
+                  <h6>
+                    Add Topics that covers Resource.Separate multiple topic with
+                    commas.
+                  </h6>
+                </Row>
+              </div>
+              <div>
+                <Row>
+                  <Label className="mt-4" style={{ font: "GT Walsheim Pro" }}>
+                    <b>Descriptions</b>
+                    {/* <b>
+                                Descriptions
+                                <span style={{ color: "red" }}>*</span>
+                              </b> */}
+                  </Label>
+                  <h5>
+                    <textarea
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      type="text"
+                      // style={{ background: "#F1F1F1" }}
+                      className="form-control"
+                      placeholder=" Enter blog description here"
+                      onChange={(e) => setDesc(e.target.value)}
+                    />
+                  </h5>
+                </Row>
+
+                <Row>
+                  <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                    <b>Upload Image of Related Content </b>
+                  </Label>
+                  <h5>
+                    <input
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      type="file"
+                      // style={{ background: "#F1F1F1" }}
+                      className="form-control imageuserupload"
+                      onChange={fileUpload}
+                    />
+                  </h5>
+                </Row>
+                <b className="mt-1">Release year/last Updated</b>
+                <Row className="mx-1">
+                  <Label style={{ font: "GT Walsheim Pro" }}></Label>
+
+                  <Input
+                    style={{ background: "rgb(241, 241, 241)" }}
+                    type="select"
+                    className="form-control"
+                    name="yrName"
+                    onChange={(e) => {
+                      setSelectedyear(e.target.value);
+                    }}
+                  >
+                    <option>Select Year</option>
+                    {relyear?.map((yr) => {
+                      return (
+                        <option value={yr?._id} key={yr?._id}>
+                          {yr?.yrName}
+                        </option>
+                      );
+                    })}
+                  </Input>
+                </Row>
+                <p className=" mb-3">
+                  Which year was this resource Was released or last updated?
+                </p>
+              </div>
+              <div>
+                <Row>
+                  <Col lg="12">
+                    <FormGroup>
+                      <Label className="mt-3">
+                        <h6>
+                          <b>Optional</b>
+                        </h6>
+                      </Label>
+
+                      <Accordion open={open} toggle={toggler}>
+                        <AccordionItem>
+                          <AccordionHeader targetId="1">
+                            Optional Fields
+                          </AccordionHeader>
+
+                          <AccordionBody accordionId="1">
+                            <div>
+                              <Row>
+                                <Label style={{ font: "GT Walsheim Pro" }}>
+                                  <b>Title of your Resource</b>
+                                </Label>
+                                <input
+                                  type="text"
+                                  style={{
+                                    background: "rgb(241, 241, 241)",
+                                  }}
+                                  className=" form-control mb-3"
+                                  placeholder="Title of the resource?"
+                                  onChange={(e) => setOptitle(e.target.value)}
+                                />
+                              </Row>
+
+                              <Row>
+                                <Label style={{ font: "GT Walsheim Pro" }}>
+                                  <b>Creator Name</b>
+                                  <span> *</span>
+                                </Label>
+                                <input
+                                  type="text"
+                                  style={{
+                                    background: "rgb(241, 241, 241)",
+                                  }}
+                                  className="form-control mb-3"
+                                  placeholder="author of the resource?"
+                                  onChange={(e) => setOpcname(e.target.value)}
+                                />
+                              </Row>
+
+                              {/* <Row>
+                                          <Label
+                                            style={{ font: "GT Walsheim Pro" }}
+                                          >
+                                            <b>Release year/last Updated</b>
+                                          </Label>
+                                          <Input
+                                            type="select"
+                                            className="form-control"
+                                            name="yrName"
+                                            onChange={(e) => {
+                                              setSelectedyear(e.target.value);
+                                            }}
+                                          >
+                                            <option>Select Year</option>
+                                            {relyear?.map((yr) => {
+                                              return (
+                                                <option
+                                                  value={yr?._id}
+                                                  key={yr?._id}
+                                                >
+                                                  {yr?.yrName}
+                                                </option>
+                                              );
+                                            })}
+                                          </Input>
+                                          <p className=" mb-3">
+                                            What year was this resource released
+                                            or last updated?
+                                          </p>
+                                        </Row> */}
+
+                              <Row>
+                                <Label style={{ font: "GT Walsheim Pro" }}>
+                                  <b>Description</b>
+                                </Label>
+                                <h5>
+                                  <textarea
+                                    type="text"
+                                    style={{
+                                      background: "rgb(241, 241, 241)",
+                                    }}
+                                    className="form-control mb-3"
+                                    placeholder="describe the resource in a few sentences, topics it covers?"
+                                    onChange={(e) => setOpdes(e.target.value)}
+                                  />
+                                </h5>
+                              </Row>
+
+                              <Row>
+                                <Label style={{ font: "GT Walsheim Pro" }}>
+                                  <b>Comments</b>
+                                </Label>
+                                <h5>
+                                  <textarea
+                                    type="text"
+                                    style={{
+                                      background: "rgb(241, 241, 241)",
+                                    }}
+                                    className="form-control "
+                                    placeholder="Add anything you want to let us know"
+                                    onChange={(e) => setOpcomm(e.target.value)}
+                                  />
+                                </h5>
+                              </Row>
+
+                              <h6>
+                                Thesefields are optional, but it will help
+                                others find the resource more easily.
+                              </h6>
+                            </div>
+                          </AccordionBody>
+                        </AccordionItem>
+                      </Accordion>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </div>
+              <div>
+                <Row>
+                  <Col lg="8"></Col>
+                  {!isLoading ? (
+                    <>
+                      <Col>
+                        <Button
+                          onClick={() => (
+                            setModal(false), gaEventTracker("Discard")
+                          )}
+                          color="danger"
+                          className="m-1"
+                        >
+                          Discard
+                        </Button>
+                        <Button
+                          color="success"
+                          className="m-1"
+                          onClick={(e) => (
+                            handleSubmitResource(e), gaEventTracker("Submit")
+                          )}
+                        >
+                          SUBMIT
+                        </Button>
+                      </Col>
+                    </>
+                  ) : (
+                    <>
+                      <div className="spinner-container d-flex justify-content-center">
+                        <div className="loading-spinner"></div>
+                      </div>
+                    </>
+                  )}
+                </Row>
+              </div>
+            </Form>
+          </ModalBody>
+        </div>
+      </Modal>
+      <Modal
+        toggle={() => (
+          closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
+        )}
+        {...args}
+        className="content-creator-model"
+        isOpen={isContentCreatorModel}
+      >
+        <div className="mb-2 d-flex justify-content-between align-items-center">
+          <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
+          <ImCancelCircle
+            style={{ cursor: "pointer" }}
+            className="setmodelfalseicon"
+            onClick={() => closeModel()}
+            size={30}
+          />
+        </div>
+        <p style={{ color: "#494949", fontSize: "18px" }}>
+          Found a cool{" "}
+          <Link style={{ color: "#4095FF" }} to="/">
+            content creator?
+          </Link>
+        </p>
+        <p style={{ color: "#494949", fontSize: "18px" }}>
+          Send it to us and we will add it to the database!
+        </p>
+
+        <form className="mt-5">
+          <div className="form-group mb-4">
+            <label
+              for="Creator name"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Creator Name
+            </label>
+            <input
+              style={{ background: "#F1F1F1" }}
+              value={creatorName}
+              onChange={(e) => setCreatorName(e.target.value)}
+              type="text"
+              className="form-control border-0"
+              id="Creator name"
+              placeholder=""
+            />
+            {creatorName ? (
+              ""
+            ) : fillPlease === "define" ? (
+              <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="form-group">
+            <label
+              for="Profile Link"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Profile Link
+            </label>
+
+            {linkData?.map((link, index) => (
+              <div key={link.id}>
+                <div className="position-relative ">
+                  <input
+                    style={{ background: "#F1F1F1" }}
+                    type="text"
+                    name={link.name}
+                    value={link.value}
+                    onChange={(event) => handleInputChange(event, link.id)}
+                    className="form-control border-0 mb-2"
+                    id={link.name}
+                    placeholder={
+                      link.name.charAt(0).toUpperCase() + link.name.slice(1)
+                    }
+                  />
+
+                  <ImCancelCircle
+                    style={{ cursor: "pointer" }}
+                    className="setmodelfalseicon linkCloseBtn"
+                    onClick={() => deleteLinkField(link.id)}
+                    size={30}
+                  />
+                </div>
+              </div>
+            ))}
+            {linkData.length > 1 ? (
+              ""
+            ) : linkField === "define" ? (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                One Field Mendatory
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+
+          <Button
+            className="w-100 border-0 d-flex justify-content-center py-2"
+            onClick={addLinkField}
+          >
+            <div style={{ height: 20, width: 20 }} className="me-4">
+              <img className="h-auto w-100" src="/plus-icon.png" alt="add" />
+            </div>
+            <div>
+              <span style={{ fontSize: "18px" }}>Add more links</span>
+            </div>
+          </Button>
+
+          <Row className="my-4">
+            <Col>
+              <div className="form-group mb-4">
+                <label
+                  for="Phone Number"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Phone Number
+                </label>
+                <input
+                  style={{ background: "#F1F1F1" }}
+                  type="text"
+                  value={phoneNo}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                  className="form-control border-0"
+                  id="Phone Number"
+                  placeholder="+91"
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Category"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Category
+                </label>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="form-control border-0"
+                  id="Category"
+                  placeholder="Select Category"
+                >
+                  <option>Select Category</option>
+                  {allcatego?.map((allCategory) => {
+                    return (
+                      <option value={allCategory?._id} key={allCategory?._id}>
+                        {allCategory?.title}
+                      </option>
+                    );
+                  })}
+                </Input>
+                {category ? (
+                  ""
+                ) : fillPlease === "define" ? (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    Fill This Field
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Format"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Format
+                </label>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={format}
+                  onChange={(e) => setFormat(e.target.value)}
+                  className="form-control border-0"
+                  id="Format"
+                  placeholder="Select Format"
+                >
+                  <option>Select Format </option>
+                  <option value="Video">Video</option>
+                  <option value="Text">Text</option>
+                  <option value="Video & Text">Video & Text</option>
+                </Input>
+              </div>
+            </Col>
+            <Col>
+              <div className="form-group mb-4">
+                <label
+                  for="Email ID"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Email ID
+                </label>
+                <input
+                  style={{ background: "#F1F1F1" }}
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control border-0"
+                  id="Email ID"
+                  placeholder="abc@gmail.com"
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Sub Category"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Sub Category
+                </label>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={sub_category}
+                  onChange={(e) => setSub_category(e.target.value)}
+                  className="form-control border-0"
+                  id="Sub Category"
+                  placeholder="Select Sub Category"
+                >
+                  <option>Select Sub-Category</option>
+                  {subctgry?.map((subctgry) => {
+                    return (
+                      <option value={subctgry?._id} key={subctgry?._id}>
+                        {subctgry?.title}
+                      </option>
+                    );
+                  })}
+                </Input>
+                {sub_category ? (
+                  ""
+                ) : fillPlease === "define" ? (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    Fill This Field
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Format"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Level
+                </label>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={level}
+                  onChange={(e) => setLevel(e.target.value)}
+                  className="form-control border-0"
+                  id="Format"
+                  placeholder="Select Format"
+                >
+                  <option>Select Level </option>
+                  <option value="Video">Beginner</option>
+                  <option value="Text">Advanced</option>
+                </Input>
+              </div>
+            </Col>
+          </Row>
+          <div className="form-group mb-4">
+            <label
+              for="Language of content"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Language of content
+            </label>
+            <Input
+              style={{ background: "#F1F1F1" }}
+              type="select"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="form-control border-0"
+              id="Language of content"
+              placeholder="Select language"
+            >
+              <option>Select language</option>
+              {lngage.map((lang) => {
+                return <option value={lang._id}>{lang.language}</option>;
+              })}
+            </Input>
+
+            {/* <Multiselect
+                      style={{ background: "#F1F1F1" }}
+                      placeholder="Select language"
+                      className="form-control border-0"
+                      options={lngage}
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                      displayValue="language"
+                    /> */}
+          </div>
+          <div className="form-group mb-4">
+            <label
+              for="Topic"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Topic
+            </label>
+            <textarea
+              style={{ background: "#F1F1F1" }}
+              type="text"
+              value={topics}
+              onChange={(e) => setTopics(e.target.value)}
+              className="form-control border-0"
+              id="Topic"
+              placeholder="Java script, react, native"
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label
+              for="Upload Image of related content"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Upload Image of related content
+            </label>
+            <input
+              id="Upload Image of related content"
+              style={{ background: "rgb(241, 241, 241)" }}
+              type="file"
+              className="form-control imageuserupload"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group mb-4">
+            <label
+              for="Description"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Description
+            </label>
+            <textarea
+              style={{ background: "#F1F1F1" }}
+              type="text"
+              value={descriptionData}
+              onChange={(e) => setDescriptionData(e.target.value)}
+              className="form-control border-0"
+              id="Description"
+              placeholder="Describe the topic in few sentence, topic it covers?"
+            />
+          </div>
+          <div className="d-flex gap-4 justify-content-end">
+            <Button
+              style={{
+                border: "1px solid #919191",
+                background: "#F1F1F1",
+                color: "#919191",
+              }}
+              className="py-2 px-4"
+              onClick={(e) => DiscardContent(e)}
+            >
+              Discard
+            </Button>
+            <Button
+              style={{ borderColor: "transparent" }}
+              className="py-2 px-4"
+              onClick={(e) => NewContentCrete(e)}
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </Navbar>
   );
 }
