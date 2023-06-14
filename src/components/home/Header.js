@@ -237,7 +237,8 @@ function Header(args) {
       formData.append("sub_category", sub_category);
       formData.append("format", format);
       if (language.length != 0) {
-        formData.append("language", language);
+        language.map((e2) => formData.append("language", e2))
+
       }
       formData.append("level", level);
       formData.append("topics", topics);
@@ -1141,10 +1142,7 @@ function Header(args) {
                   />
                 </div>
                 <p style={{ color: "#494949", fontSize: "18px" }}>
-                  Found a cool{" "}
-                  <Link style={{ color: "#4095FF" }} to="/">
-                    content creator?
-                  </Link>
+                  Found a cool content creator?
                 </p>
                 <p style={{ color: "#494949", fontSize: "18px" }}>
                   Send it to us and we will add it to the database!
@@ -1258,7 +1256,7 @@ function Header(args) {
                         </label>
                         <input
                           style={{ background: "#F1F1F1" }}
-                          type="text"
+                          type="number"
                           value={phoneNo}
                           onChange={(e) => setPhoneNo(e.target.value)}
                           className="form-control border-0"
@@ -1341,7 +1339,7 @@ function Header(args) {
                         </label>
                         <input
                           style={{ background: "#F1F1F1" }}
-                          type="text"
+                          type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="form-control border-0"
@@ -1412,29 +1410,23 @@ function Header(args) {
                     </Col>
                   </Row>
                   <div className="form-group mb-4">
-                    <label
-                      for="Language of content"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                    <Label
+                      className="mt-3"
+                      style={{ font: "GT Walsheim Pro" }}
                     >
-                      Language of content
-                    </label>
-                    <Input
-                      style={{ background: "#F1F1F1" }}
-                      type="select"
-                      value={language}
-                      onChange={(e) => setLanguage(e.target.value)}
-                      className="form-control border-0"
-                      id="Language of content"
+                      <b> Language of Content</b>
+                    </Label>
+                    <Multiselect
+                      style={{
+                        borderRadius: "14px",
+                      }}
                       placeholder="Select language"
-                    >
-                      <option>Select language</option>
-                      {lngage.map((lang) => {
-                        return (
-                          <option value={lang._id}>{lang.language}</option>
-                        );
-                      })}
-                    </Input>
+                      className="w-100%"
+                      options={lngage}
+                      onSelect={onSelect}
+                      onRemove={onRemove}
+                      displayValue="language"
+                    />
 
                     {/* <Multiselect
                       style={{ background: "#F1F1F1" }}
