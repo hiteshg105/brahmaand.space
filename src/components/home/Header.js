@@ -205,7 +205,7 @@ function Header(args) {
       swal(" * Fields are mandatory Please fill details");
     }
   };
-  console.log(localStorage.getItem("userId"),"userid")
+  console.log(localStorage.getItem("userId"), "userid");
   const NewContentCrete = async () => {
     console.log("hello");
     let linkNewData;
@@ -234,7 +234,7 @@ function Header(args) {
       formData.append("sub_category", sub_category);
       formData.append("format", format);
       formData.append("language", language);
-      formData.append("level", level)
+      formData.append("level", level);
       formData.append("topics", topics);
       formData.append("desc", descriptionData);
       formData.append("userid", userid);
@@ -265,7 +265,6 @@ function Header(args) {
           setTopics("");
           setDescriptionData("");
           setFile(null);
-
         } else {
           swal("Something went wrong, Try again");
           setIsContentCreatorModel(false);
@@ -275,7 +274,6 @@ function Header(args) {
         swal("* Field Are Mandatory");
       }
     }
-
   };
   const DiscardContent = (e) => {
     if (
@@ -334,7 +332,7 @@ function Header(args) {
       .get(`/admin/getallCategory`)
 
       .then((response) => {
-        console.log(response.data.data)
+        console.log(response.data.data);
         setAllcatego(response.data.data);
       })
       .catch((error) => {
@@ -348,11 +346,7 @@ function Header(args) {
     const params = catgry ? catgry : category;
     axiosConfig
 
-      .get(
-        `/admin/listbycategory/${
-          catgry ? catgry : category
-        }`
-      )
+      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
       .then((response) => {
         // console.log(response.data.data);
         setSubctgry(response.data.data);
@@ -618,19 +612,18 @@ function Header(args) {
               className={`hero-swiper_swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
             ></div>
             <h1 style={{ fontSize: "69px" }} className="text-center p-0 m-0">
-              Looking for best content across the world?
+              Looking for the best content across the world?
             </h1>
             <p
               style={{ fontSize: "45px", letterSpacing: "0.5px" }}
               className="text-center p-0 m-0 mt-3"
             >
-              Finding the quality resources is not a hassle anymore
+              Finding quality resources is not a hassle anymore.
             </p>
             <div className="text-center p-0 m-0 mt-5 pb-4">
               <button
                 onClick={(e) => (
-                  toggle(e),
-                  gaEventTracker("+Submit a Content")
+                  toggle(e), gaEventTracker("+Submit a Content")
                 )}
                 style={{
                   backgroundColor: "#FC9358",
@@ -648,7 +641,8 @@ function Header(args) {
                 onClick={(e) => (
                   closeModel(),
                   setIsContentCreatorModel(!isContentCreatorModel),
-                  gaEventTracker("+Content Creator"))}
+                  gaEventTracker("+Content Creator")
+                )}
                 style={{
                   backgroundColor: "#FC9358",
                   fontSize: "22px",
@@ -1149,7 +1143,7 @@ function Header(args) {
                       style={{ fontSize: "20px", color: "red" }}
                       className=" mb-2"
                     >
-                      Creator's Name<span style={{ color: "red" }}>  *</span>
+                      Creator's Name<span style={{ color: "red" }}> *</span>
                     </label>
                     <input
                       style={{ background: "#F1F1F1" }}
@@ -1199,10 +1193,14 @@ function Header(args) {
                           />
 
                           <ImCancelCircle
-                            style={{ cursor: "pointer" }}
-                            className="setmodelfalseicon linkCloseBtn"
+                            style={{
+                              cursor: "pointer",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                            }}
+                            className="setmodelfalseicon linkCloseBtn position-absolute"
                             onClick={() => deleteLinkField(link.id)}
-                            size={30}
+                            size={20}
                           />
                         </div>
                       </div>
@@ -1510,8 +1508,8 @@ function Header(args) {
               </Modal>
             </Container>
           </div>
-        </section >
-      </div >
+        </section>
+      </div>
       <section>
         <div className="searchbar">
           <div className="inputarea">
