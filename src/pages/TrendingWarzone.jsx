@@ -451,7 +451,7 @@ const TrendingWarzone = () => {
             )}
           </Col>
 
-          <Row className="h-100 py-3 ps-4 flex-column justify-content-between">
+          <Row className="h-lg-100 py-3 ps-4 flex-column justify-content-between">
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3"
@@ -483,8 +483,8 @@ const TrendingWarzone = () => {
           </div>
         </div>
         <Col lg={6} className="border-top border-bottom py-4">
-          <div className="d-flex justify-content-end">
-            <div className="d-flex justify-content-end flex-wrap tag-2">
+          <div className="d-flex justify-content-lg-end">
+            <div className="d-flex justify-content-lg-end flex-wrap tag-2">
               {war?.resource1.topics[0].split(",").map((val) => (
                 <Link className="d-flex" to="#">
                   {val}
@@ -522,7 +522,10 @@ const TrendingWarzone = () => {
           className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
         >
           <div>
-            <h4 style={{ fontSize: "30px" }} className="text-end mb-2">
+            <h4
+              style={{ fontSize: "30px" }}
+              className="text-center p-0 text-lg-end mb-2"
+            >
               {war?.resource1.creatorName}
             </h4>
             {war?.resource1.format === "Video" ? (
@@ -554,7 +557,10 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
         >
           <div>
-            <h4 style={{ fontSize: "30px" }} className="mb-2">
+            <h4
+              style={{ fontSize: "30px" }}
+              className="text-center p-0 text-lg-start mb-2"
+            >
               {war?.resource2.creatorName}
             </h4>
 
@@ -595,26 +601,23 @@ const TrendingWarzone = () => {
           lg={6}
           className="border-top border-bottom border-right py-4 pe-4 ps-4 ps-lg-0"
         >
-          <div
-            style={{ width: "69%" }}
-            className="shadow-lg mx-auto mx-lg-0 ms-lg-auto ps-4 py-2 d-flex align-items-center justify-content-between"
-          >
-            <div className="w-50 text-center">
+          <div className="w-100 w-xs-75 flex-column flex-md-row shadow-lg mx-auto mx-lg-0 ms-lg-auto px-4 py-2 d-flex align-items-center justify-content-between">
+            <div className="w-100 w-md-50 text-center">
               <p style={{ fontSize: "69px", fontWeight: "600" }}>
                 {warReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
-            <div className="pe-4 w-50">
+            <div className="w-100 w-md-50">
               {warReview?.toalRsc1 === 0 ? (
                 <p
-                  className="text-end"
+                  className="text-center p-0 text-md-end"
                   style={{ fontSize: "24px", fontWeight: "600" }}
                 >
                   Not Rated
                 </p>
               ) : (
                 <p
-                  className="text-end"
+                  className="text-center p-0 text-md-end"
                   style={{ fontSize: "24px", fontWeight: "600" }}
                 >
                   {warReview?.rsc1AvReview < 2
@@ -632,10 +635,10 @@ const TrendingWarzone = () => {
                 </p>
               )}
 
-              <p className="my-3 text-end">
+              <p className="my-3 text-center p-0 text-md-end">
                 Based on {warReview?.toalRsc1} reviews
               </p>
-              <div className="d-flex align-items-center justify-content-end">
+              <div className="d-flex align-items-center justify-content-center justify-content-md-end">
                 {/* {console.log(warReview?.rsc1AvReview)} */}
                 {warReview && (
                   <ReactStars
@@ -653,15 +656,15 @@ const TrendingWarzone = () => {
           lg={6}
           className="content-box border-top border-bottom border-right py-4 ps-4"
         >
-          <div
-            style={{ width: "69%" }}
-            className="shadow-lg mx-auto mx-lg-0 ps-4 py-2 d-flex justify-content-between align-items-center"
-          >
-            <div className="w-50">
+          <div className="w-100 w-xs-75 flex-column-reverse flex-md-row shadow-lg mx-auto mx-lg-0 px-4 py-2 d-flex justify-content-between align-items-center">
+            <div className="w-100 w-md-50">
               {warReview?.toalRsc2 === 0 ? (
                 <p style={{ fontSize: "24px", fontWeight: "600" }}>Not Rated</p>
               ) : (
-                <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+                <p
+                  style={{ fontSize: "24px" }}
+                  className="text-center text-md-start fw-bold p-0"
+                >
                   {warReview?.rsc2AvReview < 2
                     ? "Bad"
                     : warReview?.rsc2AvReview >= 2 &&
@@ -676,8 +679,10 @@ const TrendingWarzone = () => {
                     : "Excellent"}
                 </p>
               )}
-              <p className="my-3">Based on {warReview?.toalRsc2} reviews</p>
-              <div className="d-flex align-items-center">
+              <p className="my-3 text-center text-md-start p-0">
+                Based on {warReview?.toalRsc2} reviews
+              </p>
+              <div className="d-flex justify-content-center justify-content-md-start align-items-center">
                 {warReview && (
                   <ReactStars
                     edit={false}
@@ -687,7 +692,7 @@ const TrendingWarzone = () => {
                 )}
               </div>
             </div>
-            <div className="w-50 text-center">
+            <div className="w-100 w-md-50 text-center">
               <p
                 style={{ fontSize: "69px", fontWeight: "600" }}
                 className="ms-2"
@@ -709,9 +714,14 @@ const TrendingWarzone = () => {
         </p>
 
         <Col lg={6} className="border-top border-bottom border-right py-4">
-          <Row className="mb-4 text-lg-end pe-4">
+          <Row className="mb-4 text-lg-end">
             <Link
-              style={{ color: "#5F56C6", fontSize: "20px" }}
+              style={{
+                color: "#5F56C6",
+                fontSize: "20px",
+                wordBreak: "break-all",
+              }}
+              className="text-center text-lg-end"
               to={war?.resource1.link}
             >
               {war?.resource1.link}
@@ -855,8 +865,13 @@ const TrendingWarzone = () => {
         >
           <Row className="mb-4 text-lg-start pe-4">
             <Link
-              style={{ color: "#5F56C6", fontSize: "20px" }}
+              style={{
+                color: "#5F56C6",
+                fontSize: "20px",
+                wordBreak: "break-all",
+              }}
               to={war?.resource2.link}
+              className="text-center text-lg-start"
             >
               {war?.resource2.link}
             </Link>
@@ -1025,7 +1040,7 @@ const TrendingWarzone = () => {
         <Col lg={6} className="px-0">
           <p
             style={{ color: "#737373", paddingRight: "20px" }}
-            className="text-end mx-auto border-top"
+            className="text-center p-3 text-lg-end mx-auto border-top"
           >
             {war?.resource1.res_desc
               ? war?.resource1.res_desc
@@ -1035,7 +1050,7 @@ const TrendingWarzone = () => {
         <Col lg={6} className="content-box px-0">
           <p
             style={{ color: "#737373", paddingLeft: "20px" }}
-            className="mx-auto border-top"
+            className="text-center text-lg-start border-top p-3"
           >
             {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -1060,11 +1075,11 @@ const TrendingWarzone = () => {
             className="mx-0 ms-lg-auto me-0 me-lg-4"
           >
             {warRscReview?.toalRsc1 === 0 ? (
-              <p style={{ fontSize: "24px" }} className="text-end fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-end fw-bold">
                 Not Rated
               </p>
             ) : (
-              <p style={{ fontSize: "24px" }} className="text-end fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-end fw-bold">
                 {warRscReview?.rsc1AvReview < 2
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
@@ -1080,7 +1095,7 @@ const TrendingWarzone = () => {
               </p>
             )}
 
-            <div className="d-flex align-items-center justify-content-end">
+            <div className="d-flex align-items-center justify-content-center justify-content-lg-end">
               {warRscReview && (
                 <ReactStars
                   edit={false}
@@ -1091,14 +1106,14 @@ const TrendingWarzone = () => {
 
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
-                className="ms-2 text-end"
+                className="ms-2 text-center p-0 text-lg-end"
               >
                 {warRscReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
             <p
               style={{ fontSize: "14px", color: "#CACACA" }}
-              className="mt-2 text-end fw-bold"
+              className="mt-2 text-center p-0 text-lg-end fw-bold"
             >
               {warRscReview?.toalRsc1} customers reviews
             </p>
@@ -1227,14 +1242,14 @@ const TrendingWarzone = () => {
           </div>
         </Col>
 
-        <Col lg={6} className="content-box border-top d-flex text-end p-3">
+        <Col lg={6} className="content-box justify-content-center justify-content-lg-start border-top d-flex text-end p-3">
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
             {warRscReview?.toalRsc2 === 0 ? (
-              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-start fw-bold">
                 Not Rated
               </p>
             ) : (
-              <p style={{ fontSize: "24px" }} className="text-start fw-bold">
+              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-start fw-bold">
                 {warRscReview?.rsc2AvReview < 2
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
@@ -1249,7 +1264,7 @@ const TrendingWarzone = () => {
                   : "Excellent"}
               </p>
             )}
-            <div className="d-flex align-items-center">
+            <div className="d-flex justify-content-center justify-content-lg-start align-items-center">
               {warRscReview && (
                 <ReactStars
                   edit={false}
@@ -1260,7 +1275,7 @@ const TrendingWarzone = () => {
 
               <p
                 style={{ fontSize: "22px", fontWeight: "600" }}
-                className="ms-2"
+                className="ms-2 text-center p-0 text-lg-start"
               >
                 {warRscReview?.rsc2AvReview?.toFixed(2)}
               </p>

@@ -5,6 +5,10 @@
   height: 30px;
 }
 
+.war-rating-card {
+  width: 75%;
+}
+
 /* Category */
 
 .category-main .hero-swiper {
@@ -70,26 +74,22 @@
 
 .category-main .common-swipers .swiper .swiper-button-prev {
   left: 0;
-  background: linear-gradient(
-    -270.55deg,
-    #00273a 13%,
-    rgba(1, 21, 31, 0.729967) 30%,
-    rgba(0, 7, 11, 0.258519) 60%,
-    rgba(0, 6, 8, 0.195375) 69%,
-    rgba(0, 0, 0, 0) 120%
-  );
+  background: linear-gradient(-270.55deg,
+      #00273a 13%,
+      rgba(1, 21, 31, 0.729967) 30%,
+      rgba(0, 7, 11, 0.258519) 60%,
+      rgba(0, 6, 8, 0.195375) 69%,
+      rgba(0, 0, 0, 0) 120%);
 }
 
 .category-main .common-swipers .swiper .swiper-button-next {
   right: 12px;
-  background: linear-gradient(
-    270.55deg,
-    #00273a 13%,
-    rgba(1, 21, 31, 0.729967) 30%,
-    rgba(0, 7, 11, 0.258519) 60%,
-    rgba(0, 6, 8, 0.195375) 69%,
-    rgba(0, 0, 0, 0) 120%
-  );
+  background: linear-gradient(270.55deg,
+      #00273a 13%,
+      rgba(1, 21, 31, 0.729967) 30%,
+      rgba(0, 7, 11, 0.258519) 60%,
+      rgba(0, 6, 8, 0.195375) 69%,
+      rgba(0, 0, 0, 0) 120%);
 }
 
 .category-main .common-swipers .swiper .swiper-button-prev::before,
@@ -154,7 +154,7 @@
   transition: all 0.4s;
 }
 
-.content-creator-main .toggle input ~ label.l {
+.content-creator-main .toggle input~label.l {
   width: 50%;
   height: 100%;
   display: flex;
@@ -169,7 +169,7 @@
   font-weight: bold;
 }
 
-.content-creator-main .toggle input ~ label.r {
+.content-creator-main .toggle input~label.r {
   width: 50%;
   height: 100%;
   display: flex;
@@ -184,11 +184,11 @@
   font-weight: bold;
 }
 
-.content-creator-main .toggle input:checked ~ label.r {
+.content-creator-main .toggle input:checked~label.r {
   color: white;
 }
 
-.content-creator-main .toggle input:not(:checked) ~ label.l {
+.content-creator-main .toggle input:not(:checked)~label.l {
   color: white;
 }
 
@@ -205,8 +205,7 @@
   border-radius: 10px;
 }
 
-@media (max-width: 992px) {
-}
+@media (max-width: 992px) {}
 
 /* Content Creator Model */
 
@@ -222,7 +221,7 @@
   cursor: pointer;
 }
 
-.levels input:checked + label {
+.levels input:checked+label {
   color: white !important;
   background-color: #5f56c6 !important;
 }
@@ -357,8 +356,11 @@
   position: absolute;
   bottom: 6px;
 }
+
 /* DROPDOWN CSS */
+
 .dropdown {
   z-index: 99999999999;
 }
+
 /* DROPDOWN CSS */
