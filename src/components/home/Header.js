@@ -582,7 +582,7 @@ function Header(args) {
                   <div>
                     {imgPath === "/hero-img1.png" ? (
                       <>
-                        <img src={imgPath} usemap="#image-map" />
+                        <img className="w-100" src={imgPath} usemap="#image-map" />
                         <map name="image-map">
                           <area
                             target=""
@@ -595,7 +595,7 @@ function Header(args) {
                         </map>
                       </>
                     ) : (
-                      <img src={imgPath} alt="hero-images" />
+                      <img className="w-100" src={imgPath} alt="hero-images" />
                     )}
                   </div>
                 </SwiperSlide>
@@ -920,13 +920,15 @@ function Header(args) {
                             <b>Upload Image of Related Content </b>
                           </Label>
                           <h5>
-                            <input
-                              style={{ background: "rgb(241, 241, 241)" }}
-                              type="file"
-                              className="form-control imageuserupload"
-                              onChange={fileUpload}
-                            />
-                          </h5>
+                    <input
+                      style={{ background: "#F1F1F1",height:36 }}
+                      type="file"
+                      name=""
+                      onChange={handleChange}
+                      id="Upload Image of related content"
+                      className="w-100"
+                    />
+                    </h5>
                         </Row>
                         <b className="mt-1">Release year/last Updated</b>
                         <Row className="mx-1">
@@ -1457,14 +1459,16 @@ function Header(args) {
                     >
                       Upload Image of related content
                     </label>
+                    <h5>
                     <input
-                      style={{ background: "#F1F1F1" }}
+                      style={{ background: "#F1F1F1",height:36 }}
                       type="file"
+                      name=""
                       onChange={handleChange}
-                      className="form-control border-0 "
                       id="Upload Image of related content"
-                      placeholder="Choose file  |  No file chosen"
+                      className="w-100"
                     />
+                    </h5>
                   </div>
                   <div className="form-group mb-4">
                     <label

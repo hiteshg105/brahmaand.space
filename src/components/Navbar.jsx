@@ -65,10 +65,10 @@ function CustomNavbar(args) {
   const [isContentCreatorModel, setIsContentCreatorModel] = useState(false);
   const [creatorName, setCreatorName] = useState();
   const [linkData, setLinkData] = useState([
-    { id: 1, name: 'youtube', value: '' },
-    { id: 2, name: 'instagram', value: '' },
-    { id: 3, name: 'linkedin', value: '' },
-    { id: 4, name: 'facebook', value: '' },
+    { id: 1, name: "youtube", value: "" },
+    { id: 2, name: "instagram", value: "" },
+    { id: 3, name: "linkedin", value: "" },
+    { id: 4, name: "facebook", value: "" },
   ]);
   const [phoneNo, setPhoneNo] = useState();
   const [email, setEmail] = useState();
@@ -114,15 +114,15 @@ function CustomNavbar(args) {
     return regex.test(link);
   }
 
-  const closeModel =()=>{
+  const closeModel = () => {
     setIsContentCreatorModel(false);
     setLinkData([
-      { id: 1, name: 'youtube', value: '' },
-      { id: 2, name: 'instagram', value: '' },
-      { id: 3, name: 'linkedin', value: '' },
-      { id: 4, name: 'facebook', value: '' },
-    ])
-  }
+      { id: 1, name: "youtube", value: "" },
+      { id: 2, name: "instagram", value: "" },
+      { id: 3, name: "linkedin", value: "" },
+      { id: 4, name: "facebook", value: "" },
+    ]);
+  };
 
   const handleSubmitResource = (e) => {
     e.preventDefault();
@@ -310,7 +310,6 @@ function CustomNavbar(args) {
 
   const gaEventTracker = useAnalyticsEventTracker("CustomNavbar");
 
-
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
@@ -332,7 +331,7 @@ function CustomNavbar(args) {
     const newId = linkData.length + 1;
     setLinkData((prevData) => [
       ...prevData,
-      { id: newId, name: '', value: '' },
+      { id: newId, name: "", value: "" },
     ]);
   };
 
@@ -349,13 +348,9 @@ function CustomNavbar(args) {
   // };
   const deleteLinkField = (id) => {
     if (linkData.length > 1) {
-
       setLinkData((prevData) => prevData.filter((link) => link.id !== id));
-    }
-    else {
-
+    } else {
       setLinkField("define");
-
     }
   };
 
@@ -370,14 +365,13 @@ function CustomNavbar(args) {
       linkNewData = [linkData];
     }
 
-
-    const linkNewData2 = linkNewData?.map(e => e.value)
+    const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
 
     const formData = new FormData();
     formData.append("img", file);
     formData.append("creatorName", creatorName);
-    linkNewData2.map(e => formData.append("link", e))
+    linkNewData2.map((e) => formData.append("link", e));
 
     formData.append("phoneNo", phoneNo);
     formData.append("email", email);
@@ -401,10 +395,10 @@ function CustomNavbar(args) {
         setIsContentCreatorModel(false);
         setCreatorName("");
         setLinkData([
-          { id: 1, name: 'youtube', value: '' },
-          { id: 2, name: 'instagram', value: '' },
-          { id: 3, name: 'linkedin', value: '' },
-          { id: 4, name: 'facebook', value: '' },
+          { id: 1, name: "youtube", value: "" },
+          { id: 2, name: "instagram", value: "" },
+          { id: 3, name: "linkedin", value: "" },
+          { id: 4, name: "facebook", value: "" },
         ]);
         setPhoneNo("");
         setEmail("");
@@ -442,10 +436,10 @@ function CustomNavbar(args) {
       setIsContentCreatorModel(false);
       setCreatorName("");
       setLinkData([
-        { id: 1, name: 'youtube', value: '' },
-        { id: 2, name: 'instagram', value: '' },
-        { id: 3, name: 'linkedin', value: '' },
-        { id: 4, name: 'facebook', value: '' },
+        { id: 1, name: "youtube", value: "" },
+        { id: 2, name: "instagram", value: "" },
+        { id: 3, name: "linkedin", value: "" },
+        { id: 4, name: "facebook", value: "" },
       ]);
       setPhoneNo("");
       setEmail("");
@@ -461,10 +455,6 @@ function CustomNavbar(args) {
       setIsContentCreatorModel(false);
     }
   };
-
-
-
-
 
   return (
     <Navbar
@@ -511,7 +501,9 @@ function CustomNavbar(args) {
             </button> */}
             <Container>
               <Modal
-                toggle={() => (closeModel(),setIsContentCreatorModel(!isContentCreatorModel))}
+                toggle={() => (
+                  closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
+                )}
                 {...args}
                 className="content-creator-model"
                 isOpen={isContentCreatorModel}
@@ -571,7 +563,7 @@ function CustomNavbar(args) {
                     >
                       Profile Link
                     </label>
-                    
+
                     {linkData?.map((link, index) => (
                       <div key={link.id}>
                         <div className="position-relative ">
@@ -580,10 +572,15 @@ function CustomNavbar(args) {
                             type="text"
                             name={link.name}
                             value={link.value}
-                            onChange={(event) => handleInputChange(event, link.id)}
+                            onChange={(event) =>
+                              handleInputChange(event, link.id)
+                            }
                             className="form-control border-0 mb-2"
                             id={link.name}
-                            placeholder={link.name.charAt(0).toUpperCase() + link.name.slice(1)}
+                            placeholder={
+                              link.name.charAt(0).toUpperCase() +
+                              link.name.slice(1)
+                            }
                           />
 
                           <ImCancelCircle
@@ -592,26 +589,24 @@ function CustomNavbar(args) {
                             onClick={() => deleteLinkField(link.id)}
                             size={30}
                           />
-
                         </div>
                       </div>
                     ))}
-                    {
-                      linkData.length >1 ? (
-                        ""
-                      ) : linkField === "define" ? (
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                          One Field Mendatory
-                        </p>
-                      ) : (
-                        ""
-                      )
-                    }
+                    {linkData.length > 1 ? (
+                      ""
+                    ) : linkField === "define" ? (
+                      <p style={{ color: "red", fontSize: "12px" }}>
+                        One Field Mendatory
+                      </p>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
-
-                  <Button className="w-100 border-0 d-flex justify-content-center py-2"
-                    onClick={addLinkField}>
+                  <Button
+                    className="w-100 border-0 d-flex justify-content-center py-2"
+                    onClick={addLinkField}
+                  >
                     <div style={{ height: 20, width: 20 }} className="me-4">
                       <img
                         className="h-auto w-100"
@@ -848,12 +843,11 @@ function CustomNavbar(args) {
                       Upload Image of related content
                     </label>
                     <input
-                      style={{ background: "#F1F1F1" }}
-                      type="file"
-                      onChange={handleChange}
-                      className="form-control border-0"
                       id="Upload Image of related content"
-                      placeholder="Choose file  |  No file chosen"
+                      style={{ background: "rgb(241, 241, 241)" }}
+                      type="file"
+                      className="form-control imageuserupload"
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="form-group mb-4">
@@ -901,8 +895,8 @@ function CustomNavbar(args) {
 
           {/*user not login  */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               {/* <button
                 className="btn rbutton mobile"
@@ -1369,7 +1363,8 @@ function CustomNavbar(args) {
                                           <Label
                                             style={{ font: "GT Walsheim Pro" }}
                                           >
-                                            <b>Creator Name</b><span> *</span>
+                                            <b>Creator Name</b>
+                                            <span> *</span>
                                           </Label>
                                           <input
                                             type="text"
@@ -1540,8 +1535,8 @@ function CustomNavbar(args) {
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
             <Nav.Link>
               <UserPage />
             </Nav.Link>
