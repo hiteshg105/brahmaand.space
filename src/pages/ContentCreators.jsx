@@ -61,7 +61,7 @@ const ContentCreators = ({ categry }) => {
   const [cmtComment, setCmtComment] = useState("");
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
-  const [data1, setData1] = useState();
+  const [data1, setData1] = useState([]);
 
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -115,17 +115,7 @@ const ContentCreators = ({ categry }) => {
   // setCurrentPage(currentPage)
   const start = (currentPage - 1) * limit;
   const end = start + limit;
-  console.log("currentpage", currentPage);
-  console.log("start", start);
-  console.log("end", end)
-  // const currentData = data.slice(0,end);
-  // const handlePageChange = (pageNumber) => {
-  //   setCurrentPage(pageNumber);
-  // };
-
-  // const totalPages = Math.ceil(data.length / ItemsPerPage);
-  // const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-
+  
   const icons = {
     star: {
       complete: faStar,
@@ -348,8 +338,10 @@ const ContentCreators = ({ categry }) => {
 
   const handleContentClick = (event) => {
     if (event.target.checked === true) {
+      // setLimit(2);
       setContent("Content Creators");
     } else {
+      // setLimit(2);
       setContent("Content");
     }
   };
@@ -363,16 +355,17 @@ const ContentCreators = ({ categry }) => {
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      // console.log(data.data.data);
-      // setData1((data.data.data).slice(0,end));
-      // setVal(data1);
-      setVal(data.data.data);
+      setData1((data.data.data));
+      setVal(data1.slice(0,end));
+      // setVal(data.data.data);
     }
     if (data === "Content Creators") {
       const data = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-      setVal(data.data.data);
+      setData1((data.data.data));
+      setVal(data1.slice(0,end));
+      // setVal(data.data.data);
     }
   };
   // console.log(val);
@@ -382,7 +375,7 @@ const ContentCreators = ({ categry }) => {
 
   useEffect(() => {
     handleContent(content, limit);
-  }, [content, limit]);
+  }, [content, limit,data1]);
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -428,7 +421,7 @@ const ContentCreators = ({ categry }) => {
                 key={item._id}
                 onClick={() => handleSelection(item._id)}
               >
-                {console.log(item)}
+                {/* {console.log(item)} */}
                 <Col>
                   <div style={{ maxHeight: "300px" }}>
                     <img
@@ -785,7 +778,7 @@ const ContentCreators = ({ categry }) => {
                       </span>
                     </h5>
                     <div className="star-1">
-                      {console.log(value)}
+                      {/* {console.log(value)} */}
                       <PrettyRating
                         value={value?.rating}
                         icons={icons.star}
@@ -1383,8 +1376,9 @@ const ContentCreators = ({ categry }) => {
         </>
       )}
       {
-        val.length === 0 ? (<center><h1 className="">No content found</h1></center>) : (
-          val.length <= 12 ? (<span></span>) : (
+        data1.length === 0 ? (<center><h1 className="">No content found</h1></center>) : (
+          data1.length <= 12 ? (<span></span>) : (
+            data1.length === val.length?(<span></span>):
             <Row>
               <button
                 style={{
@@ -1394,7 +1388,7 @@ const ContentCreators = ({ categry }) => {
                   fontSize: "24px",
                 }}
                 className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-                onClick={() => seeMore()}
+                onClick={() => seeMore(currentPage+1)}
               >
                 See More
               </button>
