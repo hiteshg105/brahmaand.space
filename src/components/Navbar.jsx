@@ -99,6 +99,13 @@ function CustomNavbar(args) {
 
     base64code = fileString;
   };
+  // const deleteLinkField = (id) => {
+  //   if (linkData.length > 1) {
+  //     setLinkData((prevData) => prevData.filter((link) => link.id !== id));
+  //   } else {
+  //     setLinkField("define");
+  //   }
+  // };
   const imageToBase64 = (file) => {
     let reader = new FileReader();
     reader.onload = () => {
@@ -122,8 +129,17 @@ function CustomNavbar(args) {
       { id: 3, name: "linkedin", value: "" },
       { id: 4, name: "facebook", value: "" },
     ]);
+    setCreatorName("");
+    setPhoneNo("");
+    setEmail("");
+    setCategory("");
+    setSub_category("");
+    setFormat("");
+    setLanguage("");
+    setTopics("");
+    setDescriptionData("");
+    setFile(null);
   };
-
   const handleSubmitResource = (e) => {
     e.preventDefault();
 
@@ -176,12 +192,15 @@ function CustomNavbar(args) {
           setIsLoading(false);
           console.log(error);
           if (error.response.data.message === "error") {
-            swal(" * Fields are Mandatory Please fill details ");
+            // swal(" * Fields are Mandatory Please fill details ");
+            swal("field is mandatory")
           } else {
           }
         });
     } else {
-      swal(" * Fields are mandatory Please fill details");
+      // swal(" * Fields are mandatory Please fill details");
+      swal("field is mandatory")
+
     }
   };
 
@@ -201,22 +220,22 @@ function CustomNavbar(args) {
 
   const [subctgry, setSubctgry] = useState([]);
 
-  // useEffect(() => {
-  //   const params = catgry ? catgry : category;
-  //   axiosConfig
+  useEffect(() => {
+    // const params = catgry ? catgry : category;
+    axiosConfig
 
-  //     .get(
-  //       `/admin/listbycategory/${catgry ? catgry : category
-  //       }`
-  //     )
-  //     .then((response) => {
-  //       // console.log(response.data.data);
-  //       setSubctgry(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       // console.log(error.response.data);
-  //     });
-  // }, [catgry, category]);
+      .get(
+        `/admin/listbycategory/${catgry ? catgry : category
+        }`
+      )
+      .then((response) => {
+        // console.log(response.data.data);
+        setSubctgry(response.data.data);
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+      });
+  }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
@@ -415,7 +434,8 @@ function CustomNavbar(args) {
       }
     } else {
       setFillPlease("define");
-      swal("Field Are mendory");
+      // swal("Field Are mendory");
+      swal("field is mandatory");
     }
   };
 
@@ -481,6 +501,53 @@ function CustomNavbar(args) {
         </button>
       </Link>
 
+      {/* <div className="text-center p-0 m-0 mt-5 pb-4"> */}
+
+
+
+      {/* <button
+        onClick={(e) => (
+          toggle(e),
+          gaEventTracker("+Submit a Content")
+        )}
+        style={{
+          backgroundColor: "#FC9358",
+          fontSize: "22px",
+          borderRadius: "24px",
+        }}
+        // className="border-0 text-white fw-bold px-3 py-2 me-5 opacity-75"
+        className="btn rbutton mobile"
+      >
+        <div>
+          <span className="rText">+Submit a content</span>
+        </div>
+      </button>
+
+      <button
+        onClick={(e) => (
+          closeModel(),
+          setIsContentCreatorModel(!isContentCreatorModel),
+          gaEventTracker("+Content Creator"))}
+        style={{
+          backgroundColor: "#FC9358",
+          fontSize: "22px",
+          borderRadius: "24px",
+        }}
+        // className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
+        className="btn mb-4 mobile px-2"
+
+      >
+        <div>
+          <span className="rText">+Submit a content creator</span>
+        </div>
+      </button> */}
+
+
+
+
+      
+      {/* </div> */}
+
       <Navbar.Toggle
         className="navbar-toggle"
         aria-controls="responsive-navbar-nav"
@@ -499,6 +566,459 @@ function CustomNavbar(args) {
             >
               <h4 className="rText">+Content Creator</h4>
             </button> */}
+            <Container>
+            <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
+                <div className="p-3 w-100">
+                  <Row className=" justify-content-right canceltoggle">
+                    <Col lg="10" md="8">
+                      <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>
+                        Submit a Content
+                      </h2>
+                    </Col>
+                    <Col
+                      style={{ justifyContent: "right" }}
+                      className="d-flex justify-content-right align-item-right"
+                      lg="2"
+                      md="4"
+                    >
+                      <ImCancelCircle
+                        className="setmodelfalseicon"
+                        onClick={() => setModal(false)}
+                        size={25}
+                      />
+                    </Col>
+                  </Row>
+                  <hr></hr>
+                  <p>
+                    You know a content of any niche (Education/Politics/General
+                    Affairs etc.) Post the content and we will publish it on our
+                    website which can be rated and reviewed by users and has
+                    potential to become viral. It will also help the content
+                    reach a global audience.
+                    <p>
+                      <b> Moreover it will help you win cool prizes daily.</b>
+                    </p>
+                  </p>
+                  <Link onClick={() => setModal(false)} to="/leaderboard">
+                    <h5 className="mt-2" style={{ color: "#5F56C6" }}>
+                      Checkout Leaderboard Here.
+                    </h5>
+                  </Link>
+
+                  <ModalBody>
+                    <Form>
+                      <div className="">
+                        <Row>
+                          <Label>
+                            {link != "" ? (
+                              <p>Link</p>
+                            ) : (
+                              <p style={{ color: "red" }}>
+                                Link <span style={{ color: "Red" }}>*</span>
+                              </p>
+                            )}
+                          </Label>
+                          <h5>
+                            <input
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              required
+                              type="url"
+                              value={link}
+                              className="form-control "
+                              placeholder="https://www. "
+                              onChange={validate}
+                            />
+                            <p
+                              className="mx-2 mt-3"
+                              style={{ color: "red", fontSize: "15px" }}
+                            >
+                              {err == "This looks like Valid URL" ? (
+                                <span
+                                  style={{ color: "green", fontSize: "12px" }}
+                                >
+                                  {err}
+                                </span>
+                              ) : (
+                                <span style={{ fontSize: "12px" }}>{err}</span>
+                              )}
+                            </p>
+                          </h5>
+                        </Row>
+                      </div>
+                      <div>
+                        <Row>
+                          <Col>
+                            <Label style={{ font: "GT Walsheim Pro" }}>
+                              {catgry !== "" ? (
+                                <p style={{ color: "black" }} className="mt-4">
+                                  Category
+                                </p>
+                              ) : (
+                                <p style={{ color: "red" }} className="mt-4">
+                                  Category
+                                  <span style={{ color: "red" }}>*</span>
+                                </p>
+                              )}
+                            </Label>
+                            <Input
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              required
+                              type="select"
+                              name="catgry"
+                              className="form-control"
+                              onChange={(e) => setCatgry(e.target.value)}
+                            >
+                              <option>Select Category</option>
+                              {allcatego?.map((allCategory) => {
+                                return (
+                                  <option
+                                    value={allCategory?._id}
+                                    key={allCategory?._id}
+                                  >
+                                    {allCategory?.title}
+                                  </option>
+                                );
+                              })}
+                            </Input>
+                          </Col>
+
+                          <Col>
+                            <Label style={{ font: "GT Walsheim Pro" }}>
+                              {subcatry !== "" ? (
+                                <p style={{ color: "black" }} className="mt-4">
+                                  Sub-Category
+                                </p>
+                              ) : (
+                                <p style={{ color: "red" }} className="mt-4">
+                                  Sub-Category
+                                  <span style={{ color: "red" }}>*</span>
+                                </p>
+                              )}
+                            </Label>
+                            <select
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              required
+                              type="select"
+                              name="title"
+                              className="form-control"
+                              onChange={(e) => setSubcatry(e.target.value)}
+                            >
+                              <option>Select Sub-Category</option>
+                              {subctgry?.map((subctgry) => {
+                                return (
+                                  <option
+                                    value={subctgry?._id}
+                                    key={subctgry?._id}
+                                  >
+                                    {subctgry?.title}
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </Col>
+                        </Row>
+
+                        <Row>
+                          <Col>
+                            <Label
+                              className="mt-3"
+                              style={{ font: "GT Walsheim Pro" }}
+                            >
+                              <b> Type</b>
+                            </Label>
+                            <select
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              onChange={(e) => setType(e.target.value)}
+                              className="form-control"
+                            >
+                              <option>Select Type</option>
+                              <option>Free</option>
+                              <option>Paid</option>
+                            </select>
+                          </Col>
+
+                          <Col>
+                            <Label
+                              className="mt-3"
+                              style={{ font: "GT Walsheim Pro" }}
+                            >
+                              <b> Format</b>
+                            </Label>
+                            <select
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              onChange={(e) => setformate(e.target.value)}
+                              className="form-control"
+                            >
+                              <option>Select Format</option>
+                              <option>Video</option>
+                              <option>Text</option>
+                              <option>Video & Text</option>
+                            </select>
+                          </Col>
+                        </Row>
+                      </div>
+
+                      <Row className="d-flex w-100%">
+                        <Col lg="12">
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b> Language of Content</b>
+                          </Label>
+                          <Multiselect
+                            style={{
+                              borderRadius: "14px",
+                            }}
+                            placeholder="Select language"
+                            className="w-100%"
+                            options={lngage}
+                            onSelect={onSelect}
+                            onRemove={onRemove}
+                            displayValue="language"
+                          />
+                        </Col>
+                      </Row>
+
+                      <div>
+                        <Row>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b> Topic</b>
+                          </Label>
+
+                          <h5>
+                            <textarea
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              type="text"
+                              className="form-control"
+                              placeholder="like- javaScript, react, native"
+                              onChange={(e) => setTopic(e.target.value)}
+                            />
+                          </h5>
+                          <h6>
+                            Add Topics that covers Resource.Separate multiple
+                            topic with commas.
+                          </h6>
+                        </Row>
+                      </div>
+                      <div>
+                        <Row>
+                          <Label
+                            className="mt-4"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b>Descriptions</b>
+                          </Label>
+                          <h5>
+                            <textarea
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              type="text"
+                              className="form-control"
+                              placeholder=" Enter blog description here"
+                              onChange={(e) => setDesc(e.target.value)}
+                            />
+                          </h5>
+                        </Row>
+
+                        <Row>
+                          <Label
+                            className="mt-3"
+                            style={{ font: "GT Walsheim Pro" }}
+                          >
+                            <b>Upload Image of Related Content </b>
+                          </Label>
+                          <h5>
+                            <input
+                              style={{ background: "rgb(241, 241, 241)" }}
+                              type="file"
+                              className="form-control imageuserupload"
+                              onChange={fileUpload}
+                            />
+                          </h5>
+                        </Row>
+                        <b className="mt-1">Release year/last Updated</b>
+                        <Row className="mx-1">
+                          <Label style={{ font: "GT Walsheim Pro" }}></Label>
+
+                          <Input
+                            style={{ background: "rgb(241, 241, 241)" }}
+                            type="select"
+                            className="form-control"
+                            name="yrName"
+                            onChange={(e) => {
+                              setSelectedyear(e.target.value);
+                            }}
+                          >
+                            <option>Select Year</option>
+                            {relyear?.map((yr) => {
+                              return (
+                                <option value={yr?._id} key={yr?._id}>
+                                  {yr?.yrName}
+                                </option>
+                              );
+                            })}
+                          </Input>
+                        </Row>
+                        <p className=" mb-3">
+                          Which year was this resource Was released or last
+                          updated?
+                        </p>
+                      </div>
+                      <div>
+                        <Row>
+                          <Col lg="12">
+                            <FormGroup>
+                              <Label className="mt-3">
+                                <h6>
+                                  <b>Optional</b>
+                                </h6>
+                              </Label>
+
+                              <Accordion open={open} toggle={toggler}>
+                                <AccordionItem>
+                                  <AccordionHeader targetId="1">
+                                    Optional Fields
+                                  </AccordionHeader>
+
+                                  <AccordionBody accordionId="1">
+                                    <div>
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Title of your Resource</b>
+                                        </Label>
+                                        <input
+                                          type="text"
+                                          style={{
+                                            background: "rgb(241, 241, 241)",
+                                          }}
+                                          className=" form-control mb-3"
+                                          placeholder="Title of the resource?"
+                                          onChange={(e) =>
+                                            setOptitle(e.target.value)
+                                          }
+                                        />
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Creator's Name</b>
+                                        </Label>
+                                        <input
+                                          type="text"
+                                          style={{
+                                            background: "rgb(241, 241, 241)",
+                                          }}
+                                          className="form-control mb-3"
+                                          placeholder="author of the resource?"
+                                          onChange={(e) =>
+                                            setOpcname(e.target.value)
+                                          }
+                                        />
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Description</b>
+                                        </Label>
+                                        <h5>
+                                          <textarea
+                                            type="text"
+                                            style={{
+                                              background: "rgb(241, 241, 241)",
+                                            }}
+                                            className="form-control mb-3"
+                                            placeholder="describe the resource in a few sentences, topics it covers?"
+                                            onChange={(e) =>
+                                              setOpdes(e.target.value)
+                                            }
+                                          />
+                                        </h5>
+                                      </Row>
+
+                                      <Row>
+                                        <Label
+                                          style={{ font: "GT Walsheim Pro" }}
+                                        >
+                                          <b>Comments</b>
+                                        </Label>
+                                        <h5>
+                                          <textarea
+                                            type="text"
+                                            style={{
+                                              background: "rgb(241, 241, 241)",
+                                            }}
+                                            className="form-control "
+                                            placeholder="Add anything you want to let us know"
+                                            onChange={(e) =>
+                                              setOpcomm(e.target.value)
+                                            }
+                                          />
+                                        </h5>
+                                      </Row>
+
+                                      <h6>
+                                        Thesefields are optional, but it will
+                                        help others find the resource more
+                                        easily.
+                                      </h6>
+                                    </div>
+                                  </AccordionBody>
+                                </AccordionItem>
+                              </Accordion>
+                            </FormGroup>
+                          </Col>
+                        </Row>
+                      </div>
+                      <div>
+                        <Row>
+                          <Col lg="8"></Col>
+                          {!isLoading ? (
+                            <>
+                              <Col>
+                                <Button
+                                  onClick={() => (
+                                    setModal(false), gaEventTracker("Discard")
+                                  )}
+                                  color="danger"
+                                  className="m-1"
+                                >
+                                  Discard
+                                </Button>
+                                <Button
+                                  color="success"
+                                  className="m-1"
+                                  onClick={(e) => (
+                                    handleSubmitResource(e),
+                                    gaEventTracker("Submit")
+                                  )}
+                                >
+                                  SUBMIT
+                                </Button>
+                              </Col>
+                            </>
+                          ) : (
+                            <>
+                              <div className="spinner-container d-flex justify-content-center">
+                                <div className="loading-spinner"></div>
+                              </div>
+                            </>
+                          )}
+                        </Row>
+                      </div>
+                    </Form>
+                  </ModalBody>
+                </div>
+              </Modal>
+            </Container>
             <Container>
               <Modal
                 toggle={() => (
@@ -531,10 +1051,10 @@ function CustomNavbar(args) {
                   <div className="form-group mb-4">
                     <label
                       for="Creator name"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className=" mb-2"
                     >
-                      Creator Name
+                      Creator's Name<span style={{ color: "red" }}>  *</span>
                     </label>
                     <input
                       style={{ background: "#F1F1F1" }}
@@ -558,10 +1078,10 @@ function CustomNavbar(args) {
                   <div className="form-group">
                     <label
                       for="Profile Link"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className="mb-2"
                     >
-                      Profile Link
+                      Profile Link<span style={{ color: "red" }}> *</span>
                     </label>
 
                     {linkData?.map((link, index) => (
@@ -642,11 +1162,12 @@ function CustomNavbar(args) {
                       <div className="form-group mb-4">
                         <label
                           for="Category"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
                         >
                           Category
                         </label>
+                        <span style={{ color: "red" }}> *</span>
                         <Input
                           style={{ background: "#F1F1F1" }}
                           type="select"
@@ -678,7 +1199,7 @@ function CustomNavbar(args) {
                           ""
                         )}
                       </div>
-                      <div className="form-group mb-4">
+                      {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -700,7 +1221,7 @@ function CustomNavbar(args) {
                           <option value="Text">Text</option>
                           <option value="Video & Text">Video & Text</option>
                         </Input>
-                      </div>
+                      </div> */}
                     </Col>
                     <Col>
                       <div className="form-group mb-4">
@@ -724,11 +1245,12 @@ function CustomNavbar(args) {
                       <div className="form-group mb-4">
                         <label
                           for="Sub Category"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
                         >
                           Sub Category
                         </label>
+                        <span style={{ color: "red" }}> *</span>
                         <Input
                           style={{ background: "#F1F1F1" }}
                           type="select"
@@ -739,6 +1261,7 @@ function CustomNavbar(args) {
                           placeholder="Select Sub Category"
                         >
                           <option>Select Sub-Category</option>
+                          {console.log(subctgry, "subctgry")}
                           {subctgry?.map((subctgry) => {
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>
@@ -757,7 +1280,7 @@ function CustomNavbar(args) {
                           ""
                         )}
                       </div>
-                      <div className="form-group mb-4">
+                      {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -778,7 +1301,7 @@ function CustomNavbar(args) {
                           <option value="Video">Beginner</option>
                           <option value="Text">Advanced</option>
                         </Input>
-                      </div>
+                      </div> */}
                     </Col>
                   </Row>
                   <div className="form-group mb-4">
@@ -834,11 +1357,11 @@ function CustomNavbar(args) {
                       placeholder="Java script, react, native"
                     />
                   </div>
-                  <div className="form-group mb-4">
+                  <div className="form-group mb-4  ">
                     <label
                       for="Upload Image of related content"
                       style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
+                      className="text-black mb-2 "
                     >
                       Upload Image of related content
                     </label>
@@ -865,7 +1388,7 @@ function CustomNavbar(args) {
                       onChange={(e) => setDescriptionData(e.target.value)}
                       className="form-control border-0"
                       id="Description"
-                      placeholder="Describe the topic in few sentence, topic it covers?"
+                      placeholder="Describe the content creator in few sentence"
                     />
                   </div>
                   <div className="d-flex gap-4 justify-content-end">

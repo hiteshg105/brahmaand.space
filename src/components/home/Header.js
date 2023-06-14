@@ -197,12 +197,15 @@ function Header(args) {
           setIsLoading(false);
           console.log(error);
           if (error.response.data.message === "error") {
-            swal(" * Fields are Mandatory Please fill details ");
+            // swal(" * Fields are Mandatory Please fill details ");
+            swal("Field is mandatory")
+
           } else {
           }
         });
     } else {
-      swal(" * Fields are mandatory Please fill details");
+      // swal(" * Fields are mandatory Please fill details");
+      swal("Field is mandatory")
     }
   };
   console.log(localStorage.getItem("userId"), "userid");
@@ -271,7 +274,8 @@ function Header(args) {
         }
       } else {
         setFillPlease("define");
-        swal("* Field Are Mandatory");
+        // swal("* Field is Mandatory");
+        swal('Field is mandatory')
       }
     }
   };
@@ -342,19 +346,21 @@ function Header(args) {
 
   const [subctgry, setSubctgry] = useState([]);
 
-  useEffect(() => {
-    const params = catgry ? catgry : category;
-    axiosConfig
-
-      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
-      .then((response) => {
-        // console.log(response.data.data);
-        setSubctgry(response.data.data);
-      })
-      .catch((error) => {
-        // console.log(error.response.data);
-      });
-  }, [catgry, category]);
+    useEffect(() => {
+      // const params = catgry ? catgry : category;
+      axiosConfig.get(
+          `/admin/listbycategory/${
+            catgry ? catgry : category
+          }`
+        )
+        .then((response) => {
+          // console.log(response.data.data);
+          setSubctgry(response.data.data);
+        })
+        .catch((error) => {
+          // console.log(error.response.data);
+        });
+    }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
@@ -1080,8 +1086,9 @@ function Header(args) {
                             <>
                               <Col>
                                 <Button
-                                  onClick={() => (
+                                  onClick={(e) => (
                                     setModal(false), gaEventTracker("Discard")
+                                    // DiscardContent(e)
                                   )}
                                   color="danger"
                                   className="m-1"
@@ -1360,6 +1367,7 @@ function Header(args) {
                           placeholder="Select Sub Category"
                         >
                           <option>Select Sub-Category</option>
+                          {console.log(subctgry,"subctgry")}
                           {subctgry?.map((subctgry) => {
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>

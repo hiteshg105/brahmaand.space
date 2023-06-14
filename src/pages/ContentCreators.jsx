@@ -61,6 +61,8 @@ const ContentCreators = ({ categry }) => {
   const [cmtComment, setCmtComment] = useState("");
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
+  const [data1, setData1] = useState();
+
   const toggleedit = () => {
     setEditmodal(!editmodal);
   };
@@ -107,6 +109,23 @@ const ContentCreators = ({ categry }) => {
     }
   };
 
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // setCurrentPage(currentPage)
+  const start = (currentPage - 1) * limit;
+  const end = start + limit;
+  console.log("currentpage", currentPage);
+  console.log("start", start);
+  console.log("end", end)
+  // const currentData = data.slice(0,end);
+  // const handlePageChange = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
+
+  // const totalPages = Math.ceil(data.length / ItemsPerPage);
+  // const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+
   const icons = {
     star: {
       complete: faStar,
@@ -116,7 +135,7 @@ const ContentCreators = ({ categry }) => {
   };
 
   const handleSubmitCreatorComment = async (e, id) => {
-    if (cmtComment && cmtRating){
+    if (cmtComment && cmtRating) {
       e.preventDefault();
       const userid = localStorage.getItem("userId");
       // console.log(userid)
@@ -135,10 +154,10 @@ const ContentCreators = ({ categry }) => {
       } else {
         swal("Comment Already Exist");
       }
-    } else{
+    } else {
       swal("Please Enter Rating And Comment");
     }
- 
+
     // console.log(data);
   };
 
@@ -218,7 +237,7 @@ const ContentCreators = ({ categry }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -345,6 +364,8 @@ const ContentCreators = ({ categry }) => {
       );
 
       // console.log(data.data.data);
+      // setData1((data.data.data).slice(0,end));
+      // setVal(data1);
       setVal(data.data.data);
     }
     if (data === "Content Creators") {
@@ -461,7 +482,7 @@ const ContentCreators = ({ categry }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -701,14 +722,17 @@ const ContentCreators = ({ categry }) => {
                 </Col>
                 <Col lg="6">
                   {" "}
-                  <h4 className="mt-3">Write your Review</h4>
+                  <h4 className="mt-3">Rate Content</h4>
                   <ReactStars {...secondExample} />
                 </Col>
               </Row>
               <Row>
                 <Col lg="12" key={Producdetail?._id}>
                   <div className="rat-right">
-                    <Row></Row>
+                    <Row>
+                      <h4 className="mt-3">Enter your review</h4>
+
+                    </Row>
 
                     <Row lg="12">
                       <form key={Producdetail?._id}>
@@ -904,7 +928,7 @@ const ContentCreators = ({ categry }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1057,8 +1081,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1127,8 +1151,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1146,7 +1170,7 @@ const ContentCreators = ({ categry }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
@@ -1358,21 +1382,27 @@ const ContentCreators = ({ categry }) => {
           </Modal>
         </>
       )}
+      {
+        val.length === 0 ? (<center><h1 className="">No content found</h1></center>) : (
+          val.length <= 12 ? (<span></span>) : (
+            <Row>
+              <button
+                style={{
+                  width: "fit-content",
+                  margin: "30px auto 0",
+                  backgroundColor: "#FC9357",
+                  fontSize: "24px",
+                }}
+                className="text-white fw-bold border-0 rounded-5 py-2 px-4"
+                onClick={() => seeMore()}
+              >
+                See More
+              </button>
+            </Row>
+          )
+        )
+      }
 
-      <Row>
-        <button
-          style={{
-            width: "fit-content",
-            margin: "30px auto 0",
-            backgroundColor: "#FC9357",
-            fontSize: "24px",
-          }}
-          className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-          onClick={() => seeMore()}
-        >
-          See More
-        </button>
-      </Row>
     </Container>
   );
 };
