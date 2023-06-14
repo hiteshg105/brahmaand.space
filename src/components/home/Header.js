@@ -334,6 +334,7 @@ function Header(args) {
       .get(`/admin/getallCategory`)
 
       .then((response) => {
+        console.log(response.data.data)
         setAllcatego(response.data.data);
       })
       .catch((error) => {
@@ -343,23 +344,23 @@ function Header(args) {
 
   const [subctgry, setSubctgry] = useState([]);
 
-  // useEffect(() => {
-  //   const params = catgry ? catgry : category;
-  //   axiosConfig
+  useEffect(() => {
+    const params = catgry ? catgry : category;
+    axiosConfig
 
-  //     .get(
-  //       `/admin/listbycategory/${
-  //         catgry ? catgry : category
-  //       }`
-  //     )
-  //     .then((response) => {
-  //       // console.log(response.data.data);
-  //       setSubctgry(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       // console.log(error.response.data);
-  //     });
-  // }, [catgry, category]);
+      .get(
+        `/admin/listbycategory/${
+          catgry ? catgry : category
+        }`
+      )
+      .then((response) => {
+        // console.log(response.data.data);
+        setSubctgry(response.data.data);
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+      });
+  }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
@@ -385,29 +386,6 @@ function Header(args) {
         // console.log(error.response.data);
       });
   };
-
-
-  // const contentHandler = (e) => {
-  //   const userid = localStorage.getItem("userId");
-  //   if (userid === null) {
-  //     swal("Please Login or Signup");
-  //   }
-  //   else {
-  //     toggle(e)
-  //     gaEventTracker("+Submit a Content")
-  //   }
-  // }
-
-  // const createContentHandler = () => {
-  //   const userid = localStorage.getItem("userId");
-  //   if (userid === null) {
-  //     swal("please login or signup.");
-  //   } else {
-  //     closeModel()
-  //     setIsContentCreatorModel(!isContentCreatorModel)
-  //     gaEventTracker("+Content Creator")
-  //   }
-  // }
 
   useEffect(() => {
     getYear();
