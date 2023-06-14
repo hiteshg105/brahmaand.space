@@ -387,9 +387,12 @@ function Hastag() {
                             {features.resource1.format === "Video" ? (
                               <iframe
                                 allowfullscreen="true"
-                                className="iframesetdata"
-                                width="300px"
-                                style={{ borderRadius: "12px" }}
+                                className="iframesetdata obj"
+                                style={{
+                                  borderRadius: "12px",
+                                  width: 300,
+                                  height: 300,
+                                }}
                                 src={`https://www.youtube.com/embed/${
                                   features?.resource1.link.split("v=")[1]
                                 }`}
@@ -398,7 +401,7 @@ function Hastag() {
                               <div className="d-flex">
                                 <img
                                   className="mx-auto"
-                                  style={{ height: "300px" }}
+                                  style={{ height: "300px", width: 300 }}
                                   src={features?.resource1.img}
                                   alt=""
                                 />
@@ -411,7 +414,7 @@ function Hastag() {
                           style={{
                             left: "50%",
                             top: "50%",
-                            transform: "translate(-50%,-70%)",
+                            transform: "translate(-50%,-33%)",
                           }}
                           className="imagehead position-absolute"
                         >
@@ -581,9 +584,9 @@ function Hastag() {
 
       <div className="container">
         <Container>
-          <h2 className="category2 mt-4 mb-4 text-center">Featured</h2>
+          <p class="category my-4">Featured</p>
           <Swiper
-          className="sld-1 featured_swiper"
+            className="sld-1 featured_swiper"
             breakpoints={{
               1084: {
                 slidesPerView: 3,

@@ -401,7 +401,7 @@ const TrendingWarzone = () => {
             >
               {war?.resource1.desc}
             </p>
-            <div className="d-flex align-items-center justify-content-end">
+            <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
               <Link className="me-3" to="#">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -458,7 +458,7 @@ const TrendingWarzone = () => {
             >
               {war?.resource2.desc}
             </p>
-            <div style={{ height: "fit-content" }} className="d-flex">
+            <div style={{ height: "fit-content" }} className="d-flex justify-content-lg-start">
               <Link className="me-3" to="#">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -478,9 +478,9 @@ const TrendingWarzone = () => {
           >
             Topics
           </p>
-          <div>
+          {/* <div>
             <img src={link} alt="" />
-          </div>
+          </div> */}
         </div>
         <Col lg={6} className="border-top border-bottom py-4">
           <div className="d-flex justify-content-lg-end">
@@ -495,8 +495,7 @@ const TrendingWarzone = () => {
         </Col>
         <Col
           lg={6}
-          style={{ paddingLeft: "22px" }}
-          className="content-box border-top border-bottom py-4"
+          className="ps-lg-3 content-box border-top border-bottom py-4"
         >
           <div className="d-flex">
             <div className="d-flex flex-wrap tag-2">
@@ -519,7 +518,7 @@ const TrendingWarzone = () => {
         </p>
         <Col
           lg={6}
-          className="border-top border-bottom border-right py-4 px-0 ps-4 ps-lg-4 pe-4"
+          className="border-top border-bottom border-right py-4 px-0 ps-2 ps-lg-2 pe-2"
         >
           <div>
             <h4
@@ -541,10 +540,9 @@ const TrendingWarzone = () => {
                 allowfullscreen
               ></iframe>
             ) : (
-              <div className="d-flex">
+              <div style={{height:400}} className="d-flex">
                 <img
-                  className="mx-auto"
-                  style={{ height: "400px" }}
+                  className="mx-auto w-100 h-auto"
                   src={war?.resource1.img}
                   alt=""
                 />
@@ -554,7 +552,7 @@ const TrendingWarzone = () => {
         </Col>
         <Col
           lg={6}
-          className="content-box border-top border-bottom border-right py-4 px-0 pe-4 pe-lg-0 ps-4"
+          className="content-box border-top border-bottom border-right py-4 px-0 pe-2 pe-lg-0 ps-2"
         >
           <div>
             <h4
@@ -1075,11 +1073,17 @@ const TrendingWarzone = () => {
             className="mx-0 ms-lg-auto me-0 me-lg-4"
           >
             {warRscReview?.toalRsc1 === 0 ? (
-              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-end fw-bold">
+              <p
+                style={{ fontSize: "24px" }}
+                className="text-center p-0 text-lg-end fw-bold"
+              >
                 Not Rated
               </p>
             ) : (
-              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-end fw-bold">
+              <p
+                style={{ fontSize: "24px" }}
+                className="text-center p-0 text-lg-end fw-bold"
+              >
                 {warRscReview?.rsc1AvReview < 2
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
@@ -1242,14 +1246,23 @@ const TrendingWarzone = () => {
           </div>
         </Col>
 
-        <Col lg={6} className="content-box justify-content-center justify-content-lg-start border-top d-flex text-end p-3">
+        <Col
+          lg={6}
+          className="content-box justify-content-center justify-content-lg-start border-top d-flex text-end p-3"
+        >
           <div style={{ width: "fit-content" }} className="ms-0 ms-lg-4">
             {warRscReview?.toalRsc2 === 0 ? (
-              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-start fw-bold">
+              <p
+                style={{ fontSize: "24px" }}
+                className="text-center p-0 text-lg-start fw-bold"
+              >
                 Not Rated
               </p>
             ) : (
-              <p style={{ fontSize: "24px" }} className="text-center p-0 text-lg-start fw-bold">
+              <p
+                style={{ fontSize: "24px" }}
+                className="text-center p-0 text-lg-start fw-bold"
+              >
                 {warRscReview?.rsc2AvReview < 2
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
@@ -1417,11 +1430,11 @@ const TrendingWarzone = () => {
           style={{ fontSize: "20px", fontWeight: "bold" }}
           className="text-uppercase text-center py-3"
         >
-          enter your review
+          Add your reviews
         </p>
-        <Col lg={6} className="p-3 pe-4 border-top">
+        <Col lg={6} className="p-2 p-lg-3 pe-lg-4 border-top">
           <div className="w-100 w-lg-75 mx-auto ms-lg-auto">
-            <div className="reviews-rating-stars d-flex justify-content-lg-end">
+            <div className="reviews-rating-stars d-flex justify-content-center justify-content-lg-end">
               <PrettyRating
                 value={rsc1Review.rate}
                 onChange={(e) => setRsc1Review({ ...rsc1Review, rate: e })}
@@ -1454,9 +1467,9 @@ const TrendingWarzone = () => {
             </form>
           </div>
         </Col>
-        <Col lg={6} className="content-box p-3 ps-4 border-top">
+        <Col lg={6} className="content-box p-2 p-lg-3 ps-lg-4 border-top">
           <div className="w-100 w-lg-75 mx-auto mx-lg-0">
-            <div className="reviews-rating-stars d-flex">
+            <div className="reviews-rating-stars justify-content-center justify-content-lg-start d-flex">
               <PrettyRating
                 value={rsc2Review.rate}
                 onChange={(e) => setRsc2Review({ ...rsc2Review, rate: e })}
@@ -1501,8 +1514,8 @@ const TrendingWarzone = () => {
           REVIEWS
         </p>
         <Col
-          style={{ padding: "40px 16px 16px" }}
-          className="border-top d-flex flex-column gap-3"
+          lg={6}
+          className="text-center p-2 text-lg-end border-top d-flex flex-column gap-3"
         >
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
@@ -1543,8 +1556,8 @@ const TrendingWarzone = () => {
               ))}
         </Col>
         <Col
-          style={{ padding: "40px 16px 16px" }}
-          className="content-box border-top d-flex flex-column gap-3"
+        lg={6}
+          className="text-center p-2 text-lg-start content-box border-top d-flex flex-column gap-3"
         >
           {/* {console.log(comment?.newData2)} */}
           {comment?.newData2 && comment?.newData.length === 0
