@@ -582,7 +582,11 @@ function Header(args) {
                   <div>
                     {imgPath === "/hero-img1.png" ? (
                       <>
-                        <img className="w-100" src={imgPath} usemap="#image-map" />
+                        <img
+                          className="w-100"
+                          src={imgPath}
+                          usemap="#image-map"
+                        />
                         <map name="image-map">
                           <area
                             target=""
@@ -611,16 +615,16 @@ function Header(args) {
             <div
               className={`hero-swiper_swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
             ></div>
-            <h1 style={{ fontSize: "69px" }} className="text-center p-0 m-0">
+            <h1 className="hero-heading text-center p-0 m-0">
               Looking for the best content across the world?
             </h1>
             <p
-              style={{ fontSize: "45px", letterSpacing: "0.5px" }}
-              className="text-center p-0 m-0 mt-3"
+              style={{ letterSpacing: "0.5px" }}
+              className="hero-subheading text-center p-0 m-0 mt-3"
             >
               Finding quality resources is not a hassle anymore.
             </p>
-            <div className="text-center p-0 m-0 mt-5 pb-4">
+            <div className="text-center p-0 m-0 mt-5 pb-4 d-flex justify-content-center flex-wrap gap-5">
               <button
                 onClick={(e) => (
                   toggle(e), gaEventTracker("+Submit a Content")
@@ -630,7 +634,7 @@ function Header(args) {
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
-                className="border-0 text-white fw-bold px-3 py-2 me-5 opacity-75"
+                className="border-0 text-white fw-bold px-3 py-2 opacity-75"
               >
                 <div>
                   <span>+Submit a content</span>
@@ -920,15 +924,15 @@ function Header(args) {
                             <b>Upload Image of Related Content </b>
                           </Label>
                           <h5>
-                    <input
-                      style={{ background: "#F1F1F1",height:36 }}
-                      type="file"
-                      name=""
-                      onChange={handleChange}
-                      id="Upload Image of related content"
-                      className="w-100"
-                    />
-                    </h5>
+                            <input
+                              style={{ background: "#F1F1F1", height: 36 }}
+                              type="file"
+                              name=""
+                              onChange={handleChange}
+                              id="Upload Image of related content"
+                              className="w-100"
+                            />
+                          </h5>
                         </Row>
                         <b className="mt-1">Release year/last Updated</b>
                         <Row className="mx-1">
@@ -1460,14 +1464,14 @@ function Header(args) {
                       Upload Image of related content
                     </label>
                     <h5>
-                    <input
-                      style={{ background: "#F1F1F1",height:36 }}
-                      type="file"
-                      name=""
-                      onChange={handleChange}
-                      id="Upload Image of related content"
-                      className="w-100"
-                    />
+                      <input
+                        style={{ background: "#F1F1F1", height: 36 }}
+                        type="file"
+                        name=""
+                        onChange={handleChange}
+                        id="Upload Image of related content"
+                        className="w-100"
+                      />
                     </h5>
                   </div>
                   <div className="form-group mb-4">

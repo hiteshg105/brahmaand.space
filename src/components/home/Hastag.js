@@ -398,10 +398,9 @@ function Hastag() {
                                 }`}
                               ></iframe>
                             ) : (
-                              <div className="d-flex">
+                              <div className="d-flex w-100" style={{maxWidth:250}}>
                                 <img
-                                  className="mx-auto"
-                                  style={{ height: "300px", width: 300 }}
+                                  className="mx-auto w-100 h-auto"
                                   src={features?.resource1.img}
                                   alt=""
                                 />
@@ -824,16 +823,14 @@ function Hastag() {
                     className="ty-3"
                   >
                     <div className="ty-2">
-                      <Nav.Link as={NavLink} className="navbar-link">
-                        <div className="ty-1">
-                          <BsPlay
-                            className="bsplaybutton"
-                            size={75}
-                            style={{ backgroundColor: "white" }}
-                            type="submit"
-                            // onClick={() => setOpenone(true)}
-                          />
-                        </div>
+                      <Nav.Link as={NavLink} className="navbar-link mt-0 text-center">
+                        <BsPlay
+                          className="bsplaybutton"
+                          size={75}
+                          style={{ backgroundColor: "white" }}
+                          type="submit"
+                          // onClick={() => setOpenone(true)}
+                        />
                         <div className="modalvideo">
                           <ModalVideo
                             style={{ borderRadius: "12px" }}
