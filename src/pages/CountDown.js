@@ -38,8 +38,8 @@ const CountDown = ({ endDate }) => {
         <Row>
           <Col>
             <p
+              className="countdown-timer"
               style={{
-                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -49,8 +49,8 @@ const CountDown = ({ endDate }) => {
           </Col>{" "}
           <Col>
             <p
+              className="countdown-timer"
               style={{
-                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -60,8 +60,8 @@ const CountDown = ({ endDate }) => {
           </Col>{" "}
           <Col>
             <p
+              className="countdown-timer"
               style={{
-                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}
@@ -71,8 +71,8 @@ const CountDown = ({ endDate }) => {
           </Col>{" "}
           <Col>
             <p
+              className="countdown-timer"
               style={{
-                fontSize: "30px",
                 fontWeight: "bold",
                 whiteSpace: "nowrap",
               }}

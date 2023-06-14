@@ -5,6 +5,16 @@
   height: 30px;
 }
 
+.countdown-timer {
+  font-size: 30px;
+}
+
+@media (max-width:375px) {
+  .countdown-timer {
+    font-size: 24px;
+  }
+}
+
 .war-rating-card {
   width: 75%;
 }

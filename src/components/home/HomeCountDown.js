@@ -46,7 +46,7 @@ const HomeCountDown = ({ endDate }) => {
           Days
         </p>
         
-      </Col> :
+      </Col>
       <Col className="px-2">
         <p
           style={{
@@ -64,7 +64,7 @@ const HomeCountDown = ({ endDate }) => {
         >
           hours
         </p>
-      </Col> : 
+      </Col>
       <Col className="px-2">
         <p
           style={{
@@ -82,7 +82,7 @@ const HomeCountDown = ({ endDate }) => {
         >
           minutes
         </p>
-      </Col> :
+      </Col>
       <Col className="px-2">
         <p
           style={{
