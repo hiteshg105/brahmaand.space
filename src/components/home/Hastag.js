@@ -231,7 +231,7 @@ function Hastag() {
           //   navigate(`/productList/${search}`);
           // }
           if (search !== "" && search !== undefined) {
-            navigate(`/producthastag/${search}`);
+            navigate(`/productsearch/${search}`);
           }
         })
         .catch((err) => {
