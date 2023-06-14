@@ -1164,7 +1164,7 @@ const ContentCreators = ({ categry }) => {
                   </Col>
                   <Col lg="6">
                     {" "}
-                    <h4 className="mt-3">Write your Review</h4>
+                    <h4 className="mt-3">Rate Content</h4>
                     <ReactStars
                       size={50}
                       isHalf={true}
@@ -1178,7 +1178,7 @@ const ContentCreators = ({ categry }) => {
                 <Row>
                   <Col lg="12" key={contentCretorDetail?._id}>
                     <div className="rat-right">
-                      <Row></Row>
+                      <Row><h4 className="mt-3">Enter your review</h4></Row>
 
                       <Row lg="12">
                         <form key={contentCretorDetail?._id}>
