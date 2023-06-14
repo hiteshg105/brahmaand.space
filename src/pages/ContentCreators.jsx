@@ -27,8 +27,8 @@ import ReactStars from "react-rating-stars-component";
 import { AiFillEdit } from "react-icons/ai";
 import swal from "sweetalert";
 
-// const base_URL = "https://backend.brahmaand.space/";
-const base_URL = "https://stage.brahmaand.space/";
+const base_URL = "https://backend.brahmaand.space";
+// const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
 const ContentCreators = ({ categry }) => {
