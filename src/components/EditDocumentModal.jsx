@@ -11,6 +11,7 @@ import axios from "axios";
 import useAnalyticsEventTracker from '../useAnalyticsEventTracker';
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
+console.log(process.env.REACT_APP_API_DOMAIN_NAME)
 
 function EditDocumentModal({
   show_modal,
@@ -81,7 +82,7 @@ function EditDocumentModal({
           <Button
             variant="primary"
             className="edit-modal-save-button"
-            onClick={(e) => (updateDocumentHelper(e),gaEventTracker('Save changes'))}
+            onClick={(e) => (updateDocumentHelper(e), gaEventTracker('Save changes'))}
           >
             Save changes
           </Button>

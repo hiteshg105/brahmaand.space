@@ -236,7 +236,9 @@ function Header(args) {
       formData.append("category", category);
       formData.append("sub_category", sub_category);
       formData.append("format", format);
-      formData.append("language", language);
+      if (language.length != 0) {
+        formData.append("language", language);
+      }
       formData.append("level", level);
       formData.append("topics", topics);
       formData.append("desc", descriptionData);
@@ -340,27 +342,26 @@ function Header(args) {
         setAllcatego(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data.data);
+        console.log("error");
       });
   };
 
   const [subctgry, setSubctgry] = useState([]);
 
-    useEffect(() => {
-      // const params = catgry ? catgry : category;
-      axiosConfig.get(
-          `/admin/listbycategory/${
-            catgry ? catgry : category
-          }`
-        )
-        .then((response) => {
-          // console.log(response.data.data);
-          setSubctgry(response.data.data);
-        })
-        .catch((error) => {
-          // console.log(error.response.data);
-        });
-    }, [catgry, category]);
+  useEffect(() => {
+    // const params = catgry ? catgry : category;
+    axiosConfig.get(
+      `/admin/listbycategory/${catgry ? catgry : category
+      }`
+    )
+      .then((response) => {
+        // console.log(response.data.data);
+        setSubctgry(response.data.data);
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+      });
+  }, [catgry, category]);
 
   // all year selection api
   const getYear = () => {
@@ -1367,7 +1368,7 @@ function Header(args) {
                           placeholder="Select Sub Category"
                         >
                           <option>Select Sub-Category</option>
-                          {console.log(subctgry,"subctgry")}
+                          {console.log(subctgry, "subctgry")}
                           {subctgry?.map((subctgry) => {
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>
