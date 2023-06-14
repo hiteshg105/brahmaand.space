@@ -583,7 +583,7 @@ function Hastag() {
         <Container>
           <h2 className="category2 mt-4 mb-4 text-center">Featured</h2>
           <Swiper
-          className="sld-1 featured_swiper"
+            className="sld-1 featured_swiper"
             breakpoints={{
               1084: {
                 slidesPerView: 3,
