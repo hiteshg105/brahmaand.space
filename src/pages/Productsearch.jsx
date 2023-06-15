@@ -134,6 +134,7 @@ function Productsearch(args) {
         format: format,
       })
       .then((res) => {
+        console.log(res.data.data, "res.data.data")
         setCategry(res.data.data);
       })
       .catch((err) => {
@@ -155,7 +156,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const navigate = useNavigate();
@@ -255,7 +256,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -323,22 +324,18 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
   };
 
-  const handlesearchdescription = () => {
+  const handlesearchdescription = async () => {
     localStorage.setItem("searchdata", searchitem);
-    axiosConfig
-      .post(`/user/search_topic_title`, {
-        searchinput: searchitem,
-      })
-      .then((res) => {
-        setCategry(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const responce = await axiosConfig.post(`/user/search_topic_title`, {
+      searchinput: searchitem,
+    })
+    if (responce.data.status === true) {
+      navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
+    }
 
     axiosConfig
       .post(`/user/search_promotion`, {
@@ -350,7 +347,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const getLanguage = () => {
@@ -359,7 +356,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -386,7 +383,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -686,7 +683,7 @@ function Productsearch(args) {
         searchitem === "" &&
         hastagdata === "hastag" &&
         searchdata === "",
-      Filtertype === "")
+        Filtertype === "")
     ) {
       allsearchproduct();
     }
@@ -784,7 +781,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
     // axios
     //   .get(
@@ -1162,9 +1159,8 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${
-                                                  promotion?.link?.split("=")[1]
-                                                }`}
+                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                                  }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1506,7 +1502,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                    0 ? (
+                                                      0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1632,9 +1628,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                      localStorage.getItem(
-                                                        "userId"
-                                                      ) ? (
+                                                        localStorage.getItem(
+                                                          "userId"
+                                                        ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1826,7 +1822,7 @@ function Productsearch(args) {
                     </Swiper>
                   </Row>
 
-                  <ContentCreators categry={categry} />
+                  <ContentCreators />
                 </div>
               </div>
             </div>

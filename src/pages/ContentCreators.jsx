@@ -31,7 +31,7 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ categry }) => {
+const ContentCreators = () => {
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -62,6 +62,8 @@ const ContentCreators = ({ categry }) => {
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
   const [data1, setData1] = useState([]);
+
+
 
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -115,7 +117,7 @@ const ContentCreators = ({ categry }) => {
   // setCurrentPage(currentPage)
   const start = (currentPage - 1) * limit;
   const end = start + limit;
-  
+
   const icons = {
     star: {
       complete: faStar,
@@ -349,22 +351,22 @@ const ContentCreators = ({ categry }) => {
     //   setPage(page+1);
     setLimit(limit + 12);
   };
-  const handleContent = async (data, l1) => {
+  const handleContent = async (data) => {
     if (data === "Content") {
-      const data = await axiosClient.post(
+      const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      setData1((data.data.data));
-      setVal(data1.slice(0, end));
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
       // setVal(data.data.data);
     }
     if (data === "Content Creators") {
-      const data = await axiosClient.post(
+      const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-      setData1((data.data.data));
-      setVal(data1.slice(0, end));
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
       // setVal(data.data.data);
     }
   };
@@ -374,8 +376,11 @@ const ContentCreators = ({ categry }) => {
   };
 
   useEffect(() => {
+    console.log("hello")
     handleContent(content, limit);
-  }, [content, limit, data1]);
+  }, [content,params]);
+
+
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -435,7 +440,10 @@ const ContentCreators = ({ categry }) => {
                       src={
                         item.img.includes("https")
                           ? item.img
-                          : `${base_URL + "/" + item.img}`
+                          :
+                          item.img.includes("data:image") ? item.img :
+
+                            `${base_URL + "/" + item.img}`
                       }
                       alt=""
                     />
