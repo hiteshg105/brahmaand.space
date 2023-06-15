@@ -595,9 +595,9 @@ const ContentCreators = () => {
               <div className="tag-list">
                 <div className="tag-1">
                   <h5>
-                    <span>
+                    {/* <span>
                       <img src={icons} alt="" width="30px" />
-                    </span>
+                    </span> */}
                     Topic:
                   </h5>
                 </div>
@@ -1040,9 +1040,9 @@ const ContentCreators = () => {
                 <div className="tag-list">
                   <div className="tag-1">
                     <h5>
-                      <span>
+                      {/* <span>
                         <img src={icons} alt="" width="30px" />
-                      </span>
+                      </span> */}
                       Topic:
                     </h5>
                   </div>
