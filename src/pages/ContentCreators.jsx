@@ -31,7 +31,8 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ categry }) => {
+const ContentCreators = ({ format, type, language, searchdata }) => {
+  console.log(format,type,language,searchdata)
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -62,6 +63,8 @@ const ContentCreators = ({ categry }) => {
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
   const [data1, setData1] = useState([]);
+
+
 
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -226,7 +229,7 @@ const ContentCreators = ({ categry }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -348,22 +351,22 @@ const ContentCreators = ({ categry }) => {
     //   setPage(page+1);
     setLimit(limit + 12);
   };
-  const handleContent = async (data, l1) => {
+  const handleContent = async (data) => {
     if (data === "Content") {
-      const data = await axiosClient.post(
+      const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      setData1(data.data.data);
-      setVal(data1.slice(0, end));
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
       // setVal(data.data.data);
     }
     if (data === "Content Creators") {
-      const data = await axiosClient.post(
+      const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-      setData1(data.data.data);
-      setVal(data1.slice(0, end));
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
       // setVal(data.data.data);
     }
   };
@@ -374,7 +377,9 @@ const ContentCreators = ({ categry }) => {
 
   useEffect(() => {
     handleContent(content, limit);
-  }, [content, limit, data1]);
+  }, [content, params]);
+
+
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -408,17 +413,11 @@ const ContentCreators = ({ categry }) => {
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
         {val.map((item, i) => {
-          const date = new Date(
-            item.userid !== null ? item.userid?.createdAt : new Date()
-          );
-          {
-            /* console.log(item); */
-          }
+          const date = new Date(item.createdAt);
           const options = { day: "2-digit", month: "short", year: "numeric" };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
             <>
-              {/* {console.log(item.img)} */}
               <div
                 className="item"
                 key={item._id}
@@ -440,7 +439,10 @@ const ContentCreators = ({ categry }) => {
                       src={
                         item.img.includes("https")
                           ? item.img
-                          : `${base_URL + "/" + item.img}`
+                          :
+                          item.img.includes("data:image") ? item.img :
+
+                            `${base_URL + "/" + item.img}`
                       }
                       alt=""
                     />
@@ -459,22 +461,20 @@ const ContentCreators = ({ categry }) => {
                       <span>#study</span>
                     </div>
                     <h4 className="fw-bold mb-0">
-                      Java Tutorials For Beginners In Hindi
+                      {item.topics}
                     </h4>
                     <div className="my-3 d-flex justify-content-between align-items-center">
                       <p style={{ color: "#011D2B", fontWeight: 500 }}>
                         <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
-                        CodeWithHarry
+                        {item.creatorName}
                       </p>
                       <div className="d-flex align-items-center gap-1">
                         <img src="/calender-icon.png" alt="" />
-                        <span style={{ color: "#5F56C6" }}>12 Sep 2022</span>
+                        <span style={{ color: "#5F56C6" }}>{formattedDate}</span>
                       </div>
                     </div>
                     <p style={{ color: "#707281", fontSize: 12 }}>
-                      Introduction to Java + Installing Java JDK and IntelliJ
-                      IDEA for Java 19:00 Basic Structure of a Java Program:
-                      Understanding our First Java Hello World Program 14:09
+                      {content === "Content" ? item.res_desc : item.desc}
                     </p>
                     <div className="my-3 d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
@@ -494,11 +494,11 @@ const ContentCreators = ({ categry }) => {
                           )
                         </span>
                       </div>
-                      <p style={{ color: "#5F56C6" }} className="fw-bold">
+                      {/* <p style={{ color: "#5F56C6" }} className="fw-bold">
                         {item?.length} Reviews
-                      </p>
+                      </p> */}
                     </div>
-                    <div className="d-flex gap-3 overflow-auto">
+                    {/* <div className="d-flex gap-3 overflow-auto">
                       <span
                         style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
                         className="py-2 px-3"
@@ -517,7 +517,7 @@ const ContentCreators = ({ categry }) => {
                       >
                         #Android
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </Col>
               </div>
@@ -532,7 +532,7 @@ const ContentCreators = ({ categry }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -587,9 +587,9 @@ const ContentCreators = ({ categry }) => {
               <div className="tag-list">
                 <div className="tag-1">
                   <h5>
-                    <span>
+                    {/* <span>
                       <img src={icons} alt="" width="30px" />
-                    </span>
+                    </span> */}
                     Topic:
                   </h5>
                 </div>
@@ -977,7 +977,7 @@ const ContentCreators = ({ categry }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1032,9 +1032,9 @@ const ContentCreators = ({ categry }) => {
                 <div className="tag-list">
                   <div className="tag-1">
                     <h5>
-                      <span>
+                      {/* <span>
                         <img src={icons} alt="" width="30px" />
-                      </span>
+                      </span> */}
                       Topic:
                     </h5>
                   </div>
@@ -1130,8 +1130,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1200,8 +1200,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1219,7 +1219,7 @@ const ContentCreators = ({ categry }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}

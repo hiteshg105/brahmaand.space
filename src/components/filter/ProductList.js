@@ -1904,13 +1904,11 @@ function ProductList(args) {
                                               <iframe
                                                 style={{
                                                   aspectRatio: "1 !important",
+                                                  borderRadius: "12px",
                                                 }}
                                                 allowfullscreen="true"
                                                 width="200px"
                                                 height="200px"
-                                                style={{
-                                                  borderRadius: "12px",
-                                                }}
                                                 src={`https://www.youtube.com/embed/${
                                                   categry?.link?.split("=")[1]
                                                 }`}

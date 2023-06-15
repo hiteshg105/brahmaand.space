@@ -227,7 +227,7 @@ function Header(args) {
       swal("Please Login OR Sign Up");
     } else {
       const formData = new FormData();
-      formData.append("img", file);
+      formData.append("img", file === null ? NoImage : file);
       formData.append("creatorName", creatorName);
       linkNewData2.map((e) => formData.append("link", e));
       formData.append("phoneNo", phoneNo);
@@ -586,7 +586,7 @@ function Header(args) {
                     alt="hero-images"
                   />
                   <Link
-                    to={"/login"}
+                    to={"/signup"}
                     style={{
                       backgroundColor: "#fc9358",
                       fontSize: 24,
@@ -594,7 +594,7 @@ function Header(args) {
                       bottom: "25%",
                       left: "7%",
                     }}
-                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold"
+                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
                   >
                     SIGN UP
                   </Link>

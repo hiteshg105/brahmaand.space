@@ -27,6 +27,7 @@ import instance from "../components/axiosConfig";
 import CountDown from "./CountDown";
 
 import swal from "sweetalert";
+import ShowMore from "react-show-more";
 
 const TrendingWarzone = () => {
   const { id } = useParams();
@@ -202,14 +203,13 @@ const TrendingWarzone = () => {
         });
         // console.log(data.data);
         if (data.data.status === true) {
-          
-          setRsc1Review({comment:"", rate: 0 })
+          setRsc1Review({ comment: "", rate: 0 });
           getComment();
           swal("Review submitted Successfully.");
         }
         if (data.data.msg === "waiting for admin approvel") {
           swal("You have already submit your review on this.");
-          setRsc1Review({comment:"", rate: 0 })
+          setRsc1Review({ comment: "", rate: 0 });
         }
       } else {
         swal("Please Enter Comment And Rating");
@@ -217,7 +217,7 @@ const TrendingWarzone = () => {
     } catch (error) {
       if (error.response?.status === 403) {
         swal("You have already submit your review on this.");
-        setRsc1Review({comment:"", rate: 0 })
+        setRsc1Review({ comment: "", rate: 0 });
       }
     }
   };
@@ -236,12 +236,12 @@ const TrendingWarzone = () => {
         // console.log(data.data);
         if (data.data.status === true) {
           swal("Review submitted Successfully.");
-          setRsc2Review({comment:"", rate: 0 })
+          setRsc2Review({ comment: "", rate: 0 });
           getComment();
         }
         if (data.data.msg === "waiting for admin approvel") {
           swal("You have already submit your review on this.");
-          setRsc2Review({comment:"", rate: 0 })
+          setRsc2Review({ comment: "", rate: 0 });
         }
       } else {
         swal("Please Enter Comment And Rating");
@@ -249,7 +249,7 @@ const TrendingWarzone = () => {
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
-        setRsc2Review({comment:"", rate: 0 })
+        setRsc2Review({ comment: "", rate: 0 });
       }
     }
   };
@@ -411,12 +411,12 @@ const TrendingWarzone = () => {
               {war?.resource1.desc}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
-              <Link className="me-3" to="#">
+              <Link className="me-3" to={war?.resource1.link} target="_blank">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
-              <Link to="#">
+              {/* <Link to="#">
                 <img src={mdicon2} alt="" width={24} />
-              </Link>
+              </Link> */}
             </div>
           </Row>
         </Col>
@@ -471,12 +471,13 @@ const TrendingWarzone = () => {
               style={{ height: "fit-content" }}
               className="d-flex justify-content-lg-start"
             >
-              <Link className="me-3" to="#">
+              <Link className="me-3"  to={war?.resource2.link} target="_blank"
+                >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
-              <Link to="#">
+              {/* <Link to="#">
                 <img src={mdicon2} alt="" width={24} />
-              </Link>
+              </Link> */}
             </div>
           </Row>
         </Col>
@@ -573,6 +574,7 @@ const TrendingWarzone = () => {
             >
               {war?.resource2.creatorName}
             </h4>
+            {/* {console.log( war?.resource2.link,"vedio link............")} */}
 
             {war?.resource2.format === "Video" ? (
               <iframe
@@ -591,7 +593,7 @@ const TrendingWarzone = () => {
                 <img
                   className="mx-auto"
                   style={{ height: "400px" }}
-                  src={war?.resource1.img}
+                  src={war?.resource2.img}
                   alt=""
                 />
               </div>
@@ -1563,7 +1565,17 @@ const TrendingWarzone = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="fw-bold">{value.comment}</p>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                  {/* <p className="fw-bold">{value.comment}</p> */}
                 </div>
               ))}
         </Col>
@@ -1605,7 +1617,16 @@ const TrendingWarzone = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="fw-bold">{value.comment}</p>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
                 </div>
               ))}
         </Col>
