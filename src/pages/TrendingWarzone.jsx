@@ -202,17 +202,22 @@ const TrendingWarzone = () => {
         });
         // console.log(data.data);
         if (data.data.status === true) {
-          swal("Added Successfully");
+          
+          setRsc1Review({comment:"", rate: 0 })
+          getComment();
+          swal("Review submitted Successfully.");
         }
         if (data.data.msg === "waiting for admin approvel") {
-          swal("waiting for admin approvel");
+          swal("You have already submit your review on this.");
+          setRsc1Review({comment:"", rate: 0 })
         }
       } else {
         swal("Please Enter Comment And Rating");
       }
     } catch (error) {
-      if (error.response.status === 403) {
-        swal("Comment Exist");
+      if (error.response?.status === 403) {
+        swal("You have already submit your review on this.");
+        setRsc1Review({comment:"", rate: 0 })
       }
     }
   };
@@ -230,17 +235,21 @@ const TrendingWarzone = () => {
         });
         // console.log(data.data);
         if (data.data.status === true) {
-          swal("Added Successfully..");
+          swal("Review submitted Successfully.");
+          setRsc2Review({comment:"", rate: 0 })
+          getComment();
         }
         if (data.data.msg === "waiting for admin approvel") {
-          swal("waiting for admin approvel");
+          swal("You have already submit your review on this.");
+          setRsc2Review({comment:"", rate: 0 })
         }
       } else {
         swal("Please Enter Comment And Rating");
       }
     } catch (error) {
       if (error.response.status === 403) {
-        swal("Comment Exist");
+        swal("You have already submit your review on this.");
+        setRsc2Review({comment:"", rate: 0 })
       }
     }
   };
@@ -458,7 +467,10 @@ const TrendingWarzone = () => {
             >
               {war?.resource2.desc}
             </p>
-            <div style={{ height: "fit-content" }} className="d-flex justify-content-lg-start">
+            <div
+              style={{ height: "fit-content" }}
+              className="d-flex justify-content-lg-start"
+            >
               <Link className="me-3" to="#">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -540,7 +552,7 @@ const TrendingWarzone = () => {
                 allowfullscreen
               ></iframe>
             ) : (
-              <div style={{height:400}} className="d-flex">
+              <div style={{ height: 400 }} className="d-flex">
                 <img
                   className="mx-auto w-100 h-auto"
                   src={war?.resource1.img}
@@ -1556,7 +1568,7 @@ const TrendingWarzone = () => {
               ))}
         </Col>
         <Col
-        lg={6}
+          lg={6}
           className="text-center p-2 text-lg-start content-box border-top d-flex flex-column gap-3"
         >
           {/* {console.log(comment?.newData2)} */}
