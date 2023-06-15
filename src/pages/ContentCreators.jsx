@@ -1400,21 +1400,6 @@ const ContentCreators = ({ categry }) => {
           )
         )
       }
-
-      <Row>
-        <button
-          style={{
-            width: "fit-content",
-            margin: "30px auto 0",
-            backgroundColor: "#FC9357",
-            fontSize: "24px",
-          }}
-          className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-          onClick={() => seeMore()}
-        >
-          See More
-        </button>
-      </Row>
     </div>
   );
 };
