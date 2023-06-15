@@ -423,7 +423,7 @@ const ContentCreators = () => {
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
             <>
-              {/* {console.log(item.img)} */}
+              {console.log(item)}
               <div
                 className="item"
                 key={item._id}
