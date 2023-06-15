@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const domain = process.env.REACT_APP_API_DOMAIN_NAME;
-
+// console.log(domain,"domain")
 const AuthContext = createContext();
 
 export const getUser = async () => {

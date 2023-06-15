@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { Input, InputGroup, Label } from "reactstrap";
 import swal from "sweetalert";
 import axios from "axios";
-import axiosConfig from "../components/axiosConfig";
+import axiosConfig from "./axiosConfig";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
 import { useForm } from "react-hook-form";
@@ -95,7 +95,7 @@ function Login() {
         } else navigate("/login");
       })
       .catch((error) => {
-        // console.log(error.response.data);
+        console.log(error);
         if (error.response.data.msg === "User Doesnot Exist") {
           swal("User Does Not Exist");
         } else if (error.response.data.msg === "Incorrect Password") {

@@ -27,6 +27,7 @@ import instance from "../components/axiosConfig";
 import CountDown from "./CountDown";
 
 import swal from "sweetalert";
+import ShowMore from "react-show-more";
 
 const TrendingWarzone = () => {
   const { id } = useParams();
@@ -202,14 +203,13 @@ const TrendingWarzone = () => {
         });
         // console.log(data.data);
         if (data.data.status === true) {
-          
-          setRsc1Review({comment:"", rate: 0 })
+          setRsc1Review({ comment: "", rate: 0 });
           getComment();
           swal("Review submitted Successfully.");
         }
         if (data.data.msg === "waiting for admin approvel") {
           swal("You have already submit your review on this.");
-          setRsc1Review({comment:"", rate: 0 })
+          setRsc1Review({ comment: "", rate: 0 });
         }
       } else {
         swal("Please Enter Comment And Rating");
@@ -217,7 +217,7 @@ const TrendingWarzone = () => {
     } catch (error) {
       if (error.response?.status === 403) {
         swal("You have already submit your review on this.");
-        setRsc1Review({comment:"", rate: 0 })
+        setRsc1Review({ comment: "", rate: 0 });
       }
     }
   };
@@ -236,12 +236,12 @@ const TrendingWarzone = () => {
         // console.log(data.data);
         if (data.data.status === true) {
           swal("Review submitted Successfully.");
-          setRsc2Review({comment:"", rate: 0 })
+          setRsc2Review({ comment: "", rate: 0 });
           getComment();
         }
         if (data.data.msg === "waiting for admin approvel") {
           swal("You have already submit your review on this.");
-          setRsc2Review({comment:"", rate: 0 })
+          setRsc2Review({ comment: "", rate: 0 });
         }
       } else {
         swal("Please Enter Comment And Rating");
@@ -249,7 +249,7 @@ const TrendingWarzone = () => {
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
-        setRsc2Review({comment:"", rate: 0 })
+        setRsc2Review({ comment: "", rate: 0 });
       }
     }
   };
@@ -1563,7 +1563,17 @@ const TrendingWarzone = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="fw-bold">{value.comment}</p>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                  {/* <p className="fw-bold">{value.comment}</p> */}
                 </div>
               ))}
         </Col>
@@ -1605,7 +1615,16 @@ const TrendingWarzone = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="fw-bold">{value.comment}</p>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
                 </div>
               ))}
         </Col>
