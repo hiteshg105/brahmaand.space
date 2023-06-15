@@ -574,6 +574,9 @@ function Header(args) {
                 el: ".hero-swiper_swiper_pagination",
                 clickable: true,
               }}
+              autoplay={{
+                delay: 1000,
+              }}
             >
               <SwiperSlide>
                 <div className="position-relative">
@@ -588,10 +591,10 @@ function Header(args) {
                       backgroundColor: "#fc9358",
                       fontSize: 24,
                       borderRadius: 69,
-                      bottom: "25%",
+                      bottom: "20%",
                       left: "7%",
                     }}
-                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
+                    className="btn-sn-hover position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
                   >
                     SIGN UP
                   </Link>
@@ -645,6 +648,15 @@ function Header(args) {
                     alt="hero-images"
                   />
                 </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Link to={"/leaderboard"}>
+                  <img
+                    className="w-100"
+                    src={"/hero-img7.png"}
+                    alt="hero-images"
+                  />
+                </Link>
               </SwiperSlide>
             </Swiper>
           </div>
