@@ -177,7 +177,7 @@ function ProductList(args) {
           console.log(err);
         });
 
-        axiosConfig
+      axiosConfig
         .post(
           `/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
@@ -195,7 +195,7 @@ function ProductList(args) {
   const gethastagdata = () => {
     const hastagdata = localStorage.getItem("hastag");
     if (hastagdata !== "hastag")
-    axiosConfig
+      axiosConfig
         .post(`/user/search_topic_title`, {
           searchinput: hastagdata,
         })
@@ -254,7 +254,7 @@ function ProductList(args) {
           // console.log(err);
         });
 
-        axiosConfig
+      axiosConfig
         .post(
           `/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
         )
@@ -383,9 +383,7 @@ function ProductList(args) {
 
   const hadlestatusbookmark = () => {
     axiosConfig
-      .get(
-        `/user/getone_mylikes/${myId}/${liked}`
-      )
+      .get(`/user/getone_mylikes/${myId}/${liked}`)
       .then((res) => {
         console.log(res.data.data);
         setHandlebookmark(res.data.data.status);
@@ -403,9 +401,7 @@ function ProductList(args) {
     if (promotionId === _id) {
       setPromotId(promotionId);
       axiosConfig
-        .get(
-          `/admin/getone_reslist/${promotionId}`
-        )
+        .get(`/admin/getone_reslist/${promotionId}`)
         .then((res) => {
           console.log(res.data.data);
           if (
@@ -421,10 +417,8 @@ function ProductList(args) {
         .catch((err) => {
           // console.log(err.data.data);
         });
-        axiosConfig
-        .get(
-          `/user/average_rating/${promotionId}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${promotionId}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -432,7 +426,7 @@ function ProductList(args) {
         .catch((err) => {
           console.log(err);
         });
-        axiosConfig
+      axiosConfig
         .get(`/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
@@ -557,9 +551,7 @@ function ProductList(args) {
       setProductdes(selectedId);
       axiosConfig
         // .get(`https://backend.brahmaand.space/admin/getone_reslist/${productdes}`)
-        .get(
-          `/admin/getone_reslist/${selectedId}`
-        )
+        .get(`/admin/getone_reslist/${selectedId}`)
         .then((res) => {
           // console.log(res.data.data._id);
           console.log(res);
@@ -577,10 +569,8 @@ function ProductList(args) {
           // console.log(err.data.data);
         });
 
-        axiosConfig
-        .get(
-          `/user/average_rating/${selectedId}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${selectedId}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -610,9 +600,7 @@ function ProductList(args) {
     if (selectedId === _id) {
       setProductdes(selectedId);
       axiosConfig
-        .get(
-          `/admin/getone_reslist/${productdes}`
-        )
+        .get(`/admin/getone_reslist/${productdes}`)
         .then((res) => {
           // console.log(res.data.data._id);
           // console.log(res.data.data);
@@ -631,10 +619,8 @@ function ProductList(args) {
           // console.log(err.data.data);
         });
 
-        axiosConfig
-        .get(
-          `/user/average_rating/${productdes}`
-        )
+      axiosConfig
+        .get(`/user/average_rating/${productdes}`)
         .then((res) => {
           console.log(res.data);
           setAverageRating(res.data);
@@ -732,7 +718,7 @@ function ProductList(args) {
         // console.log(err);
       });
 
-      axiosConfig
+    axiosConfig
       .post(
         `axiosConfig/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
@@ -760,7 +746,7 @@ function ProductList(args) {
         // console.log(err);
       });
 
-      axiosConfig
+    axiosConfig
       .post(
         `/user/promotion_filter?sub_category=${Params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`
       )
@@ -774,9 +760,7 @@ function ProductList(args) {
   const getsearchbyratingfilter = () => {
     // console.log(searchrating);
     axiosConfig
-      .get(
-        `/user/filterByRating/${searchrating}`
-      )
+      .get(`/user/filterByRating/${searchrating}`)
       .then((res) => {
         // console.log(res.data.data);
         // setCategry(res.data.data);
@@ -788,9 +772,7 @@ function ProductList(args) {
 
   const allsearchproduct = () => {
     axiosConfig
-      .get(
-        `/admin/listbysubcategory/${Params.id}`
-      )
+      .get(`/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         if (response.data.data.length === 0) {
           swal("No Product found for this Sub-Category");
@@ -807,9 +789,7 @@ function ProductList(args) {
   const [suggested, setSuggested] = useState([]);
   const allsuggestedproduct = () => {
     axiosConfig
-      .get(
-        `/admin/listbysubcategory/${Params.id}`
-      )
+      .get(`/admin/listbysubcategory/${Params.id}`)
       .then((response) => {
         setSuggested(response.data.data);
         // console.log(response.data.data);
@@ -1229,7 +1209,7 @@ function ProductList(args) {
                                           <iframe
                                             allowfullscreen="true"
                                             width="100%"
-                                            height="auto"
+                                            height="300px"
                                             style={{
                                               borderRadius: "12px",
                                             }}
@@ -1246,7 +1226,7 @@ function ProductList(args) {
                                       src={promotion?.img}
                                       alt="image"
                                       width="100%"
-                                      height={160}
+                                      height={300}
                                     />
                                   )}
                                   {/* <img
@@ -1922,9 +1902,12 @@ function ProductList(args) {
                                                 {categry[1]}
                                               </h2>
                                               <iframe
+                                                style={{
+                                                  aspectRatio: "1 !important",
+                                                }}
                                                 allowfullscreen="true"
-                                                width="100%"
-                                                height="auto"
+                                                width="200px"
+                                                height="200px"
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
@@ -1941,8 +1924,8 @@ function ProductList(args) {
                                             style={{ borderRadius: "10px" }}
                                             src={categry?.img}
                                             alt="image"
-                                            width="100%"
-                                            height={160}
+                                            width="200px"
+                                            height={200}
                                           />
                                         </>
                                       )}
@@ -3556,7 +3539,7 @@ function ProductList(args) {
                                       <iframe
                                         allowfullscreen="true"
                                         width="100%"
-                                        height="auto"
+                                        height="250px"
                                         style={{
                                           borderRadius: "12px",
                                         }}
@@ -3569,11 +3552,14 @@ function ProductList(args) {
                                 </>
                               ) : (
                                 <img
-                                  style={{ borderRadius: "10px" }}
+                                  style={{
+                                    borderRadius: "10px",
+                                    aspectRatio: "1 !important",
+                                  }}
                                   src={categry?.img}
                                   alt="image"
                                   width="100%"
-                                  height={160}
+                                  height={250}
                                 />
                               )}
                               {/* <img

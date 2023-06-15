@@ -30,7 +30,7 @@ import {
   AccordionItem,
 } from "reactstrap";
 import axiosConfig from "../axiosConfig";
-import NoImage from "./noimage.png"
+import NoImage from "./noimage.png";
 
 function Header(args) {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -77,7 +77,7 @@ function Header(args) {
   const [topics, setTopics] = useState();
   const [descriptionData, setDescriptionData] = useState();
   const [file, setFile] = useState(NoImage);
-  console.log(file)
+  console.log(file);
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
 
@@ -575,39 +575,77 @@ function Header(args) {
                 clickable: true,
               }}
             >
-              {[
-                "/hero-img1.png",
-                "/hero-img2.png",
-                "/hero-img3.png",
-                "/hero-img4.png",
-                "/hero-img5.png",
-              ].map((imgPath) => (
-                <SwiperSlide>
-                  <div>
-                    {imgPath === "/hero-img1.png" ? (
-                      <>
-                        <img
-                          className="w-100"
-                          src={imgPath}
-                          usemap="#image-map"
-                        />
-                        <map name="image-map">
-                          <area
-                            target=""
-                            alt="button"
-                            title="button"
-                            href="/#/signup"
-                            coords="346,535,163,465,838,657,1197,667,470,589,543,457,560,575,438,611,431,580,1116,643,953,355"
-                            shape=""
-                          />
-                        </map>
-                      </>
-                    ) : (
-                      <img className="w-100" src={imgPath} alt="hero-images" />
-                    )}
-                  </div>
-                </SwiperSlide>
-              ))}
+              <SwiperSlide>
+                <div className="position-relative">
+                  <img
+                    className="w-100"
+                    src={"/hero-img1.png"}
+                    alt="hero-images"
+                  />
+                  <Link
+                    to={"/login"}
+                    style={{
+                      backgroundColor: "#fc9358",
+                      fontSize: 24,
+                      borderRadius: 69,
+                      bottom: "25%",
+                      left: "7%",
+                    }}
+                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold"
+                  >
+                    SIGN UP
+                  </Link>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div
+                  onClick={() =>
+                    setIsContentCreatorModel(!isContentCreatorModel)
+                  }
+                >
+                  <img
+                    className="w-100"
+                    src={"/hero-img2.png"}
+                    alt="hero-images"
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div onClick={() => toggle()}>
+                  <img
+                    className="w-100"
+                    src={"/hero-img3.png"}
+                    alt="hero-images"
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img
+                    className="w-100"
+                    src={"/hero-img4.png"}
+                    alt="hero-images"
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img
+                    className="w-100"
+                    src={"/hero-img5.png"}
+                    alt="hero-images"
+                  />
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div>
+                  <img
+                    className="w-100"
+                    src={"/hero-img6.png"}
+                    alt="hero-images"
+                  />
+                </div>
+              </SwiperSlide>
             </Swiper>
           </div>
           <div
@@ -617,7 +655,7 @@ function Header(args) {
             }}
           >
             <div
-              className={`hero-swiper_swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
+              className={`hero-swiper_swiper_pagination d-flex justify-content-center gap-1 py-4 z-1`}
             ></div>
             <h1 className="hero-heading text-center p-0 m-0">
               Looking for the best content across the world?
@@ -634,7 +672,7 @@ function Header(args) {
                   toggle(e), gaEventTracker("+Submit a Content")
                 )}
                 style={{
-                  backgroundColor: "#FC9358",
+                  backgroundColor: "#011D2B",
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
@@ -652,7 +690,7 @@ function Header(args) {
                   gaEventTracker("+Content Creator")
                 )}
                 style={{
-                  backgroundColor: "#FC9358",
+                  backgroundColor: "#011D2B",
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
