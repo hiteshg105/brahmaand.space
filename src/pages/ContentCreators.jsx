@@ -109,13 +109,12 @@ const ContentCreators = ({ categry }) => {
     }
   };
 
-
   const [currentPage, setCurrentPage] = useState(1);
 
   // setCurrentPage(currentPage)
   const start = (currentPage - 1) * limit;
   const end = start + limit;
-  
+
   const icons = {
     star: {
       complete: faStar,
@@ -227,7 +226,7 @@ const ContentCreators = ({ categry }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -355,7 +354,7 @@ const ContentCreators = ({ categry }) => {
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      setData1((data.data.data));
+      setData1(data.data.data);
       setVal(data1.slice(0, end));
       // setVal(data.data.data);
     }
@@ -363,7 +362,7 @@ const ContentCreators = ({ categry }) => {
       const data = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-      setData1((data.data.data));
+      setData1(data.data.data);
       setVal(data1.slice(0, end));
       // setVal(data.data.data);
     }
@@ -426,8 +425,14 @@ const ContentCreators = ({ categry }) => {
                 onClick={() => handleSelection(item._id)}
               >
                 {/* {console.log(item)} */}
-                <Col>
-                  <div className="contentcreator-img-main" style={{ maxHeight: "300px" }}>
+                <Col
+                  style={{ padding: "18px", borderRadius: "10px" }}
+                  className="bg-white"
+                >
+                  <div
+                    className="contentcreator-img-main"
+                    style={{ maxHeight: "300px" }}
+                  >
                     <img
                       style={{ borderRadius: "10px" }}
                       className="w-100"
@@ -440,10 +445,38 @@ const ContentCreators = ({ categry }) => {
                       alt=""
                     />
                   </div>
-                  <div className="py-3 px-3">
-                    <h4 className="fw-bold">{item?.creatorName}</h4>
-                    <p className="mb-2">User since: {formattedDate}</p>
-                    <div className="d-flex justify-content-sm-between">
+                  <div className="px-2 mt-3">
+                    <div
+                      style={{
+                        color: "#5F56C6",
+                        fontSize: "14px",
+                        gap: "10px",
+                        fontWeight: 500,
+                      }}
+                      className="d-flex overflow-auto mb-2"
+                    >
+                      <span>#best</span>
+                      <span>#study</span>
+                    </div>
+                    <h4 className="fw-bold mb-0">
+                      Java Tutorials For Beginners In Hindi
+                    </h4>
+                    <div className="my-3 d-flex justify-content-between align-items-center">
+                      <p style={{ color: "#011D2B", fontWeight: 500 }}>
+                        <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
+                        CodeWithHarry
+                      </p>
+                      <div className="d-flex align-items-center gap-1">
+                        <img src="/calender-icon.png" alt="" />
+                        <span style={{ color: "#5F56C6" }}>12 Sep 2022</span>
+                      </div>
+                    </div>
+                    <p style={{ color: "#707281", fontSize: 12 }}>
+                      Introduction to Java + Installing Java JDK and IntelliJ
+                      IDEA for Java 19:00 Basic Structure of a Java Program:
+                      Understanding our First Java Hello World Program 14:09
+                    </p>
+                    <div className="my-3 d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
                         <PrettyRating
                           value={item?.ava_rating?.toFixed(2)}
@@ -465,6 +498,26 @@ const ContentCreators = ({ categry }) => {
                         {item?.length} Reviews
                       </p>
                     </div>
+                    <div className="d-flex gap-3 overflow-auto">
+                      <span
+                        style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
+                        className="py-2 px-3"
+                      >
+                        2022
+                      </span>
+                      <span
+                        style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
+                        className="py-2 px-3"
+                      >
+                        #Java
+                      </span>
+                      <span
+                        style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
+                        className="py-2 px-3"
+                      >
+                        #Android
+                      </span>
+                    </div>
                   </div>
                 </Col>
               </div>
@@ -479,7 +532,7 @@ const ContentCreators = ({ categry }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-        // {...args}
+          // {...args}
         >
           <ModalBody>
             <Row>
@@ -728,7 +781,6 @@ const ContentCreators = ({ categry }) => {
                   <div className="rat-right">
                     <Row>
                       <h4 className="mt-3">Enter your review</h4>
-
                     </Row>
 
                     <Row lg="12">
@@ -925,7 +977,7 @@ const ContentCreators = ({ categry }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-          // {...args}
+            // {...args}
           >
             <ModalBody>
               <Row>
@@ -1078,8 +1130,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  2
-                                )}
+                                    2
+                                  )}
                             </Link>
                           </div>
                         </div>
@@ -1148,8 +1200,8 @@ const ContentCreators = ({ categry }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  2
-                                )}
+                                    2
+                                  )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1167,7 +1219,7 @@ const ContentCreators = ({ categry }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                    // {...secondExample}
+                      // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
@@ -1175,7 +1227,9 @@ const ContentCreators = ({ categry }) => {
                 <Row>
                   <Col lg="12" key={contentCretorDetail?._id}>
                     <div className="rat-right">
-                      <Row><h4 className="mt-3">Enter your review</h4></Row>
+                      <Row>
+                        <h4 className="mt-3">Enter your review</h4>
+                      </Row>
 
                       <Row lg="12">
                         <form key={contentCretorDetail?._id}>
@@ -1379,27 +1433,30 @@ const ContentCreators = ({ categry }) => {
           </Modal>
         </>
       )}
-      {
-        data1.length === 0 ? (<center><h1 className="">No content found</h1></center>) : (
-          data1.length <= 12 ? (<span></span>) : (
-            data1.length === val.length ? (<span></span>) :
-              <Row>
-                <button
-                  style={{
-                    width: "fit-content",
-                    margin: "30px auto 0",
-                    backgroundColor: "#FC9357",
-                    fontSize: "24px",
-                  }}
-                  className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-                  onClick={() => seeMore(currentPage + 1)}
-                >
-                  See More
-                </button>
-              </Row>
-          )
-        )
-      }
+      {data1.length === 0 ? (
+        <center>
+          <h1 className="">No content found</h1>
+        </center>
+      ) : data1.length <= 12 ? (
+        <span></span>
+      ) : data1.length === val.length ? (
+        <span></span>
+      ) : (
+        <Row>
+          <button
+            style={{
+              width: "fit-content",
+              margin: "30px auto 0",
+              backgroundColor: "#FC9357",
+              fontSize: "24px",
+            }}
+            className="text-white fw-bold border-0 rounded-5 py-2 px-4"
+            onClick={() => seeMore(currentPage + 1)}
+          >
+            See More
+          </button>
+        </Row>
+      )}
     </div>
   );
 };
