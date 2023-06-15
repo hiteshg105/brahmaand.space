@@ -574,6 +574,9 @@ function Header(args) {
                 el: ".hero-swiper_swiper_pagination",
                 clickable: true,
               }}
+              autoplay={{
+                delay: 1000,
+              }}
             >
               <SwiperSlide>
                 <div className="position-relative">
