@@ -32,7 +32,6 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "http://localhost:9000";
 
 const ContentCreators = ({ format, type, language, searchdata }) => {
-  console.log(format,type,language,searchdata)
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -356,18 +355,68 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
+      if (format || type) {
 
-      setData1(responce.data.data);
-      setVal(responce.data.data.slice(0, end));
-      // setVal(data.data.data);
+        const newdata = JSON.parse(JSON.stringify(responce.data.data))
+
+        const dataFilter = newdata.filter((e) => {
+          return e.format === format || e.type === type;
+        });
+        setData1(dataFilter);
+        setVal(dataFilter.slice(0, end));
+      } else {
+
+        setData1(responce.data.data);
+        setVal(responce.data.data.slice(0, end));
+      }
     }
     if (data === "Content Creators") {
+
       const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-      setData1(responce.data.data);
-      setVal(responce.data.data.slice(0, end));
-      // setVal(data.data.data);
+      if (format) {
+
+        const newdata = JSON.parse(JSON.stringify(responce.data.data))
+
+        const dataFilter = newdata.filter((e) => {
+          return e.format === format;
+        });
+        setData1(dataFilter);
+        setVal(dataFilter.slice(0, end));
+      } else {
+
+        setData1(responce.data.data);
+        setVal(responce.data.data.slice(0, end));
+      }
+
+
+
+
+
+
+
+
+
+      // if (format || type || language || searchdata) {
+      //   console.log(format, "format", language, searchdata)
+      //   const responce = await axiosClient.post(`/content/keyword_search_filter`, {
+      //     searchinput: searchdata,
+      //     language: language,
+      //     format: format,
+      //   })
+      //   console.log(responce.data.data)
+      //   setData1(responce.data.data);
+      //   setVal(responce.data.data.slice(0, end));
+      // } else {
+
+      //   const responce = await axiosClient.post(
+      //     `/content/advance_content_filter?sub_category=${params.id}`
+      //   );
+      //   setData1(responce.data.data);
+      //   setVal(responce.data.data.slice(0, end));
+      //   // setVal(data.data.data);
+      // }
     }
   };
   // console.log(val);
@@ -376,8 +425,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
 
   useEffect(() => {
-    handleContent(content, limit);
-  }, [content, params]);
+    handleContent(content);
+  }, [content, params, format, type, language, searchdata]);
 
 
 
@@ -423,11 +472,11 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                 key={item._id}
                 onClick={() => handleSelection(item._id)}
               >
-                {/* {console.log(item)} */}
                 <Col
                   style={{ padding: "18px", borderRadius: "10px" }}
                   className="bg-white"
                 >
+                  {console.log(item)}
                   <div
                     className="contentcreator-img-main"
                     style={{ maxHeight: "300px" }}

@@ -134,7 +134,6 @@ function Productsearch(args) {
         format: format,
       })
       .then((res) => {
-        console.log(res.data.data, "res.data.data")
         setCategry(res.data.data);
       })
       .catch((err) => {
