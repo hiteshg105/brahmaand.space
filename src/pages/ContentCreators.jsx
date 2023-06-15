@@ -63,8 +63,6 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   const [upcom, setUpcom] = useState("");
   const [data1, setData1] = useState([]);
 
-
-
   const toggleedit = () => {
     setEditmodal(!editmodal);
   };
@@ -228,7 +226,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -428,8 +426,6 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     handleContent(content);
   }, [content, params, format, type, language, searchdata]);
 
-
-
   const handleclosemodal = () => {
     // setModal(false);
     toggle();
@@ -446,7 +442,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           </h3>
         </Col>
         <Col>
-          <div className="toggle mx-auto ms-md-auto">
+          <div className="toggle ml-auto ms-md-auto">
             <input type="checkbox" onChange={(e) => handleContentClick(e)} />
             <label className="l">Content</label>
             <label className="r">Content Creators</label>
@@ -479,19 +475,18 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                   {console.log(item)}
                   <div
                     className="contentcreator-img-main"
-                    style={{ maxHeight: "300px" }}
+                    style={{ maxHeight: "250px" }}
                   >
                     <img
-                      style={{ borderRadius: "10px" }}
+                      style={{ borderRadius: "10px", objectFit: "contain" }}
                       className="w-100"
-                      height={300}
+                      height={250}
                       src={
                         item.img.includes("https")
                           ? item.img
-                          :
-                          item.img.includes("data:image") ? item.img :
-
-                            `${base_URL + "/" + item.img}`
+                          : item.img.includes("data:image")
+                          ? item.img
+                          : `${base_URL + "/" + item.img}`
                       }
                       alt=""
                     />
@@ -509,17 +504,22 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       <span>#best</span>
                       <span>#study</span>
                     </div>
-                    <h4 className="fw-bold mb-0">
+                    <h4
+                      style={{ wordWrap: "break-word" }}
+                      className="fw-bold mb-0"
+                    >
                       {item.topics}
                     </h4>
-                    <div className="my-3 d-flex justify-content-between align-items-center">
+                    <div className="my-3 d-flex justify-content-between align-items-center flex-wrap">
                       <p style={{ color: "#011D2B", fontWeight: 500 }}>
                         <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
                         {item.creatorName}
                       </p>
                       <div className="d-flex align-items-center gap-1">
                         <img src="/calender-icon.png" alt="" />
-                        <span style={{ color: "#5F56C6" }}>{formattedDate}</span>
+                        <span style={{ color: "#5F56C6" }}>
+                          {formattedDate}
+                        </span>
                       </div>
                     </div>
                     <p style={{ color: "#707281", fontSize: 12 }}>
@@ -581,7 +581,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-        // {...args}
+          // {...args}
         >
           <ModalBody>
             <Row>
@@ -1026,7 +1026,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-          // {...args}
+            // {...args}
           >
             <ModalBody>
               <Row>
@@ -1179,8 +1179,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  2
-                                )}
+                                    2
+                                  )}
                             </Link>
                           </div>
                         </div>
@@ -1249,8 +1249,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  2
-                                )}
+                                    2
+                                  )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1268,7 +1268,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                    // {...secondExample}
+                      // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
