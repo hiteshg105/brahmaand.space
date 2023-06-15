@@ -583,7 +583,7 @@ function Header(args) {
                     alt="hero-images"
                   />
                   <Link
-                    to={"/login"}
+                    to={"/signup"}
                     style={{
                       backgroundColor: "#fc9358",
                       fontSize: 24,
@@ -591,7 +591,7 @@ function Header(args) {
                       bottom: "25%",
                       left: "7%",
                     }}
-                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold"
+                    className="position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
                   >
                     SIGN UP
                   </Link>

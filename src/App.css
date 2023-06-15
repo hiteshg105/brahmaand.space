@@ -444,4 +444,9 @@
   }
 }
 
+
+.btn-sn-hover:hover{
+  background-color: #00273a !important;
+}
+
 /* Hero  */
