@@ -356,26 +356,16 @@ const ContentCreators = () => {
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-<<<<<<< HEAD
       setData1(responce.data.data);
       setVal(responce.data.data.slice(0, end));
-=======
-      setData1(data.data.data);
-      setVal(data1.slice(0, end));
->>>>>>> origin/me-dev
       // setVal(data.data.data);
     }
     if (data === "Content Creators") {
       const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
-<<<<<<< HEAD
       setData1(responce.data.data);
       setVal(responce.data.data.slice(0, end));
-=======
-      setData1(data.data.data);
-      setVal(data1.slice(0, end));
->>>>>>> origin/me-dev
       // setVal(data.data.data);
     }
   };
