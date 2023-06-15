@@ -228,7 +228,7 @@ const ContentCreators = () => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -377,7 +377,7 @@ const ContentCreators = () => {
   useEffect(() => {
     console.log("hello")
     handleContent(content, limit);
-  }, [content,params]);
+  }, [content, params]);
 
 
 
@@ -413,12 +413,7 @@ const ContentCreators = () => {
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
         {val.map((item, i) => {
-          const date = new Date(
-            item.userid !== null ? item.userid?.createdAt : new Date()
-          );
-          {
-            /* console.log(item); */
-          }
+          const date = new Date(item.createdAt);
           const options = { day: "2-digit", month: "short", year: "numeric" };
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
@@ -454,7 +449,7 @@ const ContentCreators = () => {
                     />
                   </div>
                   <div className="px-2 mt-3">
-                    <div
+                    {/* <div
                       style={{
                         color: "#5F56C6",
                         fontSize: "14px",
@@ -465,24 +460,22 @@ const ContentCreators = () => {
                     >
                       <span>#best</span>
                       <span>#study</span>
-                    </div>
+                    </div> */}
                     <h4 className="fw-bold mb-0">
-                      Java Tutorials For Beginners In Hindi
+                      {item.topics}
                     </h4>
                     <div className="my-3 d-flex justify-content-between align-items-center">
                       <p style={{ color: "#011D2B", fontWeight: 500 }}>
                         <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
-                        CodeWithHarry
+                        {item.creatorName}
                       </p>
                       <div className="d-flex align-items-center gap-1">
                         <img src="/calender-icon.png" alt="" />
-                        <span style={{ color: "#5F56C6" }}>12 Sep 2022</span>
+                        <span style={{ color: "#5F56C6" }}>{formattedDate}</span>
                       </div>
                     </div>
                     <p style={{ color: "#707281", fontSize: 12 }}>
-                      Introduction to Java + Installing Java JDK and IntelliJ
-                      IDEA for Java 19:00 Basic Structure of a Java Program:
-                      Understanding our First Java Hello World Program 14:09
+                      {content === "Content" ? item.res_desc : item.desc}
                     </p>
                     <div className="my-3 d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
@@ -502,11 +495,11 @@ const ContentCreators = () => {
                           )
                         </span>
                       </div>
-                      <p style={{ color: "#5F56C6" }} className="fw-bold">
+                      {/* <p style={{ color: "#5F56C6" }} className="fw-bold">
                         {item?.length} Reviews
-                      </p>
+                      </p> */}
                     </div>
-                    <div className="d-flex gap-3 overflow-auto">
+                    {/* <div className="d-flex gap-3 overflow-auto">
                       <span
                         style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
                         className="py-2 px-3"
@@ -525,7 +518,7 @@ const ContentCreators = () => {
                       >
                         #Android
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </Col>
               </div>
@@ -540,7 +533,7 @@ const ContentCreators = () => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -985,7 +978,7 @@ const ContentCreators = () => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1138,8 +1131,8 @@ const ContentCreators = () => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1208,8 +1201,8 @@ const ContentCreators = () => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
-                                  )}
+                                  2
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1227,7 +1220,7 @@ const ContentCreators = () => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
