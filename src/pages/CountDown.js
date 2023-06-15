@@ -31,7 +31,7 @@ const CountDown = ({ endDate }) => {
       >
         Ends In:
       </p> */}
-      <div
+      {/* <div
         style={{ border: "3px solid #000" }}
         className="mt-5 rounded-2 px-3 py-2 px-xl-5 py-xl-4"
       >
@@ -68,7 +68,7 @@ const CountDown = ({ endDate }) => {
             >
               {minutes.toString().length === 1 ? `0${minutes}` : minutes}
             </p>
-          </Col>{" "}
+          </Col>{""}
           <Col>
             <p
               className="countdown-timer"
@@ -84,32 +84,123 @@ const CountDown = ({ endDate }) => {
         <Row>
           <Col>
             <p
-              style={{ fontSize: "8px", fontWeight: "bold" }}
-              className="text-center p-0"
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0 ms-1"
             >
               Days
             </p>
           </Col>
-
           <Col>
             <p
-              style={{ fontSize: "8px", fontWeight: "bold" }}
-              className="text-center p-0"
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0 ms-3"
             >
               hours
             </p>
           </Col>
           <Col>
             <p
-              style={{ fontSize: "8px", fontWeight: "bold" }}
-              className="text-center p-0"
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0 ms-2"
             >
               minutes
             </p>
           </Col>
           <Col>
             <p
-              style={{ fontSize: "8px", fontWeight: "bold" }}
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0"
+            >
+              Seconds
+            </p>
+          </Col>
+        </Row>
+      </div> */}
+      <div
+        style={{ border: "3px solid #000" }}
+        className="mt-5 rounded-2 px-3 py-2 px-xl-5 py-xl-4"
+      >
+        <Row
+        // style={{ border: "3px solid #000" }}
+        // className="d-flex align-items-center me-4 text-uppercase text-nowrap"
+        >
+
+
+          <Col style={{ width: "50px" }}>
+            <p
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+              className=""
+            >
+              {days <= 9 ? ("0" + days).slice(-2) : days}
+            </p>
+            <p
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0"
+            >
+              Days
+            </p>
+          </Col>
+          <Col style={{ width: "2px", fontSize: "20px" }} className="mt-1">:</Col>
+          <Col style={{ width: "50px" }}>
+            <p
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+              className=""
+            >
+              {hours <= 9 ? ("0" + hours).slice(-2) : hours}
+
+              {/* {hours} */}
+            </p>
+            <p
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0"
+            >
+              hours
+            </p>
+          </Col>
+          <Col style={{ width: "2px", fontSize: "20px" }} className="mt-1">:</Col>
+          <Col style={{ width: "50px" }}>
+            <p
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+              className=""
+            >
+              {minutes <= 9 ? ("0" + minutes).slice(-2) : minutes}
+              {/* {minutes} */}
+            </p>
+            <p
+              style={{ fontSize: "12px", fontWeight: "bold" }}
+              className="text-center p-0"
+            >
+              minutes
+            </p>
+          </Col>
+          <Col style={{ width: "2px", fontSize: "20px" }} className="mt-1">:</Col>
+          <Col style={{ width: "50px" }}>
+            <p
+              style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+              className=""
+            >
+              {seconds <= 9 ? ("0" + seconds).slice(-2) : seconds}
+
+              {/* {seconds<=9} */}
+            </p>
+            <p
+              style={{ fontSize: "12px", fontWeight: "bold" }}
               className="text-center p-0"
             >
               Seconds
@@ -117,81 +208,6 @@ const CountDown = ({ endDate }) => {
           </Col>
         </Row>
       </div>
-      {/* <Row
-        style={{ border: "3px solid #000" }}
-        className="rounded-2 px-3 py-2 flex-nowrap items-center"
-      >
-        
-
-        <Col>
-          <p
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {days}
-          </p>
-          <p
-            style={{ fontSize: "8px", fontWeight: "bold" }}
-            className="text-center p-0"
-          >
-            Days
-          </p>
-        </Col> :
-        <Col>
-          <p
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {hours}
-          </p>
-          <p
-            style={{ fontSize: "8px", fontWeight: "bold" }}
-            className="text-center p-0"
-          >
-            hours
-          </p>
-        </Col> :
-        <Col>
-          <p
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {minutes}
-          </p>
-          <p
-            style={{ fontSize: "8px", fontWeight: "bold" }}
-            className="text-center p-0"
-          >
-            minutes
-          </p>
-        </Col> :
-        <Col>
-          <p
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {seconds}
-          </p>
-          <p
-            style={{ fontSize: "8px", fontWeight: "bold" }}
-            className="text-center p-0"
-          >
-            Seconds
-          </p>
-        </Col>
-      </Row> */}
     </div>
   );
 };

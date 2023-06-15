@@ -18,17 +18,17 @@ const HomeCountDown = ({ endDate }) => {
     return () => clearInterval(interval);
   }, [endDate]);
 
-  const days = countdown > 0 ? Math.floor(countdown / 86400) : 0;
-  const hours = countdown > 0 ? Math.floor((countdown % 86400) / 3600) : 0;
-  const minutes = countdown > 0 ? Math.floor((countdown % 3600) / 60) : 0;
-  const seconds = countdown > 0 ? Math.floor(countdown % 60) : 0;
+  const days = countdown > 9 ? Math.floor(countdown / 86400) : 0;
+  const hours = countdown > 9 ? Math.floor((countdown % 86400) / 3600) : 0;
+  const minutes = countdown > 9 ? Math.floor((countdown % 3600) / 60) : 0;
+  const seconds = countdown > 9 ? Math.floor(countdown % 60) : 0;
   return (
     <Row
       style={{ border: "2px solid #BAB8B8", width: "fit-content" }}
-      className="rounded-2 py-2 flex-nowrap mx-auto"
+      className="rounded-2 py-2 flex-nowrap mx-auto px-2"
     >
-      
-      <Col className="px-2">
+
+      <Col className="px-2" style={{ width: "35px" }}>
         <p
           style={{
             fontSize: "14px",
@@ -37,7 +37,8 @@ const HomeCountDown = ({ endDate }) => {
           }}
           className="text-center p-0"
         >
-          {days} 
+          {days <= 9 ? ("0" + days).slice(-2) : days}
+          {/* {days}  */}
         </p>
         <p
           style={{ fontSize: "8px", fontWeight: "bold" }}
@@ -45,9 +46,11 @@ const HomeCountDown = ({ endDate }) => {
         >
           Days
         </p>
-        
+
       </Col>
-      <Col className="px-2">
+      <Col style={{ width: "1px", fontSize: "16px" }} className="px-2">:</Col>
+
+      <Col className="px-1" style={{ width: "35px" }}>
         <p
           style={{
             fontSize: "14px",
@@ -56,7 +59,8 @@ const HomeCountDown = ({ endDate }) => {
           }}
           className="text-center p-0"
         >
-          {hours}
+          {hours <= 9 ? ("0" + hours).slice(-2) : hours}
+          {/* {hours} */}
         </p>
         <p
           style={{ fontSize: "8px", fontWeight: "bold" }}
@@ -65,7 +69,9 @@ const HomeCountDown = ({ endDate }) => {
           hours
         </p>
       </Col>
-      <Col className="px-2">
+      <Col style={{ width: "1px", fontSize: "16px" }} className="px-2">:</Col>
+
+      <Col className="px-1" style={{ width: "35px" }}>
         <p
           style={{
             fontSize: "14px",
@@ -74,7 +80,8 @@ const HomeCountDown = ({ endDate }) => {
           }}
           className="text-center p-0"
         >
-          {minutes}
+          {minutes <= 9 ? ("0" + minutes).slice(-2) : minutes}
+          {/* {minutes} */}
         </p>
         <p
           style={{ fontSize: "8px", fontWeight: "bold" }}
@@ -83,7 +90,9 @@ const HomeCountDown = ({ endDate }) => {
           minutes
         </p>
       </Col>
-      <Col className="px-2">
+      <Col style={{ width: "1px", fontSize: "16px" }} className="px-2">:</Col>
+
+      <Col className="px-1 " style={{ width: "35px" }}>
         <p
           style={{
             fontSize: "14px",
@@ -92,7 +101,9 @@ const HomeCountDown = ({ endDate }) => {
           }}
           className="text-center p-0"
         >
-          {seconds}
+
+          {seconds <= 9 ? ("0" + seconds).slice(-2) : seconds}
+          {/* {seconds} */}
         </p>
         <p
           style={{ fontSize: "8px", fontWeight: "bold" }}

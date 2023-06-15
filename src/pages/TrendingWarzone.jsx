@@ -411,12 +411,12 @@ const TrendingWarzone = () => {
               {war?.resource1.desc}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
-              <Link className="me-3" to="#">
+              <Link className="me-3" to={war?.resource1.link} target="_blank">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
-              <Link to="#">
+              {/* <Link to="#">
                 <img src={mdicon2} alt="" width={24} />
-              </Link>
+              </Link> */}
             </div>
           </Row>
         </Col>
@@ -471,12 +471,13 @@ const TrendingWarzone = () => {
               style={{ height: "fit-content" }}
               className="d-flex justify-content-lg-start"
             >
-              <Link className="me-3" to="#">
+              <Link className="me-3"  to={war?.resource2.link} target="_blank"
+                >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
-              <Link to="#">
+              {/* <Link to="#">
                 <img src={mdicon2} alt="" width={24} />
-              </Link>
+              </Link> */}
             </div>
           </Row>
         </Col>
@@ -573,6 +574,7 @@ const TrendingWarzone = () => {
             >
               {war?.resource2.creatorName}
             </h4>
+            {/* {console.log( war?.resource2.link,"vedio link............")} */}
 
             {war?.resource2.format === "Video" ? (
               <iframe
@@ -591,7 +593,7 @@ const TrendingWarzone = () => {
                 <img
                   className="mx-auto"
                   style={{ height: "400px" }}
-                  src={war?.resource1.img}
+                  src={war?.resource2.img}
                   alt=""
                 />
               </div>
