@@ -1822,7 +1822,7 @@ function Productsearch(args) {
                     </Swiper>
                   </Row>
 
-                  <ContentCreators />
+                  <ContentCreators format={format} type={type} language={language} searchdata={searchdata} />
                 </div>
               </div>
             </div>

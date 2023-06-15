@@ -31,7 +31,8 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = () => {
+const ContentCreators = ({ format, type, language, searchdata }) => {
+  console.log(format,type,language,searchdata)
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -375,7 +376,6 @@ const ContentCreators = () => {
   };
 
   useEffect(() => {
-    console.log("hello")
     handleContent(content, limit);
   }, [content, params]);
 
@@ -418,7 +418,6 @@ const ContentCreators = () => {
           const formattedDate = date.toLocaleDateString("en-US", options);
           return (
             <>
-              {console.log(item)}
               <div
                 className="item"
                 key={item._id}
@@ -449,7 +448,7 @@ const ContentCreators = () => {
                     />
                   </div>
                   <div className="px-2 mt-3">
-                    {/* <div
+                    <div
                       style={{
                         color: "#5F56C6",
                         fontSize: "14px",
@@ -460,7 +459,7 @@ const ContentCreators = () => {
                     >
                       <span>#best</span>
                       <span>#study</span>
-                    </div> */}
+                    </div>
                     <h4 className="fw-bold mb-0">
                       {item.topics}
                     </h4>
