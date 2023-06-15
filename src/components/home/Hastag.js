@@ -292,7 +292,7 @@ function Hastag() {
             <Col>
               <p className="Trending">
                 <img className="mb-5" src={has1} alt="img" width="45px" />
-                Trending Warzone
+                Brahmaand Battle
               </p>
               <div className="text-end">
                 <Link

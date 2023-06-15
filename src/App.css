@@ -126,12 +126,15 @@
   width: fit-content;
   position: relative;
   overflow: hidden;
+  max-width: 300px;
 }
 
 .content-creator-main .toggle input[type="checkbox"] {
+  display: flex;
+  gap: 25px;
   position: relative;
   appearance: none;
-  max-width: 333px;
+  /* max-width: 333px; */
   height: 50px;
   background-color: #fee6d9;
   border-radius: 50px;
@@ -142,9 +145,9 @@
 .content-creator-main .toggle input[type="checkbox"]::after {
   position: absolute;
   content: "";
-  left: 5px;
+  left: 10px;
   top: 50%;
-  width: 50%;
+  width: 30%;
   height: 80%;
   background-color: #fc9357;
   border-radius: 50px;
@@ -152,8 +155,12 @@
   transition: all 0.4s;
 }
 
+.content-creator-main .toggle input:checked::after {
+  width: 60%;
+}
+
 .content-creator-main .toggle input:checked[type="checkbox"]::after {
-  left: calc(50% - 5px);
+  left: calc(39% - 5px);
 }
 
 .content-creator-main .toggle label {
@@ -164,13 +171,13 @@
 }
 
 .content-creator-main .toggle input~label.l {
-  width: 50%;
+  width: 30%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   top: 50%;
-  left: 0;
+  left: 10px;
   transform: translateY(-50%);
   color: black;
   text-align: center;
@@ -179,7 +186,7 @@
 }
 
 .content-creator-main .toggle input~label.r {
-  width: 50%;
+  width: 65%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -287,13 +294,13 @@
   display: inline-block !important;
   width: 15px;
   height: 15px;
-  border: 1px solid #e9987b !important;
+  border: 1px solid #011d2b !important;
   background-color: transparent !important;
   opacity: 1 !important;
 }
 
 .newdesign-main .swiper-pagination-bullet-active {
-  background-color: #e7977c !important;
+  background-color: #011d2b !important;
 }
 
 .newdesign-main .trending_warzone_swiper .swiper-button-prev,
