@@ -180,6 +180,7 @@ function Hastag() {
   // featured content api integration
   const [feature, setFeature] = useState([]);
   const [war, setWar] = useState([]);
+  console.log(war,"fgnlshflshfhsl")
 
   const featuredContent = () => {
     axiosConfig
