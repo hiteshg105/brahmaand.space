@@ -226,7 +226,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -295,7 +295,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     e.preventDefault();
 
     if (myId == "") {
-      swal("Login First");
+      swal("Login First 1234");
       navigate("/login");
     }
     if (myId !== null && myId !== undefined && myId !== "") {
@@ -350,6 +350,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
   const handleContent = async (data) => {
     if (data === "Content") {
+      console.log(params.id, "hello")
       const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
@@ -422,9 +423,23 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
   };
 
+  const getUser = async () => {
+    const user = await localStorage.getItem("userId");
+    if (user !== null && user !== "") {
+      setmyId(user);
+    } else {
+      // console.log("no UserId Found");
+    }
+  };
+
   useEffect(() => {
     handleContent(content);
   }, [content, params, format, type, language, searchdata]);
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -485,8 +500,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                         item.img.includes("https")
                           ? item.img
                           : item.img.includes("data:image")
-                          ? item.img
-                          : `${base_URL + "/" + item.img}`
+                            ? item.img
+                            : `${base_URL + "/" + item.img}`
                       }
                       alt=""
                     />
@@ -581,7 +596,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -1026,7 +1041,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1179,8 +1194,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1249,8 +1264,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1268,7 +1283,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}

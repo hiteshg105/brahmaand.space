@@ -153,7 +153,9 @@ function LeaderBoard() {
                     </Col>
                     <Col lg="8" className="d-flex flex-column justify-content-between">
                       <h4> Rating </h4>
-                      <h3 style={{ color: "#5F56C6" }}> {calculatedata.rating} meteors</h3>
+                      <h3 style={{ color: "#5F56C6" }}> 
+                      {/* {calculatedata.rating}  */}
+                      2 meteors</h3>
                     </Col>
                   </Row>
                 </Col>
@@ -176,7 +178,9 @@ function LeaderBoard() {
                     </Col>
                     <Col lg="8" className="d-flex flex-column justify-content-between">
                       <h4> Review </h4>
-                      <h3 style={{ color: "#F35F5F" }}>{calculatedata.comment} meteors</h3>
+                      <h3 style={{ color: "#F35F5F" }}>
+                        {/* {calculatedata.comment} */}
+                        5 meteors</h3>
                     </Col>
                   </Row>
                 </Col>
