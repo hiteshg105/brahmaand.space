@@ -216,7 +216,6 @@
 
 .content-creator-main .grid-main .item {
   width: calc(25% - 20px);
-  min-width: 300px;
   border: 1px solid #011d2b;
   border-radius: 10px;
 }
@@ -445,7 +444,7 @@
 }
 
 
-.btn-sn-hover:hover{
+.btn-sn-hover:hover {
   background-color: #00273a !important;
 }
 
