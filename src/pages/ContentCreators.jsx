@@ -356,7 +356,7 @@ const ContentCreators = ({ categry }) => {
       );
 
       setData1((data.data.data));
-      setVal(data1.slice(0,end));
+      setVal(data1.slice(0, end));
       // setVal(data.data.data);
     }
     if (data === "Content Creators") {
@@ -364,7 +364,7 @@ const ContentCreators = ({ categry }) => {
         `/content/advance_content_filter?sub_category=${params.id}`
       );
       setData1((data.data.data));
-      setVal(data1.slice(0,end));
+      setVal(data1.slice(0, end));
       // setVal(data.data.data);
     }
   };
@@ -375,7 +375,7 @@ const ContentCreators = ({ categry }) => {
 
   useEffect(() => {
     handleContent(content, limit);
-  }, [content, limit,data1]);
+  }, [content, limit, data1]);
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -403,7 +403,7 @@ const ContentCreators = ({ categry }) => {
 
       <Row className="my-4">
         <h4 className="fw-bold text-center text-md-start p-0 ps-md-3">
-          Content Creators
+          {content === "Content" ? "Content" : "Content Creators"}
         </h4>
       </Row>
       {/* {console.log(modal, "model")} */}
@@ -1382,21 +1382,21 @@ const ContentCreators = ({ categry }) => {
       {
         data1.length === 0 ? (<center><h1 className="">No content found</h1></center>) : (
           data1.length <= 12 ? (<span></span>) : (
-            data1.length === val.length?(<span></span>):
-            <Row>
-              <button
-                style={{
-                  width: "fit-content",
-                  margin: "30px auto 0",
-                  backgroundColor: "#FC9357",
-                  fontSize: "24px",
-                }}
-                className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-                onClick={() => seeMore(currentPage+1)}
-              >
-                See More
-              </button>
-            </Row>
+            data1.length === val.length ? (<span></span>) :
+              <Row>
+                <button
+                  style={{
+                    width: "fit-content",
+                    margin: "30px auto 0",
+                    backgroundColor: "#FC9357",
+                    fontSize: "24px",
+                  }}
+                  className="text-white fw-bold border-0 rounded-5 py-2 px-4"
+                  onClick={() => seeMore(currentPage + 1)}
+                >
+                  See More
+                </button>
+              </Row>
           )
         )
       }
