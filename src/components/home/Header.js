@@ -684,11 +684,11 @@ function Header(args) {
                   toggle(e), gaEventTracker("+Submit a Content")
                 )}
                 style={{
-                  backgroundColor: "#011D2B",
+                  backgroundColor: "#fc9358",
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
-                className="border-0 text-white fw-bold px-3 py-2 opacity-75"
+                className="btn-sn-hover border-0 text-white fw-bold px-3 py-2 opacity-75"
               >
                 <div>
                   <span>+Submit a content</span>
@@ -702,11 +702,11 @@ function Header(args) {
                   gaEventTracker("+Content Creator")
                 )}
                 style={{
-                  backgroundColor: "#011D2B",
+                  backgroundColor: "#fc9358",
                   fontSize: "22px",
                   borderRadius: "24px",
                 }}
-                className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
+                className="btn-sn-hover border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
               >
                 <div>
                   <span>+Submit a content creator</span>
