@@ -353,12 +353,12 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
-      if (format || type) {
+      if (format && type) {
 
         const newdata = JSON.parse(JSON.stringify(responce.data.data))
 
         const dataFilter = newdata.filter((e) => {
-          return e.format === format || e.type === type;
+          return e.format === format && e.type === type;
         });
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
@@ -528,7 +528,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     <div className="my-3 d-flex justify-content-sm-between">
                       <div className="d-flex align-items-center">
                         <PrettyRating
-                          value={item?.ava_rating?.toFixed(2)}
+                          value={item?.ava_rating?.toFixed(1)}
                           icons={icons.star}
                           colors={colors.star}
                         />
@@ -538,7 +538,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                         >
                           (
                           {item?.ava_rating
-                            ? item?.ava_rating?.toFixed(2)
+                            ? item?.ava_rating?.toFixed(1)
                             : 0.0}
                           )
                         </span>
@@ -1179,7 +1179,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
+                                    1
                                   )}
                             </Link>
                           </div>
@@ -1237,7 +1237,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                           value={
                             contentCretorDetail?.avarageRating === null
                               ? 0
-                              : contentCretorDetail?.avarageRating?.toFixed(2)
+                              : contentCretorDetail?.avarageRating?.toFixed(1)
                           }
                           icons={icons.star}
                           colors={colors.star}
@@ -1249,7 +1249,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    2
+                                    1
                                   )}
                               ] of 5 Stars
                             </>
