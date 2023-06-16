@@ -479,7 +479,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     />
                   </div>
                   <div className="px-2 mt-3">
-                    <div
+                    {/* <div
                       style={{
                         color: "#5F56C6",
                         fontSize: "14px",
@@ -490,7 +490,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     >
                       <span>#best</span>
                       <span>#study</span>
-                    </div>
+                    </div> */}
                     <h4
                       style={{ wordWrap: "break-word" }}
                       className="fw-bold mb-0"

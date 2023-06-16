@@ -480,13 +480,6 @@ function Hastag() {
                                   WINNER
                                 </div>
                                 : "" : ""}
-
-
-
-
-
-
-
                           {/* {features.winner ? features.winner === features.resource2._id ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }} className="position-absolute text-white d-flex justify-content-center align-items-center">WINNER</div> : "" : ""} */}
 
                         </Col>
