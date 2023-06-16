@@ -124,7 +124,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
 
   const handleSubmitCreatorComment = async (e, id) => {
-    if (cmtComment && cmtRating) {
+    if (cmtRating) {
       e.preventDefault();
       const userid = localStorage.getItem("userId");
       // console.log(userid)
@@ -141,11 +141,15 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
         handleSelection(id);
         handleContent(content, limit);
       } else {
+        setCmtRating("")
         swal("Comment Already Exist");
       }
-    } else {
+    } 
+    else{
+      setCmtComment("")
       swal("Please Enter Rating And Comment");
     }
+    
 
     // console.log(data);
   };
@@ -301,7 +305,10 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     if (myId !== null && myId !== undefined && myId !== "") {
       const selectedId = Producdetail._id;
 
-      if (!(!text && rating !== 0)) {
+      // if(rating === ""){
+
+      // }
+      if(rating !== ""){
         axiosClient
           .post(`/user/add_Comment`, {
             submitresrcId: id,
@@ -329,7 +336,9 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           });
         settText("");
         setRating("");
-      } else {
+
+      }
+      else {
         swal("Please Enter Rating and Comment");
       }
     }
@@ -465,9 +474,9 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     style={{ maxHeight: "250px" }}
                   >
                     <img
-                      style={{ borderRadius: "10px", objectFit: "contain" }}
+                      style={{ borderRadius: "10px", objectFit: "cover" ,aspectRatio: "16/9"}}
                       className="w-100"
-                      height={250}
+                      
                       src={
                         item.img.includes("https")
                           ? item.img
@@ -808,7 +817,9 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                 </Col>
                 <Col lg="6">
                   {" "}
-                  <h4 className="mt-3">Rate Content</h4>
+                  <h4 className="mt-3">
+                    Rate Content
+                  </h4>
                   <ReactStars {...secondExample} />
                 </Col>
               </Row>
