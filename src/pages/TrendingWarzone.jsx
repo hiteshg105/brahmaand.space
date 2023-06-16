@@ -316,7 +316,8 @@ const TrendingWarzone = () => {
   const submitRcc1Comment = async (e) => {
     e.preventDefault();
     try {
-      if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
+      // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
+        if (rsc1Review.rate != 0) {
         console.log("rsc1Review")
         const userid = localStorage.getItem("userId");
         const data = await instance.post(`user/add_Comment`, {
@@ -349,7 +350,8 @@ const TrendingWarzone = () => {
   const submitRcc2Comment = async (e) => {
     e.preventDefault();
     try {
-      if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
+      // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
+        if (rsc2Review.rate != 0) {
         console.log("rsc2Review")
         const userid = localStorage.getItem("userId");
         const data = await instance.post(`user/add_Comment`, {
