@@ -575,7 +575,7 @@ function Header(args) {
                 clickable: true,
               }}
               autoplay={{
-                delay: 1000,
+                delay: 5000,
               }}
             >
               <SwiperSlide>
