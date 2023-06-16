@@ -466,7 +466,6 @@ function Hastag() {
                               />
                             </div>
                           )}
-                          {console.log(features.winner, "bhadresh l;athoyua")}
 
                           {features.winner || features.winner === null ?
                             features.winner === null
