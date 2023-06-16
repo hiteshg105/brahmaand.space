@@ -556,71 +556,85 @@ function CustomNavbar(args) {
       >
         <Nav className="navbar-nav ms-0">
           <Nav.Link as={NavLink} className="navbar-link">
-            {pathname.pathname !== "/" ||
-              pathname.pathname !== "/signup" ||
-              (pathname.pathname !== "/login" && (
-                <button
-                  className="btn rbutton mobile"
-                  type="submit"
-                  onClick={(e) => (
-                    closeModel(),
-                    setIsContentCreatorModel(!isContentCreatorModel),
-                    gaEventTracker("+Content Creator")
-                  )}
-                >
-                  <h4 className="rText">+Content Creator</h4>
-                </button>
-              ))}
+            {pathname.pathname === "/" ||
+            pathname.pathname === "/signup" ||
+            pathname.pathname === "/login" ? (
+              ""
+            ) : (
+              <button
+                className="btn rbutton mobile"
+                type="submit"
+                onClick={(e) => (
+                  closeModel(),
+                  setIsContentCreatorModel(!isContentCreatorModel),
+                  gaEventTracker("+Content Creator")
+                )}
+              >
+                <h4 className="rText">+Content Creator</h4>
+              </button>
+            )}
             <Container></Container>
           </Nav.Link>
-
-          {localStorage.getItem("userId") !== "" &&
+          {console.log(
+            pathname.pathname !== "/" ||
+              pathname.pathname !== "/signup" ||
+              pathname.pathname !== "/login"
+          )}
+          {/* {console.log(pathname.pathname !== "/" ||
+                pathname.pathname !== "/signup" ||
+                pathname.pathname !== "/login")} */}
+          {/* {localStorage.getItem("userId") !== "" &&
           localStorage.getItem("userId") !== null &&
           localStorage.getItem("userId") !== undefined ? (
             <Nav.Link as={NavLink} className="navbar-link">
               {pathname.pathname !== "/" ||
-                pathname.pathname !== "/signup" ||
-                (pathname.pathname !== "/login" && (
-                  <button
-                    className="btn rbutton mobile"
-                    type="submit"
-                    onClick={(e) => (
-                      toggle(e), gaEventTracker("+Submit a Content")
-                    )}
-                  >
-                    <h4 className="rText">+Submit a Content</h4>
-                  </button>
-                ))}
+              pathname.pathname !== "/signup" ||
+              pathname.pathname !== "/login" ? (
+                <button
+                  className="btn rbutton mobile"
+                  type="submit"
+                  onClick={(e) => (
+                    toggle(e), gaEventTracker("+Submit a Content")
+                  )}
+                >
+                  <h4 className="rText">+Submit a Content</h4>
+                </button>
+              ) : (
+                ""
+              )}
               <Container></Container>
             </Nav.Link>
-          ) : (
-            <Nav.Link as={NavLink} className="navbar-link">
-              <Link to={`/signup`}>
-                {pathname.pathname !== "/" ||
-                  pathname.pathname !== "/signup" ||
-                  (pathname.pathname !== "/login" && (
-                    <button
-                      className="btn rbutton mobile"
-                      onClick={() => {
-                        gaEventTracker("+ Submit a Content");
-                        return (
-                          <p
-                            className="d-flex justify-content-center"
-                            style={{ color: "black" }}
-                          >
-                            {swal(
-                              "Join our Brahmaand community to submit content"
-                            )}
-                          </p>
-                        );
-                      }}
+          ) : ( */}
+          <Nav.Link as={NavLink} className="navbar-link">
+            {/* <Link to={`/signup`}> */}
+
+            {
+              pathname.pathname === "/" ||
+              pathname.pathname === "/signup" ||
+              pathname.pathname === "/login"
+             ? (
+             ""
+            ) : (
+              <button
+                className="btn rbutton mobile"
+                onClick={() => {
+                  gaEventTracker("+ Submit a Content");
+                  return (
+                    <p
+                      className="d-flex justify-content-center"
+                      style={{ color: "black" }}
                     >
-                      <h4 className="rText">+ Submit a Content</h4>
-                    </button>
-                  ))}
-              </Link>
-            </Nav.Link>
-          )}
+                      {swal("Join our Brahmaand community to submit content")}
+                    </p>
+                  );
+                }}
+              >
+                <h4 className="rText">+ Submit a Content</h4>
+              </button>
+            )}
+            {/* </Link> */}
+          </Nav.Link>
+          {/* )} */}
 
           {localStorage.getItem("userId") !== "" &&
           localStorage.getItem("userId") !== null &&
