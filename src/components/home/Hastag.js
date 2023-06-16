@@ -375,7 +375,11 @@ function Hastag() {
                     {features?.category?.title}
                   </h4>
                   <div style={{ minHeight: "53px" }} className="mb-4">
-                    {features.winner || features.winner === null ? <h3 className="text-center fw-bold">Result Declared</h3> : <HomeCountDown endDate={features.endDate} />}
+                    {features.winner || features.winner === null ? (
+                      <h3 className="text-center fw-bold">Result Declared</h3>
+                    ) : (
+                      <HomeCountDown endDate={features.endDate} />
+                    )}
                   </div>
 
                   <div className="ifram warzone">
@@ -406,18 +410,43 @@ function Hastag() {
                             </div>
                           )}
 
-                          {features.winner || features.winner === null ?
-                            features.winner === null
-                              ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }}
-                                className="position-absolute text-white d-flex justify-content-center align-items-center">
+                          {features.winner || features.winner === null ? (
+                            features.winner === null ? (
+                              <div
+                                style={{
+                                  backgroundColor: "#000000B3",
+                                  height: "90%",
+                                  width: "90%",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                  fontSize: "32px",
+                                }}
+                                className="position-absolute text-white d-flex justify-content-center align-items-center"
+                              >
                                 DRAW
-                              </div> :
-                              features.winner === features.resource1._id ?
-                                <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }}
-                                  className="position-absolute text-white d-flex justify-content-center align-items-center">
-                                  WINNER
-                                </div>
-                                : "" : ""}
+                              </div>
+                            ) : features.winner === features.resource1._id ? (
+                              <div
+                                style={{
+                                  backgroundColor: "#000000B3",
+                                  height: "90%",
+                                  width: "90%",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                  fontSize: "32px",
+                                }}
+                                className="position-absolute text-white d-flex justify-content-center align-items-center"
+                              >
+                                WINNER
+                              </div>
+                            ) : (
+                              ""
+                            )
+                          ) : (
+                            ""
+                          )}
                           {/* {features.winner ? features.winner === features.resource1._id ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }} className="position-absolute text-white d-flex justify-content-center align-items-center">WINNER</div> : "" : ""} */}
                         </Col>
                         <Col
@@ -467,20 +496,45 @@ function Hastag() {
                             </div>
                           )}
 
-                          {features.winner || features.winner === null ?
-                            features.winner === null
-                              ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }}
-                                className="position-absolute text-white d-flex justify-content-center align-items-center">
+                          {features.winner || features.winner === null ? (
+                            features.winner === null ? (
+                              <div
+                                style={{
+                                  backgroundColor: "#000000B3",
+                                  height: "90%",
+                                  width: "90%",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                  fontSize: "32px",
+                                }}
+                                className="position-absolute text-white d-flex justify-content-center align-items-center"
+                              >
                                 DRAW
-                              </div> :
-                              features.winner === features.resource2._id ?
-                                <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }}
-                                  className="position-absolute text-white d-flex justify-content-center align-items-center">
-                                  WINNER
-                                </div>
-                                : "" : ""}
-                          {/* {features.winner ? features.winner === features.resource2._id ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }} className="position-absolute text-white d-flex justify-content-center align-items-center">WINNER</div> : "" : ""} */}
+                              </div>
+                            ) : features.winner === features.resource2._id ? (
+                              <div
+                                style={{
+                                  backgroundColor: "#000000B3",
+                                  height: "90%",
+                                  width: "90%",
+                                  top: "50%",
+                                  left: "50%",
+                                  transform: "translate(-50%,-50%)",
+                                  fontSize: "32px",
+                                }}
+                                className="position-absolute text-white d-flex justify-content-center align-items-center"
+                              >
+                                WINNER
+                              </div>
+                            ) : (
+                              ""
+                            )
+                          ) : (
+                            ""
+                          )}
 
+                          {/* {features.winner ? features.winner === features.resource2._id ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }} className="position-absolute text-white d-flex justify-content-center align-items-center">WINNER</div> : "" : ""} */}
                         </Col>
                       </Row>
                     </div>
