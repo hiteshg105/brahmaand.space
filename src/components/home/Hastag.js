@@ -96,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -126,7 +126,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   function isValidEmail(email) {
     const expression =
@@ -194,17 +194,28 @@ function Hastag() {
       });
   };
 
-  const warContent = () => {
-    axiosConfig
-      .get(`/get/all/warzone`)
-      .then((res) => {
-        // console.log(res.data);
-        setWar(res.data.war);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const warContent = async () => {
+
+    const responce = await axiosConfig.get(`/get/all/warzone`)
+    const data = responce.data.war;
+    data.forEach(obj => {
+      obj.isContent = 0;
+    });
+    // console.log(responce.data.war, "responce.data.war")
+    const responce1 = await axiosConfig.get(`/get/all/creator_warzone`)
+    const data1 = responce1.data.war;
+    data1.forEach(obj => {
+      obj.isContent = 1;
+    });
+    if (responce.data.status === true && responce1.data.status === true) {
+      setWar([
+        ...data,
+        ...data1
+      ]);
+    }
+
   };
+  console.log(war, "fnslfbhsofgsfbsklfb")
   const landtoproductpage = () => {
     // console.log(homesearch);
     // navigate(`/productList/${homesearch}`);
@@ -262,17 +273,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                      <button
-                        key={trendingtopics._id}
-                        onClick={() => (
-                          handlehastagtopic(trendingtopics?.topics),
-                          gaEventTracker(`${trendingtopics?.topics}`)
-                        )}
-                        className="btn1"
-                      >
-                        {trendingtopics?.topics}
-                      </button>
-                    ))
+                    <button
+                      key={trendingtopics._id}
+                      onClick={() => (
+                        handlehastagtopic(trendingtopics?.topics),
+                        gaEventTracker(`${trendingtopics?.topics}`)
+                      )}
+                      className="btn1"
+                    >
+                      {trendingtopics?.topics}
+                    </button>
+                  ))
                   : null}
               </div>
             </div>
@@ -384,6 +395,7 @@ function Hastag() {
 
                   <div className="ifram warzone">
                     <div>
+                      {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
                         <Col className="position-relative p-0 mx-3 -z-50">
                           {features.resource1.format === "Video" ? (
@@ -395,9 +407,7 @@ function Hastag() {
                                 width: "100%",
                                 height: "100%",
                               }}
-                              src={`https://www.youtube.com/embed/${
-                                features?.resource1.link.split("v=")[1]
-                              }`}
+                              src={`https://www.youtube.com/embed/${features?.resource1.link[0].split("v=")[1]}`}
                             ></iframe>
                           ) : (
                             <div className="w-100">
@@ -481,9 +491,8 @@ function Hastag() {
                                 width: "100%",
                                 height: "100%",
                               }}
-                              src={`https://www.youtube.com/embed/${
-                                features?.resource2.link.split("v=")[1]
-                              }`}
+                              // src={`https://www.youtube.com/embed/${Array.isArray(features?.resource2.link) === true ? features?.resource2.link[0]?.split("v=")[1] : features?.resource2.link.split("v=")[1]}`}
+                              src={`https://www.youtube.com/embed/${features?.resource2.link[0]?.split("v=")[1]}`}
                             ></iframe>
                           ) : (
                             <div className="w-100">
@@ -578,7 +587,9 @@ function Hastag() {
                     <Row>
                       <Button
                         onClick={() =>
-                          navigate(`/trending-warzone/${features._id}`)
+                          // navigate(`/trending-warzone/${features._id}`)
+
+                          navigate(`/trending-warzone/${features._id}?additionalValue=${features.isContent}`)
                         }
                         style={{ borderRadius: "4px", width: "fit-content" }}
                         size="sm"
@@ -731,8 +742,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -918,7 +929,7 @@ function Hastag() {
                           size={75}
                           style={{ backgroundColor: "white" }}
                           type="submit"
-                          // onClick={() => setOpenone(true)}
+                        // onClick={() => setOpenone(true)}
                         />
                         <div className="modalvideo">
                           <ModalVideo
