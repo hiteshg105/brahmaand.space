@@ -3,7 +3,7 @@ import "../../styles/ModulePage.css";
 
 import Head from "../../images/social-media-with-photo-frame-like-button-media-payer-pink-background-illustration 10.png";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hastag from "../../../src/components/home/Hastag";
 import { Button, Modal, ModalBody, Label, FormGroup, Input } from "reactstrap";
 import backimg from "../../assets/images/backimg.png";
@@ -77,12 +77,10 @@ function Header(args) {
   const [topics, setTopics] = useState();
   const [descriptionData, setDescriptionData] = useState();
   const [file, setFile] = useState(NoImage);
-  // console.log(file);
+  console.log(file);
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
 
-  const pathName = useLocation();
-  // console.log(pathName.pathname,"pathName");
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
     const files = e.target.files;
@@ -209,7 +207,7 @@ function Header(args) {
       swal("Field is mandatory");
     }
   };
-  // console.log(localStorage.getItem("userId"), "userid");
+  console.log(localStorage.getItem("userId"), "userid");
   const NewContentCrete = async () => {
     console.log("hello");
     let linkNewData;
@@ -339,7 +337,7 @@ function Header(args) {
       .get(`/admin/getallCategory`)
 
       .then((response) => {
-        // console.log(response.data.data);
+        console.log(response.data.data);
         setAllcatego(response.data.data);
       })
       .catch((error) => {
@@ -676,50 +674,45 @@ function Header(args) {
             </h1>
             <p
               style={{ letterSpacing: "0.5px" }}
-              className={`hero-subheading text-center p-0 m-0 mt-3 ${
-                pathName.pathname === "/" && "pb-5"
-              }`}
+              className="hero-subheading text-center p-0 m-0 mt-3"
             >
               Finding quality resources is not a hassle anymore.
             </p>
-            {pathName.pathname !== "/" && (
-              <div className="text-center p-0 m-0 mt-5 pb-4 d-flex justify-content-center flex-wrap gap-5">
-                <button
-                  onClick={(e) => (
-                    toggle(e), gaEventTracker("+Submit a Content")
-                  )}
-                  style={{
-                    backgroundColor: "#011D2B",
-                    fontSize: "22px",
-                    borderRadius: "24px",
-                  }}
-                  className="border-0 text-white fw-bold px-3 py-2 opacity-75"
-                >
-                  <div>
-                    <span>+Submit a content</span>
-                  </div>
-                </button>
+            <div className="text-center p-0 m-0 mt-5 pb-4 d-flex justify-content-center flex-wrap gap-5">
+              <button
+                onClick={(e) => (
+                  toggle(e), gaEventTracker("+Submit a Content")
+                )}
+                style={{
+                  backgroundColor: "#011D2B",
+                  fontSize: "22px",
+                  borderRadius: "24px",
+                }}
+                className="border-0 text-white fw-bold px-3 py-2 opacity-75"
+              >
+                <div>
+                  <span>+Submit a content</span>
+                </div>
+              </button>
 
-                <button
-                  onClick={(e) => (
-                    closeModel(),
-                    setIsContentCreatorModel(!isContentCreatorModel),
-                    gaEventTracker("+Content Creator")
-                  )}
-                  style={{
-                    backgroundColor: "#011D2B",
-                    fontSize: "22px",
-                    borderRadius: "24px",
-                  }}
-                  className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
-                >
-                  <div>
-                    <span>+Submit a content creator</span>
-                  </div>
-                </button>
-              </div>
-            )}
-
+              <button
+                onClick={(e) => (
+                  closeModel(),
+                  setIsContentCreatorModel(!isContentCreatorModel),
+                  gaEventTracker("+Content Creator")
+                )}
+                style={{
+                  backgroundColor: "#011D2B",
+                  fontSize: "22px",
+                  borderRadius: "24px",
+                }}
+                className="border-0 text-white fw-bold px-2 pe-3 py-2 opacity-75"
+              >
+                <div>
+                  <span>+Submit a content creator</span>
+                </div>
+              </button>
+            </div>
             <Container>
               <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
                 <div className="p-3 w-100">
@@ -1419,7 +1412,7 @@ function Header(args) {
                           placeholder="Select Sub Category"
                         >
                           <option>Select Sub-Category</option>
-                          {/* {console.log(subctgry, "subctgry")} */}
+                          {console.log(subctgry, "subctgry")}
                           {subctgry?.map((subctgry) => {
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>
