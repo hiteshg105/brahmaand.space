@@ -307,7 +307,7 @@ const TrendingWarzone = () => {
             </>
           )}
         </Col>
-        <Col>{!war?.winner && <CountDown endDate={war && war.endDate} />}</Col>
+        <Col>{war?.winner || war?.winner ===null ? war?.winner === null ? <h1 style={{color:"blue"}} className="text-center">Draw</h1> : "" : <CountDown endDate={war && war.endDate} />}</Col>
         <Col
           style={{ top: "-16px", right: "-12px" }}
           className="h-100 text-end position-absolute d-sm-block d-lg-none"

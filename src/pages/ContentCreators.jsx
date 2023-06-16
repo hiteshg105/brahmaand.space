@@ -295,7 +295,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     e.preventDefault();
 
     if (myId == "") {
-      swal("Login First 1234");
+      swal("Login First");
       navigate("/login");
     }
     if (myId !== null && myId !== undefined && myId !== "") {
@@ -388,34 +388,6 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
         setData1(responce.data.data);
         setVal(responce.data.data.slice(0, end));
       }
-
-
-
-
-
-
-
-
-
-      // if (format || type || language || searchdata) {
-      //   console.log(format, "format", language, searchdata)
-      //   const responce = await axiosClient.post(`/content/keyword_search_filter`, {
-      //     searchinput: searchdata,
-      //     language: language,
-      //     format: format,
-      //   })
-      //   console.log(responce.data.data)
-      //   setData1(responce.data.data);
-      //   setVal(responce.data.data.slice(0, end));
-      // } else {
-
-      //   const responce = await axiosClient.post(
-      //     `/content/advance_content_filter?sub_category=${params.id}`
-      //   );
-      //   setData1(responce.data.data);
-      //   setVal(responce.data.data.slice(0, end));
-      //   // setVal(data.data.data);
-      // }
     }
   };
   // console.log(val);
