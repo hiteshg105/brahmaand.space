@@ -304,11 +304,13 @@ const TrendingWarzone = () => {
 
     if (isContent === "0") {
       const data = await instance.get(`/get/comment/warzone/${id}`);
-      setComment(data.data);
+      setComment(data.data.newData);
     }
     if (isContent === "1") {
+      console.log("bhadresh")
       const data = await instance.get(`/get/comment/creator_warzone/${id}`);
-      setComment(data.data);
+      console.log(data.data, "hfklsfhslhflsfhlshfl")
+      setComment(data.data.newData2);
     }
 
   };
@@ -317,27 +319,54 @@ const TrendingWarzone = () => {
     e.preventDefault();
     try {
       // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
+      if (isContent === "0") {
         if (rsc1Review.rate != 0) {
-        console.log("rsc1Review")
-        const userid = localStorage.getItem("userId");
-        const data = await instance.post(`user/add_Comment`, {
-          submitresrcId: war.resource1._id,
-          userid: userid,
-          comment: rsc1Review.comment,
-          rating: rsc1Review.rate,
-        });
-        // console.log(data.data);
-        if (data.data.status === true) {
-          setRsc1Review({ comment: "", rate: 0 });
-          getComment();
-          swal("Review submitted Successfully.");
+          console.log("rsc1Review")
+          const userid = localStorage.getItem("userId");
+          const data = await instance.post(`user/add_Comment`, {
+            submitresrcId: war.resource1._id,
+            userid: userid,
+            comment: rsc1Review.comment,
+            rating: rsc1Review.rate,
+          });
+          // console.log(data.data);
+          if (data.data.status === true) {
+            setRsc1Review({ comment: "", rate: 0 });
+            getComment();
+            swal("Review submitted Successfully.");
+          }
+          if (data.data.msg === "waiting for admin approvel") {
+            swal("You have already submit your review on this.");
+            setRsc1Review({ comment: "", rate: 0 });
+          }
+        } else {
+          swal("Please Enter Comment And Rating");
         }
-        if (data.data.msg === "waiting for admin approvel") {
-          swal("You have already submit your review on this.");
-          setRsc1Review({ comment: "", rate: 0 });
+      }
+
+      if (isContent === "1") {
+        if (rsc1Review.rate != 0) {
+          console.log("rsc1Review")
+          const userid = localStorage.getItem("userId");
+          const data = await instance.post(`/user/add_creator_comment`, {
+            creatorResrcId: war.resource1._id,
+            userid: userid,
+            comment: rsc1Review.comment,
+            rating: rsc1Review.rate,
+          });
+          // console.log(data.data);
+          if (data.data.status === true) {
+            setRsc1Review({ comment: "", rate: 0 });
+            getComment();
+            swal("Review submitted Successfully.");
+          }
+          if (data.data.msg === "waiting for admin approvel") {
+            swal("You have already submit your review on this.");
+            setRsc1Review({ comment: "", rate: 0 });
+          }
+        } else {
+          swal("Please Enter Comment And Rating");
         }
-      } else {
-        swal("Please Enter Comment And Rating");
       }
     } catch (error) {
       if (error.response?.status === 403) {
@@ -351,27 +380,54 @@ const TrendingWarzone = () => {
     e.preventDefault();
     try {
       // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
+      if (isContent === "0") {
         if (rsc2Review.rate != 0) {
-        console.log("rsc2Review")
-        const userid = localStorage.getItem("userId");
-        const data = await instance.post(`user/add_Comment`, {
-          submitresrcId: war.resource2._id,
-          userid: userid,
-          comment: rsc2Review.comment,
-          rating: rsc2Review.rate,
-        });
-        // console.log(data.data);
-        if (data.data.status === true) {
-          swal("Review submitted Successfully.");
-          setRsc2Review({ comment: "", rate: 0 });
-          getComment();
+          console.log("rsc2Review")
+          const userid = localStorage.getItem("userId");
+          const data = await instance.post(`user/add_Comment`, {
+            submitresrcId: war.resource2._id,
+            userid: userid,
+            comment: rsc2Review.comment,
+            rating: rsc2Review.rate,
+          });
+          // console.log(data.data);
+          if (data.data.status === true) {
+            swal("Review submitted Successfully.");
+            setRsc2Review({ comment: "", rate: 0 });
+            getComment();
+          }
+          if (data.data.msg === "waiting for admin approvel") {
+            swal("You have already submit your review on this.");
+            setRsc2Review({ comment: "", rate: 0 });
+          }
+        } else {
+          swal("Please Enter Comment And Rating");
         }
-        if (data.data.msg === "waiting for admin approvel") {
-          swal("You have already submit your review on this.");
-          setRsc2Review({ comment: "", rate: 0 });
+      }
+
+      if (isContent === "1") {
+        if (rsc2Review.rate != 0) {
+          console.log("rsc2Review")
+          const userid = localStorage.getItem("userId");
+          const data = await instance.post(`/user/add_creator_comment`, {
+            creatorResrcId: war.resource2._id,
+            userid: userid,
+            comment: rsc2Review.comment,
+            rating: rsc2Review.rate,
+          });
+          // console.log(data.data);
+          if (data.data.status === true) {
+            swal("Review submitted Successfully.");
+            setRsc2Review({ comment: "", rate: 0 });
+            getComment();
+          }
+          if (data.data.msg === "waiting for admin approvel") {
+            swal("You have already submit your review on this.");
+            setRsc2Review({ comment: "", rate: 0 });
+          }
+        } else {
+          swal("Please Enter Comment And Rating");
         }
-      } else {
-        swal("Please Enter Comment And Rating");
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -622,14 +678,27 @@ const TrendingWarzone = () => {
             <img src={link} alt="" />
           </div> */}
         </div>
+        {console.log(war?.resource1.topics, "war?.resource1.topics")}
         <Col lg={6} className="border-top border-bottom py-4">
           <div className="d-flex justify-content-lg-end">
             <div className="d-flex justify-content-lg-end flex-wrap tag-2">
-              {war?.resource1.topics?.split(",").map((val) => (
-                <Link className="d-flex" to="#">
-                  {val}
-                </Link>
-              ))}
+              {
+                isContent === "0" ? <>
+                  {war?.resource1.topics[0]?.split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
+                </>
+                  :
+                  <>
+                    {war?.resource1.topics?.split(",").map((val) => (
+                      <Link className="d-flex" to="#">
+                        {val}
+                      </Link>
+                    ))}
+                  </>
+              }
             </div>
           </div>
         </Col>
@@ -639,11 +708,29 @@ const TrendingWarzone = () => {
         >
           <div className="d-flex">
             <div className="d-flex flex-wrap tag-2">
-              {war?.resource2.topics?.split(",").map((val) => (
-                <Link className="d-flex" to="#">
-                  {val}
-                </Link>
-              ))}
+
+              {
+                isContent === "0" ? <>
+                  {war?.resource2.topics[0]?.split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
+                </>
+                  :
+                  <>
+                    {war?.resource2.topics?.split(",").map((val) => (
+                      <Link className="d-flex" to="#">
+                        {val}
+                      </Link>
+                    ))}
+                  </>
+              }
+
+
+
+
+
             </div>
           </div>
         </Col>
@@ -852,17 +939,33 @@ const TrendingWarzone = () => {
 
         <Col lg={6} className="border-top border-bottom border-right py-4">
           <Row className="mb-4 text-lg-end">
-            <Link
-              style={{
-                color: "#5F56C6",
-                fontSize: "20px",
-                wordBreak: "break-all",
-              }}
-              className="text-center text-lg-end"
-              to={war?.resource1.link[0]}
-            >
-              {war?.resource1.link[0]}
-            </Link>
+            {
+              isContent === "0" ? <>
+                <Link
+                  style={{
+                    color: "#5F56C6",
+                    fontSize: "20px",
+                    wordBreak: "break-all",
+                  }}
+                  className="text-center text-lg-end"
+                  to={war?.resource1.link}
+                >
+                  {war?.resource1.link}
+                </Link>
+              </>
+                : <>
+                  <Link
+                    style={{
+                      color: "#5F56C6",
+                      fontSize: "20px",
+                      wordBreak: "break-all",
+                    }}
+                    className="text-center text-lg-end"
+                    to={war?.resource1.link[0]}
+                  >
+                    {war?.resource1.link[0]}
+                  </Link></>
+            }
           </Row>
           <Row className="justify-content-between justify-content-lg-start">
             <Row className="gap-3 mb-3 m-0">
@@ -1011,17 +1114,35 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4"
         >
           <Row className="mb-4 text-lg-start pe-4">
-            <Link
-              style={{
-                color: "#5F56C6",
-                fontSize: "20px",
-                wordBreak: "break-all",
-              }}
-              to={war?.resource2.link[0]}
-              className="text-center text-lg-start"
-            >
-              {war?.resource2.link[0]}
-            </Link>
+
+            {
+              isContent === "0" ? <>
+                <Link
+                  style={{
+                    color: "#5F56C6",
+                    fontSize: "20px",
+                    wordBreak: "break-all",
+                  }}
+                  to={war?.resource2.link}
+                  className="text-center text-lg-start"
+                >
+                  {war?.resource2.link}
+                </Link>
+              </>
+                : <>
+                  <Link
+                    style={{
+                      color: "#5F56C6",
+                      fontSize: "20px",
+                      wordBreak: "break-all",
+                    }}
+                    to={war?.resource2.link[0]}
+                    className="text-center text-lg-start"
+                  >
+                    {war?.resource2.link[0]}
+                  </Link>
+                </>
+            }
           </Row>
           <Row className="justify-content-start justify-content-lg-end">
             <Row className="gap-3 mb-3 m-0">
@@ -1677,7 +1798,7 @@ const TrendingWarzone = () => {
           lg={6}
           className="text-center p-2 text-lg-end border-top d-flex flex-column gap-3"
         >
-          {comment?.newData && comment?.newData.length === 0
+          {comment && comment?.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
               <div
