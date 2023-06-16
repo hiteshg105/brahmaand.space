@@ -556,7 +556,7 @@ function CustomNavbar(args) {
       />
       <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
         <Nav className="navbar-nav ms-0">
-          {/* <Nav.Link as={NavLink} className="navbar-link">
+          <Nav.Link as={NavLink} className="navbar-link">
             <button
               className="btn rbutton mobile"
               type="submit"
@@ -607,7 +607,7 @@ function CustomNavbar(args) {
                 </button>
               </Link>
             </Nav.Link>
-          )} */}
+          )}
 
           {/* signup and login condition */}
           {localStorage.getItem("userId") !== "" &&
