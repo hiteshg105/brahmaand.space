@@ -38,6 +38,8 @@ import { BsFillLampFill } from "react-icons/bs";
 import spinner from "../pages/spinner.css";
 import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 import axiosConfig from "./axiosConfig";
+import NoImage from "../components/home/noimage1.png";
+
 
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
@@ -384,55 +386,61 @@ function CustomNavbar(args) {
     const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
 
-    const formData = new FormData();
-    formData.append("img", file);
-    formData.append("creatorName", creatorName);
-    linkNewData2.map((e) => formData.append("link", e));
-
-    formData.append("phoneNo", phoneNo);
-    formData.append("email", email);
-    formData.append("category", category);
-    formData.append("sub_category", sub_category);
-    formData.append("format", format);
-    formData.append("language", language);
-    formData.append("topics", topics);
-    formData.append("desc", descriptionData);
-    formData.append("userid", userid);
-
-    if (creatorName && linkData && category && sub_category) {
-      const responce = await axiosConfig.post(
-        `/user/content/creator`,
-        formData
-      );
-
-      // console.log(responce.data.data);
-      if (responce.data.success === true) {
-        swal("Content Creator profile added successfully👍.");
-        setIsContentCreatorModel(false);
-        setCreatorName("");
-        setLinkData([
-          { id: 1, name: "youtube", value: "" },
-          { id: 2, name: "instagram", value: "" },
-          { id: 3, name: "linkedin", value: "" },
-          { id: 4, name: "facebook", value: "" },
-        ]);
-        setPhoneNo("");
-        setEmail("");
-        setCategory("");
-        setSub_category("");
-        setFormat("");
-        setLanguage("");
-        setTopics("");
-        setDescriptionData("");
-        setFile(null);
-      } else {
-        swal("Something went wrong, Try again");
-        setIsContentCreatorModel(false);
-      }
+    if (userid === null) {
+      swal("Please Login OR Sign Up");
     } else {
-      setFillPlease("define");
-      // swal("Field Are mendory");
-      swal("field is mandatory");
+      const formData = new FormData();
+      formData.append("img", file === null ? NoImage : file);
+      formData.append("creatorName", creatorName);
+      linkNewData2.map((e) => formData.append("link", e));
+      formData.append("phoneNo", phoneNo);
+      formData.append("email", email);
+      formData.append("category", category);
+      formData.append("sub_category", sub_category);
+      formData.append("format", format);
+      if (language.length != 0) {
+        language.map((e2) => formData.append("language", e2));
+      }
+      formData.append("level", level);
+      formData.append("topics", topics);
+      formData.append("desc", descriptionData);
+      formData.append("userid", userid);
+
+      if (creatorName && linkData && category && sub_category) {
+        const responce = await axiosConfig.post(
+          `/user/content/creator`,
+          formData
+        );
+
+        // console.log(responce.data.data,"hello");
+        if (responce.data.success === true) {
+          swal("Content Creator profile added successfully👍.");
+          setIsContentCreatorModel(false);
+          setCreatorName("");
+          setLinkData([
+            { id: 1, name: "youtube", value: "" },
+            { id: 2, name: "instagram", value: "" },
+            { id: 3, name: "linkedin", value: "" },
+            { id: 4, name: "facebook", value: "" },
+          ]);
+          setPhoneNo("");
+          setEmail("");
+          setCategory("");
+          setSub_category("");
+          setFormat("");
+          setLanguage("");
+          setTopics("");
+          setDescriptionData("");
+          setFile(null);
+        } else {
+          swal("Something went wrong, Try again");
+          setIsContentCreatorModel(false);
+        }
+      } else {
+        setFillPlease("define");
+        // swal("* Field is Mandatory");
+        swal("Field is mandatory");
+      }
     }
   };
 
@@ -449,7 +457,7 @@ function CustomNavbar(args) {
       language
     ) {
       console.log("hello");
-      swal("Content are Discard 👍.");
+      swal("Content is Discard 👍.");
       setIsContentCreatorModel(false);
       setCreatorName("");
       setLinkData([
@@ -1184,298 +1192,307 @@ function CustomNavbar(args) {
         </div>
       </Modal>
       <Modal
-        toggle={() => (
-          closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
-        )}
-        {...args}
-        className="content-creator-model"
-        isOpen={isContentCreatorModel}
-      >
-        <div className="mb-2 d-flex justify-content-between align-items-center">
-          <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
-          <ImCancelCircle
-            style={{ cursor: "pointer" }}
-            className="setmodelfalseicon"
-            onClick={() => closeModel()}
-            size={30}
-          />
-        </div>
-        <p style={{ color: "#494949", fontSize: "18px" }}>
-          Found a cool{" "}
-          <Link style={{ color: "#4095FF" }} to="/">
-            content creator?
-          </Link>
-        </p>
-        <p style={{ color: "#494949", fontSize: "18px" }}>
-          Send it to us and we will add it to the database!
-        </p>
-
-        <form className="mt-5">
-          <div className="form-group mb-4">
-            <label
-              for="Creator name"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Creator Name
-            </label>
-            <input
-              style={{ background: "#F1F1F1" }}
-              value={creatorName}
-              onChange={(e) => setCreatorName(e.target.value)}
-              type="text"
-              className="form-control border-0"
-              id="Creator name"
-              placeholder=""
-            />
-            {creatorName ? (
-              ""
-            ) : fillPlease === "define" ? (
-              <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="form-group">
-            <label
-              for="Profile Link"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Profile Link
-            </label>
-
-            {linkData?.map((link, index) => (
-              <div key={link.id}>
-                <div className="position-relative ">
-                  <input
-                    style={{ background: "#F1F1F1" }}
-                    type="text"
-                    name={link.name}
-                    value={link.value}
-                    onChange={(event) => handleInputChange(event, link.id)}
-                    className="form-control border-0 mb-2"
-                    id={link.name}
-                    placeholder={
-                      link.name.charAt(0).toUpperCase() + link.name.slice(1)
-                    }
-                  />
-
+                toggle={() => (
+                  closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
+                )}
+                {...args}
+                className="content-creator-model"
+                isOpen={isContentCreatorModel}
+              >
+                <div className="mb-2 d-flex justify-content-between align-items-center">
+                  <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
                   <ImCancelCircle
                     style={{ cursor: "pointer" }}
-                    className="setmodelfalseicon linkCloseBtn"
-                    onClick={() => deleteLinkField(link.id)}
+                    className="setmodelfalseicon"
+                    onClick={() => closeModel()}
                     size={30}
                   />
                 </div>
-              </div>
-            ))}
-            {linkData.length > 1 ? (
-              ""
-            ) : linkField === "define" ? (
-              <p style={{ color: "red", fontSize: "12px" }}>
-                One Field Mendatory
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
+                <p style={{ color: "#494949", fontSize: "18px" }}>
+                  Found a cool content creator?
+                </p>
+                <p style={{ color: "#494949", fontSize: "18px" }}>
+                  Send it to us and we will add it to the database!
+                </p>
 
-          <Button
-            className="w-100 border-0 d-flex justify-content-center py-2"
-            onClick={addLinkField}
-          >
-            <div style={{ height: 20, width: 20 }} className="me-4">
-              <img className="h-auto w-100" src="/plus-icon.png" alt="add" />
-            </div>
-            <div>
-              <span style={{ fontSize: "18px" }}>Add more links</span>
-            </div>
-          </Button>
+                <form className="mt-5">
+                  <div className="form-group mb-4">
+                    <label
+                      for="Creator name"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className=" mb-2"
+                    >
+                      Creator's Name<span style={{ color: "red" }}> *</span>
+                    </label>
+                    <input
+                      style={{ background: "#F1F1F1" }}
+                      value={creatorName}
+                      onChange={(e) => setCreatorName(e.target.value)}
+                      type="text"
+                      className="form-control border-0"
+                      id="Creator name"
+                      placeholder=""
+                    />
+                    {creatorName ? (
+                      ""
+                    ) : fillPlease === "define" ? (
+                      <p style={{ color: "red", fontSize: "12px" }}>
+                        Fill This Field
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <label
+                      for="Profile Link"
+                      style={{ fontSize: "20px", color: "red" }}
+                      className="mb-2"
+                    >
+                      Profile Link<span style={{ color: "red" }}> *</span>
+                    </label>
 
-          <Row className="my-4">
-            <Col>
-              <div className="form-group mb-4">
-                <label
-                  for="Phone Number"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Phone Number
-                </label>
-                <input
-                  style={{ background: "#F1F1F1" }}
-                  type="text"
-                  value={phoneNo}
-                  onChange={(e) => setPhoneNo(e.target.value)}
-                  className="form-control border-0"
-                  id="Phone Number"
-                  placeholder="+91"
-                />
-              </div>
-              <div className="form-group mb-4">
-                <label
-                  for="Category"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Category
-                </label>
-                <Input
-                  style={{ background: "#F1F1F1" }}
-                  type="select"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="form-control border-0"
-                  id="Category"
-                  placeholder="Select Category"
-                >
-                  <option>Select Category</option>
-                  {allcatego?.map((allCategory) => {
-                    return (
-                      <option value={allCategory?._id} key={allCategory?._id}>
-                        {allCategory?.title}
-                      </option>
-                    );
-                  })}
-                </Input>
-                {category ? (
-                  ""
-                ) : fillPlease === "define" ? (
-                  <p style={{ color: "red", fontSize: "12px" }}>
-                    Fill This Field
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="form-group mb-4">
-                <label
-                  for="Format"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Format
-                </label>
-                <Input
-                  style={{ background: "#F1F1F1" }}
-                  type="select"
-                  value={format}
-                  onChange={(e) => setFormat(e.target.value)}
-                  className="form-control border-0"
-                  id="Format"
-                  placeholder="Select Format"
-                >
-                  <option>Select Format </option>
-                  <option value="Video">Video</option>
-                  <option value="Text">Text</option>
-                  <option value="Video & Text">Video & Text</option>
-                </Input>
-              </div>
-            </Col>
-            <Col>
-              <div className="form-group mb-4">
-                <label
-                  for="Email ID"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Email ID
-                </label>
-                <input
-                  style={{ background: "#F1F1F1" }}
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="form-control border-0"
-                  id="Email ID"
-                  placeholder="abc@gmail.com"
-                />
-              </div>
-              <div className="form-group mb-4">
-                <label
-                  for="Sub Category"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Sub Category
-                </label>
-                <Input
-                  style={{ background: "#F1F1F1" }}
-                  type="select"
-                  value={sub_category}
-                  onChange={(e) => setSub_category(e.target.value)}
-                  className="form-control border-0"
-                  id="Sub Category"
-                  placeholder="Select Sub Category"
-                >
-                  <option>Select Sub-Category</option>
-                  {subctgry?.map((subctgry) => {
-                    return (
-                      <option value={subctgry?._id} key={subctgry?._id}>
-                        {subctgry?.title}
-                      </option>
-                    );
-                  })}
-                </Input>
-                {sub_category ? (
-                  ""
-                ) : fillPlease === "define" ? (
-                  <p style={{ color: "red", fontSize: "12px" }}>
-                    Fill This Field
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="form-group mb-4">
-                <label
-                  for="Format"
-                  style={{ fontSize: "20px" }}
-                  className="text-black mb-2"
-                >
-                  Level
-                </label>
-                <Input
-                  style={{ background: "#F1F1F1" }}
-                  type="select"
-                  value={level}
-                  onChange={(e) => setLevel(e.target.value)}
-                  className="form-control border-0"
-                  id="Format"
-                  placeholder="Select Format"
-                >
-                  <option>Select Level </option>
-                  <option value="Video">Beginner</option>
-                  <option value="Text">Advanced</option>
-                </Input>
-              </div>
-            </Col>
-          </Row>
-          <div className="form-group mb-4">
-            <label
-              for="Language of content"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Language of content
-            </label>
-            <Input
-              style={{ background: "#F1F1F1" }}
-              type="select"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="form-control border-0"
-              id="Language of content"
-              placeholder="Select language"
-            >
-              <option>Select language</option>
-              {lngage.map((lang) => {
-                return <option value={lang._id}>{lang.language}</option>;
-              })}
-            </Input>
+                    {linkData?.map((link, index) => (
+                      <div key={link.id}>
+                        <div className="position-relative ">
+                          <input
+                            style={{ background: "#F1F1F1" }}
+                            type="text"
+                            name={link.name}
+                            value={link.value}
+                            onChange={(event) =>
+                              handleInputChange(event, link.id)
+                            }
+                            className="form-control border-0 mb-2"
+                            id={link.name}
+                            placeholder={
+                              link.name.charAt(0).toUpperCase() +
+                              link.name.slice(1)
+                            }
+                          />
 
-            {/* <Multiselect
+                          <ImCancelCircle
+                            style={{
+                              cursor: "pointer",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                            }}
+                            className="setmodelfalseicon linkCloseBtn position-absolute"
+                            onClick={() => deleteLinkField(link.id)}
+                            size={20}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                    {linkData.length > 1 ? (
+                      ""
+                    ) : linkField === "define" ? (
+                      <p style={{ color: "red", fontSize: "12px" }}>
+                        One Field Mendatory
+                      </p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
+                  <Button
+                    className="w-100 border-0 d-flex justify-content-center py-2"
+                    onClick={addLinkField}
+                  >
+                    <div style={{ height: 20, width: 20 }} className="me-4">
+                      <img
+                        className="h-auto w-100"
+                        src="/plus-icon.png"
+                        alt="add"
+                      />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: "18px" }}>Add more links</span>
+                    </div>
+                  </Button>
+
+                  <Row className="my-4">
+                    <Col>
+                      <div className="form-group mb-4">
+                        <label
+                          for="Phone Number"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Phone Number
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="number"
+                          value={phoneNo}
+                          onChange={(e) => setPhoneNo(e.target.value)}
+                          className="form-control border-0"
+                          id="Phone Number"
+                          placeholder="+91"
+                        />
+                      </div>
+                      <div className="form-group mb-4">
+                        <label
+                          for="Category"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
+                        >
+                          Category
+                        </label>
+                        <span style={{ color: "red" }}> *</span>
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={category}
+                          onChange={(e) => setCategory(e.target.value)}
+                          className="form-control border-0"
+                          id="Category"
+                          placeholder="Select Category"
+                        >
+                          <option>Select Category</option>
+                          {allcatego?.map((allCategory) => {
+                            return (
+                              <option
+                                value={allCategory?._id}
+                                key={allCategory?._id}
+                              >
+                                {allCategory?.title}
+                              </option>
+                            );
+                          })}
+                        </Input>
+                        {category ? (
+                          ""
+                        ) : fillPlease === "define" ? (
+                          <p style={{ color: "red", fontSize: "12px" }}>
+                            Fill This Field
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      {/* <div className="form-group mb-4">
+                        <label
+                          for="Format"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Format
+                        </label>
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={format}
+                          onChange={(e) => setFormat(e.target.value)}
+                          className="form-control border-0"
+                          id="Format"
+                          placeholder="Select Format"
+                        >
+                          <option>Select Format </option>
+                          <option value="Video">Video</option>
+                          <option value="Text">Text</option>
+                          <option value="Video & Text">Video & Text</option>
+                        </Input>
+                      </div> */}
+                    </Col>
+                    <Col>
+                      <div className="form-group mb-4">
+                        <label
+                          for="Email ID"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Email ID
+                        </label>
+                        <input
+                          style={{ background: "#F1F1F1" }}
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="form-control border-0"
+                          id="Email ID"
+                          placeholder="abc@gmail.com"
+                        />
+                      </div>
+                      <div className="form-group mb-4">
+                        <label
+                          for="Sub Category"
+                          style={{ fontSize: "20px", color: "red" }}
+                          className=" mb-2"
+                        >
+                          Sub Category
+                        </label>
+                        <span style={{ color: "red" }}> *</span>
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={sub_category}
+                          onChange={(e) => setSub_category(e.target.value)}
+                          className="form-control border-0"
+                          id="Sub Category"
+                          placeholder="Select Sub Category"
+                        >
+                          <option>Select Sub-Category</option>
+                          {console.log(subctgry, "subctgry")}
+                          {subctgry?.map((subctgry) => {
+                            return (
+                              <option value={subctgry?._id} key={subctgry?._id}>
+                                {subctgry?.title}
+                              </option>
+                            );
+                          })}
+                        </Input>
+                        {sub_category ? (
+                          ""
+                        ) : fillPlease === "define" ? (
+                          <p style={{ color: "red", fontSize: "12px" }}>
+                            Fill This Field
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      {/* <div className="form-group mb-4">
+                        <label
+                          for="Format"
+                          style={{ fontSize: "20px" }}
+                          className="text-black mb-2"
+                        >
+                          Level
+                        </label>
+                        <Input
+                          style={{ background: "#F1F1F1" }}
+                          type="select"
+                          value={level}
+                          onChange={(e) => setLevel(e.target.value)}
+                          className="form-control border-0"
+                          id="Format"
+                          placeholder="Select Format"
+                        >
+                          <option>Select Level </option>
+                          <option value="Video">Beginner</option>
+                          <option value="Text">Advanced</option>
+                        </Input>
+                      </div> */}
+                    </Col>
+                  </Row>
+                  <div className="form-group mb-4">
+                    <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+                      <b> Language of Content</b>
+                    </Label>
+                    <Multiselect
+                      style={{
+                        borderRadius: "14px",
+                      }}
+                      placeholder="Select language"
+                      className="w-100%"
+                      options={lngage}
+                      onSelect={onSelect}
+                      onRemove={onRemove}
+                      displayValue="language"
+                    />
+
+                    {/* <Multiselect
                       style={{ background: "#F1F1F1" }}
                       placeholder="Select language"
                       className="form-control border-0"
@@ -1484,81 +1501,84 @@ function CustomNavbar(args) {
                       onChange={(e) => setLanguage(e.target.value)}
                       displayValue="language"
                     /> */}
-          </div>
-          <div className="form-group mb-4">
-            <label
-              for="Topic"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Topic
-            </label>
-            <textarea
-              style={{ background: "#F1F1F1" }}
-              type="text"
-              value={topics}
-              onChange={(e) => setTopics(e.target.value)}
-              className="form-control border-0"
-              id="Topic"
-              placeholder="Java script, react, native"
-            />
-          </div>
-          <div className="form-group mb-4">
-            <label
-              for="Upload Image of related content"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Upload Image of related content
-            </label>
-            <input
-              id="Upload Image of related content"
-              style={{ background: "rgb(241, 241, 241)" }}
-              type="file"
-              className="form-control imageuserupload"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-group mb-4">
-            <label
-              for="Description"
-              style={{ fontSize: "20px" }}
-              className="text-black mb-2"
-            >
-              Description
-            </label>
-            <textarea
-              style={{ background: "#F1F1F1" }}
-              type="text"
-              value={descriptionData}
-              onChange={(e) => setDescriptionData(e.target.value)}
-              className="form-control border-0"
-              id="Description"
-              placeholder="Describe the topic in few sentence, topic it covers?"
-            />
-          </div>
-          <div className="d-flex gap-4 justify-content-end">
-            <Button
-              style={{
-                border: "1px solid #919191",
-                background: "#F1F1F1",
-                color: "#919191",
-              }}
-              className="py-2 px-4"
-              onClick={(e) => DiscardContent(e)}
-            >
-              Discard
-            </Button>
-            <Button
-              style={{ borderColor: "transparent" }}
-              className="py-2 px-4"
-              onClick={(e) => NewContentCrete(e)}
-            >
-              Submit
-            </Button>
-          </div>
-        </form>
-      </Modal>
+                  </div>
+                  <div className="form-group mb-4">
+                    <label
+                      for="Topic"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Topic
+                    </label>
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={topics}
+                      onChange={(e) => setTopics(e.target.value)}
+                      className="form-control border-0"
+                      id="Topic"
+                      placeholder="Java script, react, native"
+                    />
+                  </div>
+                  <div className="form-group mb-4  ">
+                    <label
+                      for="Upload Image of related content"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2 "
+                    >
+                      Upload Image of related content
+                    </label>
+                    <h5>
+                      <input
+                        style={{ background: "#F1F1F1", height: 36 }}
+                        type="file"
+                        name=""
+                        onChange={handleChange}
+                        id="Upload Image of related content"
+                        className="w-100"
+                      />
+                    </h5>
+                  </div>
+                  <div className="form-group mb-4">
+                    <label
+                      for="Description"
+                      style={{ fontSize: "20px" }}
+                      className="text-black mb-2"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      style={{ background: "#F1F1F1" }}
+                      type="text"
+                      value={descriptionData}
+                      onChange={(e) => setDescriptionData(e.target.value)}
+                      className="form-control border-0"
+                      id="Description"
+                      placeholder="Describe the content creator in few sentence"
+                    />
+                  </div>
+                  <div className="d-flex gap-4 justify-content-end">
+                    <Button
+                      style={{
+                        border: "1px solid #919191",
+                        background: "#F1F1F1",
+                        color: "#919191",
+                      }}
+                      className="py-2 px-4"
+                      onClick={(e) => DiscardContent(e)}
+                    >
+                      Discard
+                    </Button>
+                    <Button
+                      style={{ borderColor: "transparent" }}
+                      className="py-2 px-4"
+                      onClick={(e) => NewContentCrete(e)}
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </form>
+              </Modal>
     </Navbar>
   );
 }

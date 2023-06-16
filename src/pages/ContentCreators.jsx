@@ -337,10 +337,10 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
 
   const handleContentClick = (event) => {
     if (event.target.checked === true) {
-      // setLimit(2);
+      setLimit(12);
       setContent("Content Creators");
     } else {
-      // setLimit(2);
+      setLimit(12);
       setContent("Content");
     }
   };
@@ -350,7 +350,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
   const handleContent = async (data) => {
     if (data === "Content") {
-      console.log(params.id, "hello")
+      // console.log(params.id, "hello")
       const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
@@ -406,7 +406,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
 
   useEffect(() => {
     handleContent(content);
-  }, [content, params, format, type, language, searchdata]);
+  }, [content, params, format, type, language, searchdata, limit]);
 
   useEffect(() => {
     getUser();
@@ -1487,7 +1487,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
               fontSize: "24px",
             }}
             className="text-white fw-bold border-0 rounded-5 py-2 px-4"
-            onClick={() => seeMore(currentPage + 1)}
+            onClick={() => seeMore()}
           >
             See More
           </button>

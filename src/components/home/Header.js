@@ -30,7 +30,7 @@ import {
   AccordionItem,
 } from "reactstrap";
 import axiosConfig from "../axiosConfig";
-import NoImage from "./noimage.png";
+import NoImage from "./noimage1.png";
 
 function Header(args) {
   const [searchbytopics, setSearchbytopics] = useState("");
@@ -222,7 +222,7 @@ function Header(args) {
 
     const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
-    // console.log(userid, "hello")
+    console.log(userid, "hello")
     if (userid === null) {
       swal("Please Login OR Sign Up");
     } else {
