@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 //images
 import { BsFillStarFill } from "react-icons/bs";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
+import { faL, faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import usericon from "../assets/icons/usericon.png";
 import typeicon from "../assets/icons/typeicon.png";
@@ -304,13 +304,13 @@ const TrendingWarzone = () => {
 
     if (isContent === "0") {
       const data = await instance.get(`/get/comment/warzone/${id}`);
-      setComment(data.data.newData);
+      setComment(data.data);
     }
     if (isContent === "1") {
       console.log("bhadresh")
       const data = await instance.get(`/get/comment/creator_warzone/${id}`);
-      console.log(data.data, "hfklsfhslhflsfhlshfl")
-      setComment(data.data.newData2);
+      console.log(data.data)
+      setComment(data.data);
     }
 
   };
@@ -360,7 +360,7 @@ const TrendingWarzone = () => {
             getComment();
             swal("Review submitted Successfully.");
           }
-          if (data.data.msg === "waiting for admin approvel") {
+          if (data.data.status === false) {
             swal("You have already submit your review on this.");
             setRsc1Review({ comment: "", rate: 0 });
           }
@@ -421,7 +421,7 @@ const TrendingWarzone = () => {
             setRsc2Review({ comment: "", rate: 0 });
             getComment();
           }
-          if (data.data.msg === "waiting for admin approvel") {
+          if (data.data.status === false) {
             swal("You have already submit your review on this.");
             setRsc2Review({ comment: "", rate: 0 });
           }
@@ -1798,7 +1798,7 @@ const TrendingWarzone = () => {
           lg={6}
           className="text-center p-2 text-lg-end border-top d-flex flex-column gap-3"
         >
-          {comment && comment?.length === 0
+          {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
               <div
@@ -1851,7 +1851,7 @@ const TrendingWarzone = () => {
           className="text-center p-2 text-lg-start content-box border-top d-flex flex-column gap-3"
         >
           {/* {console.log(comment?.newData2)} */}
-          {comment?.newData2 && comment?.newData.length === 0
+          {comment?.newData2 && comment?.newData2.length === 0
             ? "No Review Found"
             : comment?.newData2.map((value) => (
               <div
