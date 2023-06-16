@@ -77,7 +77,7 @@ function Header(args) {
   const [topics, setTopics] = useState();
   const [descriptionData, setDescriptionData] = useState();
   const [file, setFile] = useState(NoImage);
-  console.log(file);
+  // console.log(file);
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
 
@@ -207,7 +207,7 @@ function Header(args) {
       swal("Field is mandatory");
     }
   };
-  console.log(localStorage.getItem("userId"), "userid");
+  // console.log(localStorage.getItem("userId"), "userid");
   const NewContentCrete = async () => {
     console.log("hello");
     let linkNewData;
@@ -337,7 +337,7 @@ function Header(args) {
       .get(`/admin/getallCategory`)
 
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setAllcatego(response.data.data);
       })
       .catch((error) => {
@@ -1412,7 +1412,7 @@ function Header(args) {
                           placeholder="Select Sub Category"
                         >
                           <option>Select Sub-Category</option>
-                          {console.log(subctgry, "subctgry")}
+                          {/* {console.log(subctgry, "subctgry")} */}
                           {subctgry?.map((subctgry) => {
                             return (
                               <option value={subctgry?._id} key={subctgry?._id}>

@@ -96,7 +96,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -126,7 +126,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -180,7 +180,7 @@ function Hastag() {
   // featured content api integration
   const [feature, setFeature] = useState([]);
   const [war, setWar] = useState([]);
-  console.log(war, "fgnlshflshfhsl")
+  // console.log(war, "fgnlshflshfhsl")
 
   const featuredContent = () => {
     axiosConfig
@@ -198,7 +198,7 @@ function Hastag() {
     axiosConfig
       .get(`/get/all/warzone`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setWar(res.data.war);
       })
       .catch((err) => {
@@ -262,17 +262,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                    <button
-                      key={trendingtopics._id}
-                      onClick={() => (
-                        handlehastagtopic(trendingtopics?.topics),
-                        gaEventTracker(`${trendingtopics?.topics}`)
-                      )}
-                      className="btn1"
-                    >
-                      {trendingtopics?.topics}
-                    </button>
-                  ))
+                      <button
+                        key={trendingtopics._id}
+                        onClick={() => (
+                          handlehastagtopic(trendingtopics?.topics),
+                          gaEventTracker(`${trendingtopics?.topics}`)
+                        )}
+                        className="btn1"
+                      >
+                        {trendingtopics?.topics}
+                      </button>
+                    ))
                   : null}
               </div>
             </div>
@@ -391,8 +391,9 @@ function Hastag() {
                                 width: "100%",
                                 height: "100%",
                               }}
-                              src={`https://www.youtube.com/embed/${features?.resource1.link.split("v=")[1]
-                                }`}
+                              src={`https://www.youtube.com/embed/${
+                                features?.resource1.link.split("v=")[1]
+                              }`}
                             ></iframe>
                           ) : (
                             <div className="w-100">
@@ -425,7 +426,7 @@ function Hastag() {
                             left: "50%",
                             top: "50%",
                             transform: "translate(-50%,-33%)",
-                            zIndex: 69
+                            zIndex: 69,
                           }}
                           className="imagehead position-absolute"
                         >
@@ -451,8 +452,9 @@ function Hastag() {
                                 width: "100%",
                                 height: "100%",
                               }}
-                              src={`https://www.youtube.com/embed/${features?.resource2.link.split("v=")[1]
-                                }`}
+                              src={`https://www.youtube.com/embed/${
+                                features?.resource2.link.split("v=")[1]
+                              }`}
                             ></iframe>
                           ) : (
                             <div className="w-100">
@@ -488,7 +490,6 @@ function Hastag() {
                           {/* {features.winner ? features.winner === features.resource2._id ? <div style={{ backgroundColor: "#000000B3", height: "90%", width: "90%", top: "50%", left: "50%", transform: "translate(-50%,-50%)", fontSize: "32px" }} className="position-absolute text-white d-flex justify-content-center align-items-center">WINNER</div> : "" : ""} */}
 
                         </Col>
-
                       </Row>
                     </div>
 
@@ -684,8 +685,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -871,7 +872,7 @@ function Hastag() {
                           size={75}
                           style={{ backgroundColor: "white" }}
                           type="submit"
-                        // onClick={() => setOpenone(true)}
+                          // onClick={() => setOpenone(true)}
                         />
                         <div className="modalvideo">
                           <ModalVideo
