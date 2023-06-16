@@ -40,7 +40,6 @@ import useAnalyticsEventTracker from "../useAnalyticsEventTracker";
 import axiosConfig from "./axiosConfig";
 import NoImage from "../components/home/noimage1.png";
 
-
 function CustomNavbar(args) {
   const [validated, setValidated] = useState(false);
   const [link, setLink] = useState("");
@@ -555,9 +554,9 @@ function CustomNavbar(args) {
         id="responsive-navbar-nav"
         className="justify-content-end"
       >
-        {pathname.pathname !== "/" && (
-          <Nav className="navbar-nav ms-0">
-            <Nav.Link as={NavLink} className="navbar-link">
+        <Nav className="navbar-nav ms-0">
+          <Nav.Link as={NavLink} className="navbar-link">
+            {pathname.pathname !== "/" && (
               <button
                 className="btn rbutton mobile"
                 type="submit"
@@ -569,13 +568,15 @@ function CustomNavbar(args) {
               >
                 <h4 className="rText">+Content Creator</h4>
               </button>
-              <Container></Container>
-            </Nav.Link>
+            )}
+            <Container></Container>
+          </Nav.Link>
 
-            {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
-              <Nav.Link as={NavLink} className="navbar-link">
+          {localStorage.getItem("userId") !== "" &&
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
+            <Nav.Link as={NavLink} className="navbar-link">
+              {pathname.pathname !== "/" && (
                 <button
                   className="btn rbutton mobile"
                   type="submit"
@@ -585,70 +586,69 @@ function CustomNavbar(args) {
                 >
                   <h4 className="rText">+Submit a Content</h4>
                 </button>
-                <Container></Container>
-              </Nav.Link>
-            ) : (
-              <Nav.Link as={NavLink} className="navbar-link">
-                <Link to={`/signup`}>
-                  <button
-                    className="btn rbutton mobile"
-                    onClick={() => {
-                      gaEventTracker("+ Submit a Content");
-                      return (
-                        <p
-                          className="d-flex justify-content-center"
-                          style={{ color: "black" }}
-                        >
-                          {swal(
-                            "Join our Brahmaand community to submit content"
-                          )}
-                        </p>
-                      );
-                    }}
-                  >
-                    <h4 className="rText">+ Submit a Content</h4>
-                  </button>
-                </Link>
-              </Nav.Link>
-            )}
-
-            {localStorage.getItem("userId") !== "" &&
-            localStorage.getItem("userId") !== null &&
-            localStorage.getItem("userId") !== undefined ? (
-              <Nav.Link>
-                <UserPage />
-              </Nav.Link>
-            ) : (
-              <>
-                <Nav.Link
-                  exact
-                  to="/signup"
-                  as={NavLink}
-                  className="navbar-link mt-0 d-flex align-items-center"
+              )}
+              <Container></Container>
+            </Nav.Link>
+          ) : (
+            <Nav.Link as={NavLink} className="navbar-link">
+              <Link to={`/signup`}>
+                <button
+                  className="btn rbutton mobile"
+                  onClick={() => {
+                    gaEventTracker("+ Submit a Content");
+                    return (
+                      <p
+                        className="d-flex justify-content-center"
+                        style={{ color: "black" }}
+                      >
+                        {swal("Join our Brahmaand community to submit content")}
+                      </p>
+                    );
+                  }}
                 >
-                  <span className="text bSignUp" aria-current="page">
-                    Sign up
-                  </span>
-                </Nav.Link>
+                  <h4 className="rText">+ Submit a Content</h4>
+                </button>
+              </Link>
+            </Nav.Link>
+          )}
 
-                <Nav.Link
-                  exact
-                  to="/login"
-                  as={NavLink}
-                  className="navbar-link lText mt-0 d-flex align-items-center"
+          {localStorage.getItem("userId") !== "" &&
+          localStorage.getItem("userId") !== null &&
+          localStorage.getItem("userId") !== undefined ? (
+            <Nav.Link>
+              <UserPage />
+            </Nav.Link>
+          ) : (
+            <>
+              <Nav.Link
+                exact
+                to="/signup"
+                as={NavLink}
+                className="navbar-link mt-0 d-flex align-items-center"
+              >
+                <span className="text bSignUp" aria-current="page">
+                  Sign up
+                </span>
+              </Nav.Link>
+
+              <Nav.Link
+                exact
+                to="/login"
+                as={NavLink}
+                className="navbar-link lText mt-0 d-flex align-items-center"
+              >
+                <button
+                  className="btn rLogin mobile mt-0"
+                  type="submit"
+                  onClick={() => gaEventTracker("LOGIN")}
                 >
-                  <button
-                    className="btn rLogin mobile mt-0"
-                    type="submit"
-                    onClick={() => gaEventTracker("LOGIN")}
-                  >
-                    <span className="">LOGIN</span>
-                  </button>
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
-        )}
+                  <span className="">LOGIN</span>
+                </button>
+              </Nav.Link>
+            </>
+          )}
+        </Nav>
+        {/* )} */}
       </Navbar.Collapse>
       {/* <UserPage/> */}
       <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
@@ -1192,186 +1192,174 @@ function CustomNavbar(args) {
         </div>
       </Modal>
       <Modal
-                toggle={() => (
-                  closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
-                )}
-                {...args}
-                className="content-creator-model"
-                isOpen={isContentCreatorModel}
-              >
-                <div className="mb-2 d-flex justify-content-between align-items-center">
-                  <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
+        toggle={() => (
+          closeModel(), setIsContentCreatorModel(!isContentCreatorModel)
+        )}
+        {...args}
+        className="content-creator-model"
+        isOpen={isContentCreatorModel}
+      >
+        <div className="mb-2 d-flex justify-content-between align-items-center">
+          <h3 className="fw-bold mb-0">Submit a Content Creator</h3>
+          <ImCancelCircle
+            style={{ cursor: "pointer" }}
+            className="setmodelfalseicon"
+            onClick={() => closeModel()}
+            size={30}
+          />
+        </div>
+        <p style={{ color: "#494949", fontSize: "18px" }}>
+          Found a cool content creator?
+        </p>
+        <p style={{ color: "#494949", fontSize: "18px" }}>
+          Send it to us and we will add it to the database!
+        </p>
+
+        <form className="mt-5">
+          <div className="form-group mb-4">
+            <label
+              for="Creator name"
+              style={{ fontSize: "20px", color: "red" }}
+              className=" mb-2"
+            >
+              Creator's Name<span style={{ color: "red" }}> *</span>
+            </label>
+            <input
+              style={{ background: "#F1F1F1" }}
+              value={creatorName}
+              onChange={(e) => setCreatorName(e.target.value)}
+              type="text"
+              className="form-control border-0"
+              id="Creator name"
+              placeholder=""
+            />
+            {creatorName ? (
+              ""
+            ) : fillPlease === "define" ? (
+              <p style={{ color: "red", fontSize: "12px" }}>Fill This Field</p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="form-group">
+            <label
+              for="Profile Link"
+              style={{ fontSize: "20px", color: "red" }}
+              className="mb-2"
+            >
+              Profile Link<span style={{ color: "red" }}> *</span>
+            </label>
+
+            {linkData?.map((link, index) => (
+              <div key={link.id}>
+                <div className="position-relative ">
+                  <input
+                    style={{ background: "#F1F1F1" }}
+                    type="text"
+                    name={link.name}
+                    value={link.value}
+                    onChange={(event) => handleInputChange(event, link.id)}
+                    className="form-control border-0 mb-2"
+                    id={link.name}
+                    placeholder={
+                      link.name.charAt(0).toUpperCase() + link.name.slice(1)
+                    }
+                  />
+
                   <ImCancelCircle
-                    style={{ cursor: "pointer" }}
-                    className="setmodelfalseicon"
-                    onClick={() => closeModel()}
-                    size={30}
+                    style={{
+                      cursor: "pointer",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                    className="setmodelfalseicon linkCloseBtn position-absolute"
+                    onClick={() => deleteLinkField(link.id)}
+                    size={20}
                   />
                 </div>
-                <p style={{ color: "#494949", fontSize: "18px" }}>
-                  Found a cool content creator?
-                </p>
-                <p style={{ color: "#494949", fontSize: "18px" }}>
-                  Send it to us and we will add it to the database!
-                </p>
+              </div>
+            ))}
+            {linkData.length > 1 ? (
+              ""
+            ) : linkField === "define" ? (
+              <p style={{ color: "red", fontSize: "12px" }}>
+                One Field Mendatory
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
 
-                <form className="mt-5">
-                  <div className="form-group mb-4">
-                    <label
-                      for="Creator name"
-                      style={{ fontSize: "20px", color: "red" }}
-                      className=" mb-2"
-                    >
-                      Creator's Name<span style={{ color: "red" }}> *</span>
-                    </label>
-                    <input
-                      style={{ background: "#F1F1F1" }}
-                      value={creatorName}
-                      onChange={(e) => setCreatorName(e.target.value)}
-                      type="text"
-                      className="form-control border-0"
-                      id="Creator name"
-                      placeholder=""
-                    />
-                    {creatorName ? (
-                      ""
-                    ) : fillPlease === "define" ? (
-                      <p style={{ color: "red", fontSize: "12px" }}>
-                        Fill This Field
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="form-group">
-                    <label
-                      for="Profile Link"
-                      style={{ fontSize: "20px", color: "red" }}
-                      className="mb-2"
-                    >
-                      Profile Link<span style={{ color: "red" }}> *</span>
-                    </label>
+          <Button
+            className="w-100 border-0 d-flex justify-content-center py-2"
+            onClick={addLinkField}
+          >
+            <div style={{ height: 20, width: 20 }} className="me-4">
+              <img className="h-auto w-100" src="/plus-icon.png" alt="add" />
+            </div>
+            <div>
+              <span style={{ fontSize: "18px" }}>Add more links</span>
+            </div>
+          </Button>
 
-                    {linkData?.map((link, index) => (
-                      <div key={link.id}>
-                        <div className="position-relative ">
-                          <input
-                            style={{ background: "#F1F1F1" }}
-                            type="text"
-                            name={link.name}
-                            value={link.value}
-                            onChange={(event) =>
-                              handleInputChange(event, link.id)
-                            }
-                            className="form-control border-0 mb-2"
-                            id={link.name}
-                            placeholder={
-                              link.name.charAt(0).toUpperCase() +
-                              link.name.slice(1)
-                            }
-                          />
-
-                          <ImCancelCircle
-                            style={{
-                              cursor: "pointer",
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                            }}
-                            className="setmodelfalseicon linkCloseBtn position-absolute"
-                            onClick={() => deleteLinkField(link.id)}
-                            size={20}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                    {linkData.length > 1 ? (
-                      ""
-                    ) : linkField === "define" ? (
-                      <p style={{ color: "red", fontSize: "12px" }}>
-                        One Field Mendatory
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-
-                  <Button
-                    className="w-100 border-0 d-flex justify-content-center py-2"
-                    onClick={addLinkField}
-                  >
-                    <div style={{ height: 20, width: 20 }} className="me-4">
-                      <img
-                        className="h-auto w-100"
-                        src="/plus-icon.png"
-                        alt="add"
-                      />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: "18px" }}>Add more links</span>
-                    </div>
-                  </Button>
-
-                  <Row className="my-4">
-                    <Col>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Phone Number"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Phone Number
-                        </label>
-                        <input
-                          style={{ background: "#F1F1F1" }}
-                          type="number"
-                          value={phoneNo}
-                          onChange={(e) => setPhoneNo(e.target.value)}
-                          className="form-control border-0"
-                          id="Phone Number"
-                          placeholder="+91"
-                        />
-                      </div>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Category"
-                          style={{ fontSize: "20px", color: "red" }}
-                          className=" mb-2"
-                        >
-                          Category
-                        </label>
-                        <span style={{ color: "red" }}> *</span>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={category}
-                          onChange={(e) => setCategory(e.target.value)}
-                          className="form-control border-0"
-                          id="Category"
-                          placeholder="Select Category"
-                        >
-                          <option>Select Category</option>
-                          {allcatego?.map((allCategory) => {
-                            return (
-                              <option
-                                value={allCategory?._id}
-                                key={allCategory?._id}
-                              >
-                                {allCategory?.title}
-                              </option>
-                            );
-                          })}
-                        </Input>
-                        {category ? (
-                          ""
-                        ) : fillPlease === "define" ? (
-                          <p style={{ color: "red", fontSize: "12px" }}>
-                            Fill This Field
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {/* <div className="form-group mb-4">
+          <Row className="my-4">
+            <Col>
+              <div className="form-group mb-4">
+                <label
+                  for="Phone Number"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Phone Number
+                </label>
+                <input
+                  style={{ background: "#F1F1F1" }}
+                  type="number"
+                  value={phoneNo}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                  className="form-control border-0"
+                  id="Phone Number"
+                  placeholder="+91"
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Category"
+                  style={{ fontSize: "20px", color: "red" }}
+                  className=" mb-2"
+                >
+                  Category
+                </label>
+                <span style={{ color: "red" }}> *</span>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="form-control border-0"
+                  id="Category"
+                  placeholder="Select Category"
+                >
+                  <option>Select Category</option>
+                  {allcatego?.map((allCategory) => {
+                    return (
+                      <option value={allCategory?._id} key={allCategory?._id}>
+                        {allCategory?.title}
+                      </option>
+                    );
+                  })}
+                </Input>
+                {category ? (
+                  ""
+                ) : fillPlease === "define" ? (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    Fill This Field
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -1394,65 +1382,65 @@ function CustomNavbar(args) {
                           <option value="Video & Text">Video & Text</option>
                         </Input>
                       </div> */}
-                    </Col>
-                    <Col>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Email ID"
-                          style={{ fontSize: "20px" }}
-                          className="text-black mb-2"
-                        >
-                          Email ID
-                        </label>
-                        <input
-                          style={{ background: "#F1F1F1" }}
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="form-control border-0"
-                          id="Email ID"
-                          placeholder="abc@gmail.com"
-                        />
-                      </div>
-                      <div className="form-group mb-4">
-                        <label
-                          for="Sub Category"
-                          style={{ fontSize: "20px", color: "red" }}
-                          className=" mb-2"
-                        >
-                          Sub Category
-                        </label>
-                        <span style={{ color: "red" }}> *</span>
-                        <Input
-                          style={{ background: "#F1F1F1" }}
-                          type="select"
-                          value={sub_category}
-                          onChange={(e) => setSub_category(e.target.value)}
-                          className="form-control border-0"
-                          id="Sub Category"
-                          placeholder="Select Sub Category"
-                        >
-                          <option>Select Sub-Category</option>
-                          {console.log(subctgry, "subctgry")}
-                          {subctgry?.map((subctgry) => {
-                            return (
-                              <option value={subctgry?._id} key={subctgry?._id}>
-                                {subctgry?.title}
-                              </option>
-                            );
-                          })}
-                        </Input>
-                        {sub_category ? (
-                          ""
-                        ) : fillPlease === "define" ? (
-                          <p style={{ color: "red", fontSize: "12px" }}>
-                            Fill This Field
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {/* <div className="form-group mb-4">
+            </Col>
+            <Col>
+              <div className="form-group mb-4">
+                <label
+                  for="Email ID"
+                  style={{ fontSize: "20px" }}
+                  className="text-black mb-2"
+                >
+                  Email ID
+                </label>
+                <input
+                  style={{ background: "#F1F1F1" }}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control border-0"
+                  id="Email ID"
+                  placeholder="abc@gmail.com"
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label
+                  for="Sub Category"
+                  style={{ fontSize: "20px", color: "red" }}
+                  className=" mb-2"
+                >
+                  Sub Category
+                </label>
+                <span style={{ color: "red" }}> *</span>
+                <Input
+                  style={{ background: "#F1F1F1" }}
+                  type="select"
+                  value={sub_category}
+                  onChange={(e) => setSub_category(e.target.value)}
+                  className="form-control border-0"
+                  id="Sub Category"
+                  placeholder="Select Sub Category"
+                >
+                  <option>Select Sub-Category</option>
+                  {console.log(subctgry, "subctgry")}
+                  {subctgry?.map((subctgry) => {
+                    return (
+                      <option value={subctgry?._id} key={subctgry?._id}>
+                        {subctgry?.title}
+                      </option>
+                    );
+                  })}
+                </Input>
+                {sub_category ? (
+                  ""
+                ) : fillPlease === "define" ? (
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    Fill This Field
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              {/* <div className="form-group mb-4">
                         <label
                           for="Format"
                           style={{ fontSize: "20px" }}
@@ -1474,25 +1462,25 @@ function CustomNavbar(args) {
                           <option value="Text">Advanced</option>
                         </Input>
                       </div> */}
-                    </Col>
-                  </Row>
-                  <div className="form-group mb-4">
-                    <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
-                      <b> Language of Content</b>
-                    </Label>
-                    <Multiselect
-                      style={{
-                        borderRadius: "14px",
-                      }}
-                      placeholder="Select language"
-                      className="w-100%"
-                      options={lngage}
-                      onSelect={onSelect}
-                      onRemove={onRemove}
-                      displayValue="language"
-                    />
+            </Col>
+          </Row>
+          <div className="form-group mb-4">
+            <Label className="mt-3" style={{ font: "GT Walsheim Pro" }}>
+              <b> Language of Content</b>
+            </Label>
+            <Multiselect
+              style={{
+                borderRadius: "14px",
+              }}
+              placeholder="Select language"
+              className="w-100%"
+              options={lngage}
+              onSelect={onSelect}
+              onRemove={onRemove}
+              displayValue="language"
+            />
 
-                    {/* <Multiselect
+            {/* <Multiselect
                       style={{ background: "#F1F1F1" }}
                       placeholder="Select language"
                       className="form-control border-0"
@@ -1501,84 +1489,84 @@ function CustomNavbar(args) {
                       onChange={(e) => setLanguage(e.target.value)}
                       displayValue="language"
                     /> */}
-                  </div>
-                  <div className="form-group mb-4">
-                    <label
-                      for="Topic"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Topic
-                    </label>
-                    <textarea
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={topics}
-                      onChange={(e) => setTopics(e.target.value)}
-                      className="form-control border-0"
-                      id="Topic"
-                      placeholder="Java script, react, native"
-                    />
-                  </div>
-                  <div className="form-group mb-4  ">
-                    <label
-                      for="Upload Image of related content"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2 "
-                    >
-                      Upload Image of related content
-                    </label>
-                    <h5>
-                      <input
-                        style={{ background: "#F1F1F1", height: 36 }}
-                        type="file"
-                        name=""
-                        onChange={handleChange}
-                        id="Upload Image of related content"
-                        className="w-100"
-                      />
-                    </h5>
-                  </div>
-                  <div className="form-group mb-4">
-                    <label
-                      for="Description"
-                      style={{ fontSize: "20px" }}
-                      className="text-black mb-2"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      style={{ background: "#F1F1F1" }}
-                      type="text"
-                      value={descriptionData}
-                      onChange={(e) => setDescriptionData(e.target.value)}
-                      className="form-control border-0"
-                      id="Description"
-                      placeholder="Describe the content creator in few sentence"
-                    />
-                  </div>
-                  <div className="d-flex gap-4 justify-content-end">
-                    <Button
-                      style={{
-                        border: "1px solid #919191",
-                        background: "#F1F1F1",
-                        color: "#919191",
-                      }}
-                      className="py-2 px-4"
-                      onClick={(e) => DiscardContent(e)}
-                    >
-                      Discard
-                    </Button>
-                    <Button
-                      style={{ borderColor: "transparent" }}
-                      className="py-2 px-4"
-                      onClick={(e) => NewContentCrete(e)}
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </form>
-              </Modal>
+          </div>
+          <div className="form-group mb-4">
+            <label
+              for="Topic"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Topic
+            </label>
+            <textarea
+              style={{ background: "#F1F1F1" }}
+              type="text"
+              value={topics}
+              onChange={(e) => setTopics(e.target.value)}
+              className="form-control border-0"
+              id="Topic"
+              placeholder="Java script, react, native"
+            />
+          </div>
+          <div className="form-group mb-4  ">
+            <label
+              for="Upload Image of related content"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2 "
+            >
+              Upload Image of related content
+            </label>
+            <h5>
+              <input
+                style={{ background: "#F1F1F1", height: 36 }}
+                type="file"
+                name=""
+                onChange={handleChange}
+                id="Upload Image of related content"
+                className="w-100"
+              />
+            </h5>
+          </div>
+          <div className="form-group mb-4">
+            <label
+              for="Description"
+              style={{ fontSize: "20px" }}
+              className="text-black mb-2"
+            >
+              Description
+            </label>
+            <textarea
+              style={{ background: "#F1F1F1" }}
+              type="text"
+              value={descriptionData}
+              onChange={(e) => setDescriptionData(e.target.value)}
+              className="form-control border-0"
+              id="Description"
+              placeholder="Describe the content creator in few sentence"
+            />
+          </div>
+          <div className="d-flex gap-4 justify-content-end">
+            <Button
+              style={{
+                border: "1px solid #919191",
+                background: "#F1F1F1",
+                color: "#919191",
+              }}
+              className="py-2 px-4"
+              onClick={(e) => DiscardContent(e)}
+            >
+              Discard
+            </Button>
+            <Button
+              style={{ borderColor: "transparent" }}
+              className="py-2 px-4"
+              onClick={(e) => NewContentCrete(e)}
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </Navbar>
   );
 }
