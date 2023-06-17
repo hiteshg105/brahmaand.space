@@ -506,23 +506,25 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     >
                       {/* <span>#best</span>
                       <span>#study</span> */}
+
+
                       <span># {item.topics}</span>
-                     
+
                     </div>
                     <h4
                       style={{ wordWrap: "break-word" }}
                       className="fw-bold mb-0"
                     >
-                      {content ==="Content"?item.resTitle?.slice(0, 80):item.desc.slice(0,80)}
+                      {content === "Content" ? item.resTitle?.slice(0, 80) : item.creatorName}
                       {/* {item.resTitle?.slice(0, 80)} */}
                       {/* {item.desc?.slice(0, 80)} */}
                       {/* {item.topics} */}
                     </h4>
                     <div className="my-3 d-flex justify-content-between align-items-center flex-wrap">
-                      <p style={{ color: "#011D2B", fontWeight: 500 }}>
+                      {content === "Content" ? <p style={{ color: "#011D2B", fontWeight: 500 }}>
                         <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
                         {item.creatorName}
-                      </p>
+                      </p> : ""}
                       <div className="d-flex align-items-center gap-1">
                         <img src="/calender-icon.png" alt="" />
                         <span style={{ color: "#5F56C6" }}>
