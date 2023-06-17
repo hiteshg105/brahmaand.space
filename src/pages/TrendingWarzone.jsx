@@ -594,7 +594,7 @@ const TrendingWarzone = () => {
               {war?.resource1.desc}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
-              <Link className="me-3" to={war?.resource1.link[0]} target="_blank">
+              <Link className="me-3" to={ isContent === "0" ?  war?.resource1.link : war?.resource1.link[0]} target="_blank">
                 <img src={mdicon1} alt="" width={24} />
               </Link>
               {/* <Link to="#">
@@ -654,7 +654,7 @@ const TrendingWarzone = () => {
               style={{ height: "fit-content" }}
               className="d-flex justify-content-lg-start"
             >
-              <Link className="me-3" to={war?.resource2.link[0]} target="_blank"
+              <Link className="me-3" to={isContent === "0" ?  war?.resource1.link : war?.resource1.link[0]} target="_blank"
               >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -758,7 +758,7 @@ const TrendingWarzone = () => {
               <iframe
                 style={{ height: "400px" }}
                 className="w-100"
-                src={`https://www.youtube.com/embed/${war?.resource1.link[0].split("v=")[1]
+                src={`https://www.youtube.com/embed/${ isContent === "0" ? war?.resource1.link.split("v=")[1] : war?.resource1.link[0].split("v=")[1]
                   }`}
                 title="YouTube video player"
                 frameborder="0"
@@ -793,7 +793,7 @@ const TrendingWarzone = () => {
               <iframe
                 style={{ height: "400px" }}
                 className="w-100"
-                src={`https://www.youtube.com/embed/${war?.resource2.link[0].split("v=")[1]
+                src={`https://www.youtube.com/embed/${isContent === "0" ? war?.resource2.link.split("v=")[1] : war?.resource2.link[0].split("v=")[1]
                   }`}
                 title="YouTube video player"
                 frameborder="0"
