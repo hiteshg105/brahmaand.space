@@ -35,7 +35,7 @@ const Privacy = () => {
         <hr />
         <div>
           {first?.map((first) => (
-            <h3 className="mt-3">{ReactHtmlParser(first.desc)}</h3>
+            <h4 className="mt-3">{ReactHtmlParser(first.desc)}</h4>
           ))}
         </div>
       </Container>
