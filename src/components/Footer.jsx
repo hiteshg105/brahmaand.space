@@ -118,13 +118,13 @@ function Footer() {
               </Col>
               <Col md="6" className="d-flex justify-content-center justify-content-md-end">
                 <div className="icon">
-                  <Link to="#">
+                  <Link to="#" >
                     <FaFacebook className="it-i" />
                   </Link>
-                  <Link to="#">
+                  <Link to="https://www.instagram.com/brahmaand.space/?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank">
                     <FaInstagram className="it-i" />
                   </Link>
-                  <Link to="#">
+                  <Link to="https://www.youtube.com/@Brahmaand.SpaceKnowledgeHindi" target="_blank">
                     <FaYoutube className="it-i" />
                   </Link>
                   <Link to="#">

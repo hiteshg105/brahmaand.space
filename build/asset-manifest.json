@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.16c4ff81.css",
-    "main.js": "/static/js/main.00f0a5c4.js",
+    "main.css": "/static/css/main.2b2ab5df.css",
+    "main.js": "/static/js/main.b8dab094.js",
     "static/js/787.2d6ec2d3.chunk.js": "/static/js/787.2d6ec2d3.chunk.js",
     "static/media/dummy.png": "/static/media/dummy.ee2c95b333a006a294b7.png",
     "static/media/technology.png": "/static/media/technology.f9c43a613b0cc9ac4204.png",
@@ -40,6 +40,7 @@
     "static/media/GTWalsheimProRegular.ttf": "/static/media/GTWalsheimProRegular.7b2766a04ac0c4c89294.ttf",
     "static/media/emoji2.png": "/static/media/emoji2.8dd7ea24299e637e844b.png",
     "static/media/logonew.png": "/static/media/logonew.1b649293db16698603b7.png",
+    "static/media/noimage.jpg": "/static/media/noimage.5cdecbbf084125f25350.jpg",
     "static/media/winnerone.png": "/static/media/winnerone.59df74efc5a6922f5406.png",
     "static/media/winthree.png": "/static/media/winthree.a284feb87e82630ad6b6.png",
     "static/media/wintwo.png": "/static/media/wintwo.1f636e768d3e75deab64.png",
@@ -58,12 +59,12 @@
     "static/media/six.png": "/static/media/six.070a8aec339442205e77.png",
     "static/media/logo.svg": "/static/media/logo.f0da73cdba90ef9b7be31f136a184bcf.svg",
     "index.html": "/index.html",
-    "main.16c4ff81.css.map": "/static/css/main.16c4ff81.css.map",
-    "main.00f0a5c4.js.map": "/static/js/main.00f0a5c4.js.map",
+    "main.2b2ab5df.css.map": "/static/css/main.2b2ab5df.css.map",
+    "main.b8dab094.js.map": "/static/js/main.b8dab094.js.map",
     "787.2d6ec2d3.chunk.js.map": "/static/js/787.2d6ec2d3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.16c4ff81.css",
-    "static/js/main.00f0a5c4.js"
+    "static/css/main.2b2ab5df.css",
+    "static/js/main.b8dab094.js"
   ]
 }

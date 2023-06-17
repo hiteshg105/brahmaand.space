@@ -124,32 +124,38 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
 
   const handleSubmitCreatorComment = async (e, id) => {
-    if (cmtRating) {
-      e.preventDefault();
-      const userid = localStorage.getItem("userId");
-      // console.log(userid)
-      // console.log(id)
-      const data = await axiosClient.post(`/user/add_creator_comment`, {
-        creatorResrcId: id,
-        userid: userid,
-        comment: cmtComment,
-        rating: cmtRating,
-      });
-      if (data.data.status) {
-        setCmtComment("");
-        swal("Comment Added");
-        handleSelection(id);
-        handleContent(content, limit);
-      } else {
-        setCmtRating("")
-        swal("Comment Already Exist");
-      }
-    } 
-    else{
-      setCmtComment("")
-      swal("Please Enter Rating And Comment");
+    if (myId == "") {
+      swal("Login First");
+      navigate("/login");
     }
-    
+    if (myId !== null && myId !== undefined && myId !== "") {
+
+      if (cmtRating) {
+        e.preventDefault();
+        const userid = localStorage.getItem("userId");
+        // console.log(userid)
+        // console.log(id)
+        const data = await axiosClient.post(`/user/add_creator_comment`, {
+          creatorResrcId: id,
+          userid: userid,
+          comment: cmtComment,
+          rating: cmtRating,
+        });
+        if (data.data.status) {
+          setCmtComment("");
+          swal("Comment Added");
+          handleSelection(id);
+          handleContent(content, limit);
+        } else {
+          setCmtRating("")
+          swal("Comment Already Exist");
+        }
+      }
+      else {
+        setCmtComment("")
+        swal("Please Enter Rating And Comment");
+      }
+    }
 
     // console.log(data);
   };
@@ -308,7 +314,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       // if(rating === ""){
 
       // }
-      if(rating !== ""){
+      if (rating !== "") {
         axiosClient
           .post(`/user/add_Comment`, {
             submitresrcId: id,
@@ -363,7 +369,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       const responce = await axiosClient.post(
         `/user/advancefilter?sub_category=${params.id}`
       );
-      
+
       if (format && type) {
 
         const newdata = JSON.parse(JSON.stringify(responce.data.data))
@@ -475,9 +481,9 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     style={{ maxHeight: "250px" }}
                   >
                     <img
-                      style={{ borderRadius: "10px", objectFit: "cover" ,aspectRatio: "16/9"}}
+                      style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
                       className="w-100"
-                      
+
                       src={
                         item.img.includes("https")
                           ? item.img
@@ -489,7 +495,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                     />
                   </div>
                   <div className="px-2 mt-3">
-                    {/* <div
+                    <div
                       style={{
                         color: "#5F56C6",
                         fontSize: "14px",
@@ -498,14 +504,19 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       }}
                       className="d-flex overflow-auto mb-2"
                     >
-                      <span>#best</span>
-                      <span>#study</span>
-                    </div> */}
+                      {/* <span>#best</span>
+                      <span>#study</span> */}
+                      <span># {item.topics}</span>
+                     
+                    </div>
                     <h4
                       style={{ wordWrap: "break-word" }}
                       className="fw-bold mb-0"
                     >
-                      {item.topics}
+                      {content ==="Content"?item.resTitle?.slice(0, 80):item.desc.slice(0,80)}
+                      {/* {item.resTitle?.slice(0, 80)} */}
+                      {/* {item.desc?.slice(0, 80)} */}
+                      {/* {item.topics} */}
                     </h4>
                     <div className="my-3 d-flex justify-content-between align-items-center flex-wrap">
                       <p style={{ color: "#011D2B", fontWeight: 500 }}>
@@ -594,7 +605,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
             <div className="main-content">
               <h2>
                 {Producdetail?.resTitle?.slice(0, 80)}
-                {Producdetail?.desc?.slice(0, 80)}
+                {/* {Producdetail?.desc?.slice(0, 80)} */}
               </h2>
               <Row className="top-icon">
                 <Col lg="10">
