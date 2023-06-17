@@ -442,12 +442,12 @@ const TrendingWarzone = () => {
           }
         }
       }
-        else {
-          swal("Please Login OR Sign Up");
+      else {
+        swal("Please Login OR Sign Up");
 
 
-        }
-      
+      }
+
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
@@ -618,11 +618,12 @@ const TrendingWarzone = () => {
           </Col>
 
           <Row className="flex-column justify-content-between py-3 pe-4 ps-4 justify-content-end ps-lg-0">
+            {console.log(war)}
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
-              className="col-lg-10 mb-3 ms-auto"
+              className="col-lg-10 mb-3 ms-auto text-right"
             >
-              {war?.resource1.desc}
+              {isContent === "0" ? war?.resource1.resTitle : war?.resource1.creatorName}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
               <Link className="me-3" to={isContent === "0" ? war?.resource1.link : war?.resource1.link[0]} target="_blank">
@@ -679,7 +680,7 @@ const TrendingWarzone = () => {
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3"
             >
-              {war?.resource2.desc}
+              {isContent === "0" ? war?.resource2.resTitle : war?.resource2.creatorName}
             </p>
             <div
               style={{ height: "fit-content" }}
@@ -777,7 +778,7 @@ const TrendingWarzone = () => {
               style={{ fontSize: "30px" }}
               className="text-center p-0 text-lg-end mb-2"
             >
-              {war?.resource1.creatorName}
+              {isContent === "1" ? "" : war?.resource1.creatorName}
             </h4>
             {/* {console.log(war?.resource1.link)}
             {console.log(war?.resource2.link)} */}
@@ -794,9 +795,8 @@ const TrendingWarzone = () => {
                           // height: "400px",
                           // height: "100%",
                         }}
-                        src={`https://www.youtube.com/embed/${
-                          war?.resource1.link.split("v=")[1]
-                        }`}
+                        src={`https://www.youtube.com/embed/${war?.resource1.link.split("v=")[1]
+                          }`}
                       ></iframe>
                     ) : (
                       <>
@@ -829,9 +829,8 @@ const TrendingWarzone = () => {
                           // height: "400px",
                           // height: "100%",
                         }}
-                        src={`https://www.youtube.com/embed/${
-                          war?.resource1.link[0].split("v=")[1]
-                        }`}
+                        src={`https://www.youtube.com/embed/${war?.resource1.link[0].split("v=")[1]
+                          }`}
                       ></iframe>
                     ) : (
                       <>
@@ -883,7 +882,7 @@ const TrendingWarzone = () => {
               style={{ fontSize: "30px" }}
               className="text-center p-0 text-lg-start mb-2"
             >
-              {war?.resource2.creatorName}
+              {isContent === "1" ? "" : war?.resource2.creatorName}
             </h4>
             {/* {console.log( war?.resource2.link,"vedio link............")} */}
 
@@ -900,9 +899,8 @@ const TrendingWarzone = () => {
                           // height: "400px",
                           // height: "100%",
                         }}
-                        src={`https://www.youtube.com/embed/${
-                          war?.resource2.link.split("v=")[1]
-                        }`}
+                        src={`https://www.youtube.com/embed/${war?.resource2.link.split("v=")[1]
+                          }`}
                       ></iframe>
                     ) : (
                       <>
@@ -935,9 +933,8 @@ const TrendingWarzone = () => {
                           // height: "400px",
                           // height: "100%",
                         }}
-                        src={`https://www.youtube.com/embed/${
-                          war?.resource2.link[0].split("v=")[1]
-                        }`}
+                        src={`https://www.youtube.com/embed/${war?.resource2.link[0].split("v=")[1]
+                          }`}
                       ></iframe>
                     ) : (
                       <>
@@ -1017,14 +1014,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc1AvReview >= 2 &&
                       warReview?.rsc1AvReview < 3
-                    ? "Average"
-                    : warReview?.rsc1AvReview >= 3 &&
-                      warReview?.rsc1AvReview < 4
-                    ? "Good"
-                    : warReview?.rsc1AvReview >= 4 &&
-                      warReview?.rsc1AvReview < 4.5
-                    ? "Very Good"
-                    : "Excellent"}
+                      ? "Average"
+                      : warReview?.rsc1AvReview >= 3 &&
+                        warReview?.rsc1AvReview < 4
+                        ? "Good"
+                        : warReview?.rsc1AvReview >= 4 &&
+                          warReview?.rsc1AvReview < 4.5
+                          ? "Very Good"
+                          : "Excellent"}
                 </p>
               )}
 
@@ -1062,14 +1059,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc2AvReview >= 2 &&
                       warReview?.rsc2AvReview < 3
-                    ? "Average"
-                    : warReview?.rsc2AvReview >= 3 &&
-                      warReview?.rsc2AvReview < 4
-                    ? "Good"
-                    : warReview?.rsc2AvReview >= 4 &&
-                      warReview?.rsc2AvReview < 4.5
-                    ? "Very Good"
-                    : "Excellent"}
+                      ? "Average"
+                      : warReview?.rsc2AvReview >= 3 &&
+                        warReview?.rsc2AvReview < 4
+                        ? "Good"
+                        : warReview?.rsc2AvReview >= 4 &&
+                          warReview?.rsc2AvReview < 4.5
+                          ? "Very Good"
+                          : "Excellent"}
                 </p>
               )}
               <p className="my-3 text-center text-md-start p-0">
@@ -1496,8 +1493,8 @@ const TrendingWarzone = () => {
             {war?.resource1.res_desc
               ? war?.resource1.res_desc
               : war?.resource1.desc
-              ? war?.resource1.desc
-              : "No Description Found"}
+                ? war?.resource1.desc
+                : "No Description Found"}
           </p>
         </Col>
         <Col lg={6} className="content-box px-0">
@@ -1508,8 +1505,8 @@ const TrendingWarzone = () => {
             {war?.resource2.res_desc
               ? war?.resource2.res_desc
               : war?.resource2.desc
-              ? war?.resource2.desc
-              : "No Description Found"}
+                ? war?.resource2.desc
+                : "No Description Found"}
 
             {/* {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -1549,14 +1546,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
                     warRscReview?.rsc1AvReview < 3
-                  ? "Average"
-                  : warRscReview?.rsc1AvReview >= 3 &&
-                    warRscReview?.rsc1AvReview < 4
-                  ? "Good"
-                  : warRscReview?.rsc1AvReview >= 4 &&
-                    warRscReview?.rsc1AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
+                    ? "Average"
+                    : warRscReview?.rsc1AvReview >= 3 &&
+                      warRscReview?.rsc1AvReview < 4
+                      ? "Good"
+                      : warRscReview?.rsc1AvReview >= 4 &&
+                        warRscReview?.rsc1AvReview < 4.5
+                        ? "Very Good"
+                        : "Excellent"}
               </p>
             )}
 
@@ -1728,14 +1725,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
                     warRscReview?.rsc2AvReview < 3
-                  ? "Average"
-                  : warRscReview?.rsc2AvReview >= 3 &&
-                    warRscReview?.rsc2AvReview < 4
-                  ? "Good"
-                  : warRscReview?.rsc2AvReview >= 4 &&
-                    warRscReview?.rsc2AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
+                    ? "Average"
+                    : warRscReview?.rsc2AvReview >= 3 &&
+                      warRscReview?.rsc2AvReview < 4
+                      ? "Good"
+                      : warRscReview?.rsc2AvReview >= 4 &&
+                        warRscReview?.rsc2AvReview < 4.5
+                        ? "Very Good"
+                        : "Excellent"}
               </p>
             )}
             <div className="d-flex justify-content-center justify-content-lg-start align-items-center">
@@ -1981,50 +1978,50 @@ const TrendingWarzone = () => {
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
-                <div
-                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                  className="d-flex flex-column p-3 rounded-4"
-                >
-                  <div className="re-list d-flex align-items-center gap-4">
-                    <div style={{ width: "50px" }}>
-                      <img
-                        className="w-100 h-auto rounded-circle"
-                        src={value?.userid?.profileImg?.[0]}
-                        timeLine
-                        alt="UserImage"
-                      />
-                    </div>
-                    <div className="re-listcont w-100 d-flex justify-content-between">
-                      <div>
-                        <h5>{value?.userid?.username}</h5>
-                        <div className="star-1">
-                          <PrettyRating
-                            value={value.rating}
-                            edit={false}
-                            icons={icons.star}
-                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                          />
-                        </div>
-                      </div>
-                      <span>
-                        {/* <Moment format="ll"></Moment> */}
-                        {value?.timeLine}
-                      </span>
-                    </div>
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg?.[0]}
+                      timeLine
+                      alt="UserImage"
+                    />
                   </div>
-                  <ShowMore
-                    className="showmore"
-                    style={{ color: "black" }}
-                    lines={1}
-                    more="learn More"
-                    less="learn less"
-                    anchorClass=""
-                  >
-                    {value.comment}
-                  </ShowMore>
-                  {/* <p className="fw-bold">{value.comment}</p> */}
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          value={value.rating}
+                          edit={false}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={1}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
+                  {value.comment}
+                </ShowMore>
+                {/* <p className="fw-bold">{value.comment}</p> */}
+              </div>
+            ))}
         </Col>
         <Col
           lg={6}
@@ -2034,48 +2031,48 @@ const TrendingWarzone = () => {
           {comment?.newData2 && comment?.newData2.length === 0
             ? "No Review Found"
             : comment?.newData2.map((value) => (
-                <div
-                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                  className="d-flex flex-column p-3 rounded-4"
-                >
-                  <div className="re-list d-flex align-items-center gap-4">
-                    <div style={{ width: "50px" }}>
-                      <img
-                        className="w-100 h-auto rounded-circle"
-                        src={value?.userid?.profileImg[0]}
-                        alt="UserImage"
-                      />
-                    </div>
-                    <div className="re-listcont w-100 d-flex justify-content-between">
-                      <div>
-                        <h5>{value?.userid?.username}</h5>
-                        <div className="star-1">
-                          <PrettyRating
-                            edit={false}
-                            value={value.rating}
-                            icons={icons.star}
-                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                          />
-                        </div>
-                      </div>
-                      <span>
-                        {/* <Moment format="ll"></Moment> */}
-                        {value?.timeLine}
-                      </span>
-                    </div>
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg[0]}
+                      alt="UserImage"
+                    />
                   </div>
-                  <ShowMore
-                    className="showmore"
-                    style={{ color: "black" }}
-                    lines={1}
-                    more="learn More"
-                    less="learn less"
-                    anchorClass=""
-                  >
-                    {value.comment}
-                  </ShowMore>
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          edit={false}
+                          value={value.rating}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={1}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
+                  {value.comment}
+                </ShowMore>
+              </div>
+            ))}
         </Col>
       </Row>
     </Container>
