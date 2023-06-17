@@ -170,7 +170,7 @@ function Header(args) {
           userid: userid,
         })
         .then((res) => {
-          console.log(res.data.data);
+          console.log(res);
 
           if (res.data.message === "success") {
             swal("Resource Submitted Successfully👍");
@@ -222,12 +222,12 @@ function Header(args) {
 
     const linkNewData2 = linkNewData?.map((e) => e.value);
     const userid = localStorage.getItem("userId");
-    console.log(userid, "hello")
+    console.log(userid, "hello");
     if (userid === null) {
       swal("Please Login OR Sign Up");
     } else {
       const formData = new FormData();
-      formData.append("img", file === null ? NoImage : file);
+      formData.append("img", file === null ? "" : file);
       formData.append("creatorName", creatorName);
       linkNewData2.map((e) => formData.append("link", e));
       formData.append("phoneNo", phoneNo);
@@ -249,7 +249,7 @@ function Header(args) {
           formData
         );
 
-        // console.log(responce.data.data,"hello");
+        console.log(responce,"hello");
         if (responce.data.success === true) {
           swal("Content Creator profile added successfully👍.");
           setIsContentCreatorModel(false);
@@ -269,10 +269,15 @@ function Header(args) {
           setTopics("");
           setDescriptionData("");
           setFile(null);
-        } else {
-          swal("Something went wrong, Try again");
+        }
+        if (responce.data.success === false) {
+          swal("Content Creator Exists");
           setIsContentCreatorModel(false);
         }
+        //  else {
+        //   swal("Something went wrong, Try again");
+        //   setIsContentCreatorModel(false);
+        // }
       } else {
         setFillPlease("define");
         // swal("* Field is Mandatory");

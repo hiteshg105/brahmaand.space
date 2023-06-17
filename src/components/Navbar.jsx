@@ -389,7 +389,7 @@ function CustomNavbar(args) {
       swal("Please Login OR Sign Up");
     } else {
       const formData = new FormData();
-      formData.append("img", file === null ? NoImage : file);
+      formData.append("img", file === null ? "" : file);
       formData.append("creatorName", creatorName);
       linkNewData2.map((e) => formData.append("link", e));
       formData.append("phoneNo", phoneNo);
