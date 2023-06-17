@@ -33,13 +33,12 @@ const TrendingWarzone = () => {
   // const { id } = useParams();
   // // console.log(id, "id");
 
-
   const { id } = useParams();
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const isContent = params.get('additionalValue')
-  console.log(typeof isContent)
+  const isContent = params.get("additionalValue");
+  console.log(typeof isContent);
 
   const [war, setWar] = useState();
   const [warReview, setWarReview] = useState();
@@ -87,14 +86,14 @@ const TrendingWarzone = () => {
   };
   // console.log(instance)
   const getSingleWar = async () => {
-    console.log("hello")
+    console.log("hello");
     if (isContent === "0") {
       const data = await instance.get(`/get/single/warzone/${id}`);
       setWar(data.data.war);
     }
 
     if (isContent === "1") {
-      console.log("bhadresh")
+      console.log("bhadresh");
       const data = await instance.get(`/get/single/creator_warzone/${id}`);
       setWar(data.data.war);
     }
@@ -202,9 +201,10 @@ const TrendingWarzone = () => {
       });
     }
 
-
     if (isContent === "1") {
-      const data = await instance.get(`/get/allreview/creator_warzone/resource/${id}`);
+      const data = await instance.get(
+        `/get/allreview/creator_warzone/resource/${id}`
+      );
       // console.log(data.data);
       setWarRscReview(data.data);
       let Start1R1 = 0;
@@ -300,19 +300,16 @@ const TrendingWarzone = () => {
   };
 
   const getComment = async () => {
-
-
     if (isContent === "0") {
       const data = await instance.get(`/get/comment/warzone/${id}`);
       setComment(data.data);
     }
     if (isContent === "1") {
-      console.log("bhadresh")
+      console.log("bhadresh");
       const data = await instance.get(`/get/comment/creator_warzone/${id}`);
-      console.log(data.data)
+      console.log(data.data);
       setComment(data.data);
     }
-
   };
 
   const submitRcc1Comment = async (e) => {
@@ -321,7 +318,7 @@ const TrendingWarzone = () => {
       // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
       if (isContent === "0") {
         if (rsc1Review.rate != 0) {
-          console.log("rsc1Review")
+          console.log("rsc1Review");
           const userid = localStorage.getItem("userId");
           const data = await instance.post(`user/add_Comment`, {
             submitresrcId: war.resource1._id,
@@ -346,7 +343,7 @@ const TrendingWarzone = () => {
 
       if (isContent === "1") {
         if (rsc1Review.rate != 0) {
-          console.log("rsc1Review")
+          console.log("rsc1Review");
           const userid = localStorage.getItem("userId");
           const data = await instance.post(`/user/add_creator_comment`, {
             creatorResrcId: war.resource1._id,
@@ -382,7 +379,7 @@ const TrendingWarzone = () => {
       // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
       if (isContent === "0") {
         if (rsc2Review.rate != 0) {
-          console.log("rsc2Review")
+          console.log("rsc2Review");
           const userid = localStorage.getItem("userId");
           const data = await instance.post(`user/add_Comment`, {
             submitresrcId: war.resource2._id,
@@ -407,7 +404,7 @@ const TrendingWarzone = () => {
 
       if (isContent === "1") {
         if (rsc2Review.rate != 0) {
-          console.log("rsc2Review")
+          console.log("rsc2Review");
           const userid = localStorage.getItem("userId");
           const data = await instance.post(`/user/add_creator_comment`, {
             creatorResrcId: war.resource2._id,
@@ -488,7 +485,19 @@ const TrendingWarzone = () => {
             </>
           )}
         </Col>
-        <Col>{war?.winner || war?.winner === null ? war?.winner === null ? <h1 style={{ color: "blue" }} className="text-center">Draw</h1> : "" : <CountDown endDate={war && war.endDate} />}</Col>
+        <Col>
+          {war?.winner || war?.winner === null ? (
+            war?.winner === null ? (
+              <h1 style={{ color: "blue" }} className="text-center">
+                Draw
+              </h1>
+            ) : (
+              ""
+            )
+          ) : (
+            <CountDown endDate={war && war.endDate} />
+          )}
+        </Col>
         <Col
           style={{ top: "-16px", right: "-12px" }}
           className="h-100 text-end position-absolute d-sm-block d-lg-none"
@@ -594,7 +603,11 @@ const TrendingWarzone = () => {
               {war?.resource1.desc}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
-              <Link className="me-3" to={war?.resource1.link[0]} target="_blank">
+              <Link
+                className="me-3"
+                to={war?.resource1.link[0]}
+                target="_blank"
+              >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
               {/* <Link to="#">
@@ -654,7 +667,10 @@ const TrendingWarzone = () => {
               style={{ height: "fit-content" }}
               className="d-flex justify-content-lg-start"
             >
-              <Link className="me-3" to={war?.resource2.link[0]} target="_blank"
+              <Link
+                className="me-3"
+                to={war?.resource2.link[0]}
+                target="_blank"
               >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -682,23 +698,23 @@ const TrendingWarzone = () => {
         <Col lg={6} className="border-top border-bottom py-4">
           <div className="d-flex justify-content-lg-end">
             <div className="d-flex justify-content-lg-end flex-wrap tag-2">
-              {
-                isContent === "0" ? <>
+              {isContent === "0" ? (
+                <>
                   {war?.resource1.topics[0]?.split(",").map((val) => (
                     <Link className="d-flex" to="#">
                       {val}
                     </Link>
                   ))}
                 </>
-                  :
-                  <>
-                    {war?.resource1.topics?.split(",").map((val) => (
-                      <Link className="d-flex" to="#">
-                        {val}
-                      </Link>
-                    ))}
-                  </>
-              }
+              ) : (
+                <>
+                  {war?.resource1.topics?.split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </Col>
@@ -708,29 +724,23 @@ const TrendingWarzone = () => {
         >
           <div className="d-flex">
             <div className="d-flex flex-wrap tag-2">
-
-              {
-                isContent === "0" ? <>
+              {isContent === "0" ? (
+                <>
                   {war?.resource2.topics[0]?.split(",").map((val) => (
                     <Link className="d-flex" to="#">
                       {val}
                     </Link>
                   ))}
                 </>
-                  :
-                  <>
-                    {war?.resource2.topics?.split(",").map((val) => (
-                      <Link className="d-flex" to="#">
-                        {val}
-                      </Link>
-                    ))}
-                  </>
-              }
-
-
-
-
-
+              ) : (
+                <>
+                  {war?.resource2.topics?.split(",").map((val) => (
+                    <Link className="d-flex" to="#">
+                      {val}
+                    </Link>
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </Col>
@@ -758,8 +768,9 @@ const TrendingWarzone = () => {
               <iframe
                 style={{ height: "400px" }}
                 className="w-100"
-                src={`https://www.youtube.com/embed/${war?.resource1.link[0].split("v=")[1]
-                  }`}
+                src={`https://www.youtube.com/embed/${
+                  war?.resource1.link[0].split("v=")[1]
+                }`}
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -793,8 +804,9 @@ const TrendingWarzone = () => {
               <iframe
                 style={{ height: "400px" }}
                 className="w-100"
-                src={`https://www.youtube.com/embed/${war?.resource2.link[0].split("v=")[1]
-                  }`}
+                src={`https://www.youtube.com/embed/${
+                  war?.resource2.link[0].split("v=")[1]
+                }`}
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -848,14 +860,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc1AvReview >= 2 &&
                       warReview?.rsc1AvReview < 3
-                      ? "Average"
-                      : warReview?.rsc1AvReview >= 3 &&
-                        warReview?.rsc1AvReview < 4
-                        ? "Good"
-                        : warReview?.rsc1AvReview >= 4 &&
-                          warReview?.rsc1AvReview < 4.5
-                          ? "Very Good"
-                          : "Excellent"}
+                    ? "Average"
+                    : warReview?.rsc1AvReview >= 3 &&
+                      warReview?.rsc1AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc1AvReview >= 4 &&
+                      warReview?.rsc1AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
                 </p>
               )}
 
@@ -893,14 +905,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc2AvReview >= 2 &&
                       warReview?.rsc2AvReview < 3
-                      ? "Average"
-                      : warReview?.rsc2AvReview >= 3 &&
-                        warReview?.rsc2AvReview < 4
-                        ? "Good"
-                        : warReview?.rsc2AvReview >= 4 &&
-                          warReview?.rsc2AvReview < 4.5
-                          ? "Very Good"
-                          : "Excellent"}
+                    ? "Average"
+                    : warReview?.rsc2AvReview >= 3 &&
+                      warReview?.rsc2AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc2AvReview >= 4 &&
+                      warReview?.rsc2AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
                 </p>
               )}
               <p className="my-3 text-center text-md-start p-0">
@@ -939,8 +951,8 @@ const TrendingWarzone = () => {
 
         <Col lg={6} className="border-top border-bottom border-right py-4">
           <Row className="mb-4 text-lg-end">
-            {
-              isContent === "0" ? <>
+            {isContent === "0" ? (
+              <>
                 <Link
                   style={{
                     color: "#5F56C6",
@@ -953,19 +965,21 @@ const TrendingWarzone = () => {
                   {war?.resource1.link}
                 </Link>
               </>
-                : <>
-                  <Link
-                    style={{
-                      color: "#5F56C6",
-                      fontSize: "20px",
-                      wordBreak: "break-all",
-                    }}
-                    className="text-center text-lg-end"
-                    to={war?.resource1.link[0]}
-                  >
-                    {war?.resource1.link[0]}
-                  </Link></>
-            }
+            ) : (
+              <>
+                <Link
+                  style={{
+                    color: "#5F56C6",
+                    fontSize: "20px",
+                    wordBreak: "break-all",
+                  }}
+                  className="text-center text-lg-end"
+                  to={war?.resource1.link[0]}
+                >
+                  {war?.resource1.link[0]}
+                </Link>
+              </>
+            )}
           </Row>
           <Row className="justify-content-between justify-content-lg-start">
             <Row className="gap-3 mb-3 m-0">
@@ -996,9 +1010,8 @@ const TrendingWarzone = () => {
             </Row>
 
             <div className="d-flex flex-wrap gap-3">
-
-              {war?.resource1.type ?
-                (<Col className="shadow-lg rounded-2 px-0">
+              {war?.resource1.type ? (
+                <Col className="shadow-lg rounded-2 px-0">
                   <div className="mid-1 tt-2">
                     <div className="me-3">
                       <img src={typeicon} alt="" width="25px" />
@@ -1010,9 +1023,10 @@ const TrendingWarzone = () => {
                       </Link>
                     </div>
                   </div>
-                </Col>)
-                : ""
-              }
+                </Col>
+              ) : (
+                ""
+              )}
               <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
@@ -1065,10 +1079,8 @@ const TrendingWarzone = () => {
                 </div>
               </Col>
 
-
-
-              {
-                war?.resource1.relYear ? <Col className="shadow-lg rounded-2 px-0">
+              {war?.resource1.relYear ? (
+                <Col className="shadow-lg rounded-2 px-0">
                   <div className="mid-1 tt-2">
                     <div className="me-3">
                       <img src={yearicon} alt="" width="35px" />
@@ -1085,13 +1097,16 @@ const TrendingWarzone = () => {
                           backgroundColor: "#F1F1F1",
                         }}
                       >
-                        {war?.resource1.relYear ? war?.resource1.relYear[0].yrName : ""}
+                        {war?.resource1.relYear
+                          ? war?.resource1.relYear[0].yrName
+                          : ""}
                       </Link>
                     </div>
                   </div>
                 </Col>
-                  : ""
-              }
+              ) : (
+                ""
+              )}
               <Col className="shadow-lg rounded-2 px-0">
                 <div className="mid-1 tt-2">
                   <div className="me-3">
@@ -1114,9 +1129,8 @@ const TrendingWarzone = () => {
           className="content-box border-top border-bottom border-right py-4"
         >
           <Row className="mb-4 text-lg-start pe-4">
-
-            {
-              isContent === "0" ? <>
+            {isContent === "0" ? (
+              <>
                 <Link
                   style={{
                     color: "#5F56C6",
@@ -1129,20 +1143,21 @@ const TrendingWarzone = () => {
                   {war?.resource2.link}
                 </Link>
               </>
-                : <>
-                  <Link
-                    style={{
-                      color: "#5F56C6",
-                      fontSize: "20px",
-                      wordBreak: "break-all",
-                    }}
-                    to={war?.resource2.link[0]}
-                    className="text-center text-lg-start"
-                  >
-                    {war?.resource2.link[0]}
-                  </Link>
-                </>
-            }
+            ) : (
+              <>
+                <Link
+                  style={{
+                    color: "#5F56C6",
+                    fontSize: "20px",
+                    wordBreak: "break-all",
+                  }}
+                  to={war?.resource2.link[0]}
+                  className="text-center text-lg-start"
+                >
+                  {war?.resource2.link[0]}
+                </Link>
+              </>
+            )}
           </Row>
           <Row className="justify-content-start justify-content-lg-end">
             <Row className="gap-3 mb-3 m-0">
@@ -1173,24 +1188,23 @@ const TrendingWarzone = () => {
             </Row>
 
             <div className="d-flex flex-wrap gap-3">
-
-              {war?.resource2.type ? <Col className="shadow-lg px-0 rounded-3">
-                <div className="mid-1 tt-2">
-                  <div className="me-3">
-                    <img src={typeicon} alt="" width="25px" />
+              {war?.resource2.type ? (
+                <Col className="shadow-lg px-0 rounded-3">
+                  <div className="mid-1 tt-2">
+                    <div className="me-3">
+                      <img src={typeicon} alt="" width="25px" />
+                    </div>
+                    <div className="mid-1-b tt-1">
+                      <p>Type:</p>
+                      <Link className="text-nowrap" to="#">
+                        {war?.resource2.type}
+                      </Link>
+                    </div>
                   </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Type:</p>
-                    <Link className="text-nowrap" to="#">
-                      {war?.resource2.type}
-                    </Link>
-                  </div>
-                </div>
-              </Col> : ""}
-
-
-
-
+                </Col>
+              ) : (
+                ""
+              )}
 
               <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
@@ -1244,33 +1258,34 @@ const TrendingWarzone = () => {
                 </div>
               </Col>
 
-
-
-
-              {war?.resource2.relYear ? <Col className="shadow-lg px-0 rounded-3">
-                <div className="mid-1 tt-2">
-                  <div className="me-3">
-                    <img src={yearicon} alt="" width="35px" />
+              {war?.resource2.relYear ? (
+                <Col className="shadow-lg px-0 rounded-3">
+                  <div className="mid-1 tt-2">
+                    <div className="me-3">
+                      <img src={yearicon} alt="" width="35px" />
+                    </div>
+                    <div className="mid-1-b tt-1">
+                      <p>Year:</p>
+                      <Link
+                        className="text-nowrap"
+                        style={{
+                          borderWidth: "0.5px",
+                          borderColor: "#494949",
+                          color: "#494949",
+                          fontWeight: 500,
+                          backgroundColor: "#F1F1F1",
+                        }}
+                      >
+                        {war?.resource2.relYear
+                          ? war?.resource2.relYear[0].yrName
+                          : ""}
+                      </Link>
+                    </div>
                   </div>
-                  <div className="mid-1-b tt-1">
-                    <p>Year:</p>
-                    <Link
-                      className="text-nowrap"
-                      style={{
-                        borderWidth: "0.5px",
-                        borderColor: "#494949",
-                        color: "#494949",
-                        fontWeight: 500,
-                        backgroundColor: "#F1F1F1",
-                      }}
-                    >
-                      {war?.resource2.relYear ? war?.resource2.relYear[0].yrName : ""}
-                    </Link>
-                  </div>
-                </div>
-              </Col> : ""}
-
-
+                </Col>
+              ) : (
+                ""
+              )}
 
               <Col className="shadow-lg px-0 rounded-3">
                 <div className="mid-1 tt-2">
@@ -1321,7 +1336,11 @@ const TrendingWarzone = () => {
             style={{ color: "#737373", paddingRight: "20px" }}
             className="text-center p-3 text-lg-end mx-auto border-top"
           >
-            {war?.resource1.res_desc ? war?.resource1.res_desc : war?.resource1.desc ? war?.resource1.desc : "No Description Found"}
+            {war?.resource1.res_desc
+              ? war?.resource1.res_desc
+              : war?.resource1.desc
+              ? war?.resource1.desc
+              : "No Description Found"}
           </p>
         </Col>
         <Col lg={6} className="content-box px-0">
@@ -1329,7 +1348,11 @@ const TrendingWarzone = () => {
             style={{ color: "#737373", paddingLeft: "20px" }}
             className="text-center text-lg-start border-top p-3"
           >
-            {war?.resource2.res_desc ? war?.resource2.res_desc : war?.resource2.desc ? war?.resource2.desc : "No Description Found"}
+            {war?.resource2.res_desc
+              ? war?.resource2.res_desc
+              : war?.resource2.desc
+              ? war?.resource2.desc
+              : "No Description Found"}
 
             {/* {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -1369,14 +1392,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
                     warRscReview?.rsc1AvReview < 3
-                    ? "Average"
-                    : warRscReview?.rsc1AvReview >= 3 &&
-                      warRscReview?.rsc1AvReview < 4
-                      ? "Good"
-                      : warRscReview?.rsc1AvReview >= 4 &&
-                        warRscReview?.rsc1AvReview < 4.5
-                        ? "Very Good"
-                        : "Excellent"}
+                  ? "Average"
+                  : warRscReview?.rsc1AvReview >= 3 &&
+                    warRscReview?.rsc1AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc1AvReview >= 4 &&
+                    warRscReview?.rsc1AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
               </p>
             )}
 
@@ -1548,14 +1571,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
                     warRscReview?.rsc2AvReview < 3
-                    ? "Average"
-                    : warRscReview?.rsc2AvReview >= 3 &&
-                      warRscReview?.rsc2AvReview < 4
-                      ? "Good"
-                      : warRscReview?.rsc2AvReview >= 4 &&
-                        warRscReview?.rsc2AvReview < 4.5
-                        ? "Very Good"
-                        : "Excellent"}
+                  ? "Average"
+                  : warRscReview?.rsc2AvReview >= 3 &&
+                    warRscReview?.rsc2AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc2AvReview >= 4 &&
+                    warRscReview?.rsc2AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
               </p>
             )}
             <div className="d-flex justify-content-center justify-content-lg-start align-items-center">
@@ -1801,50 +1824,50 @@ const TrendingWarzone = () => {
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg?.[0]}
-                      timeLine
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          value={value.rating}
-                          edit={false}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
-                    </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
-                  </div>
-                </div>
-                <ShowMore
-                  className="showmore"
-                  style={{ color: "black" }}
-                  lines={1}
-                  more="learn More"
-                  less="learn less"
-                  anchorClass=""
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
                 >
-                  {value.comment}
-                </ShowMore>
-                {/* <p className="fw-bold">{value.comment}</p> */}
-              </div>
-            ))}
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg?.[0]}
+                        timeLine
+                        alt="UserImage"
+                      />
+                    </div>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            value={value.rating}
+                            edit={false}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
+                  </div>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                  {/* <p className="fw-bold">{value.comment}</p> */}
+                </div>
+              ))}
         </Col>
         <Col
           lg={6}
@@ -1854,48 +1877,48 @@ const TrendingWarzone = () => {
           {comment?.newData2 && comment?.newData2.length === 0
             ? "No Review Found"
             : comment?.newData2.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg[0]}
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          edit={false}
-                          value={value.rating}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
-                    </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
-                  </div>
-                </div>
-                <ShowMore
-                  className="showmore"
-                  style={{ color: "black" }}
-                  lines={1}
-                  more="learn More"
-                  less="learn less"
-                  anchorClass=""
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
                 >
-                  {value.comment}
-                </ShowMore>
-              </div>
-            ))}
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg[0]}
+                        alt="UserImage"
+                      />
+                    </div>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            edit={false}
+                            value={value.rating}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
+                  </div>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                </div>
+              ))}
         </Col>
       </Row>
     </Container>
