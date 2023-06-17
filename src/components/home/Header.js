@@ -914,7 +914,7 @@ function Header(args) {
                         <Col lg="12">
                           <Label
                             className="mt-3"
-                            style={{ font: "GT Walsheim Pro" }}
+                            style={{ font: "GT Walsheim Pro"  }}
                           >
                             <b> Language of Content</b>
                           </Label>
@@ -989,7 +989,7 @@ function Header(args) {
                               name=""
                               onChange={handleChange}
                               id="Upload Image of related content"
-                              className="w-100"
+                              className="uploadimage w-100"
                             />
                           </h5>
                         </Row>
@@ -1519,7 +1519,7 @@ function Header(args) {
                         name=""
                         onChange={handleChange}
                         id="Upload Image of related content"
-                        className="w-100"
+                        className="uploadimage w-100"
                       />
                     </h5>
                   </div>
