@@ -34,7 +34,7 @@ const Category = () => {
 
   const getallWar = async () => {
     const responce = await axiosConfig.get(`/get/warzone`);
-    // console.log(responce.data.data)
+    console.log(responce.data.data, "responce.data.data")
     setAllWarData(responce.data.data);
   };
   useEffect(() => {
@@ -132,9 +132,8 @@ const Category = () => {
                                 <iframe
                                   height={300}
                                   className="w-100 rounded-4"
-                                  src={`https://www.youtube.com/embed/${
-                                    slides?.resource1.link.split("v=")[1]
-                                  }`}
+                                  src={`https://www.youtube.com/embed/${slides?.resource1.link.split("v=")[1]
+                                    }`}
                                   title="YouTube video player"
                                   frameborder="0"
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -178,8 +177,8 @@ const Category = () => {
                                     {slides?.resource1.ava_rating === null
                                       ? 0
                                       : slides?.resource1.ava_rating?.toFixed(
-                                          2
-                                        )}
+                                        2
+                                      )}
                                     )
                                   </span>
                                 </div>
@@ -192,9 +191,8 @@ const Category = () => {
                                 <iframe
                                   height={300}
                                   className="w-100 rounded-4"
-                                  src={`https://www.youtube.com/embed/${
-                                    slides?.resource2.link.split("v=")[1]
-                                  }`}
+                                  src={`https://www.youtube.com/embed/${slides?.resource2.link.split("v=")[1]
+                                    }`}
                                   title="YouTube video player"
                                   frameborder="0"
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -238,8 +236,8 @@ const Category = () => {
                                     {slides?.resource1.ava_rating === null
                                       ? 0
                                       : slides?.resource2.ava_rating?.toFixed(
-                                          2
-                                        )}
+                                        2
+                                      )}
                                     )
                                   </span>
                                 </div>

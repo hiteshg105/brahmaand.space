@@ -26,6 +26,7 @@ import Moment from "react-moment";
 import ReactStars from "react-rating-stars-component";
 import { AiFillEdit } from "react-icons/ai";
 import swal from "sweetalert";
+import NoImage from "../components/home/noimage1.png";
 
 const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
@@ -464,6 +465,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           const date = new Date(item.createdAt);
           const options = { day: "2-digit", month: "short", year: "numeric" };
           const formattedDate = date.toLocaleDateString("en-US", options);
+          console.log(item, "shnklsfbsklfksbfksb")
           return (
             <>
               <div
@@ -475,24 +477,52 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                   style={{ padding: "18px", borderRadius: "10px" }}
                   className="bg-white"
                 >
-                  {console.log(item)}
                   <div
                     className="contentcreator-img-main"
                     style={{ maxHeight: "250px" }}
                   >
+
+                    {
+                      content === "Content" ?
+                        <>
+                          <img
+                            style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
+                            className="w-100"
+
+                            src={
+                              item.img.includes("https") ? item.img : item.img.includes("data:image") ? item.img : NoImage
+                            }
+                            alt=""
+                          />
+                        </>
+                        :
+                        <img
+                          style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
+                          className="w-100"
+
+                          src={
+                            item.img ? `${base_URL + "/" + item.img}` : item.img.includes("data:image") ? item.img : NoImage
+                          }
+                          alt=""
+                        />
+                    }
+
+
+
+
+
+
+
+                    {/* 
                     <img
                       style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
                       className="w-100"
 
                       src={
-                        item.img.includes("https")
-                          ? item.img
-                          : item.img.includes("data:image")
-                            ? item.img
-                            : `${base_URL + "/" + item.img}`
+                        item.img.includes("https") ? item.img : NoImage ? item.img : `${base_URL + "/" + item.img}`
                       }
                       alt=""
-                    />
+                    />/ */}
                   </div>
                   <div className="px-2 mt-3">
                     <div
