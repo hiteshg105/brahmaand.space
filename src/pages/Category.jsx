@@ -132,8 +132,9 @@ const Category = () => {
                                 <iframe
                                   height={300}
                                   className="w-100 rounded-4"
-                                  src={`https://www.youtube.com/embed/${slides?.resource1.link.split("v=")[1]
-                                    }`}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(slides?.resource1.link).search
+                                  ).get("v")}`}
                                   title="YouTube video player"
                                   frameborder="0"
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -191,8 +192,9 @@ const Category = () => {
                                 <iframe
                                   height={300}
                                   className="w-100 rounded-4"
-                                  src={`https://www.youtube.com/embed/${slides?.resource2.link.split("v=")[1]
-                                    }`}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(slides?.resource2.link).search
+                                  ).get("v")}`}
                                   title="YouTube video player"
                                   frameborder="0"
                                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

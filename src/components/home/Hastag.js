@@ -399,6 +399,9 @@ function Hastag() {
                             <> */}
                           {typeof features.resource1.link === "string" ? (
                             <>
+                              {/* {console.log(`https://www.youtube.com/embed/${
+                                    features?.resource1.link.split("v=")[1]
+                                  }`,"hello")} */}
                               {features.resource1.link.includes("v=") ? (
                                 <iframe
                                   allowfullscreen="true"
@@ -408,8 +411,9 @@ function Hastag() {
                                     width: "100%",
                                     height: "100%",
                                   }}
-                                  src={`https://www.youtube.com/embed/${features?.resource1.link.split("v=")[1]
-                                    }`}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(features?.resource1.link).search
+                                  ).get("v")}`}
                                 ></iframe>
                               ) : (
                                 <>
@@ -436,20 +440,22 @@ function Hastag() {
                               {features.resource1.link.some((e) =>
                                 e.includes("v=")
                               ) ? (
-                                <iframe
-                                  allowfullscreen="true"
-                                  className="iframesetdata obj"
-                                  style={{
-                                    borderRadius: "12px",
-                                    width: "100%",
-                                    height: "100%",
-                                  }}
-                                  src={`https://www.youtube.com/embed/${features?.resource1.link[0].split("v=")[1]
-                                    }`}
-                                ></iframe>
+                                <>
+                                  <iframe
+                                    allowfullscreen="true"
+                                    className="iframesetdata obj"
+                                    style={{
+                                      borderRadius: "12px",
+                                      width: "100%",
+                                      height: "100%",
+                                    }}
+                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                      new URL(features?.resource1.link).search
+                                    ).get("v")}`}
+                                  ></iframe>
+                                </>
                               ) : (
                                 <>
-
                                   {/* {features?.resource1.img.length ==0 } */}
                                   <img
                                     style={{
@@ -588,8 +594,9 @@ function Hastag() {
                                     width: "100%",
                                     height: "100%",
                                   }}
-                                  src={`https://www.youtube.com/embed/${features?.resource2.link.split("v=")[1]
-                                    }`}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(features?.resource2.link).search
+                                  ).get("v")}`}
                                 ></iframe>
                               ) : (
                                 <img
@@ -621,8 +628,9 @@ function Hastag() {
                                     width: "100%",
                                     height: "100%",
                                   }}
-                                  src={`https://www.youtube.com/embed/${features?.resource2.link[0].split("v=")[1]
-                                    }`}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(features?.resource2.link).search
+                                  ).get("v")}`}
                                 ></iframe>
                               ) : (
                                 <img

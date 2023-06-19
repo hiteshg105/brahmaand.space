@@ -808,9 +808,9 @@ const TrendingWarzone = () => {
                       // height: "400px",
                       // height: "100%",
                     }}
-                    src={`https://www.youtube.com/embed/${
-                      war?.resource1.link.split("v=")[1]
-                    }`}
+                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                      new URL(war?.resource1.link).search
+                    ).get("v")}`}
                   ></iframe>
                 ) : (
                   <>
@@ -843,9 +843,9 @@ const TrendingWarzone = () => {
                       // height: "400px",
                       // height: "100%",
                     }}
-                    src={`https://www.youtube.com/embed/${
-                      war?.resource1.link[0].split("v=")[1]
-                    }`}
+                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                      new URL(war?.resource1.link).search
+                    ).get("v")}`}
                   ></iframe>
                 ) : (
                   <>
@@ -928,21 +928,29 @@ const TrendingWarzone = () => {
 
             {/* {war?.resource2.format === "Video" ? ( */}
             {/* <> */}
+
             {typeof war?.resource2.link === "string" ? (
               <>
                 {war?.resource2.link.includes("v=") ? (
-                  <iframe
-                    allowfullscreen="true"
-                    className="iframesetdata obj"
-                    style={{
-                      borderRadius: "12px",
-                      // height: "400px",
-                      // height: "100%",
-                    }}
-                    src={`https://www.youtube.com/embed/${
-                      war?.resource2.link.split("v=")[1]
-                    }`}
-                  ></iframe>
+                  <>
+                    {/* {console.log(
+                      `https://www.youtube.com/embed/${new URLSearchParams(
+                        new URL(war?.resource2.link).search
+                      ).get("v")}`
+                    )} */}
+                    <iframe
+                      allowfullscreen="true"
+                      className="iframesetdata obj"
+                      style={{
+                        borderRadius: "12px",
+                        // height: "400px",
+                        // height: "100%",
+                      }}
+                      src={`https://www.youtube.com/embed/${new URLSearchParams(
+                        new URL(war?.resource2.link).search
+                      ).get("v")}`}
+                    ></iframe>
+                  </>
                 ) : (
                   <>
                     {/* {features?.resource1.img.length ==0 } */}
@@ -966,18 +974,20 @@ const TrendingWarzone = () => {
             ) : (
               <>
                 {war?.resource2.link.some((e) => e.includes("v=")) ? (
-                  <iframe
-                    allowfullscreen="true"
-                    className="iframesetdata obj"
-                    style={{
-                      borderRadius: "12px",
-                      // height: "400px",
-                      // height: "100%",
-                    }}
-                    src={`https://www.youtube.com/embed/${
-                      war?.resource2.link[0].split("v=")[1]
-                    }`}
-                  ></iframe>
+                  <>
+                    <iframe
+                      allowfullscreen="true"
+                      className="iframesetdata obj"
+                      style={{
+                        borderRadius: "12px",
+                        // height: "400px",
+                        // height: "100%",
+                      }}
+                      src={`https://www.youtube.com/embed/${new URLSearchParams(
+                        new URL(war?.resource2.link).search
+                      ).get("v")}`}
+                    ></iframe>
+                  </>
                 ) : (
                   <>
                     {/* {features?.resource1.img.length ==0 } */}
