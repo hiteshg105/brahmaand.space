@@ -35,38 +35,29 @@ const Category = () => {
   const getallWar = async () => {
 
     const responce = await axiosConfig.get(`/get/warzone`);
+    console.log(responce.data, "data")
     const data = responce.data.data;
-    console.log(data, "data")
-    data.forEach((obj) => {
+    // console.log(data, "data")
+    data[0]?.forEach((obj) => {
       obj.isContent = 0;
     });
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/creator_warzone`);
+    console.log(responce1.data, "data1")
     const data1 = responce1.data.data;
-    console.log(data1, "data1");
-    data1.forEach((obj) => {
+    // console.log(data1, "data1");
+    data1[0]?.forEach((obj) => {
       obj.isContent = 1;
     });
-    if (responce.data.status === true && responce1.data.status === true) {
+    if (responce.data.success === true && responce1.data.success === true) {
       setAllWarData([...data, ...data1]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const responce = await axiosConfig.get(`/get/warzone`);
-    // console.log(responce.data.data, "responce.data.data")
+    else if (responce.data.success === true) {
+      setAllWarData(data);
+    }
+    else if (responce1.data.success === true) {
+      setAllWarData(data1);
+    }
     // setAllWarData(responce.data.data);
   };
   useEffect(() => {
@@ -99,7 +90,7 @@ const Category = () => {
       </Row>
 
       <Row className="common-swipers ps-5 position-relative">
-        {allWarData?.map((ele) => (
+        {allWarData && allWarData?.map((ele) => (
           <>
             <div
               style={{ top: 0 }}
