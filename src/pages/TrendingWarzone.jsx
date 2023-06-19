@@ -328,7 +328,7 @@ const TrendingWarzone = () => {
       if (userid !== null) {
         if (isContent === "0") {
           if (rsc1Review.rate != 0) {
-            console.log("rsc1Review")
+            console.log("rsc1Review");
             const data = await instance.post(`user/add_Comment`, {
               submitresrcId: war.resource1._id,
               userid: userid,
@@ -352,7 +352,7 @@ const TrendingWarzone = () => {
 
         if (isContent === "1") {
           if (rsc1Review.rate != 0) {
-            console.log("rsc1Review")
+            console.log("rsc1Review");
             const userid = localStorage.getItem("userId");
             const data = await instance.post(`/user/add_creator_comment`, {
               creatorResrcId: war.resource1._id,
@@ -374,10 +374,8 @@ const TrendingWarzone = () => {
             swal("Please Enter Comment And Rating");
           }
         }
-      }
-      else {
+      } else {
         swal("Please Login OR Sign Up");
-
       }
     } catch (error) {
       if (error.response?.status === 403) {
@@ -395,7 +393,7 @@ const TrendingWarzone = () => {
       if (userid !== null) {
         if (isContent === "0") {
           if (rsc2Review.rate != 0) {
-            console.log("rsc2Review")
+            console.log("rsc2Review");
             const data = await instance.post(`user/add_Comment`, {
               submitresrcId: war.resource2._id,
               userid: userid,
@@ -419,7 +417,7 @@ const TrendingWarzone = () => {
 
         if (isContent === "1") {
           if (rsc2Review.rate != 0) {
-            console.log("rsc2Review")
+            console.log("rsc2Review");
             const userid = localStorage.getItem("userId");
             const data = await instance.post(`/user/add_creator_comment`, {
               creatorResrcId: war.resource2._id,
@@ -441,13 +439,9 @@ const TrendingWarzone = () => {
             swal("Please Enter Comment And Rating");
           }
         }
-      }
-      else {
+      } else {
         swal("Please Login OR Sign Up");
-
-
       }
-
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
@@ -618,15 +612,25 @@ const TrendingWarzone = () => {
           </Col>
 
           <Row className="flex-column justify-content-between py-3 pe-4 ps-4 justify-content-end ps-lg-0">
-            {console.log(war)}
+            {/* {console.log(war)} */}
             <p
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3 ms-auto text-right"
             >
-              {isContent === "0" ? war?.resource1.resTitle : war?.resource1.creatorName}
+              {isContent === "0"
+                ? war?.resource1.resTitle
+                : war?.resource1.creatorName}
             </p>
             <div className="d-flex align-items-center justify-content-lg-start justify-content-lg-end">
-              <Link className="me-3" to={isContent === "0" ? war?.resource1.link : war?.resource1.link[0]} target="_blank">
+              <Link
+                className="me-3"
+                to={
+                  isContent === "0"
+                    ? war?.resource1.link
+                    : war?.resource1.link[0]
+                }
+                target="_blank"
+              >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
               {/* <Link to="#">
@@ -680,13 +684,22 @@ const TrendingWarzone = () => {
               style={{ fontSize: "24px", fontWeight: "bold" }}
               className="col-lg-10 mb-3"
             >
-              {isContent === "0" ? war?.resource2.resTitle : war?.resource2.creatorName}
+              {isContent === "0"
+                ? war?.resource2.resTitle
+                : war?.resource2.creatorName}
             </p>
             <div
               style={{ height: "fit-content" }}
               className="d-flex justify-content-lg-start"
             >
-              <Link className="me-3" to={isContent === "0" ? war?.resource1.link : war?.resource1.link[0]} target="_blank"
+              <Link
+                className="me-3"
+                to={
+                  isContent === "0"
+                    ? war?.resource1.link
+                    : war?.resource1.link[0]
+                }
+                target="_blank"
               >
                 <img src={mdicon1} alt="" width={24} />
               </Link>
@@ -782,95 +795,122 @@ const TrendingWarzone = () => {
             </h4>
             {/* {console.log(war?.resource1.link)}
             {console.log(war?.resource2.link)} */}
-            {war?.resource1.format === "Video" ? (
+            {/* {war?.resource1.format === "Video" ? (
+              <> */}
+            {typeof war?.resource1.link === "string" ? (
               <>
-                {typeof war?.resource1.link === "string" ? (
-                  <>
-                    {war?.resource1.link.includes("v=") ? (
-                      <iframe
-                        allowfullscreen="true"
-                        className="iframesetdata obj"
-                        style={{
-                          borderRadius: "12px",
-                          // height: "400px",
-                          // height: "100%",
-                        }}
-                        src={`https://www.youtube.com/embed/${war?.resource1.link.split("v=")[1]
-                          }`}
-                      ></iframe>
-                    ) : (
-                      <>
-                        {/* {features?.resource1.img.length ==0 } */}
-                        <img
-                          style={{
-                            objectFit: "contain",
-                            height: "400px",
-                            borderRadius: 12,
-                          }}
-                          className="w-100  object-contain"
-                          src={
-                            war?.resource1.img.length === 0
-                              ? NoImage
-                              : `https://backend.brahmaand.space/${war?.resource1.img}`
-                          }
-                          alt=""
-                        />
-                      </>
-                    )}
-                  </>
+                {war?.resource1.link.includes("v=") ? (
+                  <iframe
+                    allowfullscreen="true"
+                    className="iframesetdata obj"
+                    style={{
+                      borderRadius: "12px",
+                      // height: "400px",
+                      // height: "100%",
+                    }}
+                    src={`https://www.youtube.com/embed/${
+                      war?.resource1.link.split("v=")[1]
+                    }`}
+                  ></iframe>
                 ) : (
                   <>
-                    {war?.resource1.link.some((e) => e.includes("v=")) ? (
-                      <iframe
-                        allowfullscreen="true"
-                        className="iframesetdata obj"
-                        style={{
-                          borderRadius: "12px",
-                          // height: "400px",
-                          // height: "100%",
-                        }}
-                        src={`https://www.youtube.com/embed/${war?.resource1.link[0].split("v=")[1]
-                          }`}
-                      ></iframe>
-                    ) : (
-                      <>
-                        {/* {features?.resource1.img.length ==0 } */}
-                        <img
-                          style={{
-                            objectFit: "contain",
-                            height: "400px",
-                            borderRadius: 12,
-                          }}
-                          className="w-100  object-contain"
-                          src={
-                            war?.resource1.img.length === 0
-                              ? NoImage
-                              : `https://backend.brahmaand.space/${war?.resource1.img}`
-                          }
-                          alt=""
-                        />
-                      </>
-                    )}
+                    {/* {features?.resource1.img.length ==0 } */}
+                    <img
+                      style={{
+                        objectFit: "contain",
+                        height: "400px",
+                        borderRadius: 12,
+                      }}
+                      className="w-100  object-contain"
+                      src={
+                        war?.resource1.img.length === 0
+                          ? NoImage
+                          : war?.resource1.img
+                      }
+                      alt=""
+                    />
                   </>
                 )}
               </>
+            ) : (
+              <>
+                {war?.resource1.link.some((e) => e.includes("v=")) ? (
+                  <iframe
+                    allowfullscreen="true"
+                    className="iframesetdata obj"
+                    style={{
+                      borderRadius: "12px",
+                      // height: "400px",
+                      // height: "100%",
+                    }}
+                    src={`https://www.youtube.com/embed/${
+                      war?.resource1.link[0].split("v=")[1]
+                    }`}
+                  ></iframe>
+                ) : (
+                  <>
+                    {/* {features?.resource1.img.length ==0 } */}
+                    <img
+                      style={{
+                        objectFit: "contain",
+                        height: "400px",
+                        borderRadius: 12,
+                      }}
+                      className="w-100  object-contain"
+                      src={
+                        war?.resource1.img.length === 0
+                          ? NoImage
+                          : `https://backend.brahmaand.space/${war?.resource1.img}`
+                      }
+                      alt=""
+                    />
+                  </>
+                )}
+              </>
+            )}
+            {/* </>
             ) : (
               <div
                 // style={{ }}
                 className="w-100"
               >
-                <img
-                  style={{
-                    height: "400px",
-                    borderRadius: 12,
-                    objectFit: "contain",
-                  }}
-                  className="w-100"
-                  src={war?.resource1.img}
-                  alt=""
-                />
+                {typeof war?.resource1.link === "string" ? (
+                  <>
+                    <img
+                      style={{
+                        height: "250px",
+                        borderRadius: 12,
+                        objectFit: "contain",
+                      }}
+                      className="w-100"
+                      src={
+                        war?.resource1.img.length === 0
+                          ? NoImage
+                          : war?.resource1.img
+                      }
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <>
+                    <img
+                      style={{
+                        height: "250px",
+                        borderRadius: 12,
+                        objectFit: "contain",
+                      }}
+                      className="w-100"
+                      src={
+                        war?.resource1.img.length === 0
+                          ? NoImage
+                          : `https://backend.brahmaand.space/${war?.resource1.img}`
+                      }
+                      alt=""
+                    />
+                  </>
+                )}
               </div>
-            )}
+            )} */}
           </div>
         </Col>
         <Col
@@ -886,95 +926,122 @@ const TrendingWarzone = () => {
             </h4>
             {/* {console.log( war?.resource2.link,"vedio link............")} */}
 
-            {war?.resource2.format === "Video" ? (
+            {/* {war?.resource2.format === "Video" ? ( */}
+            {/* <> */}
+            {typeof war?.resource2.link === "string" ? (
               <>
-                {typeof war?.resource2.link === "string" ? (
-                  <>
-                    {war?.resource2.link.includes("v=") ? (
-                      <iframe
-                        allowfullscreen="true"
-                        className="iframesetdata obj"
-                        style={{
-                          borderRadius: "12px",
-                          // height: "400px",
-                          // height: "100%",
-                        }}
-                        src={`https://www.youtube.com/embed/${war?.resource2.link.split("v=")[1]
-                          }`}
-                      ></iframe>
-                    ) : (
-                      <>
-                        {/* {features?.resource1.img.length ==0 } */}
-                        <img
-                          style={{
-                            objectFit: "contain",
-                            height: "400px",
-                            borderRadius: 12,
-                          }}
-                          className="w-100  object-contain"
-                          src={
-                            war?.resource2.img.length === 0
-                              ? NoImage
-                              : `https://backend.brahmaand.space/${war?.resource2.img}`
-                          }
-                          alt=""
-                        />
-                      </>
-                    )}
-                  </>
+                {war?.resource2.link.includes("v=") ? (
+                  <iframe
+                    allowfullscreen="true"
+                    className="iframesetdata obj"
+                    style={{
+                      borderRadius: "12px",
+                      // height: "400px",
+                      // height: "100%",
+                    }}
+                    src={`https://www.youtube.com/embed/${
+                      war?.resource2.link.split("v=")[1]
+                    }`}
+                  ></iframe>
                 ) : (
                   <>
-                    {war?.resource2.link.some((e) => e.includes("v=")) ? (
-                      <iframe
-                        allowfullscreen="true"
-                        className="iframesetdata obj"
-                        style={{
-                          borderRadius: "12px",
-                          // height: "400px",
-                          // height: "100%",
-                        }}
-                        src={`https://www.youtube.com/embed/${war?.resource2.link[0].split("v=")[1]
-                          }`}
-                      ></iframe>
-                    ) : (
-                      <>
-                        {/* {features?.resource1.img.length ==0 } */}
-                        <img
-                          style={{
-                            objectFit: "contain",
-                            height: "400px",
-                            borderRadius: 12,
-                          }}
-                          className="w-100  object-contain"
-                          src={
-                            war?.resource2.img.length === 0
-                              ? NoImage
-                              : `https://backend.brahmaand.space/${war?.resource2.img}`
-                          }
-                          alt=""
-                        />
-                      </>
-                    )}
+                    {/* {features?.resource1.img.length ==0 } */}
+                    <img
+                      style={{
+                        objectFit: "contain",
+                        height: "400px",
+                        borderRadius: 12,
+                      }}
+                      className="w-100  object-contain"
+                      src={
+                        war?.resource2.img.length === 0
+                          ? NoImage
+                          : war?.resource2.img
+                      }
+                      alt=""
+                    />
                   </>
                 )}
               </>
             ) : (
+              <>
+                {war?.resource2.link.some((e) => e.includes("v=")) ? (
+                  <iframe
+                    allowfullscreen="true"
+                    className="iframesetdata obj"
+                    style={{
+                      borderRadius: "12px",
+                      // height: "400px",
+                      // height: "100%",
+                    }}
+                    src={`https://www.youtube.com/embed/${
+                      war?.resource2.link[0].split("v=")[1]
+                    }`}
+                  ></iframe>
+                ) : (
+                  <>
+                    {/* {features?.resource1.img.length ==0 } */}
+                    <img
+                      style={{
+                        objectFit: "contain",
+                        height: "400px",
+                        borderRadius: 12,
+                      }}
+                      className="w-100  object-contain"
+                      src={
+                        war?.resource2.img.length === 0
+                          ? NoImage
+                          : `https://backend.brahmaand.space/${war?.resource2.img}`
+                      }
+                      alt=""
+                    />
+                  </>
+                )}
+              </>
+            )}
+            {/* </> */}
+            {/* ) : (
               <div
                 // style={{ }}
                 className="w-100"
               >
-                <img
-                  style={{
-                    height: "400px",
-                    borderRadius: 12,
-                    objectFit: "contain",
-                  }}
-                  className="w-100"
-                  src={war?.resource2.img}
-                  alt=""
-                />
+                {typeof war?.resource2.link === "string" ? (
+                  <>
+                    <img
+                      style={{
+                        height: "250px",
+                        borderRadius: 12,
+                        objectFit: "contain",
+                      }}
+                      className="w-100"
+                      src={
+                        war?.resource2.img.length === 0
+                          ? NoImage
+                          : war?.resource2.img
+                      }
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <>
+                    <img
+                      style={{
+                        height: "250px",
+                        borderRadius: 12,
+                        objectFit: "contain",
+                      }}
+                      className="w-100"
+                      src={
+                        war?.resource2.img.length === 0
+                          ? NoImage
+                          : `https://backend.brahmaand.space/${war?.resource2.img}`
+                      }
+                      alt=""
+                    />
+                  </>
+                )}
               </div>
-            )}
+            )} */}
           </div>
         </Col>
       </Row>
@@ -996,7 +1063,7 @@ const TrendingWarzone = () => {
                 {warReview?.rsc1AvReview?.toFixed(2)}
               </p>
             </div>
-            {console.log(warReview?.toalRsc1, "hello")}
+            {/* {console.log(warReview?.toalRsc1, "hello")} */}
             <div className="w-100 w-md-50">
               {warReview?.toalRsc1 === 0 ? (
                 <p
@@ -1014,14 +1081,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc1AvReview >= 2 &&
                       warReview?.rsc1AvReview < 3
-                      ? "Average"
-                      : warReview?.rsc1AvReview >= 3 &&
-                        warReview?.rsc1AvReview < 4
-                        ? "Good"
-                        : warReview?.rsc1AvReview >= 4 &&
-                          warReview?.rsc1AvReview < 4.5
-                          ? "Very Good"
-                          : "Excellent"}
+                    ? "Average"
+                    : warReview?.rsc1AvReview >= 3 &&
+                      warReview?.rsc1AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc1AvReview >= 4 &&
+                      warReview?.rsc1AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
                 </p>
               )}
 
@@ -1059,14 +1126,14 @@ const TrendingWarzone = () => {
                     ? "Bad"
                     : warReview?.rsc2AvReview >= 2 &&
                       warReview?.rsc2AvReview < 3
-                      ? "Average"
-                      : warReview?.rsc2AvReview >= 3 &&
-                        warReview?.rsc2AvReview < 4
-                        ? "Good"
-                        : warReview?.rsc2AvReview >= 4 &&
-                          warReview?.rsc2AvReview < 4.5
-                          ? "Very Good"
-                          : "Excellent"}
+                    ? "Average"
+                    : warReview?.rsc2AvReview >= 3 &&
+                      warReview?.rsc2AvReview < 4
+                    ? "Good"
+                    : warReview?.rsc2AvReview >= 4 &&
+                      warReview?.rsc2AvReview < 4.5
+                    ? "Very Good"
+                    : "Excellent"}
                 </p>
               )}
               <p className="my-3 text-center text-md-start p-0">
@@ -1493,8 +1560,8 @@ const TrendingWarzone = () => {
             {war?.resource1.res_desc
               ? war?.resource1.res_desc
               : war?.resource1.desc
-                ? war?.resource1.desc
-                : "No Description Found"}
+              ? war?.resource1.desc
+              : "No Description Found"}
           </p>
         </Col>
         <Col lg={6} className="content-box px-0">
@@ -1505,8 +1572,8 @@ const TrendingWarzone = () => {
             {war?.resource2.res_desc
               ? war?.resource2.res_desc
               : war?.resource2.desc
-                ? war?.resource2.desc
-                : "No Description Found"}
+              ? war?.resource2.desc
+              : "No Description Found"}
 
             {/* {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -1546,14 +1613,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
                     warRscReview?.rsc1AvReview < 3
-                    ? "Average"
-                    : warRscReview?.rsc1AvReview >= 3 &&
-                      warRscReview?.rsc1AvReview < 4
-                      ? "Good"
-                      : warRscReview?.rsc1AvReview >= 4 &&
-                        warRscReview?.rsc1AvReview < 4.5
-                        ? "Very Good"
-                        : "Excellent"}
+                  ? "Average"
+                  : warRscReview?.rsc1AvReview >= 3 &&
+                    warRscReview?.rsc1AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc1AvReview >= 4 &&
+                    warRscReview?.rsc1AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
               </p>
             )}
 
@@ -1725,14 +1792,14 @@ const TrendingWarzone = () => {
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
                     warRscReview?.rsc2AvReview < 3
-                    ? "Average"
-                    : warRscReview?.rsc2AvReview >= 3 &&
-                      warRscReview?.rsc2AvReview < 4
-                      ? "Good"
-                      : warRscReview?.rsc2AvReview >= 4 &&
-                        warRscReview?.rsc2AvReview < 4.5
-                        ? "Very Good"
-                        : "Excellent"}
+                  ? "Average"
+                  : warRscReview?.rsc2AvReview >= 3 &&
+                    warRscReview?.rsc2AvReview < 4
+                  ? "Good"
+                  : warRscReview?.rsc2AvReview >= 4 &&
+                    warRscReview?.rsc2AvReview < 4.5
+                  ? "Very Good"
+                  : "Excellent"}
               </p>
             )}
             <div className="d-flex justify-content-center justify-content-lg-start align-items-center">
@@ -1978,50 +2045,50 @@ const TrendingWarzone = () => {
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg?.[0]}
-                      timeLine
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          value={value.rating}
-                          edit={false}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
-                    </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
-                  </div>
-                </div>
-                <ShowMore
-                  className="showmore"
-                  style={{ color: "black" }}
-                  lines={1}
-                  more="learn More"
-                  less="learn less"
-                  anchorClass=""
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
                 >
-                  {value.comment}
-                </ShowMore>
-                {/* <p className="fw-bold">{value.comment}</p> */}
-              </div>
-            ))}
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg?.[0]}
+                        timeLine
+                        alt="UserImage"
+                      />
+                    </div>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            value={value.rating}
+                            edit={false}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
+                  </div>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                  {/* <p className="fw-bold">{value.comment}</p> */}
+                </div>
+              ))}
         </Col>
         <Col
           lg={6}
@@ -2031,48 +2098,48 @@ const TrendingWarzone = () => {
           {comment?.newData2 && comment?.newData2.length === 0
             ? "No Review Found"
             : comment?.newData2.map((value) => (
-              <div
-                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                className="d-flex flex-column p-3 rounded-4"
-              >
-                <div className="re-list d-flex align-items-center gap-4">
-                  <div style={{ width: "50px" }}>
-                    <img
-                      className="w-100 h-auto rounded-circle"
-                      src={value?.userid?.profileImg[0]}
-                      alt="UserImage"
-                    />
-                  </div>
-                  <div className="re-listcont w-100 d-flex justify-content-between">
-                    <div>
-                      <h5>{value?.userid?.username}</h5>
-                      <div className="star-1">
-                        <PrettyRating
-                          edit={false}
-                          value={value.rating}
-                          icons={icons.star}
-                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                        />
-                      </div>
-                    </div>
-                    <span>
-                      {/* <Moment format="ll"></Moment> */}
-                      {value?.timeLine}
-                    </span>
-                  </div>
-                </div>
-                <ShowMore
-                  className="showmore"
-                  style={{ color: "black" }}
-                  lines={1}
-                  more="learn More"
-                  less="learn less"
-                  anchorClass=""
+                <div
+                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                  className="d-flex flex-column p-3 rounded-4"
                 >
-                  {value.comment}
-                </ShowMore>
-              </div>
-            ))}
+                  <div className="re-list d-flex align-items-center gap-4">
+                    <div style={{ width: "50px" }}>
+                      <img
+                        className="w-100 h-auto rounded-circle"
+                        src={value?.userid?.profileImg[0]}
+                        alt="UserImage"
+                      />
+                    </div>
+                    <div className="re-listcont w-100 d-flex justify-content-between">
+                      <div>
+                        <h5>{value?.userid?.username}</h5>
+                        <div className="star-1">
+                          <PrettyRating
+                            edit={false}
+                            value={value.rating}
+                            icons={icons.star}
+                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                          />
+                        </div>
+                      </div>
+                      <span>
+                        {/* <Moment format="ll"></Moment> */}
+                        {value?.timeLine}
+                      </span>
+                    </div>
+                  </div>
+                  <ShowMore
+                    className="showmore"
+                    style={{ color: "black" }}
+                    lines={1}
+                    more="learn More"
+                    less="learn less"
+                    anchorClass=""
+                  >
+                    {value.comment}
+                  </ShowMore>
+                </div>
+              ))}
         </Col>
       </Row>
     </Container>

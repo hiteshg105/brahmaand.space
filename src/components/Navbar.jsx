@@ -575,11 +575,11 @@ function CustomNavbar(args) {
             )}
             <Container></Container>
           </Nav.Link>
-          {console.log(
+          {/* {console.log(
             pathname.pathname !== "/" ||
               pathname.pathname !== "/signup" ||
               pathname.pathname !== "/login"
-          )}
+          )} */}
           {/* {console.log(pathname.pathname !== "/" ||
                 pathname.pathname !== "/signup" ||
                 pathname.pathname !== "/login")} */}
@@ -1445,7 +1445,7 @@ function CustomNavbar(args) {
                   placeholder="Select Sub Category"
                 >
                   <option>Select Sub-Category</option>
-                  {console.log(subctgry, "subctgry")}
+                  {/* {console.log(subctgry, "subctgry")} */}
                   {subctgry?.map((subctgry) => {
                     return (
                       <option value={subctgry?._id} key={subctgry?._id}>

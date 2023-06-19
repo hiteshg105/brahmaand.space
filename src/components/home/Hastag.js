@@ -198,13 +198,14 @@ function Hastag() {
   const warContent = async () => {
     const responce = await axiosConfig.get(`/get/all/warzone`);
     const data = responce.data.war;
+    // console.log(data,"data")
     data.forEach((obj) => {
       obj.isContent = 0;
     });
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/all/creator_warzone`);
     const data1 = responce1.data.war;
-    console.log(data1, "data1");
+    // console.log(data1, "data1");
     data1.forEach((obj) => {
       obj.isContent = 1;
     });
@@ -395,103 +396,125 @@ function Hastag() {
                       {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
                         <Col className="position-relative p-0 mx-3 -z-50">
-                          {features.resource1.format === "Video" ? (
+                          {/* {features.resource1.format === "Video" ? (
+                            <> */}
+                          {typeof features.resource1.link === "string" ? (
                             <>
-                              {typeof features.resource1.link === "string" ? (
-                                <>
-                                  {features.resource1.link.includes("v=") ? (
-                                    <iframe
-                                      allowfullscreen="true"
-                                      className="iframesetdata obj"
-                                      style={{
-                                        borderRadius: "12px",
-                                        width: "100%",
-                                        height: "100%",
-                                      }}
-                                      src={`https://www.youtube.com/embed/${
-                                        features?.resource1.link.split(
-                                          "v="
-                                        )[1]
-                                      }`}
-                                    ></iframe>
-                                  ) : (
-                                    <>
-                                      {/* {features?.resource1.img.length ==0 } */}
-                                      <img
-                                        style={{
-                                          objectFit: "contain",
-                                          height: "250px",
-                                          borderRadius: 12,
-                                        }}
-                                        className="w-100  object-contain"
-                                        src={
-                                          features?.resource1.img.length === 0
-                                            ? NoImage
-                                            : `https://backend.brahmaand.space/${features?.resource1.img}`
-                                        }
-                                        alt=""
-                                      />
-                                    </>
-                                  )}
-                                </>
+                              {features.resource1.link.includes("v=") ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${
+                                    features?.resource1.link.split("v=")[1]
+                                  }`}
+                                ></iframe>
                               ) : (
                                 <>
-                                  {features.resource1.link.some((e) =>
-                                    e.includes("v=")
-                                  ) ? (
-                                    <iframe
-                                      allowfullscreen="true"
-                                      className="iframesetdata obj"
-                                      style={{
-                                        borderRadius: "12px",
-                                        width: "100%",
-                                        height: "100%",
-                                      }}
-                                      src={`https://www.youtube.com/embed/${
-                                        features?.resource1.link[0].split(
-                                          "v="
-                                        )[1]
-                                      }`}
-                                    ></iframe>
-                                  ) : (
-                                    <>
-                                      {/* {features?.resource1.img.length ==0 } */}
-                                      <img
-                                        style={{
-                                          objectFit: "contain",
-                                          height: "250px",
-                                          borderRadius: 12,
-                                        }}
-                                        className="w-100  object-contain"
-                                        src={
-                                          features?.resource1.img.length === 0
-                                            ? NoImage
-                                            : `https://backend.brahmaand.space/${features?.resource1.img}`
-                                        }
-                                        alt=""
-                                      />
-                                    </>
-                                  )}
+                                  {/* {features?.resource1.img.length ==0 } */}
+                                  <img
+                                    style={{
+                                      objectFit: "contain",
+                                      height: "250px",
+                                      borderRadius: 12,
+                                    }}
+                                    className="w-100  object-contain"
+                                    src={
+                                      features?.resource1.img.length === 0
+                                        ? NoImage
+                                        : features?.resource1.img
+                                    }
+                                    alt=""
+                                  />
                                 </>
                               )}
                             </>
                           ) : (
+                            <>
+                              {features.resource1.link.some((e) =>
+                                e.includes("v=")
+                              ) ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${
+                                    features?.resource1.link[0].split("v=")[1]
+                                  }`}
+                                ></iframe>
+                              ) : (
+                                <>
+                              
+                                  {/* {features?.resource1.img.length ==0 } */}
+                                  <img
+                                    style={{
+                                      objectFit: "contain",
+                                      height: "250px",
+                                      borderRadius: 12,
+                                    }}
+                                    className="w-100  object-contain"
+                                    src={
+                                      features?.resource1.img.length === 0
+                                        ? NoImage
+                                        : `https://backend.brahmaand.space/${features?.resource1.img}`
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              )}
+                            </>
+                          )}
+                          {/* </> */}
+                          {/* ) : (
                             <div
                               // style={{ }}
                               className="w-100"
                             >
-                              <img
-                                style={{
-                                  height: "250px",
-                                  borderRadius: 12,
-                                  objectFit: "contain",
-                                }}
-                                className="w-100"
-                                src={features?.resource1.img}
-                                alt=""
-                              />
-                            </div>
-                          )}
+                              {typeof features?.resource1.link === "string" ? (
+                                <>
+                                  <img
+                                    style={{
+                                      height: "250px",
+                                      borderRadius: 12,
+                                      objectFit: "contain",
+                                    }}
+                                    className="w-100"
+                                    src={
+                                      features?.resource1.img.length === 0
+                                        ? NoImage
+                                        : features?.resource1.img
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    style={{
+                                      height: "250px",
+                                      borderRadius: 12,
+                                      objectFit: "contain",
+                                    }}
+                                    className="w-100"
+                                    src={
+                                      features?.resource1.img.length === 0
+                                        ? NoImage
+                                        : `https://backend.brahmaand.space/${features?.resource1.img}`
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              )} */}
+                          {/* </div> */}
+                          {/* )} */}
 
                           {features.winner || features.winner === null ? (
                             features.winner === null ? (
@@ -555,97 +578,118 @@ function Hastag() {
                           lg=""
                           className="d-flex justify-content-center align-items-center position-relative p-0 mx-3"
                         >
-                          {features.resource2.format === "Video" ? (
+                          {/* {features.resource2.format === "Video" ? (
+                            <> */}
+                          {typeof features.resource2.link === "string" ? (
                             <>
-                              {typeof features.resource2.link === "string" ? (
-                                <>
-                                  {features.resource2.link.includes("v=") ? (
-                                    <iframe
-                                      allowfullscreen="true"
-                                      className="iframesetdata obj"
-                                      style={{
-                                        borderRadius: "12px",
-                                        width: "100%",
-                                        height: "100%",
-                                      }}
-                                      src={`https://www.youtube.com/embed/${
-                                        features?.resource2.link.split(
-                                          "v="
-                                        )[1]
-                                      }`}
-                                    ></iframe>
-                                  ) : (
-                                    <img
-                                      style={{
-                                        objectFit: "contain",
-                                        height: "250px",
-                                        borderRadius: 12,
-                                      }}
-                                      className="w-100"
-                                      src={
-                                        features?.resource2.img.length === 0
-                                          ? NoImage
-                                          : `https://backend.brahmaand.space/${features?.resource2.img}`
-                                      }
-                                      alt=""
-                                    />
-                                  )}
-                                </>
+                              {features.resource2.link.includes("v=") ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${
+                                    features?.resource2.link.split("v=")[1]
+                                  }`}
+                                ></iframe>
                               ) : (
-                                <>
-                                  {features.resource2.link.some((e) =>
-                                    e.includes("v=")
-                                  ) ? (
-                                    <iframe
-                                      allowfullscreen="true"
-                                      className="iframesetdata obj"
-                                      style={{
-                                        borderRadius: "12px",
-                                        width: "100%",
-                                        height: "100%",
-                                      }}
-                                      src={`https://www.youtube.com/embed/${
-                                        features?.resource2.link[0].split(
-                                          "v="
-                                        )[1]
-                                      }`}
-                                    ></iframe>
-                                  ) : (
-                                    <img
-                                      style={{
-                                        objectFit: "contain",
-                                        height: "250px",
-                                        borderRadius: 12,
-                                      }}
-                                      className="w-100"
-                                      src={
-                                        features?.resource2.img.length === 0
-                                          ? NoImage
-                                          : `https://backend.brahmaand.space/${features?.resource2.img}`
-                                      }
-                                      alt=""
-                                    />
-                                  )}
-                                </>
+                                <img
+                                  style={{
+                                    objectFit: "contain",
+                                    height: "250px",
+                                    borderRadius: 12,
+                                  }}
+                                  className="w-100"
+                                  src={
+                                    features?.resource2.img.length === 0
+                                      ? NoImage
+                                      : features?.resource2.img
+                                  }
+                                  alt=""
+                                />
                               )}
                             </>
+                          ) : (
+                            <>
+                              {features.resource2.link.some((e) =>
+                                e.includes("v=")
+                              ) ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${
+                                    features?.resource2.link[0].split("v=")[1]
+                                  }`}
+                                ></iframe>
+                              ) : (
+                                <img
+                                  style={{
+                                    objectFit: "contain",
+                                    height: "250px",
+                                    borderRadius: 12,
+                                  }}
+                                  className="w-100"
+                                  src={
+                                    features?.resource2.img.length === 0
+                                      ? NoImage
+                                      : `https://backend.brahmaand.space/${features?.resource2.img}`
+                                  }
+                                  alt=""
+                                />
+                              )}
+                            </>
+                          )}
+                          {/* </>
                           ) : (
                             <div
                               // style={{ height: "250px",  }}
                               className="w-100"
                             >
-                              <img
-                                style={{
-                                  height: "250px",
-                                  borderRadius: 12,
-                                  objectFit: "contain",
-                                }}
-                                className="w-100"
-                                src={features?.resource2.img}
-                                alt=""
-                              />
+                              {typeof features?.resource2.link === "string" ? (
+                                <>
+                                  <img
+                                    style={{
+                                      height: "250px",
+                                      borderRadius: 12,
+                                      objectFit: "contain",
+                                    }}
+                                    className="w-100"
+                                    src={
+                                      features?.resource2.img.length === 0
+                                        ? NoImage
+                                        : features?.resource2.img
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    style={{
+                                      height: "250px",
+                                      borderRadius: 12,
+                                      objectFit: "contain",
+                                    }}
+                                    className="w-100"
+                                    src={
+                                      features?.resource2.img.length === 0
+                                        ? NoImage
+                                        : `https://backend.brahmaand.space/${features?.resource2.img}`
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              )}
                             </div>
-                          )}
+                          )} */}
 
                           {features.winner || features.winner === null ? (
                             features.winner === null ? (
