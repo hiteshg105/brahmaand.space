@@ -130,7 +130,6 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       navigate("/login");
     }
     if (myId !== null && myId !== undefined && myId !== "") {
-
       if (cmtRating) {
         e.preventDefault();
         const userid = localStorage.getItem("userId");
@@ -148,12 +147,11 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           handleSelection(id);
           handleContent(content, limit);
         } else {
-          setCmtRating("")
+          setCmtRating("");
           swal("Comment Already Exist");
         }
-      }
-      else {
-        setCmtComment("")
+      } else {
+        setCmtComment("");
         swal("Please Enter Rating And Comment");
       }
     }
@@ -237,7 +235,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -343,9 +341,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           });
         settText("");
         setRating("");
-
-      }
-      else {
+      } else {
         swal("Please Enter Rating and Comment");
       }
     }
@@ -372,8 +368,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       );
 
       if (format && type) {
-
-        const newdata = JSON.parse(JSON.stringify(responce.data.data))
+        const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
           return e.format === format && e.type === type;
@@ -381,19 +376,18 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
       } else {
-
         setData1(responce.data.data);
         setVal(responce.data.data.slice(0, end));
       }
     }
+    console.log(data, "data");
     if (data === "Content Creators") {
-
       const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
+      // console.log(responce.data, "dfjkflfgfhsdfg");
       if (format) {
-
-        const newdata = JSON.parse(JSON.stringify(responce.data.data))
+        const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
           return e.format === format;
@@ -401,13 +395,12 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
       } else {
-
         setData1(responce.data.data);
         setVal(responce.data.data.slice(0, end));
       }
     }
   };
-  // console.log(val);
+  console.log(val);
   const colors = {
     star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
   };
@@ -422,13 +415,13 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
   };
 
   useEffect(() => {
+    // console.log(content);
     handleContent(content);
   }, [content, params, format, type, language, searchdata, limit]);
 
   useEffect(() => {
     getUser();
   }, []);
-
 
   const handleclosemodal = () => {
     // setModal(false);
@@ -461,59 +454,116 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
       </Row>
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
-        {val.map((item, i) => {
-          const date = new Date(item.createdAt);
-          const options = { day: "2-digit", month: "short", year: "numeric" };
-          const formattedDate = date.toLocaleDateString("en-US", options);
-          console.log(item, "shnklsfbsklfksbfksb")
-          return (
-            <>
-              <div
-                className="item"
-                key={item._id}
-                onClick={() => handleSelection(item._id)}
-              >
-                <Col
-                  style={{ padding: "18px", borderRadius: "10px" }}
-                  className="bg-white"
+        {val &&
+          val.map((item, i) => {
+            const date = new Date(item.createdAt);
+            const options = { day: "2-digit", month: "short", year: "numeric" };
+            const formattedDate = date.toLocaleDateString("en-US", options);
+            {
+              /* console.log(item, "shnklsfbsklfksbfksb"); */
+            }
+            return (
+              <>
+                <div
+                  className="item"
+                  key={item._id}
+                  onClick={() => handleSelection(item._id)}
                 >
-                  <div
-                    className="contentcreator-img-main"
-                    style={{ maxHeight: "250px" }}
+                  <Col
+                    style={{ padding: "18px", borderRadius: "10px" }}
+                    className="bg-white"
                   >
+                    {/* {console.log(item)} */}
 
-                    {
-                      content === "Content" ?
+                    <div
+                      className="contentcreator-img-main"
+                      style={{ maxHeight: "250px" }}
+                    >
+                      {content === "Content" ? (
                         <>
-                          <img
-                            style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
-                            className="w-100"
-
-                            src={
-                              item.img.includes("https") ? item.img : item.img.includes("data:image") ? item.img : NoImage
-                            }
-                            alt=""
-                          />
+                          {item?.link.includes("v=") ? (
+                            <iframe
+                              allowfullscreen="true"
+                              className="iframesetdata obj"
+                              style={{
+                                borderRadius: "12px",
+                                width: "100%",
+                                height: "100%",
+                              }}
+                              src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                new URL(item?.link).search
+                              ).get("v")}`}
+                            ></iframe>
+                          ) : (
+                            <>
+                              {/* {features?.resource1.img.length ==0 } */}
+                              <img
+                                style={{
+                                  borderRadius: "10px",
+                                  objectFit: "cover",
+                                  aspectRatio: "16/9",
+                                }}
+                                className="w-100"
+                                src={
+                                  item.img.includes("https")
+                                    ? item.img
+                                    : item.img.includes("data:image")
+                                    ? item.img
+                                    : NoImage
+                                }
+                                alt=""
+                              />
+                            </>
+                          )}
                         </>
-                        :
-                        <img
-                          style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
-                          className="w-100"
+                      ) : (
+                        <>
+                          {console.log(item?.link, "item?.link")}
+                          {typeof item?.link !== "string" ? (
+                            <>
+                              {item?.link?.some((e) => e?.includes("v=")) ? (
+                                <>
+                                  <iframe
+                                    allowfullscreen="true"
+                                    className="iframesetdata obj"
+                                    style={{
+                                      borderRadius: "12px",
+                                      width: "100%",
+                                      height: "100%",
+                                    }}
+                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                      new URL(item?.link).search
+                                    ).get("v")}`}
+                                  ></iframe>
+                                </>
+                              ) : (
+                                <>
+                                  <img
+                                    style={{
+                                      borderRadius: "10px",
+                                      objectFit: "cover",
+                                      aspectRatio: "16/9",
+                                    }}
+                                    className="w-100"
+                                    src={
+                                      item.img
+                                        ? `${base_URL + "/" + item.img}`
+                                        : item.img.includes("data:image")
+                                        ? item.img
+                                        : NoImage
+                                    }
+                                    alt=""
+                                  />
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
 
-                          src={
-                            item.img ? `${base_URL + "/" + item.img}` : item.img.includes("data:image") ? item.img : NoImage
-                          }
-                          alt=""
-                        />
-                    }
-
-
-
-
-
-
-
-                    {/* 
+                      {/* 
                     <img
                       style={{ borderRadius: "10px", objectFit: "cover", aspectRatio: "16/9" }}
                       className="w-100"
@@ -523,71 +573,75 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       }
                       alt=""
                     />/ */}
-                  </div>
-                  <div className="px-2 mt-3">
-                    <div
-                      style={{
-                        color: "#5F56C6",
-                        fontSize: "14px",
-                        gap: "10px",
-                        fontWeight: 500,
-                      }}
-                      className="d-flex overflow-auto mb-2"
-                    >
-                      {/* <span>#best</span>
+                    </div>
+                    <div className="px-2 mt-3">
+                      <div
+                        style={{
+                          color: "#5F56C6",
+                          fontSize: "14px",
+                          gap: "10px",
+                          fontWeight: 500,
+                        }}
+                        className="d-flex overflow-auto mb-2"
+                      >
+                        {/* <span>#best</span>
                       <span>#study</span> */}
 
-
-                      <span># {item.topics}</span>
-
-                    </div>
-                    <h4
-                      style={{ wordWrap: "break-word" }}
-                      className="fw-bold mb-0"
-                    >
-                      {content === "Content" ? item.resTitle?.slice(0, 80) : item.creatorName}
-                      {/* {item.resTitle?.slice(0, 80)} */}
-                      {/* {item.desc?.slice(0, 80)} */}
-                      {/* {item.topics} */}
-                    </h4>
-                    <div className="my-3 d-flex justify-content-between align-items-center flex-wrap">
-                      {content === "Content" ? <p style={{ color: "#011D2B", fontWeight: 500 }}>
-                        <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
-                        {item.creatorName}
-                      </p> : ""}
-                      <div className="d-flex align-items-center gap-1">
-                        <img src="/calender-icon.png" alt="" />
-                        <span style={{ color: "#5F56C6" }}>
-                          {formattedDate}
-                        </span>
+                        <span># {item.topics}</span>
                       </div>
-                    </div>
-                    <p style={{ color: "#707281", fontSize: 12 }}>
-                      {content === "Content" ? item.res_desc : item.desc}
-                    </p>
-                    <div className="my-3 d-flex justify-content-sm-between">
-                      <div className="d-flex align-items-center">
-                        <PrettyRating
-                          value={item?.ava_rating?.toFixed(1)}
-                          icons={icons.star}
-                          colors={colors.star}
-                        />
-                        <span
-                          style={{ color: "#FCAF3B" }}
-                          className="ms-2 fw-bold"
-                        >
-                          (
-                          {item?.ava_rating
-                            ? item?.ava_rating?.toFixed(1)
-                            : 0.0}
-                          )
-                        </span>
+                      <h4
+                        style={{ wordWrap: "break-word" }}
+                        className="fw-bold mb-0"
+                      >
+                        {content === "Content"
+                          ? item.resTitle?.slice(0, 80)
+                          : item.creatorName}
+                        {/* {item.resTitle?.slice(0, 80)} */}
+                        {/* {item.desc?.slice(0, 80)} */}
+                        {/* {item.topics} */}
+                      </h4>
+                      <div className="my-3 d-flex justify-content-between align-items-center flex-wrap">
+                        {content === "Content" ? (
+                          <p style={{ color: "#011D2B", fontWeight: 500 }}>
+                            <span style={{ color: "#9A9AB0" }}>By</span>&nbsp;
+                            {item.creatorName}
+                          </p>
+                        ) : (
+                          ""
+                        )}
+                        <div className="d-flex align-items-center gap-1">
+                          <img src="/calender-icon.png" alt="" />
+                          <span style={{ color: "#5F56C6" }}>
+                            {formattedDate}
+                          </span>
+                        </div>
                       </div>
-                      {/* <p style={{ color: "#5F56C6" }} className="fw-bold">
+                      <p style={{ color: "#707281", fontSize: 12 }}>
+                        {content === "Content" ? item.res_desc : item.desc}
+                      </p>
+                      <div className="my-3 d-flex justify-content-sm-between">
+                        <div className="d-flex align-items-center">
+                          <PrettyRating
+                            value={item?.ava_rating?.toFixed(1)}
+                            icons={icons.star}
+                            colors={colors.star}
+                          />
+                          <span
+                            style={{ color: "#FCAF3B" }}
+                            className="ms-2 fw-bold"
+                          >
+                            (
+                            {item?.ava_rating
+                              ? item?.ava_rating?.toFixed(1)
+                              : 0.0}
+                            )
+                          </span>
+                        </div>
+                        {/* <p style={{ color: "#5F56C6" }} className="fw-bold">
                         {item?.length} Reviews
                       </p> */}
-                    </div>
-                    {/* <div className="d-flex gap-3 overflow-auto">
+                      </div>
+                      {/* <div className="d-flex gap-3 overflow-auto">
                       <span
                         style={{ backgroundColor: "#F1F1F1", borderRadius: 69 }}
                         className="py-2 px-3"
@@ -607,12 +661,12 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                         #Android
                       </span>
                     </div> */}
-                  </div>
-                </Col>
-              </div>
-            </>
-          );
-        })}
+                    </div>
+                  </Col>
+                </div>
+              </>
+            );
+          })}
       </div>
       {/* {console.log(modal)} */}
       {content && content === "Content" ? (
@@ -621,7 +675,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-        // {...args}
+          // {...args}
         >
           <ModalBody>
             <Row>
@@ -861,9 +915,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                 </Col>
                 <Col lg="6">
                   {" "}
-                  <h4 className="mt-3">
-                    Rate Content
-                  </h4>
+                  <h4 className="mt-3">Rate Content</h4>
                   <ReactStars {...secondExample} />
                 </Col>
               </Row>
@@ -1068,7 +1120,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-          // {...args}
+            // {...args}
           >
             <ModalBody>
               <Row>
@@ -1221,8 +1273,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  1
-                                )}
+                                    1
+                                  )}
                             </Link>
                           </div>
                         </div>
@@ -1291,8 +1343,8 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  1
-                                )}
+                                    1
+                                  )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1310,7 +1362,7 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                    // {...secondExample}
+                      // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
