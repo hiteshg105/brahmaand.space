@@ -37,18 +37,18 @@ const Category = () => {
     const responce = await axiosConfig.get(`/get/warzone`);
     const data = responce.data.data;
     console.log(data, "data")
-    data[0].forEach((obj) => {
+    data.forEach((obj) => {
       obj.isContent = 0;
     });
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/creator_warzone`);
     const data1 = responce1.data.data;
     console.log(data1, "data1");
-    data1[0].forEach((obj) => {
+    data1.forEach((obj) => {
       obj.isContent = 1;
     });
     if (responce.data.status === true && responce1.data.status === true) {
-      setAllWarData([...data[0], ...data1[0]]);
+      setAllWarData([...data, ...data1]);
     }
 
 
