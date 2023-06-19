@@ -33,14 +33,46 @@ const Category = () => {
   };
 
   const getallWar = async () => {
+
     const responce = await axiosConfig.get(`/get/warzone`);
-    console.log(responce.data.data, "responce.data.data")
-    setAllWarData(responce.data.data);
+    const data = responce.data.data;
+    console.log(data, "data")
+    data[0].forEach((obj) => {
+      obj.isContent = 0;
+    });
+    // console.log(responce.data.war, "responce.data.war")
+    const responce1 = await axiosConfig.get(`/get/creator_warzone`);
+    const data1 = responce1.data.data;
+    console.log(data1, "data1");
+    data1[0].forEach((obj) => {
+      obj.isContent = 1;
+    });
+    if (responce.data.status === true && responce1.data.status === true) {
+      setAllWarData([...data[0], ...data1[0]]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const responce = await axiosConfig.get(`/get/warzone`);
+    // console.log(responce.data.data, "responce.data.data")
+    // setAllWarData(responce.data.data);
   };
   useEffect(() => {
     getallWar();
   }, []);
-  // console.log(allWarData, "allWarData")
+  console.log(allWarData, "allWarData")
   return (
     <div className="category-main overflow-x-hidden">
       <Row className="hero-swiper">
