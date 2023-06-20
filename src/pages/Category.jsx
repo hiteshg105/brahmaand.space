@@ -80,10 +80,12 @@ const Category = () => {
             >
               <img
                 className="w-100 object-fit-contain"
-                src="/trending-bg.png"
+                src="/trending-bg-3.png"
                 alt="bg"
               />
             </div>
+           
+           
             <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
             <Swiper
               breakpoints={{
