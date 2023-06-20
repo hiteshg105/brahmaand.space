@@ -127,176 +127,179 @@ const Category = () => {
               {ele?.map((slides) => {
                 return (
                   <>
-                   <div className="row w-100">
-                   <SwiperSlide className="ct_slider_w" >
-                      <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
-                        <HomeCountDown endDate={slides.endDate} />
-                        <Row className="position-relative">
-                          <Col className="d-flex flex-column justify-content-center">
-                            <div className="top-main">
-                              {slides?.resource1.format === "Video" ? (
-                                <iframe
-                                  className="w-100 rounded-4 ct_if_asrto"
-                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                    new URL(slides?.resource1.link).search
-                                  ).get("v")}`}
-                                  title="YouTube video player"
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                  allowfullscreen
-                                ></iframe>
-                              ) : (
-                                <div
-                                  style={{ height: "300px" }}
-                                  className="d-flex"
-                                >
-                                  {console.log(slides?.resource1.img.includes("https"), "slides?.resource1.img")}
-                                  <img
-                                    className="w-100 h-auto rounded-4 object-fit-contain"
-                                    style={{ height: "400px" }}
-                                    src={
-                                      slides?.resource1.img.includes("https")
-                                        ? slides?.resource1.img
-                                        : slides?.resource1.img.includes("data:image")
+                    <div className="row w-100">
+                      <SwiperSlide className="ct_slider_w" >
+                        <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
+                          <HomeCountDown endDate={slides.endDate} />
+                          <Row className="position-relative">
+                            <Col className="d-flex flex-column justify-content-center">
+                              <div className="top-main">
+                                {slides?.resource1.format === "Video" ? (
+                                  <iframe
+                                    className="w-100 rounded-4 ct_if_asrto"
+                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                      new URL(slides?.resource1.link).search
+                                    ).get("v")}`}
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen
+                                  ></iframe>
+                                ) : (
+                                  <div
+                                    style={{ height: "300px" }}
+                                    className="d-flex"
+                                  >
+                                    {console.log(slides?.resource1.img.includes("https"), "slides?.resource1.img")}
+                                    <img
+                                      className="w-100 h-auto rounded-4 object-fit-contain"
+                                      style={{ height: "400px" }}
+                                      src={
+                                        slides?.resource1.img.includes("https")
                                           ? slides?.resource1.img
+                                          : slides?.resource1.img.includes("data:image")
+                                            ? slides?.resource1.img
+                                            : NoImage
+                                      }
+                                      // src={slides?.resource1.img}
+                                      alt=""
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                              {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
+                              <Row>
+                                <h4 className="text-center">
+                                  {slides?.resource1.creatorName}
+                                </h4>
+                                <div className="d-flex align-items-center justify-content-center">
+                                  <div className="d-flex align-items-center">
+                                    <PrettyRating
+                                      value={
+                                        slides?.resource1.ava_rating === null
+                                          ? 0
+                                          : slides?.resource1.ava_rating
+                                      }
+                                      icons={icons.star}
+                                      colors={colors.star}
+                                    />
+                                    <span
+                                      style={{ fontSize: "14px" }}
+                                      className="ms-1"
+                                    >
+                                      (
+                                      {slides?.resource1.ava_rating === null
+                                        ? 0
+                                        : slides?.resource1.ava_rating?.toFixed(
+                                          2
+                                        )}
+                                      )
+                                    </span>
+                                  </div>
+                                </div>
+                              </Row>
+                            </Col>
+                            <Col className="d-flex flex-column justify-content-center">
+                              <div className="top-main">
+                                {slides?.resource2.format === "Video" ? (
+                                  <iframe
+                                    className="w-100 rounded-4 ct_if_asrto"
+                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                      new URL(slides?.resource2.link).search
+                                    ).get("v")}`}
+                                    title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen
+                                  ></iframe>
+                                ) : (
+                                  <div
+                                    style={{ height: "300px" }}
+                                    className="d-flex"
+                                  >
+                                    <img
+                                      className="w-100 h-auto rounded-4 object-fit-contain"
+                                      style={{ height: "400px" }}
+                                      src={
+                                        slides?.resource2?.img?.includes("https") ? slides.resource2.img
                                           : NoImage
-                                    }
-                                    // src={slides?.resource1.img}
-                                    alt=""
-                                  />
-                                </div>
-                              )}
-                            </div>
-                            {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
-                            <Row>
-                              <h4 className="text-center">
-                                {slides?.resource1.creatorName}
-                              </h4>
-                              <div className="d-flex align-items-center justify-content-center">
-                                <div className="d-flex align-items-center">
-                                  <PrettyRating
-                                    value={
-                                      slides?.resource1.ava_rating === null
-                                        ? 0
-                                        : slides?.resource1.ava_rating
-                                    }
-                                    icons={icons.star}
-                                    colors={colors.star}
-                                  />
-                                  <span
-                                    style={{ fontSize: "14px" }}
-                                    className="ms-1"
-                                  >
-                                    (
-                                    {slides?.resource1.ava_rating === null
-                                      ? 0
-                                      : slides?.resource1.ava_rating?.toFixed(
-                                        2
-                                      )}
-                                    )
-                                  </span>
-                                </div>
+                                      }
+                                      // src={slides?.resource2.img}
+                                      alt=""
+                                    />
+                                  </div>
+                                )}
                               </div>
-                            </Row>
-                          </Col>
-                          <Col className="d-flex flex-column justify-content-center">
-                            <div className="top-main">
-                              {slides?.resource2.format === "Video" ? (
-                                <iframe
-                                  className="w-100 rounded-4 ct_if_asrto"
-                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                    new URL(slides?.resource2.link).search
-                                  ).get("v")}`}
-                                  title="YouTube video player"
-                                  frameborder="0"
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                  allowfullscreen
-                                ></iframe>
-                              ) : (
-                                <div
-                                  style={{ height: "300px" }}
-                                  className="d-flex"
-                                >
-                                  <img
-                                    className="w-100 h-auto rounded-4 object-fit-contain"
-                                    style={{ height: "400px" }}
-                                    src={
-                                      slides?.resource2?.img?.includes("https") ? slides.resource2.img
-                                        : NoImage
-                                    }
-                                    // src={slides?.resource2.img}
-                                    alt=""
-                                  />
-                                </div>
-                              )}
-                            </div>
-                            {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
-                            <Row>
-                              <h4 className="text-center">
-                                {slides?.resource2.creatorName}
-                              </h4>
-                              <div className="d-flex align-items-center justify-content-center">
-                                <div className="d-flex align-items-center">
-                                  <PrettyRating
-                                    value={
-                                      slides?.resource1.ava_rating === null
+                              {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
+                              <Row>
+                                <h4 className="text-center">
+                                  {slides?.resource2.creatorName}
+                                </h4>
+                                <div className="d-flex align-items-center justify-content-center">
+                                  <div className="d-flex align-items-center">
+                                    <PrettyRating
+                                      value={
+                                        slides?.resource1.ava_rating === null
+                                          ? 0
+                                          : slides?.resource1.ava_rating
+                                      }
+                                      icons={icons.star}
+                                      colors={colors.star}
+                                    />
+                                    <span
+                                      style={{ fontSize: "14px" }}
+                                      className="ms-1"
+                                    >
+                                      (
+                                      {slides?.resource1.ava_rating === null
                                         ? 0
-                                        : slides?.resource1.ava_rating
-                                    }
-                                    icons={icons.star}
-                                    colors={colors.star}
-                                  />
-                                  <span
-                                    style={{ fontSize: "14px" }}
-                                    className="ms-1"
-                                  >
-                                    (
-                                    {slides?.resource1.ava_rating === null
-                                      ? 0
-                                      : slides?.resource2.ava_rating?.toFixed(
-                                        2
-                                      )}
-                                    )
-                                  </span>
+                                        : slides?.resource2.ava_rating?.toFixed(
+                                          2
+                                        )}
+                                      )
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                            </Row>
-                          </Col>
-                          <div
-                            style={{
-                              left: "50%",
-                              top: "40%",
-                              transform: "translate(-50%,-50%)",
-                            }}
-                            className="position-absolute text-center p-0"
-                          >
-                            <img
-                              width={90}
-                              height={90}
-                              src={versus}
-                              alt="v/s"
-                            />
-                          </div>
-                        </Row>
-                        <Row>
-                          <Button
-                            onClick={() =>
-                              navigate(`/trending-warzone/${slides._id}`)
-                            }
-                            style={{
-                              borderRadius: "4px",
-                              width: "fit-content",
-                              backgroundColor: "#5F56C6",
-                            }}
-                            size="sm"
-                            className="m-0 mb-2 border-0 mx-auto text-white px-3"
-                          >
-                            Rate Now
-                          </Button>
-                        </Row>
-                      </Container>
-                    </SwiperSlide>
-                   </div>
+                              </Row>
+                            </Col>
+                            <div
+                              style={{
+                                left: "50%",
+                                top: "40%",
+                                transform: "translate(-50%,-50%)",
+                              }}
+                              className="position-absolute text-center p-0"
+                            >
+                              <img
+                                width={90}
+                                height={90}
+                                src={versus}
+                                alt="v/s"
+                              />
+                            </div>
+                          </Row>
+                          <Row>
+                            <Button
+                              onClick={() =>
+                                navigate(
+                                  `/trending-warzone/${slides._id}?additionalValue=${slides.isContent}`
+                                )
+                                // navigate(`/trending-warzone/${slides._id}`)
+                              }
+                              style={{
+                                borderRadius: "4px",
+                                width: "fit-content",
+                                backgroundColor: "#5F56C6",
+                              }}
+                              size="sm"
+                              className="m-0 mb-2 border-0 mx-auto text-white px-3"
+                            >
+                              Rate Now
+                            </Button>
+                          </Row>
+                        </Container>
+                      </SwiperSlide>
+                    </div>
                   </>
                 );
               })}
