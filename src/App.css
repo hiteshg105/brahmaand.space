@@ -449,3 +449,17 @@
 }
 
 /* Hero  */
+
+
+
+.ct_box_shadow{
+  box-shadow: 2px 2px 4px rgba(186, 198, 207, 0.55);
+}
+
+.ct_if_asrto{
+  aspect-ratio: 16/9 !important;
+}
+
+.ct_slider_w{
+  width: 49% !important;
+}
