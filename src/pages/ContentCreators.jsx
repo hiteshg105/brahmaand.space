@@ -32,7 +32,8 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ format, type, language, searchdata, updateParentState }) => {
+const ContentCreators = ({ format, type, language, searchdata, updateParentState,Filtertype }) => {
+  console.log(Filtertype)
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -370,11 +371,12 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      if (format && type) {
+      if (format && type && language) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
-          return e.format === format && e.type === type;
+          const languageMatch = e.language.some((lang) => lang._id === language);
+          return e.format === format && e.type === type && languageMatch;
         });
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
@@ -383,17 +385,18 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
         setVal(responce.data.data.slice(0, end));
       }
     }
-    console.log(data, "data");
     if (data === "Content Creators") {
       const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
       // console.log(responce.data, "dfjkflfgfhsdfg");
-      if (format) {
+      if (format && language) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
-          return e.format === format;
+          const languageMatch = e.language.some((lang) => lang._id === language);
+
+          return e.format === format && languageMatch;
         });
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));

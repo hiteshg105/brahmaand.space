@@ -84,8 +84,8 @@ const Category = () => {
                 alt="bg"
               />
             </div>
-           
-           
+
+
             <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
             <Swiper
               breakpoints={{
@@ -136,7 +136,100 @@ const Category = () => {
                           <Row className="position-relative">
                             <Col className="d-flex flex-column justify-content-center">
                               <div className="top-main">
-                                {slides?.resource1.format === "Video" ? (
+
+                                {typeof slides.resource1.link === "string" ? (
+                                  <>
+                                    {/* {console.log(`https://www.youtube.com/embed/${
+                                    features?.resource1.link.split("v=")[1]
+                                  }`,"hello")} */}
+                                    {slides.resource1.link.includes("v=") ? (
+                                      <iframe
+                                        allowfullscreen="true"
+                                        className="iframesetdata obj"
+                                        style={{
+                                          borderRadius: "12px",
+                                          width: "100%",
+                                          height: "100%",
+                                        }}
+                                        src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                          new URL(slides?.resource1.link).search
+                                        ).get("v")}`}
+                                      ></iframe>
+                                    ) : (
+                                      <>
+                                        {/* {features?.resource1.img.length ==0 } */}
+                                        <img
+                                          style={{
+                                            objectFit: "contain",
+                                            height: "250px",
+                                            borderRadius: 12,
+                                          }}
+                                          className="w-100  object-contain"
+                                          src={
+                                            slides?.resource1.img.length === 0
+                                              ? NoImage
+                                              : slides?.resource1.img
+                                          }
+                                          alt=""
+                                        />
+                                      </>
+                                    )}
+                                  </>
+                                ) : (
+                                  <>
+                                    {slides.resource1.link.some((e) =>
+                                      e.includes("v=")
+                                    ) ? (
+                                      <>
+                                        <iframe
+                                          allowfullscreen="true"
+                                          className="iframesetdata obj"
+                                          style={{
+                                            borderRadius: "12px",
+                                            width: "100%",
+                                            height: "100%",
+                                          }}
+                                          src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                            new URL(slides?.resource1.link).search
+                                          ).get("v")}`}
+                                        ></iframe>
+                                      </>
+                                    ) : (
+                                      <>
+                                        {/* {console.log(features?.resource1.img) } */}
+                                        <img
+                                          style={{
+                                            objectFit: "contain",
+                                            height: "250px",
+                                            borderRadius: 12,
+                                          }}
+                                          className="w-100  object-contain"
+                                          src={
+                                            slides?.resource1.img?.length === 0
+                                              ? NoImage
+                                              : slides?.resource1.img?.includes(
+                                                "https"
+                                              )
+                                                ? slides?.resource1.img
+                                                : `https://backend.brahmaand.space/${slides?.resource1.img}`
+                                          }
+                                          alt=""
+                                        />
+                                      </>
+                                    )}
+                                  </>
+                                )}
+
+
+
+
+
+
+
+
+
+
+                                {/* {slides?.resource1.format === "Video" ? (
                                   <iframe
                                     className="w-100 rounded-4 ct_if_asrto"
                                     src={`https://www.youtube.com/embed/${new URLSearchParams(
@@ -167,7 +260,7 @@ const Category = () => {
                                       alt=""
                                     />
                                   </div>
-                                )}
+                                )} */}
                               </div>
                               {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
                               <Row>
@@ -203,7 +296,89 @@ const Category = () => {
                             </Col>
                             <Col className="d-flex flex-column justify-content-center">
                               <div className="top-main">
-                                {slides?.resource2.format === "Video" ? (
+
+                              {typeof slides.resource2.link === "string" ? (
+                            <>
+                              {slides.resource2.link.includes("v=") ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(slides?.resource2.link).search
+                                  ).get("v")}`}
+                                ></iframe>
+                              ) : (
+                                <img
+                                  style={{
+                                    objectFit: "contain",
+                                    height: "250px",
+                                    borderRadius: 12,
+                                  }}
+                                  className="w-100"
+                                  src={
+                                    slides?.resource2.img.length === 0
+                                      ? NoImage
+                                      : slides?.resource2.img
+                                  }
+                                  alt=""
+                                />
+                              )}
+                            </>
+                          ) : (
+                            <>
+                              {slides.resource2.link.some((e) =>
+                                e.includes("v=")
+                              ) ? (
+                                <iframe
+                                  allowfullscreen="true"
+                                  className="iframesetdata obj"
+                                  style={{
+                                    borderRadius: "12px",
+                                    width: "100%",
+                                    height: "100%",
+                                  }}
+                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                    new URL(slides?.resource2.link).search
+                                  ).get("v")}`}
+                                ></iframe>
+                              ) : (
+                                <img
+                                  style={{
+                                    objectFit: "contain",
+                                    height: "250px",
+                                    borderRadius: 12,
+                                  }}
+                                  className="w-100"
+                                  src={
+                                    slides?.resource2.img?.length === 0
+                                      ? NoImage
+                                      : slides?.resource2.img?.includes(
+                                          "https"
+                                        )
+                                      ? slides?.resource2.img
+                                      : `https://backend.brahmaand.space/${slides?.resource2.img}`
+                                  }
+                                  alt=""
+                                />
+                              )}
+                            </>
+                          )}
+
+
+
+
+
+
+
+
+
+
+                                {/* {slides?.resource2.format === "Video" ? (
                                   <iframe
                                     className="w-100 rounded-4 ct_if_asrto"
                                     src={`https://www.youtube.com/embed/${new URLSearchParams(
@@ -230,7 +405,7 @@ const Category = () => {
                                       alt=""
                                     />
                                   </div>
-                                )}
+                                )} */}
                               </div>
                               {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
                               <Row>
