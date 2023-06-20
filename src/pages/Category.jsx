@@ -127,16 +127,16 @@ const Category = () => {
               {ele?.map((slides) => {
                 return (
                   <>
-                    <SwiperSlide className="bg-white rounded-4">
-                      <Container className="py-3 px-4">
+                   <div className="row w-100">
+                   <SwiperSlide className="ct_slider_w" >
+                      <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
                         <HomeCountDown endDate={slides.endDate} />
                         <Row className="position-relative">
                           <Col className="d-flex flex-column justify-content-center">
                             <div className="top-main">
                               {slides?.resource1.format === "Video" ? (
                                 <iframe
-                                  height={300}
-                                  className="w-100 rounded-4"
+                                  className="w-100 rounded-4 ct_if_asrto"
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(slides?.resource1.link).search
                                   ).get("v")}`}
@@ -203,8 +203,7 @@ const Category = () => {
                             <div className="top-main">
                               {slides?.resource2.format === "Video" ? (
                                 <iframe
-                                  height={300}
-                                  className="w-100 rounded-4"
+                                  className="w-100 rounded-4 ct_if_asrto"
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(slides?.resource2.link).search
                                   ).get("v")}`}
@@ -290,13 +289,14 @@ const Category = () => {
                               backgroundColor: "#5F56C6",
                             }}
                             size="sm"
-                            className="m-0 border-0 mx-auto text-white px-3"
+                            className="m-0 mb-2 border-0 mx-auto text-white px-3"
                           >
                             Rate Now
                           </Button>
                         </Row>
                       </Container>
                     </SwiperSlide>
+                   </div>
                   </>
                 );
               })}
