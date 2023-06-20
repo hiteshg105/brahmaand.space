@@ -15,6 +15,7 @@ import { useState } from "react";
 import HomeCountDown from "../components/home/HomeCountDown";
 import { useNavigate } from "react-router-dom";
 import axiosConfig from "../components/axiosConfig";
+import NoImage from "../components/home/noimage1.png";
 
 const Category = () => {
   const [allWarData, setAllWarData] = useState();
@@ -34,31 +35,12 @@ const Category = () => {
 
   const getallWar = async () => {
 
-    const responce = await axiosConfig.get(`/get/warzone`);
-    console.log(responce.data, "data")
-    const data = responce.data.data;
-    // console.log(data, "data")
-    data[0]?.forEach((obj) => {
-      obj.isContent = 0;
-    });
-    // console.log(responce.data.war, "responce.data.war")
-    const responce1 = await axiosConfig.get(`/get/creator_warzone`);
-    console.log(responce1.data, "data1")
-    const data1 = responce1.data.data;
-    // console.log(data1, "data1");
-    data1[0]?.forEach((obj) => {
-      obj.isContent = 1;
-    });
-    if (responce.data.success === true && responce1.data.success === true) {
-      setAllWarData([...data, ...data1]);
+    const responce = await axiosConfig.get(`/get/both_warzone`);
+
+
+    if (responce.data.success === true) {
+      setAllWarData(responce.data.data)
     }
-    else if (responce.data.success === true) {
-      setAllWarData(data);
-    }
-    else if (responce1.data.success === true) {
-      setAllWarData(data1);
-    }
-    // setAllWarData(responce.data.data);
   };
   useEffect(() => {
     getallWar();
@@ -168,10 +150,18 @@ const Category = () => {
                                   style={{ height: "300px" }}
                                   className="d-flex"
                                 >
+                                  {console.log(slides?.resource1.img.includes("https"), "slides?.resource1.img")}
                                   <img
                                     className="w-100 h-auto rounded-4 object-fit-contain"
                                     style={{ height: "400px" }}
-                                    src={slides?.resource1.img}
+                                    src={
+                                      slides?.resource1.img.includes("https")
+                                        ? slides?.resource1.img
+                                        : slides?.resource1.img.includes("data:image")
+                                          ? slides?.resource1.img
+                                          : NoImage
+                                    }
+                                    // src={slides?.resource1.img}
                                     alt=""
                                   />
                                 </div>
@@ -231,7 +221,11 @@ const Category = () => {
                                   <img
                                     className="w-100 h-auto rounded-4 object-fit-contain"
                                     style={{ height: "400px" }}
-                                    src={slides?.resource2.img}
+                                    src={
+                                      slides?.resource2?.img?.includes("https") ? slides.resource2.img
+                                        : NoImage
+                                    }
+                                    // src={slides?.resource2.img}
                                     alt=""
                                   />
                                 </div>
