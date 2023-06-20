@@ -65,6 +65,10 @@ import { useFormState } from "react-hook-form";
 import ContentCreators from "./ContentCreators";
 
 function Productsearch(args) {
+
+  const [parentState, setParentState] = useState("");
+
+
   const [modalsuggestion, setModalsuggestion] = useState(false);
   const togglesuggestion = () => setModalsuggestion(!modalsuggestion);
   const toggle = () => setModal(!modal);
@@ -93,6 +97,10 @@ function Productsearch(args) {
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
+
+  const updateParentState = (newValue) => {
+    setParentState(newValue);
+  };
 
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -155,7 +163,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const navigate = useNavigate();
@@ -255,7 +263,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -323,7 +331,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
   };
 
@@ -346,7 +354,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const getLanguage = () => {
@@ -355,7 +363,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -382,7 +390,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -682,7 +690,7 @@ function Productsearch(args) {
         searchitem === "" &&
         hastagdata === "hastag" &&
         searchdata === "",
-      Filtertype === "")
+        Filtertype === "")
     ) {
       allsearchproduct();
     }
@@ -716,7 +724,7 @@ function Productsearch(args) {
     // contentyear,
     hastagdata,
     // searchdata,
-  ]);
+  ], [parentState]);
 
   const [typelength, setTypelength] = useState([]);
   // const gettypefilter = () => {
@@ -780,7 +788,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
     // axios
     //   .get(
@@ -918,7 +926,8 @@ function Productsearch(args) {
                         </Row> */}
                       </div>
                     </Col>
-                    <Col lg="12" className="py-3">
+                    {/* {console.log(parentState)} */}
+                    {parentState === "Content Creators" ? (<span></span>) : (<Col lg="12" className="py-3">
                       <div className="ft-type">
                         <h5 className="mb-3">Type</h5>
                         <Row className="mt-3 mx-2">
@@ -958,7 +967,9 @@ function Productsearch(args) {
                             : null}
                         </Row>
                       </div>
-                    </Col>
+                    </Col>)}
+
+
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
                         <h5 className="mb-3">Format</h5>
@@ -1005,31 +1016,37 @@ function Productsearch(args) {
                         <Row className=" mb-3 mx-2"></Row>
                         <Row>
                           <Container>
-                            <Label
-                              className="mt-3"
-                              style={{ font: "GT Walsheim Pro" }}
-                            >
-                              <b style={{ fontSize: "19px" }}>Content Year</b>
-                            </Label>
-                            <select
-                              defaultValue="Select Year"
-                              value={contentyear}
-                              // checked={"Select Year" === contentyear}
-                              onChange={(e) => {
-                                setContentyear(e.target.value);
-                                handlefilter(e.target.value);
-                              }}
-                              className="form-control"
-                            >
-                              <option>Select Year</option>
-                              {relyear?.map((yr) => {
-                                return (
-                                  <option value={yr?._id} key={yr?._id}>
-                                    {yr?.yrName}
-                                  </option>
-                                );
-                              })}
-                            </select>
+                            {
+                              parentState === "Content Creators" ? (<span></span>) : (
+                                <>
+                                  <Label
+                                    className="mt-3"
+                                    style={{ font: "GT Walsheim Pro" }}
+                                  >
+                                    <b style={{ fontSize: "19px" }}>Content Year</b>
+                                  </Label>
+                                  <select
+                                    defaultValue="Select Year"
+                                    value={contentyear}
+                                    // checked={"Select Year" === contentyear}
+                                    onChange={(e) => {
+                                      setContentyear(e.target.value);
+                                      handlefilter(e.target.value);
+                                    }}
+                                    className="form-control"
+                                  >
+                                    <option>Select Year</option>
+                                    {relyear?.map((yr) => {
+                                      return (
+                                        <option value={yr?._id} key={yr?._id}>
+                                          {yr?.yrName}
+                                        </option>
+                                      );
+                                    })}
+                                  </select>     
+                                </>
+                              )
+                            }
                             <Label
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
@@ -1158,9 +1175,8 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${
-                                                  promotion?.link?.split("=")[1]
-                                                }`}
+                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                                  }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1502,7 +1518,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                    0 ? (
+                                                      0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1628,9 +1644,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                      localStorage.getItem(
-                                                        "userId"
-                                                      ) ? (
+                                                        localStorage.getItem(
+                                                          "userId"
+                                                        ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1823,11 +1839,15 @@ function Productsearch(args) {
                   </Row>
 
                   <ContentCreators
+                    updateParentState={updateParentState}
                     format={format}
                     type={type}
                     language={language}
                     searchdata={searchdata}
                   />
+
+                  {/* {console.log(parentState,"")} */}
+                  {/* {console.log(parentState,"parentState")} */}
                 </div>
               </div>
             </div>

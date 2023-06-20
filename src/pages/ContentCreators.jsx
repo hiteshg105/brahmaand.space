@@ -32,7 +32,7 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ format, type, language, searchdata }) => {
+const ContentCreators = ({ format, type, language, searchdata,updateParentState }) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -351,9 +351,12 @@ const ContentCreators = ({ format, type, language, searchdata }) => {
     if (event.target.checked === true) {
       setLimit(12);
       setContent("Content Creators");
+      updateParentState("Content Creators")
     } else {
       setLimit(12);
       setContent("Content");
+      updateParentState("Content")
+
     }
   };
   const seeMore = () => {
