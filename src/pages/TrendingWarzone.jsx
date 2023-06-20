@@ -860,6 +860,8 @@ const TrendingWarzone = () => {
                       src={
                         war?.resource1.img.length === 0
                           ? NoImage
+                          : war?.resource1.img.includes("https")
+                          ? war?.resource1.img
                           : `https://backend.brahmaand.space/${war?.resource1.img}`
                       }
                       alt=""
@@ -1001,6 +1003,8 @@ const TrendingWarzone = () => {
                       src={
                         war?.resource2.img.length === 0
                           ? NoImage
+                          : war?.resource2.img.includes("https")
+                          ? war?.resource2.img
                           : `https://backend.brahmaand.space/${war?.resource2.img}`
                       }
                       alt=""
