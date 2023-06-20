@@ -32,7 +32,7 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ format, type, language, searchdata,updateParentState }) => {
+const ContentCreators = ({ format, type, language, searchdata, updateParentState }) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -235,7 +235,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -480,7 +480,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
 
                     <div
                       className="contentcreator-img-main"
-                      style={{ maxHeight: "250px" }}
+                      style={{ aspectRatio: "16/9" }}
                     >
                       {content === "Content" ? (
                         <>
@@ -511,8 +511,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                                   item.img.includes("https")
                                     ? item.img
                                     : item.img.includes("data:image")
-                                    ? item.img
-                                    : NoImage
+                                      ? item.img
+                                      : NoImage
                                 }
                                 alt=""
                               />
@@ -552,8 +552,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                                       item.img
                                         ? `${base_URL + "/" + item.img}`
                                         : item.img.includes("data:image")
-                                        ? item.img
-                                        : NoImage
+                                          ? item.img
+                                          : NoImage
                                     }
                                     alt=""
                                   />
@@ -678,7 +678,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -1123,7 +1123,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1276,8 +1276,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1346,8 +1346,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1365,7 +1365,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
