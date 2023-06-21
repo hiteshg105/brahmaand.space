@@ -32,8 +32,13 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ format, type, language, searchdata, updateParentState,Filtertype }) => {
-  console.log(Filtertype)
+const ContentCreators = ({
+  format,
+  type,
+  language,
+  searchdata,
+  updateParentState,
+}) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -352,12 +357,11 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
     if (event.target.checked === true) {
       setLimit(12);
       setContent("Content Creators");
-      updateParentState("Content Creators")
+      updateParentState("Content Creators");
     } else {
       setLimit(12);
       setContent("Content");
-      updateParentState("Content")
-
+      updateParentState("Content");
     }
   };
   const seeMore = () => {
@@ -513,9 +517,9 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
                                 src={
                                   item.img.includes("https")
                                     ? item.img
-                                    : item.img.includes("data:image")
-                                      ? item.img
-                                      : NoImage
+                                    : img.includes("data:image")
+                                    ? item.img
+                                    : NoImage
                                 }
                                 alt=""
                               />
@@ -524,7 +528,7 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
                         </>
                       ) : (
                         <>
-                          {console.log(item?.link, "item?.link")}
+                          {/* {console.log(item?.link, "item?.link")} */}
                           {typeof item?.link !== "string" ? (
                             <>
                               {item?.link?.some((e) => e?.includes("v=")) ? (
@@ -544,6 +548,7 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
                                 </>
                               ) : (
                                 <>
+                                  {console.log(item.img)}
                                   <img
                                     style={{
                                       borderRadius: "10px",
@@ -552,11 +557,11 @@ const ContentCreators = ({ format, type, language, searchdata, updateParentState
                                     }}
                                     className="w-100"
                                     src={
-                                      item.img
-                                        ? `${base_URL + "/" + item.img}`
-                                        : item.img.includes("data:image")
-                                          ? item.img
-                                          : NoImage
+                                      item.img.includes("https")
+                                        ? item.img
+                                        : img.includes("data:image")
+                                        ? item.img
+                                        : NoImage
                                     }
                                     alt=""
                                   />

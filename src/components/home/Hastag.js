@@ -204,7 +204,7 @@ function Hastag() {
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/all/creator_warzone`);
     const data1 = responce1.data.war;
-    // console.log(data1, "data1");
+    console.log(data1, "data1");
     data1.forEach((obj) => {
       obj.isContent = 1;
     });
@@ -758,6 +758,7 @@ function Hastag() {
                               colors={colors.star}
                             />
                             <span style={{ fontSize: "14px" }} className="ms-1">
+                              {console.log(features?.resource1.ava_rating, "features?.resource1.ava_rating")}
                               {features?.resource1.ava_rating?.toFixed(2)}
                             </span>
                           </div>

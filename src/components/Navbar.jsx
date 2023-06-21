@@ -476,7 +476,7 @@ function CustomNavbar(args) {
       setLanguage("");
       setTopics("");
       setDescriptionData("");
-      setFile(null);
+      setFile([]);
     } else {
       swal("Discard 👍.");
       setIsContentCreatorModel(false);
