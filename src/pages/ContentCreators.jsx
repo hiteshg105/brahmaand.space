@@ -32,7 +32,13 @@ const base_URL = "https://backend.brahmaand.space";
 // const base_URL = "https://stage.brahmaand.space/";
 // const base_URL = "http://localhost:9000";
 
-const ContentCreators = ({ format, type, language, searchdata,updateParentState }) => {
+const ContentCreators = ({
+  format,
+  type,
+  language,
+  searchdata,
+  updateParentState,
+}) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -235,7 +241,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -351,12 +357,11 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
     if (event.target.checked === true) {
       setLimit(12);
       setContent("Content Creators");
-      updateParentState("Content Creators")
+      updateParentState("Content Creators");
     } else {
       setLimit(12);
       setContent("Content");
-      updateParentState("Content")
-
+      updateParentState("Content");
     }
   };
   const seeMore = () => {
@@ -370,11 +375,12 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
         `/user/advancefilter?sub_category=${params.id}`
       );
 
-      if (format && type) {
+      if (format && type && language) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
-          return e.format === format && e.type === type;
+          const languageMatch = e.language.some((lang) => lang._id === language);
+          return e.format === format && e.type === type && languageMatch;
         });
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
@@ -383,17 +389,18 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
         setVal(responce.data.data.slice(0, end));
       }
     }
-    console.log(data, "data");
     if (data === "Content Creators") {
       const responce = await axiosClient.post(
         `/content/advance_content_filter?sub_category=${params.id}`
       );
       // console.log(responce.data, "dfjkflfgfhsdfg");
-      if (format) {
+      if (format && language) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
-          return e.format === format;
+          const languageMatch = e.language.some((lang) => lang._id === language);
+
+          return e.format === format && languageMatch;
         });
         setData1(dataFilter);
         setVal(dataFilter.slice(0, end));
@@ -480,7 +487,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
 
                     <div
                       className="contentcreator-img-main"
-                      style={{ maxHeight: "250px" }}
+                      style={{ aspectRatio: "16/9" }}
                     >
                       {content === "Content" ? (
                         <>
@@ -510,7 +517,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                                 src={
                                   item.img.includes("https")
                                     ? item.img
-                                    : item.img.includes("data:image")
+                                    : img.includes("data:image")
                                     ? item.img
                                     : NoImage
                                 }
@@ -521,7 +528,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                         </>
                       ) : (
                         <>
-                          {console.log(item?.link, "item?.link")}
+                          {/* {console.log(item?.link, "item?.link")} */}
                           {typeof item?.link !== "string" ? (
                             <>
                               {item?.link?.some((e) => e?.includes("v=")) ? (
@@ -541,6 +548,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                                 </>
                               ) : (
                                 <>
+                                  {console.log(item.img)}
                                   <img
                                     style={{
                                       borderRadius: "10px",
@@ -549,9 +557,9 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                                     }}
                                     className="w-100"
                                     src={
-                                      item.img
-                                        ? `${base_URL + "/" + item.img}`
-                                        : item.img.includes("data:image")
+                                      item.img.includes("https")
+                                        ? item.img
+                                        : img.includes("data:image")
                                         ? item.img
                                         : NoImage
                                     }
@@ -678,7 +686,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -1123,7 +1131,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1276,8 +1284,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1346,8 +1354,8 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1365,7 +1373,7 @@ const ContentCreators = ({ format, type, language, searchdata,updateParentState 
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}

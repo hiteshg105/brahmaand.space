@@ -1844,6 +1844,7 @@ function Productsearch(args) {
                     type={type}
                     language={language}
                     searchdata={searchdata}
+                    Filtertype= {Filtertype}
                   />
 
                   {/* {console.log(parentState,"")} */}

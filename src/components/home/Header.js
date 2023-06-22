@@ -80,6 +80,7 @@ function Header(args) {
   // console.log(file);
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
+  const [slider, setSlider] = useState([]);
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
@@ -408,6 +409,16 @@ function Header(args) {
   const navigate = useNavigate();
   const [homesearch, setHomesearch] = useState("");
 
+  // const getSlider = async () => {
+  //   const data = await axiosConfig.get(`/get/all/header`);
+  //   console.log(data.data, "hello");
+  //   setSlider(data.data.data);
+  // };
+
+  // useEffect(() => {
+  //   getSlider();
+  // }, []);
+
   const items = [
     {
       id: 0,
@@ -477,7 +488,7 @@ function Header(args) {
     setLanguage("");
     setTopics("");
     setDescriptionData("");
-    setFile(null);
+    setFile([]);
   };
   const handleOnFocus = () => {
     console.log("Focused");
@@ -672,6 +683,44 @@ function Header(args) {
                 </Link>
               </SwiperSlide>
             </Swiper>
+
+            {/* <Swiper
+              modules={[Pagination, Autoplay]}
+              slidesPerView={1}
+              pagination={{
+                el: ".hero-swiper_swiper_pagination",
+                clickable: true,
+              }}
+              autoplay={{
+                delay: 5000,
+              }}
+            >
+              {slider?.map((e) => (
+                <SwiperSlide>
+                  <Link to={e.link}>
+                    <img className="w-100" src={e.image} alt="hero-images" />
+                    {e.count === 1 && (
+                      <>
+                        {" "}
+                        <Link
+                          to={"/signup"}
+                          style={{
+                            backgroundColor: "#fc9358",
+                            fontSize: 24,
+                            borderRadius: 69,
+                            bottom: "20%",
+                            left: "7%",
+                          }}
+                          className="btn-sn-hover position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
+                        >
+                          SIGN UP
+                        </Link>
+                      </>
+                    )}
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper> */}
           </div>
           <div
             style={{

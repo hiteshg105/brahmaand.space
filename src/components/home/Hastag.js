@@ -97,7 +97,7 @@ function Hastag() {
         // console.log(res.data.data);
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -127,7 +127,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   function isValidEmail(email) {
     const expression =
@@ -204,7 +204,7 @@ function Hastag() {
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/all/creator_warzone`);
     const data1 = responce1.data.war;
-    // console.log(data1, "data1");
+    console.log(data1, "data1");
     data1.forEach((obj) => {
       obj.isContent = 1;
     });
@@ -270,17 +270,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                      <button
-                        key={trendingtopics._id}
-                        onClick={() => (
-                          handlehastagtopic(trendingtopics?.topics),
-                          gaEventTracker(`${trendingtopics?.topics}`)
-                        )}
-                        className="btn1"
-                      >
-                        {trendingtopics?.topics}
-                      </button>
-                    ))
+                    <button
+                      key={trendingtopics._id}
+                      onClick={() => (
+                        handlehastagtopic(trendingtopics?.topics),
+                        gaEventTracker(`${trendingtopics?.topics}`)
+                      )}
+                      className="btn1"
+                    >
+                      {trendingtopics?.topics}
+                    </button>
+                  ))
                   : null}
               </div>
             </div>
@@ -308,7 +308,7 @@ function Hastag() {
                   to="/category"
                   style={{ color: "black", textDecoration: "none" }}
                 >
-                  <span style={{ font: "larger" }}></span>
+                  <span style={{ font: "larger" }}>SEE ALL</span>
                 </Link>
               </div>
             </Col>
@@ -468,10 +468,10 @@ function Hastag() {
                                       features?.resource1.img?.length === 0
                                         ? NoImage
                                         : features?.resource1.img?.includes(
-                                            "https"
-                                          )
-                                        ? features?.resource1.img
-                                        : `https://backend.brahmaand.space/${features?.resource1.img}`
+                                          "https"
+                                        )
+                                          ? features?.resource1.img
+                                          : `https://backend.brahmaand.space/${features?.resource1.img}`
                                     }
                                     alt=""
                                   />
@@ -648,10 +648,10 @@ function Hastag() {
                                     features?.resource2.img?.length === 0
                                       ? NoImage
                                       : features?.resource2.img?.includes(
-                                          "https"
-                                        )
-                                      ? features?.resource2.img
-                                      : `https://backend.brahmaand.space/${features?.resource2.img}`
+                                        "https"
+                                      )
+                                        ? features?.resource2.img
+                                        : `https://backend.brahmaand.space/${features?.resource2.img}`
                                   }
                                   alt=""
                                 />
@@ -758,6 +758,7 @@ function Hastag() {
                               colors={colors.star}
                             />
                             <span style={{ fontSize: "14px" }} className="ms-1">
+                              {console.log(features?.resource1.ava_rating, "features?.resource1.ava_rating")}
                               {features?.resource1.ava_rating?.toFixed(2)}
                             </span>
                           </div>
@@ -941,8 +942,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -1128,7 +1129,7 @@ function Hastag() {
                           size={75}
                           style={{ backgroundColor: "white" }}
                           type="submit"
-                          // onClick={() => setOpenone(true)}
+                        // onClick={() => setOpenone(true)}
                         />
                         <div className="modalvideo">
                           <ModalVideo
