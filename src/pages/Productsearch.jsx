@@ -19,7 +19,7 @@ import { AiFillEdit } from "react-icons/ai";
 
 import Slider from "../components/filter/Slider";
 import Pagination from "react-bootstrap/Pagination";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input } from "reactstrap";
 import "../styles/ModulePage.css";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
@@ -61,6 +61,7 @@ import "../styles/Filter.css";
 import { number } from "prop-types";
 import { useFormState } from "react-hook-form";
 import ContentCreators from "./ContentCreators";
+import Swal from "sweetalert2";
 
 function Productsearch(args) {
   const [parentState, setParentState] = useState("");
@@ -94,7 +95,6 @@ function Productsearch(args) {
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
-  const [category, setCategory] = useState("");
   const [all, setAll] = useState("");
   const [display, setDisplay] = useState("d-none");
   const [display2, setDisplay2] = useState("d-none");
@@ -103,6 +103,8 @@ function Productsearch(args) {
     setParentState(newValue);
   };
 
+
+  // console.log("category::",category)
   const toggleedit = () => {
     setEditmodal(!editmodal);
   };
@@ -164,12 +166,63 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
 
+  const [category, setCategory] = useState("");
+  const [catgry, setCatgry] = useState("");
+  // const [subcatry, setSubcatry] = useState("");
+
+
+  const [allcatego, setAllcatego] = useState([]);
+  const allcategory = () => {
+    axiosConfig
+      .get(`/admin/getallCategory`)
+
+      .then((response) => {
+        // console.log(response.data.data);
+        setAllcatego(response.data.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  };
+
+  // const [cat, setCat] = useState("");
+  const [subctgry, setSubctgry] = useState([]);
+  const [sub_category, setSub_category] = useState([]);
+
+
+  useEffect(() => {
+    // const params = catgry ? catgry : category;
+    axiosConfig
+      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
+      .then((response) => {
+        // console.log(response.data.data, "sub cat");
+        setSubctgry(response.data.data);
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+      });
+  }, [catgry, category]);
+
+  // console.log(subctgry, "subctgry")
+
+  useEffect(() => {
+
+    allcategory();
+  }, []);
+
+
+  useEffect(() => {
+    setSubctgry([])
+    setCategory("")
+    setSub_category([]);
+    setCatgry("")
+  }, [parentState])
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -264,7 +317,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -332,7 +385,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
   };
 
@@ -341,8 +394,10 @@ function Productsearch(args) {
     const responce = await axiosConfig.post(`/user/search_topic_title`, {
       searchinput: searchitem,
     });
-    if (responce.data.status === true) {
+    if (responce.data.status === true && responce.data.data.length !== 0) {
       navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
+    }else{
+      swal("No Data Found")
     }
 
     axiosConfig
@@ -355,7 +410,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const getLanguage = () => {
@@ -364,7 +419,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -391,7 +446,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -474,14 +529,16 @@ function Productsearch(args) {
         .get(`/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         })
         .catch((err) => {
           // console.log(err);
         });
     }
   };
-
+  const setCategoryData = (id) => {
+    sub_category.includes(id) ? setSub_category((pre) => pre.filter(e => e !== id)) : setSub_category([...sub_category, id]);
+  }
   let Params = useParams();
 
   const [loading, setLoading] = useState(false);
@@ -695,7 +752,7 @@ function Productsearch(args) {
           searchitem === "" &&
           hastagdata === "hastag" &&
           searchdata === "",
-        Filtertype === "")
+          Filtertype === "")
       ) {
         allsearchproduct();
       }
@@ -796,7 +853,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
     // axios
     //   .get(
@@ -962,220 +1019,226 @@ function Productsearch(args) {
                       </div>
                     </Col>
                     {/* {console.log(parentState)} */}
+
+                    <Col lg="12" className="py-3">
+                      <Row className="mt-3 mb-3 mx-2 d-flex flex-nowrap align-items-center">
+                        <input
+                          id="All"
+                          className="ft-check"
+                          type="radio"
+                          checked={all}
+                          name="all"
+                          value="all"
+                          onClick={() => {
+                            setAll(all ? false : true);
+                            handlefilter();
+                          }}
+                        />
+                        <h5 className="mb-0">All &nbsp;</h5>
+                      </Row>
+
+                      <Col lg="12" className="py-3">
+                        <div className="ft-type">
+                          <h5 className="mb-3">Category</h5>
+
+
+                          {allcatego
+                            .filter((res, i) => i < 5)
+                            .map((allCategory) => {
+                              return (
+                                <Row className="mt-3 mb-3 mx-2">
+                                  <input
+                                    id={allCategory._id}
+                                    className="ft-check"
+                                    type="radio"
+                                    checked={allCategory?._id === catgry}
+                                    name="category"
+                                    value={allCategory?._id}
+                                    onClick={(e) => {
+                                      setCatgry(allCategory?._id);
+                                      handlefilter();
+                                    }}
+                                  />
+                                  {allCategory?.title} &nbsp;
+                                </Row>
+                              );
+                            })}
+                          {/* {console.log(catgry, "catgry")} */}
+                          <button
+                            className="bg-white border-0"
+                            onClick={hndleMoreCategory}
+                          >
+                            More {allcatego.length - 5} category here
+                          </button>
+                          <div
+                            className={`bg-light border border-black ${display}`}
+                            style={{
+                              padding: "10px",
+                              height: "300px",
+                              width: "700px",
+                              position: "absolute",
+                              zIndex: 99,
+                              overflowX: "hidden",
+                              overflowY: "auto",
+                              left: "250px",
+                              top: "50%",
+                            }}
+                          >
+                            <button
+                              className="top-0 postion-sticky"
+                              style={{
+                                left:"100%",
+                                height:"50px",
+                                width:"50px",
+                                backgroundColor:"red"
+                              }}
+                            >
+                              X
+                            </button>
+                            <div className="d-flex flex-wrap">
+                              {allcatego.map((allCategory) => {
+                                return (
+                                  <div
+                                    className="mt-3 mb-3 mx-2"
+                                    style={{ width: "200px" }}
+                                  >
+                                    <input
+                                      id={allCategory._id}
+                                      className="ft-check"
+                                      type="radio"
+                                      checked={allCategory?._id === catgry}
+                                      name="allCategory"
+                                      value={allCategory?._id}
+                                      onClick={(e) => {
+                                        setCatgry(allCategory?._id);
+                                        handlefilter();
+                                      }}
+                                    />
+                                    {allCategory?.title} &nbsp;
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+
+                      <Col lg="12" className="py-3">
+                        <div className="ft-type">
+                          <h5 className="mb-3">Sub Category</h5>
+
+                          {subctgry
+                            .filter((res, i) => i < 5)
+                            .map((subctgo) => {
+                              return (
+                                <Row className="mt-3 mb-3 mx-2">
+                                  <input
+                                    id={subctgo?._id}
+                                    className="ft-check"
+                                    type="checkbox"
+                                    checked={sub_category.some((e) => e === subctgo?._id)}
+                                    name="format"
+                                    value={subctgo?._id}
+                                    onClick={(e) => {
+                                      setCategoryData(subctgo?._id)
+                                      // setSub_category(subctgo?._id);
+                                      handlefilter();
+                                    }}
+                                  />
+                                  {/* {console.log("cvbvcbv",subctgry._id)} */}
+                                  {subctgo?.title} &nbsp;
+                                </Row>
+                              );
+                            })}
+                          {/* {console.log("subctgry", sub_category)} */}
+
+                          <div
+                            className={`bg-light border border-black ${display2}`}
+                            style={{
+                              padding: "10px",
+                              height: "300px",
+                              width: "700px",
+                              position: "absolute",
+                              zIndex: 99,
+                              overflowX: "hidden",
+                              overflowY: "auto",
+                            }}
+                          >
+                            <div className="d-flex flex-wrap">
+
+                              {subctgry.map((subctgry) => {
+                                return (
+                                  <div
+                                    className="mt-3 mb-3 mx-2"
+                                    style={{ width: "200px" }}
+                                  >
+                                    {/* <input
+                                      id={subctgry?._id}
+                                      className="ft-check"
+                                      type="checkbox"
+                                      checked={subctgry?._id === sub_category}
+                                      name="format"
+                                      value={sub_category?._id}
+                                      onClick={(e) => {
+                                        // setSub_category([...sub_category,subctgry?._id]);
+                                        setSub_category(subctgry?._id);
+                                        handlefilter();
+                                      }}
+                                    /> */}
+                                    {subctgry?.title} &nbsp;
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+
+
+                    </Col>
+
                     {parentState === "Content Creators" ? (
                       <span></span>
                     ) : (
-                      <Col lg="12" className="py-3">
-                        <Row className="mt-3 mb-3 mx-2 d-flex flex-nowrap align-items-center">
+                      <div className="ft-type">
+                        <h5 className="mb-3">Type</h5>
+                        <Row className="mt-3 mx-2">
                           <input
-                            id="All"
+                            id="Free"
                             className="ft-check"
                             type="radio"
-                            checked={all}
-                            name="all"
-                            value="all"
+                            checked={"Free" === type}
+                            name="type"
+                            value="Free"
                             onClick={() => {
-                              setAll(all ? false : true);
+                              setType("Free");
                               handlefilter();
                             }}
                           />
-                          <h5 className="mb-0">All &nbsp;</h5>
+                          Free &nbsp;
+                          {typelength[0]?.type == "Free"
+                            ? typelength.length
+                            : null}
                         </Row>
-
-                        <Col lg="12" className="py-3">
-                          <div className="ft-type">
-                            <h5 className="mb-3">Category</h5>
-                            <input
-                              type="text"
-                              style={{ width: "200px", padding: "10px" }}
-                              className="fs-6"
-                              placeholder="Search"
-                            />
-                            {mobiles
-                              .filter((res, i) => i < 5)
-                              .map((res) => {
-                                return (
-                                  <Row className="mt-3 mb-3 mx-2">
-                                    <input
-                                      id={res}
-                                      className="ft-check"
-                                      type="radio"
-                                      checked={res === category}
-                                      name="format"
-                                      value={res}
-                                      onClick={(e) => {
-                                        setCategory(res);
-                                        handlefilter();
-                                      }}
-                                    />
-                                    {res} &nbsp;
-                                  </Row>
-                                );
-                              })}
-                            <button
-                              className="bg-white border-0"
-                              onClick={hndleMoreCategory}
-                            >
-                              More {mobiles.length - 5} mobiles here
-                            </button>
-                            <div
-                              className={`bg-light border border-black ${display}`}
-                              style={{
-                                padding: "10px",
-                                height: "300px",
-                                width: "700px",
-                                position: "absolute",
-                                zIndex: 99,
-                                overflowX: "hidden",
-                                overflowY: "auto",
-                                left: "250px",
-                                top: "50%",
-                              }}
-                            >
-                              <div className="d-flex flex-wrap">
-                                {mobiles.map((res) => {
-                                  return (
-                                    <div
-                                      className="mt-3 mb-3 mx-2"
-                                      style={{ width: "200px" }}
-                                    >
-                                      <input
-                                        id={res}
-                                        className="ft-check"
-                                        type="radio"
-                                        checked={res === category}
-                                        name="format"
-                                        value={res}
-                                        onClick={(e) => {
-                                          setCategory(res);
-                                          handlefilter();
-                                        }}
-                                      />
-                                      {res} &nbsp;
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <Col lg="12" className="py-3">
-                          <div className="ft-type">
-                            <h5 className="mb-3">Sub Category</h5>
-                            <input
-                              type="text"
-                              style={{ width: "200px", padding: "10px" }}
-                              className="fs-6"
-                              placeholder="Search"
-                            />
-                            {mobiles
-                              .filter((res, i) => i < 5)
-                              .map((res) => {
-                                return (
-                                  <Row className="mt-3 mb-3 mx-2">
-                                    <input
-                                      id={res}
-                                      className="ft-check"
-                                      type="radio"
-                                      checked={res === category}
-                                      name="format"
-                                      value={res}
-                                      onClick={(e) => {
-                                        setCategory(res);
-                                        handlefilter();
-                                      }}
-                                    />
-                                    {res} &nbsp;
-                                  </Row>
-                                );
-                              })}
-                            <button
-                              className="bg-white border-0"
-                              onClick={hndleMoreCategory2}
-                            >
-                              More {mobiles.length - 5} mobiles here
-                            </button>
-                            <div
-                              className={`bg-light border border-black ${display2}`}
-                              style={{
-                                padding: "10px",
-                                height: "300px",
-                                width: "700px",
-                                position: "absolute",
-                                zIndex: 99,
-                                overflowX: "hidden",
-                                overflowY: "auto",
-                              }}
-                            >
-                              <div className="d-flex flex-wrap">
-                                {mobiles.map((res) => {
-                                  return (
-                                    <div
-                                      className="mt-3 mb-3 mx-2"
-                                      style={{ width: "200px" }}
-                                    >
-                                      <input
-                                        id={res}
-                                        className="ft-check"
-                                        type="radio"
-                                        checked={res === category}
-                                        name="format"
-                                        value={res}
-                                        onClick={(e) => {
-                                          setCategory(res);
-                                          handlefilter();
-                                        }}
-                                      />
-                                      {res} &nbsp;
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-
-                        <div className="ft-type">
-                          <h5 className="mb-3">Type</h5>
-                          <Row className="mt-3 mx-2">
-                            <input
-                              id="Free"
-                              className="ft-check"
-                              type="radio"
-                              checked={"Free" === type}
-                              name="type"
-                              value="Free"
-                              onClick={() => {
-                                setType("Free");
-                                handlefilter();
-                              }}
-                            />
-                            Free &nbsp;
-                            {typelength[0]?.type == "Free"
-                              ? typelength.length
-                              : null}
-                          </Row>
-                          <Row className="mt-3  mx-2">
-                            <input
-                              id="Paid"
-                              checked={"Paid" === type}
-                              className="ft-check"
-                              type="radio"
-                              name="type"
-                              value="Paid"
-                              onClick={() => {
-                                setType("Paid");
-                                handlefilter();
-                              }}
-                            />
-                            Paid &nbsp;
-                            {typelength[0]?.type == "Paid"
-                              ? typelength.length
-                              : null}
-                          </Row>
-                        </div>
-                      </Col>
+                        <Row className="mt-3  mx-2">
+                          <input
+                            id="Paid"
+                            checked={"Paid" === type}
+                            className="ft-check"
+                            type="radio"
+                            name="type"
+                            value="Paid"
+                            onClick={() => {
+                              setType("Paid");
+                              handlefilter();
+                            }}
+                          />
+                          Paid &nbsp;
+                          {typelength[0]?.type == "Paid"
+                            ? typelength.length
+                            : null}
+                        </Row>
+                      </div>
                     )}
 
                     <Col lg="12" className="py-3">
@@ -1386,9 +1449,8 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${
-                                                  promotion?.link?.split("=")[1]
-                                                }`}
+                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                                  }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1730,7 +1792,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                    0 ? (
+                                                      0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1856,9 +1918,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                      localStorage.getItem(
-                                                        "userId"
-                                                      ) ? (
+                                                        localStorage.getItem(
+                                                          "userId"
+                                                        ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -2057,6 +2119,8 @@ function Productsearch(args) {
                     language={language}
                     searchdata={searchdata}
                     Filtertype={Filtertype}
+                    category={catgry}
+                    subcategory={sub_category}
                   />
 
                   {/* {console.log(parentState,"")} */}

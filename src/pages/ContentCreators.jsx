@@ -38,6 +38,8 @@ const ContentCreators = ({
   language,
   searchdata,
   updateParentState,
+  category,
+  subcategory
 }) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
@@ -371,9 +373,32 @@ const ContentCreators = ({
   const handleContent = async (data) => {
     if (data === "Content") {
       // console.log(params.id, "hello")
-      const responce = await axiosClient.post(
-        `/user/advancefilter?sub_category=${params.id}`
-      );
+      var responce = "";
+
+      console.log(responce, "responce")
+      if (subcategory.length === 0) {
+        if (category) {
+          responce = await axiosClient.post(
+            // `/content/advance_content_filter?sub_category=${params.id}`
+            `/user/advancefilter/category`,
+            { category: category }
+          );
+        } else {
+          responce = await axiosClient.post(
+            `/user/advancefilter `,
+            { sub_category: params.id }
+          )
+        }
+
+      }
+      else {
+        responce = await axiosClient.post(
+          // `/user/advancefilter?sub_category=${params.id} ` 
+          `/user/advancefilter `,
+          { sub_category: subcategory }
+        );
+      }
+      // console.log()
 
       if (format && type && language) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
@@ -383,6 +408,7 @@ const ContentCreators = ({
           return e.format === format && e.type === type && languageMatch;
         });
         setData1(dataFilter);
+
         setVal(dataFilter.slice(0, end));
       } else {
         setData1(responce.data.data);
@@ -390,11 +416,33 @@ const ContentCreators = ({
       }
     }
     if (data === "Content Creators") {
-      const responce = await axiosClient.post(
-        `/content/advance_content_filter?sub_category=${params.id}`
-      );
+      var responce = "";
+      if (subcategory.length === 0) {
+        if (category) {
+          responce = await axiosClient.post(
+            // `/content/advance_content_filter?sub_category=${params.id}`
+            `/content/category/advance_content_filter`,
+            { category: category }
+          );
+        } else {
+          responce = await axiosClient.post(
+            // `/content/advance_content_filter?sub_category=${params.id}`
+            `/content/advance_content_filter`,
+            { sub_category: params.id }
+          );
+        }
+
+      }
+      else {
+        responce = await axiosClient.post(
+          // `/content/advance_content_filter?sub_category=${params.id}`
+          `/content/advance_content_filter`,
+          { sub_category: subcategory }
+        );
+      }
+
       // console.log(responce.data, "dfjkflfgfhsdfg");
-      if (format && language) {
+      if (format && language && subcategory) {
         const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
         const dataFilter = newdata.filter((e) => {
@@ -410,7 +458,7 @@ const ContentCreators = ({
       }
     }
   };
-  console.log(val);
+  // console.log(val);
   const colors = {
     star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
   };
@@ -424,10 +472,38 @@ const ContentCreators = ({
     }
   };
 
+
+  const getCategory = async (data) => {
+    let responce;
+    if (data === "Content Creators") {
+      responce = await axiosClient.post(
+        // `/content/advance_content_filter?sub_category=${params.id}`
+        `/content/category/advance_content_filter`,
+        { category: category }
+      );
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
+    }
+    else {
+      responce = await axiosClient.post(
+        // `/content/advance_content_filter?sub_category=${params.id}`
+        `/user/advancefilter/category`,
+        { category: category }
+      );
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
+    }
+    console.log(responce)
+  }
+
   useEffect(() => {
-    // console.log(content);
+    console.log("okokok");
     handleContent(content);
-  }, [content, params, format, type, language, searchdata, limit]);
+  }, [content, params, format, type, language, searchdata, limit, subcategory]);
+
+  useEffect(() => {
+    getCategory(content)
+  }, [category, content])
 
   useEffect(() => {
     getUser();
@@ -518,8 +594,8 @@ const ContentCreators = ({
                                   item.img.includes("https")
                                     ? item.img
                                     : img.includes("data:image")
-                                    ? item.img
-                                    : NoImage
+                                      ? item.img
+                                      : NoImage
                                 }
                                 alt=""
                               />
@@ -560,8 +636,8 @@ const ContentCreators = ({
                                       item.img.includes("https")
                                         ? item.img
                                         : img.includes("data:image")
-                                        ? item.img
-                                        : NoImage
+                                          ? item.img
+                                          : NoImage
                                     }
                                     alt=""
                                   />
@@ -1240,7 +1316,7 @@ const ContentCreators = ({
                       </div>
                     </Col>
                     <Col lg="6" md="6">
-                      <div className="mid-1 mb-3 ">
+                      <div className="mid-1 mb-3">
                         <div className="mid-1-a">
                           <img src={usericon} alt="" />
                         </div>
