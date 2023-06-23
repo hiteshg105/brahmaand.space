@@ -366,13 +366,14 @@ function Header(args) {
     axiosConfig
       .get(`/admin/listbycategory/${catgry ? catgry : category}`)
       .then((response) => {
-        // console.log(response.data.data);
+        console.log(response.data.data);
         setSubctgry(response.data.data);
       })
       .catch((error) => {
         // console.log(error.response.data);
       });
   }, [catgry, category]);
+  console.log(subctgry, "subctgry")
 
   // all year selection api
   const getYear = () => {
