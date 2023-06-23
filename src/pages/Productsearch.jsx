@@ -44,8 +44,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import "../styles/Filter.css";
 import AutoSearch from "../components/filter/AutoSearch";
-
-import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
+import { FaHeart, FaStar, FaRegHeart, FaSearch, FaPhoenixFramework } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "../components/filter/FilterList";
 import RecentProductList from "../components/filter/RecentProductList";
@@ -53,8 +52,7 @@ import backimg from "../assets/images/backimg.png";
 import axiosConfig from "../components/axiosConfig";
 import Moment from "react-moment";
 import PrettyRating from "pretty-rating-react";
-import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
-import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar, faStarHalfAlt, faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "swiper/css";
@@ -65,9 +63,7 @@ import { useFormState } from "react-hook-form";
 import ContentCreators from "./ContentCreators";
 
 function Productsearch(args) {
-
   const [parentState, setParentState] = useState("");
-
 
   const [modalsuggestion, setModalsuggestion] = useState(false);
   const togglesuggestion = () => setModalsuggestion(!modalsuggestion);
@@ -87,6 +83,7 @@ function Productsearch(args) {
   const [promotiondata, setPromotiondata] = useState({});
   const [type, setType] = useState("");
   const [format, setFormat] = useState("");
+
   // const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
@@ -97,6 +94,10 @@ function Productsearch(args) {
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
+  const [category, setCategory] = useState("");
+  const [all, setAll] = useState("");
+  const [display, setDisplay] = useState("d-none");
+  const [display2, setDisplay2] = useState("d-none");
 
   const updateParentState = (newValue) => {
     setParentState(newValue);
@@ -163,7 +164,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const navigate = useNavigate();
@@ -263,7 +264,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -331,7 +332,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
   };
 
@@ -354,7 +355,7 @@ function Productsearch(args) {
           setPromotion(res.data.data);
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const getLanguage = () => {
@@ -363,7 +364,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -390,7 +391,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -511,6 +512,9 @@ function Productsearch(args) {
   const clearfilter = () => {
     setType("");
     setFormat("");
+    setCategory("");
+    setAll("");
+
     // setSearchrating("");
     setLanguage("");
     setContentyear("");
@@ -676,55 +680,59 @@ function Productsearch(args) {
       });
   };
 
-  useEffect(() => {
-    allsuggestedproduct();
-    getYear();
-    getLanguage();
-    getUser();
+  useEffect(
+    () => {
+      allsuggestedproduct();
+      getYear();
+      getLanguage();
+      getUser();
 
-    if (
-      (type === "" &&
-        format === "" &&
-        contentyear == "" &&
-        language === "" &&
-        searchitem === "" &&
-        hastagdata === "hastag" &&
-        searchdata === "",
+      if (
+        (type === "" &&
+          format === "" &&
+          contentyear == "" &&
+          language === "" &&
+          searchitem === "" &&
+          hastagdata === "hastag" &&
+          searchdata === "",
         Filtertype === "")
-    ) {
-      allsearchproduct();
-    }
+      ) {
+        allsearchproduct();
+      }
 
-    if (hastagdata !== "hastag") {
-      gethastagdata();
-    }
-    if (searchdata !== "" && searchdata !== null) {
-      // handleSearchHomePage();
-    }
+      if (hastagdata !== "hastag") {
+        gethastagdata();
+      }
+      if (searchdata !== "" && searchdata !== null) {
+        // handleSearchHomePage();
+      }
 
-    if (Filtertype !== "" || searchdata !== "") {
-      handlefilter();
-    }
+      if (Filtertype !== "" || searchdata !== "") {
+        handlefilter();
+      }
 
-    // if (searchitem !== "") {
-    //   handlesearchdescription();
-    // }
-  }, [
-    Params,
-    type,
-    format,
-    liked,
-    Producdetail,
-    myId,
-    promotiondata,
-    handlebookmark,
-    activelike,
-    // searchitem,
-    language,
-    // contentyear,
-    hastagdata,
-    // searchdata,
-  ], [parentState]);
+      // if (searchitem !== "") {
+      //   handlesearchdescription();
+      // }
+    },
+    [
+      Params,
+      type,
+      format,
+      liked,
+      Producdetail,
+      myId,
+      promotiondata,
+      handlebookmark,
+      activelike,
+      // searchitem,
+      language,
+      // contentyear,
+      hastagdata,
+      // searchdata,
+    ],
+    [parentState]
+  );
 
   const [typelength, setTypelength] = useState([]);
   // const gettypefilter = () => {
@@ -788,7 +796,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
     // axios
     //   .get(
@@ -825,7 +833,34 @@ function Productsearch(args) {
     // );
     setItemOffset(newOffset);
   };
-
+  const mobiles = [
+    "Apple",
+    "Samsung",
+    "Google",
+    "Huawei",
+    "Xiaomi",
+    "OnePlus",
+    "LG",
+    "Sony",
+    "Nokia",
+    "Motorola",
+    "HTC",
+    "Lenovo",
+    "Oppo",
+    "Vivo",
+    "Asus",
+    "BlackBerry",
+    "Alcatel",
+    "ZTE",
+    "Meizu",
+    "Micromax",
+  ];
+  const hndleMoreCategory = () => {
+    display === "d-none" ? setDisplay("") : setDisplay("d-none");
+  };
+  const hndleMoreCategory2 = () => {
+    display2 === "d-none" ? setDisplay2("") : setDisplay2("d-none");
+  };
   return (
     <>
       <section className="seachproduct">
@@ -927,48 +962,221 @@ function Productsearch(args) {
                       </div>
                     </Col>
                     {/* {console.log(parentState)} */}
-                    {parentState === "Content Creators" ? (<span></span>) : (<Col lg="12" className="py-3">
-                      <div className="ft-type">
-                        <h5 className="mb-3">Type</h5>
-                        <Row className="mt-3 mx-2">
+                    {parentState === "Content Creators" ? (
+                      <span></span>
+                    ) : (
+                      <Col lg="12" className="py-3">
+                        <Row className="mt-3 mb-3 mx-2 d-flex flex-nowrap align-items-center">
                           <input
-                            id="Free"
+                            id="All"
                             className="ft-check"
                             type="radio"
-                            checked={"Free" === type}
-                            name="type"
-                            value="Free"
+                            checked={all}
+                            name="all"
+                            value="all"
                             onClick={() => {
-                              setType("Free");
+                              setAll(all ? false : true);
                               handlefilter();
                             }}
                           />
-                          Free &nbsp;
-                          {typelength[0]?.type == "Free"
-                            ? typelength.length
-                            : null}
+                          <h5 className="mb-0">All &nbsp;</h5>
                         </Row>
-                        <Row className="mt-3  mx-2">
-                          <input
-                            id="Paid"
-                            checked={"Paid" === type}
-                            className="ft-check"
-                            type="radio"
-                            name="type"
-                            value="Paid"
-                            onClick={() => {
-                              setType("Paid");
-                              handlefilter();
-                            }}
-                          />
-                          Paid &nbsp;
-                          {typelength[0]?.type == "Paid"
-                            ? typelength.length
-                            : null}
-                        </Row>
-                      </div>
-                    </Col>)}
 
+                        <Col lg="12" className="py-3">
+                          <div className="ft-type">
+                            <h5 className="mb-3">Category</h5>
+                            <input
+                              type="text"
+                              style={{ width: "200px", padding: "10px" }}
+                              className="fs-6"
+                              placeholder="Search"
+                            />
+                            {mobiles
+                              .filter((res, i) => i < 5)
+                              .map((res) => {
+                                return (
+                                  <Row className="mt-3 mb-3 mx-2">
+                                    <input
+                                      id={res}
+                                      className="ft-check"
+                                      type="radio"
+                                      checked={res === category}
+                                      name="format"
+                                      value={res}
+                                      onClick={(e) => {
+                                        setCategory(res);
+                                        handlefilter();
+                                      }}
+                                    />
+                                    {res} &nbsp;
+                                  </Row>
+                                );
+                              })}
+                            <button
+                              className="bg-white border-0"
+                              onClick={hndleMoreCategory}
+                            >
+                              More {mobiles.length - 5} mobiles here
+                            </button>
+                            <div
+                              className={`bg-light border border-black ${display}`}
+                              style={{
+                                padding: "10px",
+                                height: "300px",
+                                width: "700px",
+                                position: "absolute",
+                                zIndex: 99,
+                                overflowX: "hidden",
+                                overflowY: "auto",
+                                left: "250px",
+                                top: "50%",
+                              }}
+                            >
+                              <div className="d-flex flex-wrap">
+                                {mobiles.map((res) => {
+                                  return (
+                                    <div
+                                      className="mt-3 mb-3 mx-2"
+                                      style={{ width: "200px" }}
+                                    >
+                                      <input
+                                        id={res}
+                                        className="ft-check"
+                                        type="radio"
+                                        checked={res === category}
+                                        name="format"
+                                        value={res}
+                                        onClick={(e) => {
+                                          setCategory(res);
+                                          handlefilter();
+                                        }}
+                                      />
+                                      {res} &nbsp;
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+
+                        <Col lg="12" className="py-3">
+                          <div className="ft-type">
+                            <h5 className="mb-3">Sub Category</h5>
+                            <input
+                              type="text"
+                              style={{ width: "200px", padding: "10px" }}
+                              className="fs-6"
+                              placeholder="Search"
+                            />
+                            {mobiles
+                              .filter((res, i) => i < 5)
+                              .map((res) => {
+                                return (
+                                  <Row className="mt-3 mb-3 mx-2">
+                                    <input
+                                      id={res}
+                                      className="ft-check"
+                                      type="radio"
+                                      checked={res === category}
+                                      name="format"
+                                      value={res}
+                                      onClick={(e) => {
+                                        setCategory(res);
+                                        handlefilter();
+                                      }}
+                                    />
+                                    {res} &nbsp;
+                                  </Row>
+                                );
+                              })}
+                            <button
+                              className="bg-white border-0"
+                              onClick={hndleMoreCategory2}
+                            >
+                              More {mobiles.length - 5} mobiles here
+                            </button>
+                            <div
+                              className={`bg-light border border-black ${display2}`}
+                              style={{
+                                padding: "10px",
+                                height: "300px",
+                                width: "700px",
+                                position: "absolute",
+                                zIndex: 99,
+                                overflowX: "hidden",
+                                overflowY: "auto",
+                              }}
+                            >
+                              <div className="d-flex flex-wrap">
+                                {mobiles.map((res) => {
+                                  return (
+                                    <div
+                                      className="mt-3 mb-3 mx-2"
+                                      style={{ width: "200px" }}
+                                    >
+                                      <input
+                                        id={res}
+                                        className="ft-check"
+                                        type="radio"
+                                        checked={res === category}
+                                        name="format"
+                                        value={res}
+                                        onClick={(e) => {
+                                          setCategory(res);
+                                          handlefilter();
+                                        }}
+                                      />
+                                      {res} &nbsp;
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+
+                        <div className="ft-type">
+                          <h5 className="mb-3">Type</h5>
+                          <Row className="mt-3 mx-2">
+                            <input
+                              id="Free"
+                              className="ft-check"
+                              type="radio"
+                              checked={"Free" === type}
+                              name="type"
+                              value="Free"
+                              onClick={() => {
+                                setType("Free");
+                                handlefilter();
+                              }}
+                            />
+                            Free &nbsp;
+                            {typelength[0]?.type == "Free"
+                              ? typelength.length
+                              : null}
+                          </Row>
+                          <Row className="mt-3  mx-2">
+                            <input
+                              id="Paid"
+                              checked={"Paid" === type}
+                              className="ft-check"
+                              type="radio"
+                              name="type"
+                              value="Paid"
+                              onClick={() => {
+                                setType("Paid");
+                                handlefilter();
+                              }}
+                            />
+                            Paid &nbsp;
+                            {typelength[0]?.type == "Paid"
+                              ? typelength.length
+                              : null}
+                          </Row>
+                        </div>
+                      </Col>
+                    )}
 
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
@@ -1011,42 +1219,45 @@ function Productsearch(args) {
                         </Row>
                       </div>
                     </Col>
+
                     <Col lg="12" className="">
                       <div className="ft-type">
                         <Row className=" mb-3 mx-2"></Row>
                         <Row>
                           <Container>
-                            {
-                              parentState === "Content Creators" ? (<span></span>) : (
-                                <>
-                                  <Label
-                                    className="mt-3"
-                                    style={{ font: "GT Walsheim Pro" }}
-                                  >
-                                    <b style={{ fontSize: "19px" }}>Content Year</b>
-                                  </Label>
-                                  <select
-                                    defaultValue="Select Year"
-                                    value={contentyear}
-                                    // checked={"Select Year" === contentyear}
-                                    onChange={(e) => {
-                                      setContentyear(e.target.value);
-                                      handlefilter(e.target.value);
-                                    }}
-                                    className="form-control"
-                                  >
-                                    <option>Select Year</option>
-                                    {relyear?.map((yr) => {
-                                      return (
-                                        <option value={yr?._id} key={yr?._id}>
-                                          {yr?.yrName}
-                                        </option>
-                                      );
-                                    })}
-                                  </select>     
-                                </>
-                              )
-                            }
+                            {parentState === "Content Creators" ? (
+                              <span></span>
+                            ) : (
+                              <>
+                                <Label
+                                  className="mt-3"
+                                  style={{ font: "GT Walsheim Pro" }}
+                                >
+                                  <b style={{ fontSize: "19px" }}>
+                                    Content Year
+                                  </b>
+                                </Label>
+                                <select
+                                  defaultValue="Select Year"
+                                  value={contentyear}
+                                  // checked={"Select Year" === contentyear}
+                                  onChange={(e) => {
+                                    setContentyear(e.target.value);
+                                    handlefilter(e.target.value);
+                                  }}
+                                  className="form-control"
+                                >
+                                  <option>Select Year</option>
+                                  {relyear?.map((yr) => {
+                                    return (
+                                      <option value={yr?._id} key={yr?._id}>
+                                        {yr?.yrName}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </>
+                            )}
                             <Label
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
@@ -1175,8 +1386,9 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
-                                                  }`}
+                                                src={`https://www.youtube.com/embed/${
+                                                  promotion?.link?.split("=")[1]
+                                                }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1518,7 +1730,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                      0 ? (
+                                                    0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1644,9 +1856,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                        localStorage.getItem(
-                                                          "userId"
-                                                        ) ? (
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1844,7 +2056,7 @@ function Productsearch(args) {
                     type={type}
                     language={language}
                     searchdata={searchdata}
-                    Filtertype= {Filtertype}
+                    Filtertype={Filtertype}
                   />
 
                   {/* {console.log(parentState,"")} */}
