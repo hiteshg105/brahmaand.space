@@ -30,7 +30,7 @@ import NoImage from "../images/noimage.jpg";
 import swal from "sweetalert";
 import ShowMore from "react-show-more";
 
-const TrendingWarzone = () => {
+const TrendingWarzone = ({getPath}) => {
   // const { id } = useParams();
   // // console.log(id, "id");
 
@@ -456,7 +456,7 @@ const TrendingWarzone = () => {
     getWarRscReview();
     getComment();
   }, []);
-
+  getPath(location.pathname)
   return (
     <Container>
       {/* <Col className="mb-4 mt-5">
