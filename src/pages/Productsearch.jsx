@@ -1086,7 +1086,7 @@ function Productsearch(args) {
                       </Row>
 
                       <Col lg="12" className="py-3">
-                        <div className="ft-type">
+                        <div className="ft-type position-relative">
                           <h5 className="mb-3">Category</h5>
 
                           {allcatego
@@ -1132,12 +1132,16 @@ function Productsearch(args) {
                             }}
                           >
                             <button
-                              className="top-0 postion-sticky"
+                              onClick={hndleMoreCategory}
+                              className="top-0 rounded-circle"
                               style={{
+                                position: "sticky",
                                 left: "100%",
-                                height: "50px",
-                                width: "50px",
-                                backgroundColor: "red",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
                               }}
                             >
                               X
@@ -1213,6 +1217,21 @@ function Productsearch(args) {
                               overflowY: "auto",
                             }}
                           >
+                            <button
+                              onClick={hndleMoreCategory2}
+                              className="top-0 rounded-circle"
+                              style={{
+                                position: "sticky",
+                                left: "100%",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              X
+                            </button>
                             <div className="d-flex flex-wrap">
                               {subctgry.map((subctgry) => {
                                 return (
@@ -1220,7 +1239,7 @@ function Productsearch(args) {
                                     className="mt-3 mb-3 mx-2"
                                     style={{ width: "200px" }}
                                   >
-                                    {/* <input
+                                    <input
                                       id={subctgry?._id}
                                       className="ft-check"
                                       type="checkbox"
@@ -1232,7 +1251,7 @@ function Productsearch(args) {
                                         setSub_category(subctgry?._id);
                                         handlefilter();
                                       }}
-                                    /> */}
+                                    />
                                     {subctgry?.title} &nbsp;
                                   </div>
                                 );
@@ -1240,6 +1259,14 @@ function Productsearch(args) {
                             </div>
                           </div>
                         </div>
+                        {subctgry.length > 5 && (
+                          <button
+                            className="bg-white border-0"
+                            onClick={hndleMoreCategory2}
+                          >
+                            More {subctgry.length - 5} category here
+                          </button>
+                        )}
                       </Col>
                     </Col>
 
@@ -1323,6 +1350,24 @@ function Productsearch(args) {
                           />
                           Text &nbsp;
                           {formatelength[0]?.format == "Text"
+                            ? formatelength.length
+                            : null}
+                        </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="Video & Text"
+                            className="ft-check"
+                            type="radio"
+                            name="format"
+                            checked={"Video & Text" === format}
+                            value="Video & Text"
+                            onClick={() => {
+                              setFormat("Video & Text");
+                              handlefilter();
+                            }}
+                          />
+                          Video & Text &nbsp;
+                          {formatelength[0]?.format == "Video & Text"
                             ? formatelength.length
                             : null}
                         </Row>
