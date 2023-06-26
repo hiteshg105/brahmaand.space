@@ -553,6 +553,9 @@ const ContentCreators = ({
     setProductdetail("");
     setProductdes("");
   };
+  const location = useLocation();
+  console.log(location);
+
 
   return (
     <div className="ccm content-creator-main mt-5">
@@ -560,6 +563,12 @@ const ContentCreators = ({
         <Col>
           <h3 className="fw-bold text-center p-0 text-md-start">
             Showing Results
+          </h3>
+
+        </Col>
+        <Col>
+          <h3>
+            {location.state.data.title}
           </h3>
         </Col>
         <Col>
@@ -573,8 +582,10 @@ const ContentCreators = ({
 
       <Row className="my-4">
         <h4 className="fw-bold text-center text-md-start p-0 ps-md-3">
-          {content === "Content" ? "Content" : "Content Creators"}
+          {content === "Content" ? "Content " : "Content Creators "}
+
         </h4>
+        <span></span>
       </Row>
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">

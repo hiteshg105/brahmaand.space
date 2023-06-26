@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
 import "../css/arrow.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";

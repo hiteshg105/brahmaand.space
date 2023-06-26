@@ -325,58 +325,67 @@ const TrendingWarzone = ({getPath}) => {
       const userid = localStorage.getItem("userId");
 
       // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
-      if (userid !== null) {
-        if (isContent === "0") {
-          if (rsc1Review.rate != 0) {
-            console.log("rsc1Review");
-            const data = await instance.post(`user/add_Comment`, {
-              submitresrcId: war.resource1._id,
-              userid: userid,
-              comment: rsc1Review.comment,
-              rating: rsc1Review.rate,
-            });
-            // console.log(data.data);
-            if (data.data.status === true) {
-              setRsc1Review({ comment: "", rate: 0 });
-              getComment();
-              swal("Review submitted Successfully.");
-            }
-            if (data.data.msg === "waiting for admin approvel") {
-              swal("You have already submit your review on this.");
-              setRsc1Review({ comment: "", rate: 0 });
-            }
-          } else {
-            swal("Please Enter Comment And Rating");
-          }
-        }
+      if(war?.winner){
+        // swal("Bettle Ended");
+        swal("Battle is completed so you can not add Rating and Reviews.");
 
-        if (isContent === "1") {
-          if (rsc1Review.rate != 0) {
-            console.log("rsc1Review");
-            const userid = localStorage.getItem("userId");
-            const data = await instance.post(`/user/add_creator_comment`, {
-              creatorResrcId: war.resource1._id,
-              userid: userid,
-              comment: rsc1Review.comment,
-              rating: rsc1Review.rate,
-            });
-            // console.log(data.data);
-            if (data.data.status === true) {
-              setRsc1Review({ comment: "", rate: 0 });
-              getComment();
-              swal("Review submitted Successfully.");
-            }
-            if (data.data.status === false) {
-              swal("You have already submit your review on this.");
-              setRsc1Review({ comment: "", rate: 0 });
-            }
-          } else {
-            swal("Please Enter Comment And Rating");
-          }
-        }
-      } else {
-        swal("Please Login OR Sign Up");
+
       }
+      else{
+        if (userid !== null) {
+          if (isContent === "0") {
+            if (rsc1Review.rate != 0) {
+              console.log("rsc1Review");
+              const data = await instance.post(`user/add_Comment`, {
+                submitresrcId: war.resource1._id,
+                userid: userid,
+                comment: rsc1Review.comment,
+                rating: rsc1Review.rate,
+              });
+              // console.log(data.data);
+              if (data.data.status === true) {
+                setRsc1Review({ comment: "", rate: 0 });
+                getComment();
+                swal("Review submitted Successfully.");
+              }
+              if (data.data.msg === "waiting for admin approvel") {
+                swal("You have already submit your review on this.");
+                setRsc1Review({ comment: "", rate: 0 });
+              }
+            } else {
+              swal("Please Enter Comment And Rating");
+            }
+          }
+  
+          if (isContent === "1") {
+            if (rsc1Review.rate != 0) {
+              console.log("rsc1Review");
+              const userid = localStorage.getItem("userId");
+              const data = await instance.post(`/user/add_creator_comment`, {
+                creatorResrcId: war.resource1._id,
+                userid: userid,
+                comment: rsc1Review.comment,
+                rating: rsc1Review.rate,
+              });
+              // console.log(data.data);
+              if (data.data.status === true) {
+                setRsc1Review({ comment: "", rate: 0 });
+                getComment();
+                swal("Review submitted Successfully.");
+              }
+              if (data.data.status === false) {
+                swal("You have already submit your review on this.");
+                setRsc1Review({ comment: "", rate: 0 });
+              }
+            } else {
+              swal("Please Enter Comment And Rating");
+            }
+          }
+        } else {
+          swal("Please Login OR Sign Up");
+        }
+      }
+      
     } catch (error) {
       if (error.response?.status === 403) {
         swal("You have already submit your review on this.");
@@ -390,6 +399,11 @@ const TrendingWarzone = ({getPath}) => {
     try {
       // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
       const userid = localStorage.getItem("userId");
+      if(war?.winner){
+        swal("Battle is completed so you can not add Rating and Reviews.");
+
+      }
+     else{
       if (userid !== null) {
         if (isContent === "0") {
           if (rsc2Review.rate != 0) {
@@ -442,6 +456,7 @@ const TrendingWarzone = ({getPath}) => {
       } else {
         swal("Please Login OR Sign Up");
       }
+     }
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
