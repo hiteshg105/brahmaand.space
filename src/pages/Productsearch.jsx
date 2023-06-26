@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
 import "../css/arrow.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
@@ -19,7 +19,14 @@ import { AiFillEdit } from "react-icons/ai";
 
 import Slider from "../components/filter/Slider";
 import Pagination from "react-bootstrap/Pagination";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Input,
+} from "reactstrap";
 import "../styles/ModulePage.css";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
@@ -44,7 +51,13 @@ import {
 import { Link, useParams } from "react-router-dom";
 import "../styles/Filter.css";
 import AutoSearch from "../components/filter/AutoSearch";
-import { FaHeart, FaStar, FaRegHeart, FaSearch, FaPhoenixFramework } from "react-icons/fa";
+import {
+  FaHeart,
+  FaStar,
+  FaRegHeart,
+  FaSearch,
+  FaPhoenixFramework,
+} from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "../components/filter/FilterList";
 import RecentProductList from "../components/filter/RecentProductList";
@@ -52,7 +65,11 @@ import backimg from "../assets/images/backimg.png";
 import axiosConfig from "../components/axiosConfig";
 import Moment from "react-moment";
 import PrettyRating from "pretty-rating-react";
-import { faStar, faStarHalfAlt, faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import {
+  faStar,
+  faStarHalfAlt,
+  faStar as farStar,
+} from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "swiper/css";
@@ -64,7 +81,7 @@ import ContentCreators from "./ContentCreators";
 import Swal from "sweetalert2";
 
 function Productsearch(args) {
-  const [parentState, setParentState] = useState("");
+  const [parentState, setParentState] = useState("Content");
 
   const [modalsuggestion, setModalsuggestion] = useState(false);
   const togglesuggestion = () => setModalsuggestion(!modalsuggestion);
@@ -103,7 +120,6 @@ function Productsearch(args) {
     setParentState(newValue);
   };
 
-
   // console.log("category::",category)
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -126,7 +142,7 @@ function Productsearch(args) {
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
-      handlesearchdescription();
+      handlesearchtopics();
     }
   };
   const [Filtertype, setFiltertype] = useState("");
@@ -166,7 +182,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const navigate = useNavigate();
@@ -174,8 +190,10 @@ function Productsearch(args) {
 
   const [category, setCategory] = useState("");
   const [catgry, setCatgry] = useState("");
+  const [searchData, setSearchData] = useState({
+    data: { content: [], resource: [] },
+  });
   // const [subcatry, setSubcatry] = useState("");
-
 
   const [allcatego, setAllcatego] = useState([]);
   const allcategory = () => {
@@ -195,7 +213,6 @@ function Productsearch(args) {
   const [subctgry, setSubctgry] = useState([]);
   const [sub_category, setSub_category] = useState([]);
 
-
   useEffect(() => {
     // const params = catgry ? catgry : category;
     axiosConfig
@@ -212,17 +229,15 @@ function Productsearch(args) {
   // console.log(subctgry, "subctgry")
 
   useEffect(() => {
-
     allcategory();
   }, []);
 
-
   useEffect(() => {
-    setSubctgry([])
-    setCategory("")
+    setSubctgry([]);
+    setCategory("");
     setSub_category([]);
-    setCatgry("")
-  }, [parentState])
+    setCatgry("");
+  }, [parentState]);
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -317,7 +332,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -385,33 +400,64 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
   };
 
-  const handlesearchdescription = async () => {
+  // console.log(parentState, "parentState");
+  const handlesearchtopics = () => {
     localStorage.setItem("searchdata", searchitem);
-    const responce = await axiosConfig.post(`/user/search_topic_title`, {
-      searchinput: searchitem,
-    });
-    if (responce.data.status === true && responce.data.data.length !== 0) {
-      navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
-    }else{
-      swal("No Data Found")
+    if (searchitem !== "") {
+      axiosConfig
+        .post(`/user/search_topic_title/test`, {
+          searchinput: searchitem,
+        })
+        .then((res) => {
+          setSearchitem("");
+          console.log(parentState, "res");
+          setSearchData(res);
+
+          // if (res.data.data.length == "0") {
+          //   swal("No product found");
+          // } else {
+          //   const search = res.data.data[0]?.sub_category;
+          //   if (search !== "" && search !== undefined) {
+          //     navigate(`/productsearch/${search}`);
+          //   }
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    axiosConfig
-      .post(`/user/search_promotion`, {
-        searchinput: searchitem,
-      })
-      .then((res) => {
-        // console.log(res.data.data);
-        if (res.data.data !== "" && res.data.data !== null) {
-          setPromotion(res.data.data);
-        }
-      })
-      .catch((err) => { });
+    // const data = "#learning , #media , #study,  #songs, #learning ";
+    // const onedata = data.split(",");
   };
+
+  // const handlesearchdescription = async () => {
+  //   localStorage.setItem("searchdata", searchitem);
+  //   const responce = await axiosConfig.post(`/user/search_topic_title`, {
+  //     searchinput: searchitem,
+  //   });
+  //   if (responce.data.status === true && responce.data.data.length !== 0) {
+  //     navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
+  //   } else {
+  //     swal("No Data Found");
+  //   }
+
+  //   axiosConfig
+  //     .post(`/user/search_promotion`, {
+  //       searchinput: searchitem,
+  //     })
+  //     .then((res) => {
+  //       // console.log(res.data.data);
+  //       if (res.data.data !== "" && res.data.data !== null) {
+  //         setPromotion(res.data.data);
+  //       }
+  //     })
+  //     .catch((err) => {});
+  // };
 
   const getLanguage = () => {
     axiosConfig
@@ -419,7 +465,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -446,7 +492,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -537,8 +583,10 @@ function Productsearch(args) {
     }
   };
   const setCategoryData = (id) => {
-    sub_category.includes(id) ? setSub_category((pre) => pre.filter(e => e !== id)) : setSub_category([...sub_category, id]);
-  }
+    sub_category.includes(id)
+      ? setSub_category((pre) => pre.filter((e) => e !== id))
+      : setSub_category([...sub_category, id]);
+  };
   let Params = useParams();
 
   const [loading, setLoading] = useState(false);
@@ -752,7 +800,7 @@ function Productsearch(args) {
           searchitem === "" &&
           hastagdata === "hastag" &&
           searchdata === "",
-          Filtertype === "")
+        Filtertype === "")
       ) {
         allsearchproduct();
       }
@@ -825,7 +873,7 @@ function Productsearch(args) {
 
   const allsearchproduct = () => {
     const searchdata = localStorage.getItem("searchdata");
-    setSearchitem(searchdata);
+    // setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
       axiosConfig
         .post(`/user/search_topic_title`, {
@@ -853,7 +901,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
     // axios
     //   .get(
@@ -940,7 +988,7 @@ function Productsearch(args) {
             <Col lg="2">
               <Button className=" d-flex probtn text-center ">
                 <p
-                  onClick={handlesearchdescription}
+                  onClick={handlesearchtopics}
                   className="searchproduct d-flex"
                 >
                   SEARCH
@@ -1038,9 +1086,8 @@ function Productsearch(args) {
                       </Row>
 
                       <Col lg="12" className="py-3">
-                        <div className="ft-type">
+                        <div className="ft-type position-relative">
                           <h5 className="mb-3">Category</h5>
-
 
                           {allcatego
                             .filter((res, i) => i < 5)
@@ -1085,12 +1132,16 @@ function Productsearch(args) {
                             }}
                           >
                             <button
-                              className="top-0 postion-sticky"
+                              onClick={hndleMoreCategory}
+                              className="top-0 rounded-circle"
                               style={{
-                                left:"100%",
-                                height:"50px",
-                                width:"50px",
-                                backgroundColor:"red"
+                                position: "sticky",
+                                left: "100%",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
                               }}
                             >
                               X
@@ -1136,11 +1187,13 @@ function Productsearch(args) {
                                     id={subctgo?._id}
                                     className="ft-check"
                                     type="checkbox"
-                                    checked={sub_category.some((e) => e === subctgo?._id)}
+                                    checked={sub_category.some(
+                                      (e) => e === subctgo?._id
+                                    )}
                                     name="format"
                                     value={subctgo?._id}
                                     onClick={(e) => {
-                                      setCategoryData(subctgo?._id)
+                                      setCategoryData(subctgo?._id);
                                       // setSub_category(subctgo?._id);
                                       handlefilter();
                                     }}
@@ -1164,15 +1217,29 @@ function Productsearch(args) {
                               overflowY: "auto",
                             }}
                           >
+                            <button
+                              onClick={hndleMoreCategory2}
+                              className="top-0 rounded-circle"
+                              style={{
+                                position: "sticky",
+                                left: "100%",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              X
+                            </button>
                             <div className="d-flex flex-wrap">
-
                               {subctgry.map((subctgry) => {
                                 return (
                                   <div
                                     className="mt-3 mb-3 mx-2"
                                     style={{ width: "200px" }}
                                   >
-                                    {/* <input
+                                    <input
                                       id={subctgry?._id}
                                       className="ft-check"
                                       type="checkbox"
@@ -1184,7 +1251,7 @@ function Productsearch(args) {
                                         setSub_category(subctgry?._id);
                                         handlefilter();
                                       }}
-                                    /> */}
+                                    />
                                     {subctgry?.title} &nbsp;
                                   </div>
                                 );
@@ -1192,9 +1259,15 @@ function Productsearch(args) {
                             </div>
                           </div>
                         </div>
+                        {subctgry.length > 5 && (
+                          <button
+                            className="bg-white border-0"
+                            onClick={hndleMoreCategory2}
+                          >
+                            More {subctgry.length - 5} category here
+                          </button>
+                        )}
                       </Col>
-
-
                     </Col>
 
                     {parentState === "Content Creators" ? (
@@ -1277,6 +1350,24 @@ function Productsearch(args) {
                           />
                           Text &nbsp;
                           {formatelength[0]?.format == "Text"
+                            ? formatelength.length
+                            : null}
+                        </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="Video & Text"
+                            className="ft-check"
+                            type="radio"
+                            name="format"
+                            checked={"Video & Text" === format}
+                            value="Video & Text"
+                            onClick={() => {
+                              setFormat("Video & Text");
+                              handlefilter();
+                            }}
+                          />
+                          Video & Text &nbsp;
+                          {formatelength[0]?.format == "Video & Text"
                             ? formatelength.length
                             : null}
                         </Row>
@@ -1449,8 +1540,9 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
-                                                  }`}
+                                                src={`https://www.youtube.com/embed/${
+                                                  promotion?.link?.split("=")[1]
+                                                }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1792,7 +1884,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                      0 ? (
+                                                    0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1918,9 +2010,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                        localStorage.getItem(
-                                                          "userId"
-                                                        ) ? (
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -2121,6 +2213,8 @@ function Productsearch(args) {
                     Filtertype={Filtertype}
                     category={catgry}
                     subcategory={sub_category}
+                    contentyear={contentyear}
+                    searchitem={searchitem}
                   />
 
                   {/* {console.log(parentState,"")} */}

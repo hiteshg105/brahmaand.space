@@ -94,10 +94,10 @@ function Hastag() {
     axiosConfig
       .get(`/admin/getTrending`)
       .then((res) => {
-        // console.log(res.data.data);
+        // console.log(res.data.data,"This is data by smit");
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -127,7 +127,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   function isValidEmail(email) {
     const expression =
@@ -270,17 +270,17 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                    <button
-                      key={trendingtopics._id}
-                      onClick={() => (
-                        handlehastagtopic(trendingtopics?.topics),
-                        gaEventTracker(`${trendingtopics?.topics}`)
-                      )}
-                      className="btn1"
-                    >
-                      {trendingtopics?.topics}
-                    </button>
-                  ))
+                      <button
+                        key={trendingtopics._id}
+                        onClick={() => (
+                          handlehastagtopic(trendingtopics?.topics),
+                          gaEventTracker(`${trendingtopics?.topics}`)
+                        )}
+                        className="btn1"
+                      >
+                        {trendingtopics?.topics}
+                      </button>
+                    ))
                   : null}
               </div>
             </div>
@@ -394,7 +394,15 @@ function Hastag() {
                     <div>
                       {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
-                        <Col className="position-relative p-0 mx-3 -z-50">
+                        <Col
+                          className="position-relative p-0 mx-3 -z-50 "
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            borderRadius: "50%",
+                            overflow: "hidden",
+                          }}
+                        >
                           {/* {features.resource1.format === "Video" ? (
                             <> */}
                           {typeof features.resource1.link === "string" ? (
@@ -407,7 +415,6 @@ function Hastag() {
                                   allowfullscreen="true"
                                   className="iframesetdata obj"
                                   style={{
-                                    borderRadius: "12px",
                                     width: "100%",
                                     height: "100%",
                                   }}
@@ -421,7 +428,7 @@ function Hastag() {
                                   <img
                                     style={{
                                       objectFit: "contain",
-                                      height: "250px",
+                                      height: "100%",
                                       borderRadius: 12,
                                     }}
                                     className="w-100  object-contain"
@@ -468,10 +475,10 @@ function Hastag() {
                                       features?.resource1.img?.length === 0
                                         ? NoImage
                                         : features?.resource1.img?.includes(
-                                          "https"
-                                        )
-                                          ? features?.resource1.img
-                                          : `https://backend.brahmaand.space/${features?.resource1.img}`
+                                            "https"
+                                          )
+                                        ? features?.resource1.img
+                                        : `https://backend.brahmaand.space/${features?.resource1.img}`
                                     }
                                     alt=""
                                   />
@@ -528,8 +535,8 @@ function Hastag() {
                               <div
                                 style={{
                                   backgroundColor: "#000000B3",
-                                  height: "90%",
-                                  width: "90%",
+                                  height: "100%",
+                                  width: "100%",
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
@@ -543,8 +550,8 @@ function Hastag() {
                               <div
                                 style={{
                                   backgroundColor: "#000000B3",
-                                  height: "90%",
-                                  width: "90%",
+                                  height: "100%",
+                                  width: "100%",
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
@@ -570,7 +577,7 @@ function Hastag() {
                             transform: "translate(-50%,-33%)",
                             zIndex: 69,
                           }}
-                          className="imagehead position-absolute"
+                          className="imagehead position-absolute "
                         >
                           <div className="imagemainhead">
                             <img
@@ -583,7 +590,12 @@ function Hastag() {
                         </Col>
                         <Col
                           lg=""
-                          className="d-flex justify-content-center align-items-center position-relative p-0 mx-3"
+                          className="d-flex justify-content-center align-items-center position-relative p-0 mx-3 overflow-hidden"
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            borderRadius: "50%",
+                          }}
                         >
                           {/* {features.resource2.format === "Video" ? (
                             <> */}
@@ -606,10 +618,11 @@ function Hastag() {
                                 <img
                                   style={{
                                     objectFit: "contain",
-                                    height: "250px",
+                                    height: "100%",
+                                    width: "100%",
                                     borderRadius: 12,
                                   }}
-                                  className="w-100"
+                                  // className="w-h-100"
                                   src={
                                     features?.resource2.img.length === 0
                                       ? NoImage
@@ -640,7 +653,7 @@ function Hastag() {
                                 <img
                                   style={{
                                     objectFit: "contain",
-                                    height: "250px",
+                                    height: "300px",
                                     borderRadius: 12,
                                   }}
                                   className="w-100"
@@ -648,10 +661,10 @@ function Hastag() {
                                     features?.resource2.img?.length === 0
                                       ? NoImage
                                       : features?.resource2.img?.includes(
-                                        "https"
-                                      )
-                                        ? features?.resource2.img
-                                        : `https://backend.brahmaand.space/${features?.resource2.img}`
+                                          "https"
+                                        )
+                                      ? features?.resource2.img
+                                      : `https://backend.brahmaand.space/${features?.resource2.img}`
                                   }
                                   alt=""
                                 />
@@ -707,8 +720,8 @@ function Hastag() {
                               <div
                                 style={{
                                   backgroundColor: "#000000B3",
-                                  height: "90%",
-                                  width: "90%",
+                                  height: "100%",
+                                  width: "100%",
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
@@ -722,8 +735,8 @@ function Hastag() {
                               <div
                                 style={{
                                   backgroundColor: "#000000B3",
-                                  height: "90%",
-                                  width: "90%",
+                                  height: "100%",
+                                  width: "100%",
                                   top: "50%",
                                   left: "50%",
                                   transform: "translate(-50%,-50%)",
@@ -758,7 +771,10 @@ function Hastag() {
                               colors={colors.star}
                             />
                             <span style={{ fontSize: "14px" }} className="ms-1">
-                              {console.log(features?.resource1.ava_rating, "features?.resource1.ava_rating")}
+                              {console.log(
+                                features?.resource1.ava_rating,
+                                "features?.resource1.ava_rating"
+                              )}
                               {features?.resource1.ava_rating?.toFixed(2)}
                             </span>
                           </div>
@@ -942,8 +958,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>
@@ -1129,7 +1145,7 @@ function Hastag() {
                           size={75}
                           style={{ backgroundColor: "white" }}
                           type="submit"
-                        // onClick={() => setOpenone(true)}
+                          onClick={() => setOpenone(true)}
                         />
                         <div className="modalvideo">
                           <ModalVideo

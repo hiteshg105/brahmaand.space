@@ -48,9 +48,9 @@ const Category = () => {
   console.log(allWarData, "allWarData")
   return (
     <div className="category-main overflow-x-hidden">
-      <Row className="hero-swiper">
+      {/* <Row className="hero-swiper">
         <h3 className="text-center">Brahmaand Warzone</h3>
-        <Swiper
+        {/* <Swiper
           modules={[Navigation]}
           spaceBetween={0}
           slidesPerView={1}
@@ -69,7 +69,7 @@ const Category = () => {
             <img className="w-100 h-auto" src={img1} alt="" />
           </SwiperSlide>
         </Swiper>
-      </Row>
+      </Row> */}
 
       <Row className="common-swipers ps-5 position-relative">
         {allWarData && allWarData?.map((ele) => (

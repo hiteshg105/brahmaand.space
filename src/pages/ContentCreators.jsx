@@ -39,7 +39,9 @@ const ContentCreators = ({
   searchdata,
   updateParentState,
   category,
-  subcategory
+  subcategory,
+  contentyear,
+  searchitem,
 }) => {
   const params = useParams();
   const [content, setContent] = useState("Content");
@@ -243,7 +245,7 @@ const ContentCreators = ({
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -371,93 +373,121 @@ const ContentCreators = ({
     setLimit(limit + 12);
   };
   const handleContent = async (data) => {
-    if (data === "Content") {
+    // if (searchData.data.content || searchData.data.resource !== 0) {
+    //   if (content === "Content") {
+    //     if (searchData?.data.resource.length === 0) {
+    //       swal("No product found");
+    //     } else {
+    //       setData1(searchData.data.data);
+    //       setVal(searchData.data.data.slice(0, end));
+    //     }
+    //   } else {
+    //     if (searchData?.data.content.length === 0) {
+    //       swal("No product found");
+    //     } else {
+    //       setData1(searchData.data.data);
+    //       setVal(searchData.data.data.slice(0, end));
+    //     }
+    //   }
+    // } else {
+    if (content === "Content") {
       // console.log(params.id, "hello")
-      var responce = "";
+      let responce;
 
-      console.log(responce, "responce")
       if (subcategory.length === 0) {
         if (category) {
           responce = await axiosClient.post(
             // `/content/advance_content_filter?sub_category=${params.id}`
-            `/user/advancefilter/category`,
-            { category: category }
+            `/user/advancefilter/categoryNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+            { category: category, searchinput: searchitem }
           );
         } else {
+          // console.log("object");
           responce = await axiosClient.post(
-            `/user/advancefilter `,
-            { sub_category: params.id }
-          )
+            `/user/advancefilterNew?sub_category=${params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+            { searchinput: searchitem }
+          );
+          console.log(responce, "responce");
         }
-
-      }
-      else {
+      } else {
+        console.log(subcategory, "object");
         responce = await axiosClient.post(
-          // `/user/advancefilter?sub_category=${params.id} ` 
-          `/user/advancefilter `,
-          { sub_category: subcategory }
+          // `/user/advancefilter?sub_category=${params.id} `
+          `/user/advancefilterNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+          {
+            sub_category: subcategory,
+            searchinput: searchitem,
+          }
         );
       }
-      // console.log()
+      // if (format || type || language) {
+      //   const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
-      if (format && type && language) {
-        const newdata = JSON.parse(JSON.stringify(responce.data.data));
+      //   const dataFilter = newdata.filter((e) => {
+      //     const languageMatch = e.language.some(
+      //       (lang) => lang._id === language
+      //     );
+      //     return e.format === format || e.type === type || languageMatch;
+      //   });
+      //   setData1(dataFilter);
 
-        const dataFilter = newdata.filter((e) => {
-          const languageMatch = e.language.some((lang) => lang._id === language);
-          return e.format === format && e.type === type && languageMatch;
-        });
-        setData1(dataFilter);
-
-        setVal(dataFilter.slice(0, end));
-      } else {
-        setData1(responce.data.data);
-        setVal(responce.data.data.slice(0, end));
-      }
-    }
-    if (data === "Content Creators") {
-      var responce = "";
+      //   setVal(dataFilter.slice(0, end));
+      // } else {
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
+      // }
+    } else {
+      let responce;
       if (subcategory.length === 0) {
         if (category) {
           responce = await axiosClient.post(
             // `/content/advance_content_filter?sub_category=${params.id}`
-            `/content/category/advance_content_filter`,
-            { category: category }
+            `/content/category/advance_content_filterNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+            { category: category, searchinput: searchitem }
           );
         } else {
           responce = await axiosClient.post(
-            // `/content/advance_content_filter?sub_category=${params.id}`
-            `/content/advance_content_filter`,
-            { sub_category: params.id }
+            `/content/advance_content_filter_new?sub_category=${params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+            {
+              searchinput: searchitem,
+            }
+            // `/content/advance_content_filter`,
+            // { sub_category: params.id }
           );
         }
-
-      }
-      else {
+      } else {
         responce = await axiosClient.post(
-          // `/content/advance_content_filter?sub_category=${params.id}`
-          `/content/advance_content_filter`,
-          { sub_category: subcategory }
+          `/content/advance_content_filter_new?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
+          {
+            sub_category: subcategory,
+            searchinput: searchitem,
+          }
+          // `/content/advance_content_filter`,
+          // { sub_category: subcategory }
         );
       }
 
       // console.log(responce.data, "dfjkflfgfhsdfg");
-      if (format && language && subcategory) {
-        const newdata = JSON.parse(JSON.stringify(responce.data.data));
+      // if (format || language || subcategory) {
+      //   const newdata = JSON.parse(JSON.stringify(responce.data.data));
 
-        const dataFilter = newdata.filter((e) => {
-          const languageMatch = e.language.some((lang) => lang._id === language);
+      //   const dataFilter = newdata.filter((e) => {
+      //     const languageMatch = e.language.some(
+      //       (lang) => lang._id === language
+      //     );
 
-          return e.format === format && languageMatch;
-        });
-        setData1(dataFilter);
-        setVal(dataFilter.slice(0, end));
-      } else {
-        setData1(responce.data.data);
-        setVal(responce.data.data.slice(0, end));
-      }
+      //     return e.format === format || languageMatch;
+      //   });
+      //   setData1(dataFilter);
+      //   setVal(dataFilter.slice(0, end));
+      // } else {
+      setData1(responce.data.data);
+      setVal(responce.data.data.slice(0, end));
+      // }
     }
   };
+  // console.log(data, "data");
+  // };
   // console.log(val);
   const colors = {
     star: ["#FCAF3B", "#FCAF3B", "#FCAF3B"],
@@ -472,38 +502,46 @@ const ContentCreators = ({
     }
   };
 
-
-  const getCategory = async (data) => {
-    let responce;
-    if (data === "Content Creators") {
-      responce = await axiosClient.post(
-        // `/content/advance_content_filter?sub_category=${params.id}`
-        `/content/category/advance_content_filter`,
-        { category: category }
-      );
-      setData1(responce.data.data);
-      setVal(responce.data.data.slice(0, end));
-    }
-    else {
-      responce = await axiosClient.post(
-        // `/content/advance_content_filter?sub_category=${params.id}`
-        `/user/advancefilter/category`,
-        { category: category }
-      );
-      setData1(responce.data.data);
-      setVal(responce.data.data.slice(0, end));
-    }
-    console.log(responce)
-  }
+  // const getCategory = async (data) => {
+  //   let responce;
+  //   if (data === "Content Creators") {
+  //     responce = await axiosClient.post(
+  //       // `/content/advance_content_filter?sub_category=${params.id}`
+  //       `/content/category/advance_content_filter`,
+  //       { category: category }
+  //     );
+  //     setData1(responce.data.data);
+  //     setVal(responce.data.data.slice(0, end));
+  //   } else {
+  //     responce = await axiosClient.post(
+  //       `/content/advance_content_filter?sub_category=${params.id}`
+  //       // `/user/advancefilter/category`,
+  //       // { category: category }
+  //     );
+  //     setData1(responce.data.data);
+  //     setVal(responce.data.data.slice(0, end));
+  //   }
+  //   // console.log(responce);
+  // };
 
   useEffect(() => {
-    console.log("okokok");
-    handleContent(content);
-  }, [content, params, format, type, language, searchdata, limit, subcategory]);
+    // console.log("okokok");
+    content && handleContent(content);
+  }, [
+    searchitem,
+    content,
+    category,
+    params,
+    format,
+    type,
+    language,
+    searchdata,
+    limit,
+    subcategory,
+    contentyear,
+  ]);
 
-  useEffect(() => {
-    getCategory(content)
-  }, [category, content])
+  useEffect(() => {}, []);
 
   useEffect(() => {
     getUser();
@@ -594,8 +632,8 @@ const ContentCreators = ({
                                   item.img.includes("https")
                                     ? item.img
                                     : img.includes("data:image")
-                                      ? item.img
-                                      : NoImage
+                                    ? item.img
+                                    : NoImage
                                 }
                                 alt=""
                               />
@@ -624,7 +662,6 @@ const ContentCreators = ({
                                 </>
                               ) : (
                                 <>
-                                  {console.log(item.img)}
                                   <img
                                     style={{
                                       borderRadius: "10px",
@@ -636,8 +673,8 @@ const ContentCreators = ({
                                       item.img.includes("https")
                                         ? item.img
                                         : img.includes("data:image")
-                                          ? item.img
-                                          : NoImage
+                                        ? item.img
+                                        : NoImage
                                     }
                                     alt=""
                                   />
@@ -762,7 +799,7 @@ const ContentCreators = ({
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-        // {...args}
+          // {...args}
         >
           <ModalBody>
             <Row>
@@ -1207,7 +1244,7 @@ const ContentCreators = ({
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-          // {...args}
+            // {...args}
           >
             <ModalBody>
               <Row>
@@ -1360,8 +1397,8 @@ const ContentCreators = ({
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  1
-                                )}
+                                    1
+                                  )}
                             </Link>
                           </div>
                         </div>
@@ -1430,8 +1467,8 @@ const ContentCreators = ({
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                  1
-                                )}
+                                    1
+                                  )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1449,7 +1486,7 @@ const ContentCreators = ({
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                    // {...secondExample}
+                      // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
