@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
 import "../css/arrow.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
@@ -64,6 +64,7 @@ import ContentCreators from "./ContentCreators";
 import Swal from "sweetalert2";
 
 function Productsearch(args) {
+  
   const [parentState, setParentState] = useState("");
 
   const [modalsuggestion, setModalsuggestion] = useState(false);
@@ -102,6 +103,7 @@ function Productsearch(args) {
   const updateParentState = (newValue) => {
     setParentState(newValue);
   };
+
 
 
   // console.log("category::",category)

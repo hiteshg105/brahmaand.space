@@ -59,41 +59,45 @@ function AllSubCategory() {
         <Container>
           <Row className="m-3 mb-4">
             {subcatgry?.map((value) => (
+             value.conent_count === 0?(<></>):(
               <Col lg="3" md="6" sm="12" className="" key={value?.category._id}>
-                <Link
-                  to={`/productsearch/${value._id}`}
-                >
-                  <div className="bg-1">
-                    <div className="blackimage position-relative">
-                    <div class="gradient position-absolute h-100 w-100"></div>
-                      <img
-                        className="imgCol"
-                        src={value?.Subcat_img}
-                        alt="img"
-                      />
-                      <div className=" d-flex content-bt newcontent">
-                        <Row className="  mt-2">
-                          <Button className="btlisting" onClick={() => gaEventTracker('Listing')}>
-                            {value?.conent_count} - Listing
-                          </Button>
-                        </Row>
-                      </div>
-                    </div>
-                    <div className="d-flex content-bt">
-                      <p className="d-flex" style={{ color: "white" }}>
-                        {value?.title}
-                      </p>
-                    </div>
-                    {/* <div className=" d-flex content-bt">
+              <Link
+                to={`/productsearch/${value._id}`}
+                state={{ data: value }}
+
+              >
+                <div className="bg-1">
+                  <div className="blackimage position-relative">
+                  <div class="gradient position-absolute h-100 w-100"></div>
+                    <img
+                      className="imgCol "
+                      src={value?.Subcat_img}
+                      alt="img"
+                    />
+                    <div className=" d-flex content-bt newcontent"> 
                       <Row className="  mt-2">
-                        <Button className="btlisting">
+                        <Button className="btlisting" onClick={() => gaEventTracker('Listing')}>
                           {value?.conent_count} - Listing
                         </Button>
                       </Row>
-                    </div> */}
+                    </div>
                   </div>
-                </Link>
-              </Col>
+                  <div className="d-flex content-bt">
+                    <p className="d-flex" style={{ color: "white" }}>
+                      {value?.title}
+                    </p>
+                  </div>
+                  {/* <div className=" d-flex content-bt">
+                    <Row className="  mt-2">
+                      <Button className="btlisting">
+                        {value?.conent_count} - Listing
+                      </Button>
+                    </Row>
+                  </div> */}
+                </div>
+              </Link>
+            </Col>
+             )
             ))}
 
             {/* <Col lg="3" md="6" sm="12">
@@ -107,7 +111,7 @@ function AllSubCategory() {
             </Col>
             <Col lg="3" md="6" sm="12">
               <Link to="/productList">
-                <img className="imgCol" src={healthcare} alt="img" />
+                <img className="" src={healthcare} alt="img" />
                 <div className="content-bt">
                   <p>Healthcare</p>
                   <Button className="bt">Listing</Button>
