@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../../styles/ModulePage.css";
 
 import Head from "../../images/social-media-with-photo-frame-like-button-media-payer-pink-background-illustration 10.png";
@@ -10,7 +10,7 @@ import backimg from "../../assets/images/backimg.png";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import Multiselect from "multiselect-react-dropdown";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { ImCancelCircle } from "react-icons/im";
 import useAnalyticsEventTracker from "../../useAnalyticsEventTracker";
@@ -81,6 +81,9 @@ function Header(args) {
   const [err, setErr] = useState("");
   const [url, setUrl] = useState("");
   const [slider, setSlider] = useState([]);
+
+  const preRef = useRef(null);
+  const nextRef = useRef(null);
 
   var fileUpload = (e) => {
     // setCat_img(e.target.files[0]);
@@ -349,7 +352,6 @@ function Header(args) {
   const allcategory = () => {
     axiosConfig
       .get(`/admin/getallCategory`)
-
       .then((response) => {
         // console.log(response.data.data);
         setAllcatego(response.data.data);
@@ -581,7 +583,7 @@ function Header(args) {
                 </div>
               </Col>
               <Col md="6">
-                <div className="hImage col">
+                <div className="hImage col">  
                   <img src={Head} className="imghead" />
                 </div>
               </Col>
@@ -592,8 +594,10 @@ function Header(args) {
         <section className="newdesign-main">
           <div className="hero-swiper">
             <Swiper
-              modules={[Pagination, Autoplay]}
+              modules={[Pagination, Autoplay, Navigation]}
               slidesPerView={1}
+              navigation
+              loop
               pagination={{
                 el: ".hero-swiper_swiper_pagination",
                 clickable: true,
@@ -682,8 +686,9 @@ function Header(args) {
                   />
                 </Link>
               </SwiperSlide>
+              
             </Swiper>
-
+              
             {/* <Swiper
               modules={[Pagination, Autoplay]}
               slidesPerView={1}
