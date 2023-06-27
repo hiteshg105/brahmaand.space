@@ -36,18 +36,16 @@ const Category = () => {
   };
 
   const getallWar = async () => {
-
     const responce = await axiosConfig.get(`/get/both_warzone`);
 
-
     if (responce.data.success === true) {
-      setAllWarData(responce.data.data)
+      setAllWarData(responce.data.data);
     }
   };
   useEffect(() => {
     getallWar();
   }, []);
-  console.log(allWarData, "allWarData")
+  console.log(allWarData, "allWarData");
   return (
     <div className="category-main overflow-x-hidden">
       <Row className="hero-swiper">
@@ -74,9 +72,10 @@ const Category = () => {
       </Row>
 
       <Row className="common-swipers ps-5 position-relative">
-        {allWarData ? (allWarData?.map((ele) => (
-          <>
-            {/* <div
+        {allWarData ? (
+          allWarData?.map((ele) => (
+            <>
+              {/* <div
               style={{ top: 0 }}
               className="position-absolute d-flex h-100 w-100"
             >
@@ -86,417 +85,460 @@ const Category = () => {
                 alt="bg"
               />
             </div> */}
-            <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
-            <Swiper
-              breakpoints={{
-                1084: {
-                  slidesPerView: 2,
-                },
-                980: {
-                  slidesPerView: 2,
-                },
-                910: {
-                  slidesPerView: 2,
-                },
-                820: {
-                  slidesPerView: 2,
-                },
-                780: {
-                  slidesPerView: 2,
-                },
-                768: {
-                  slidesPerView: 2,
-                },
-                640: {
-                  slidesPerView: 1,
-                },
-                320: {
-                  slidesPerView: 1,
-                },
-                240: {
-                  slidesPerView: 1,
-                },
-              }}
-              modules={[Navigation, Pagination]}
-              spaceBetween={20}
-              slidesPerView={2}
+              <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
+              <Swiper
+                breakpoints={{
+                  1084: {
+                    slidesPerView: 2,
+                  },
+                  980: {
+                    slidesPerView: 2,
+                  },
+                  910: {
+                    slidesPerView: 2,
+                  },
+                  820: {
+                    slidesPerView: 2,
+                  },
+                  780: {
+                    slidesPerView: 2,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                  },
+                  640: {
+                    slidesPerView: 1,
+                  },
+                  320: {
+                    slidesPerView: 1,
+                  },
+                  240: {
+                    slidesPerView: 1,
+                  },
+                }}
+                modules={[Navigation, Pagination]}
+                spaceBetween={20}
+                slidesPerView={2}
                 centeredSlides={ele.length === 1 ? true : false}
-              navigation
-              pagination={{
-                el: ".swiper_pagination",
-                clickable: true,
-              }}
-            >
-              {ele?.map((slides) => {
-                return (
-                  <>
-                    <div className="row w-100">
-                      <SwiperSlide className="ct_slider_w" >
-                        <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
-                          <HomeCountDown endDate={slides.endDate} />
-                          <Row className="position-relative">
-                            <Col className="d-flex flex-column justify-content-center">
-                              <div className="top-main d-flex justify-content-center">
-
-                                {typeof slides.resource1.link === "string" ? (
-                                  <>
-                                    {/* {console.log(`https://www.youtube.com/embed/${
+                navigation
+                pagination={{
+                  el: ".swiper_pagination",
+                  clickable: true,
+                }}
+              >
+                {ele?.map((slides) => {
+                  return (
+                    <>
+                      <div className="row w-100">
+                        <SwiperSlide className="ct_slider_w">
+                          <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
+                            {slides.winner || slides.winner === null ? (
+                              <h3 className="text-center fw-bold">
+                                Result Declared
+                              </h3>
+                            ) : (
+                              <HomeCountDown endDate={slides.endDate} />
+                            )}
+                            {/* <HomeCountDown endDate={slides.endDate} /> */}
+                            <Row className="position-relative">
+                              <Col className="d-flex flex-column justify-content-center align-items-center">
+                                <div
+                                  className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden"
+                                  style={{ height: "300px", width: "300px" }}
+                                >
+                                  {typeof slides.resource1.link === "string" ? (
+                                    <>
+                                      {/* {console.log(`https://www.youtube.com/embed/${
                                     features?.resource1.link.split("v=")[1]
                                   }`,"hello")} */}
-                                    {slides.resource1.link.includes("v=") ? (
-                                      <iframe
-                                        allowfullscreen="true"
-                                        className="iframesetdata obj rounded-circle border border-dark"
-                                        style={{
-                                          borderRadius: "12px",
-                                          width: "300px",
-                                          height: "300px",
-                                        }}
-                                        src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                          new URL(slides?.resource1.link).search
-                                        ).get("v")}`}
-                                      ></iframe>
-                                    ) : (
-                                      <>
-                                        {/* {features?.resource1.img.length ==0 } */}
-                                        <img
-                                          style={{
-                                            objectFit: "contain",
-                                            height: "300px",
-                                            borderRadius: 12,
-                                            width:"300px"
-                                          }}
-                                          className=" rounded-circle object-contain border border-dark"
-                                          src={
-                                            slides?.resource1.img.length === 0
-                                              ? NoImage
-                                              : slides?.resource1.img
-                                          }
-                                          alt=""
-                                        />
-                                      </>
-                                    )}
-                                  </>
-                                ) : (
-                                  <>
-                                    {slides.resource1.link.some((e) =>
-                                      e.includes("v=")
-                                    ) ? (
-                                      <>
+                                      {slides.resource1.link.includes("v=") ? (
                                         <iframe
                                           allowfullscreen="true"
-                                          className="iframesetdata obj rounded-circle border border-dark"
+                                          className="iframesetdata obj rounded-circle"
                                           style={{
                                             borderRadius: "12px",
                                             width: "300px",
                                             height: "300px",
                                           }}
                                           src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                            new URL(slides?.resource1.link).search
+                                            new URL(
+                                              slides?.resource1.link
+                                            ).search
                                           ).get("v")}`}
                                         ></iframe>
-                                      </>
+                                      ) : (
+                                        <>
+                                          {/* {features?.resource1.img.length ==0 } */}
+                                          <img
+                                            style={{
+                                              objectFit: "contain",
+                                              height: "300px",
+                                              borderRadius: 12,
+                                              width: "300px",
+                                            }}
+                                            className=" rounded-circle object-contain"
+                                            src={
+                                              slides?.resource1.img.length === 0
+                                                ? NoImage
+                                                : slides?.resource1.img
+                                            }
+                                            alt=""
+                                          />
+                                        </>
+                                      )}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {slides.resource1.link.some((e) =>
+                                        e.includes("v=")
+                                      ) ? (
+                                        <>
+                                          <iframe
+                                            allowfullscreen="true"
+                                            className="iframesetdata obj"
+                                            style={{
+                                              borderRadius: "12px",
+                                              width: "300px",
+                                              height: "300px",
+                                            }}
+                                            src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                              new URL(
+                                                slides?.resource1.link
+                                              ).search
+                                            ).get("v")}`}
+                                          ></iframe>
+                                        </>
+                                      ) : (
+                                        <>
+                                          {/* {console.log(features?.resource1.img) } */}
+                                          <img
+                                            style={{
+                                              objectFit: "contain",
+                                              height: "300px",
+                                              width: "300px",
+                                              // borderRadius: 12,
+                                            }}
+                                            className="rounded-circle object-contain"
+                                            src={
+                                              slides?.resource1.img?.length ===
+                                              0
+                                                ? NoImage
+                                                : slides?.resource1.img?.includes(
+                                                    "https"
+                                                  )
+                                                ? slides?.resource1.img
+                                                : `https://backend.brahmaand.space/${slides?.resource1.img}`
+                                            }
+                                            alt=""
+                                          />
+                                        </>
+                                      )}
+                                    </>
+                                  )}
+                                  {slides.winner || slides.winner === null ? (
+                                    slides.winner === null ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        DRAW
+                                      </div>
+                                    ) : slides.winner ===
+                                      slides.resource1._id ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        WINNER
+                                      </div>
                                     ) : (
-                                      <>
-                                        {/* {console.log(features?.resource1.img) } */}
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
+                                </div>
+
+                                {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
+                                <Row>
+                                  <h4 className="text-center">
+                                    {slides?.resource1.creatorName}
+                                  </h4>
+                                  <div className="d-flex align-items-center justify-content-center">
+                                    <div className="d-flex align-items-center">
+                                      <PrettyRating
+                                        value={
+                                          slides?.resource1.ava_rating === null
+                                            ? 0
+                                            : slides?.resource1.ava_rating
+                                        }
+                                        icons={icons.star}
+                                        colors={colors.star}
+                                      />
+                                      <span
+                                        style={{ fontSize: "14px" }}
+                                        className="ms-1"
+                                      >
+                                        (
+                                        {slides?.resource1.ava_rating === null
+                                          ? 0
+                                          : slides?.resource1.ava_rating?.toFixed(
+                                              2
+                                            )}
+                                        )
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Row>
+                              </Col>
+                              <Col className="d-flex flex-column justify-content-center align-items-center">
+                                <div className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden">
+                                  {typeof slides.resource2.link === "string" ? (
+                                    <>
+                                      {slides.resource2.link.includes("v=") ? (
+                                        <iframe
+                                          allowfullscreen="true"
+                                          className="iframesetdata obj rounded-circle"
+                                          style={{
+                                            // borderRadius: "12px",
+                                            width: "300px",
+                                            height: "300px",
+                                          }}
+                                          src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                            new URL(
+                                              slides?.resource2.link
+                                            ).search
+                                          ).get("v")}`}
+                                        ></iframe>
+                                      ) : (
                                         <img
                                           style={{
                                             objectFit: "contain",
                                             height: "300px",
-                                            width:"300px",
-                                            // borderRadius: 12,
+                                            width: "300px",
+                                            borderRadius: 12,
                                           }}
-                                          className="rounded-circle object-contain border border-dark"
+                                          className="rounded-circle"
                                           src={
-                                            slides?.resource1.img?.length === 0
+                                            slides?.resource2.img.length === 0
                                               ? NoImage
-                                              : slides?.resource1.img?.includes(
-                                                "https"
-                                              )
-                                                ? slides?.resource1.img
-                                                : `https://backend.brahmaand.space/${slides?.resource1.img}`
+                                              : slides?.resource2.img
                                           }
                                           alt=""
                                         />
-                                      </>
-                                    )}
-                                  </>
-                                )}
+                                      )}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {slides.resource2.link.some((e) =>
+                                        e.includes("v=")
+                                      ) ? (
+                                        <iframe
+                                          allowfullscreen="true"
+                                          className="iframesetdata obj rounded-circle"
+                                          style={{
+                                            borderRadius: "12px",
+                                            width: "300px",
+                                            height: "300px",
+                                          }}
+                                          src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                            new URL(
+                                              slides?.resource2.link
+                                            ).search
+                                          ).get("v")}`}
+                                        ></iframe>
+                                      ) : (
+                                        <img
+                                          style={{
+                                            objectFit: "contain",
+                                            height: "300px",
+                                            width: "300px",
+                                            borderRadius: 12,
+                                          }}
+                                          className="rounded-circle"
+                                          src={
+                                            slides?.resource2.img?.length === 0
+                                              ? NoImage
+                                              : slides?.resource2.img?.includes(
+                                                  "https"
+                                                )
+                                              ? slides?.resource2.img
+                                              : `https://backend.brahmaand.space/${slides?.resource2.img}`
+                                          }
+                                          alt=""
+                                        />
+                                      )}
+                                    </>
+                                  )}
 
-
-
-
-
-
-
-
-
-
-                                {/* {slides?.resource1.format === "Video" ? (
-                                  <iframe
-                                    className="w-100 rounded-4 ct_if_asrto rounded-circle"
-                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                      new URL(slides?.resource1.link).search
-                                    ).get("v")}`}
-                                    title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen
-                                  ></iframe>
-                                ) : (
-                                  <div
-                                    style={{ height: "300px" }}
-                                    className="d-flex justify-content-center"
-                                  >
-                                    {console.log(slides?.resource1.img.includes("https"), "slides?.resource1.img")}
-                                    <img
-                                      className=" rounded-4 object-fit-contain rounded-circle"
-                                      style={{ height: "300px",width:"300px" }}
-                                      src={
-                                        slides?.resource1.img.includes("https")
-                                          ? slides?.resource1.img
-                                          : slides?.resource1.img.includes("data:image")
-                                            ? slides?.resource1.img
-                                            : NoImage
-                                      }
-                                      // src={slides?.resource1.img}
-                                      alt=""
-                                    />
-                                  </div>
-                                )} */}
-                              </div>
-                              {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
-                              <Row>
-                                <h4 className="text-center">
-                                  {slides?.resource1.creatorName}
-                                </h4>
-                                <div className="d-flex align-items-center justify-content-center">
-                                  <div className="d-flex align-items-center">
-                                    <PrettyRating
-                                      value={
-                                        slides?.resource1.ava_rating === null
-                                          ? 0
-                                          : slides?.resource1.ava_rating
-                                      }
-                                      icons={icons.star}
-                                      colors={colors.star}
-                                    />
-                                    <span
-                                      style={{ fontSize: "14px" }}
-                                      className="ms-1"
-                                    >
-                                      (
-                                      {slides?.resource1.ava_rating === null
-                                        ? 0
-                                        : slides?.resource1.ava_rating?.toFixed(
-                                          2
-                                        )}
-                                      )
-                                    </span>
-                                  </div>
+                                          {/* {slides?.resource2.format === "Video" ? (
+                                          <iframe
+                                            className="w-100 rounded-4 ct_if_asrto"
+                                            src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                              new URL(slides?.resource2.link).search
+                                            ).get("v")}`}
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                          ></iframe>
+                                        ) : (
+                                          <div
+                                            style={{ height: "300px" }}
+                                            className="d-flex"
+                                          >
+                                            <img
+                                              className="w-100 h-auto rounded-4 object-fit-contain"
+                                              style={{ height: "400px" }}
+                                              src={
+                                                slides?.resource2?.img?.includes("https") ? slides.resource2.img
+                                                  : NoImage
+                                              }
+                                              // src={slides?.resource2.img}
+                                              alt=""
+                                            />
+                                          </div>
+                                        )} */}
+                                  {slides.winner || slides.winner === null ? (
+                                    slides.winner === null ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        DRAW
+                                      </div>
+                                    ) : slides.winner ===
+                                      slides.resource1._id ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        WINNER
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
                                 </div>
-                              </Row>
-
-
-
-
-
-                              
-                            </Col>
-                            <Col className="d-flex flex-column justify-content-center">
-                              <div className="top-main d-flex justify-content-center">
-
-                              {typeof slides.resource2.link === "string" ? (
-                            <>
-                              {slides.resource2.link.includes("v=") ? (
-                                <iframe
-                                  allowfullscreen="true"
-                                  className="iframesetdata obj rounded-circle border border-dark"
-                                  style={{
-                                    // borderRadius: "12px",
-                                    width: "300px",
-                                    height: "300px",
-                                  }}
-                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                    new URL(slides?.resource2.link).search
-                                  ).get("v")}`}
-                                ></iframe>
-                              ) : (
-                                <img
-                                  style={{
-                                    objectFit: "contain",
-                                    height: "300px",
-                                    width:"300px",
-                                    borderRadius: 12,
-                                  }}
-                                  className="rounded-circle border border-dark"
-                                  src={
-                                    slides?.resource2.img.length === 0
-                                      ? NoImage
-                                      : slides?.resource2.img
-                                  }
-                                  alt=""
-                                />
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              {slides.resource2.link.some((e) =>
-                                e.includes("v=")
-                              ) ? (
-                                <iframe
-                                  allowfullscreen="true"
-                                  className="iframesetdata obj rounded-circle border border-dark"
-                                  style={{
-                                    borderRadius: "12px",
-                                    width: "300px",
-                                    height: "300px",
-                                  }}
-                                  src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                    new URL(slides?.resource2.link).search
-                                  ).get("v")}`}
-                                ></iframe>
-                              ) : (
-                                <img
-                                  style={{
-                                    objectFit: "contain",
-                                    height: "300px",
-                                    width:"300px",
-                                    borderRadius: 12,
-                                  }}
-                                  className="rounded-circle border border-dark"
-                                  src={
-                                    slides?.resource2.img?.length === 0
-                                      ? NoImage
-                                      : slides?.resource2.img?.includes(
-                                          "https"
+                                {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
+                                <Row>
+                                  <h4 className="text-center">
+                                    {slides?.resource2.creatorName}
+                                  </h4>
+                                  <div className="d-flex align-items-center justify-content-center">
+                                    <div className="d-flex align-items-center">
+                                      <PrettyRating
+                                        value={
+                                          slides?.resource1.ava_rating === null
+                                            ? 0
+                                            : slides?.resource1.ava_rating
+                                        }
+                                        icons={icons.star}
+                                        colors={colors.star}
+                                      />
+                                      <span
+                                        style={{ fontSize: "14px" }}
+                                        className="ms-1"
+                                      >
+                                        (
+                                        {slides?.resource1.ava_rating === null
+                                          ? 0
+                                          : slides?.resource2.ava_rating?.toFixed(
+                                              2
+                                            )}
                                         )
-                                      ? slides?.resource2.img
-                                      : `https://backend.brahmaand.space/${slides?.resource2.img}`
-                                  }
-                                  alt=""
+                                      </span>
+                                    </div>
+                                  </div>
+                                </Row>
+                              </Col>
+                              <div
+                                style={{
+                                  left: "50%",
+                                  top: "40%",
+                                  transform: "translate(-50%,-50%)",
+                                }}
+                                className="position-absolute text-center p-0"
+                              >
+                                <img
+                                  width={90}
+                                  height={90}
+                                  src={versus}
+                                  alt="v/s"
                                 />
-                              )}
-                            </>
-                          )}
-
-
-
-
-
-
-
-
-
-
-                                {/* {slides?.resource2.format === "Video" ? (
-                                  <iframe
-                                    className="w-100 rounded-4 ct_if_asrto"
-                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                      new URL(slides?.resource2.link).search
-                                    ).get("v")}`}
-                                    title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen
-                                  ></iframe>
-                                ) : (
-                                  <div
-                                    style={{ height: "300px" }}
-                                    className="d-flex"
-                                  >
-                                    <img
-                                      className="w-100 h-auto rounded-4 object-fit-contain"
-                                      style={{ height: "400px" }}
-                                      src={
-                                        slides?.resource2?.img?.includes("https") ? slides.resource2.img
-                                          : NoImage
-                                      }
-                                      // src={slides?.resource2.img}
-                                      alt=""
-                                    />
-                                  </div>
-                                )} */}
                               </div>
-                              {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
-                              <Row>
-                                <h4 className="text-center">
-                                  {slides?.resource2.creatorName}
-                                </h4>
-                                <div className="d-flex align-items-center justify-content-center">
-                                  <div className="d-flex align-items-center">
-                                    <PrettyRating
-                                      value={
-                                        slides?.resource1.ava_rating === null
-                                          ? 0
-                                          : slides?.resource1.ava_rating
-                                      }
-                                      icons={icons.star}
-                                      colors={colors.star}
-                                    />
-                                    <span
-                                      style={{ fontSize: "14px" }}
-                                      className="ms-1"
-                                    >
-                                      (
-                                      {slides?.resource1.ava_rating === null
-                                        ? 0
-                                        : slides?.resource2.ava_rating?.toFixed(
-                                          2
-                                        )}
-                                      )
-                                    </span>
-                                  </div>
-                                </div>
-                              </Row>
-                            </Col>
-                            <div
-                              style={{
-                                left: "50%",
-                                top: "40%",
-                                transform: "translate(-50%,-50%)",
-                              }}
-                              className="position-absolute text-center p-0"
-                            >
-                              <img
-                                width={90}
-                                height={90}
-                                src={versus}
-                                alt="v/s"
-                              />
-                            </div>
-                          </Row>
-                          <Row>
-                            <Button
-                              onClick={() =>
-                                navigate(
-                                  `/trending-warzone/${slides._id}?additionalValue=${slides.isContent}`
-                                )
-                                // navigate(`/trending-warzone/${slides._id}`)
-                              }
-                              style={{
-                                borderRadius: "4px",
-                                width: "fit-content",
-                                backgroundColor: "#5F56C6",
-                              }}
-                              size="sm"
-                              className="m-0 mb-2 border-0 mx-auto text-white px-3"
-                            >
-                              Rate Now
-                            </Button>
-                          </Row>
-                        </Container>
-                      </SwiperSlide>
-                    </div>
-                  </>
-                );
-              })}
-            </Swiper>
-            <div
-              className={`swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
-            ></div>
-          </>
-        ))):<div className="d-flex justify-content-center align-items-start" style={{height:"50vh",width:"100%"}}>
+                            </Row>
+                            <Row>
+                              <Button
+                                onClick={
+                                  () =>
+                                    navigate(
+                                      `/trending-warzone/${slides._id}?additionalValue=${slides.isContent}`
+                                    )
+                                  // navigate(`/trending-warzone/${slides._id}`)
+                                }
+                                style={{
+                                  borderRadius: "4px",
+                                  width: "fit-content",
+                                  backgroundColor: "#5F56C6",
+                                }}
+                                size="sm"
+                                className="m-0 mb-2 border-0 mx-auto text-white px-3"
+                              >
+                                Rate Now
+                              </Button>
+                            </Row>
+                          </Container>
+                        </SwiperSlide>
+                      </div>
+                    </>
+                  );
+                })}
+              </Swiper>
+              <div
+                className={`swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
+              ></div>
+            </>
+          ))
+        ) : (
+          <div
+            className="d-flex justify-content-center align-items-start"
+            style={{ height: "50vh", width: "100%" }}
+          >
             <Oval
               height={100}
               width={100}
@@ -509,7 +551,8 @@ const Category = () => {
               strokeWidth={2}
               strokeWidthSecondary={2}
             />
-          </div>}
+          </div>
+        )}
       </Row>
     </div>
   );
