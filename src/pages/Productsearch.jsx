@@ -1175,7 +1175,7 @@ function Productsearch(args) {
                       </Col>
 
                       <Col lg="12" className="py-3">
-                        <div className="ft-type">
+                        <div className="ft-type position-relative">
                           <h5 className="mb-3">Sub Category</h5>
 
                           {subctgry
@@ -1208,6 +1208,8 @@ function Productsearch(args) {
                           <div
                             className={`bg-light border border-black ${display2}`}
                             style={{
+                              top:"0",
+                              left:"100%",
                               padding: "10px",
                               height: "300px",
                               width: "700px",

@@ -4,6 +4,7 @@ import { Navigation, Pagination } from "swiper";
 import PrettyRating from "pretty-rating-react";
 
 import img1 from "../images/hero-swiper-img-1.png";
+import img2 from "../images/hero-swiper-img-2.png";
 import swiperLeft from "../images/swiper-img1.png";
 import swiperRight from "../images/swiper-img2.png";
 import versus from "../images/versus.png";
@@ -61,14 +62,14 @@ const Category = () => {
             <img className="w-100 h-auto" src={img1} alt="" />
           </SwiperSlide>
           <SwiperSlide>
+            <img className="w-100 h-auto" src={img2} alt="" />
+          </SwiperSlide>
+          {/* <SwiperSlide>
             <img className="w-100 h-auto" src={img1} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             <img className="w-100 h-auto" src={img1} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="w-100 h-auto" src={img1} alt="" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </Row>
 
@@ -119,6 +120,7 @@ const Category = () => {
               modules={[Navigation, Pagination]}
               spaceBetween={20}
               slidesPerView={2}
+                centeredSlides={ele.length === 1 ? true : false}
               navigation
               pagination={{
                 el: ".swiper_pagination",
@@ -134,7 +136,7 @@ const Category = () => {
                           <HomeCountDown endDate={slides.endDate} />
                           <Row className="position-relative">
                             <Col className="d-flex flex-column justify-content-center">
-                              <div className="top-main">
+                              <div className="top-main d-flex justify-content-center">
 
                                 {typeof slides.resource1.link === "string" ? (
                                   <>
@@ -144,11 +146,11 @@ const Category = () => {
                                     {slides.resource1.link.includes("v=") ? (
                                       <iframe
                                         allowfullscreen="true"
-                                        className="iframesetdata obj"
+                                        className="iframesetdata obj rounded-circle"
                                         style={{
                                           borderRadius: "12px",
-                                          width: "100%",
-                                          height: "100%",
+                                          width: "300px",
+                                          height: "300px",
                                         }}
                                         src={`https://www.youtube.com/embed/${new URLSearchParams(
                                           new URL(slides?.resource1.link).search
@@ -160,10 +162,11 @@ const Category = () => {
                                         <img
                                           style={{
                                             objectFit: "contain",
-                                            height: "250px",
+                                            height: "300px",
                                             borderRadius: 12,
+                                            width:"300px"
                                           }}
-                                          className="w-100  object-contain"
+                                          className=" rounded-circle object-contain"
                                           src={
                                             slides?.resource1.img.length === 0
                                               ? NoImage
@@ -185,8 +188,8 @@ const Category = () => {
                                           className="iframesetdata obj"
                                           style={{
                                             borderRadius: "12px",
-                                            width: "100%",
-                                            height: "100%",
+                                            width: "300px",
+                                            height: "300px",
                                           }}
                                           src={`https://www.youtube.com/embed/${new URLSearchParams(
                                             new URL(slides?.resource1.link).search
@@ -199,10 +202,11 @@ const Category = () => {
                                         <img
                                           style={{
                                             objectFit: "contain",
-                                            height: "250px",
-                                            borderRadius: 12,
+                                            height: "300px",
+                                            width:"300px",
+                                            // borderRadius: 12,
                                           }}
-                                          className="w-100  object-contain"
+                                          className="rounded-circle object-contain"
                                           src={
                                             slides?.resource1.img?.length === 0
                                               ? NoImage
@@ -294,18 +298,18 @@ const Category = () => {
                               </Row>
                             </Col>
                             <Col className="d-flex flex-column justify-content-center">
-                              <div className="top-main">
+                              <div className="top-main d-flex justify-content-center">
 
                               {typeof slides.resource2.link === "string" ? (
                             <>
                               {slides.resource2.link.includes("v=") ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj"
+                                  className="iframesetdata obj rounded-circle"
                                   style={{
-                                    borderRadius: "12px",
-                                    width: "100%",
-                                    height: "100%",
+                                    // borderRadius: "12px",
+                                    width: "300px",
+                                    height: "300px",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(slides?.resource2.link).search
@@ -315,10 +319,11 @@ const Category = () => {
                                 <img
                                   style={{
                                     objectFit: "contain",
-                                    height: "250px",
+                                    height: "300px",
+                                    width:"300px",
                                     borderRadius: 12,
                                   }}
-                                  className="w-100"
+                                  className="rounded-circle"
                                   src={
                                     slides?.resource2.img.length === 0
                                       ? NoImage
@@ -335,11 +340,11 @@ const Category = () => {
                               ) ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj"
+                                  className="iframesetdata obj rounded-circle"
                                   style={{
                                     borderRadius: "12px",
-                                    width: "100%",
-                                    height: "100%",
+                                    width: "300px",
+                                    height: "300px",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(slides?.resource2.link).search
@@ -349,10 +354,11 @@ const Category = () => {
                                 <img
                                   style={{
                                     objectFit: "contain",
-                                    height: "250px",
+                                    height: "300px",
+                                    width:"300px",
                                     borderRadius: 12,
                                   }}
-                                  className="w-100"
+                                  className="rounded-circle"
                                   src={
                                     slides?.resource2.img?.length === 0
                                       ? NoImage
