@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Oval } from "react-loader-spinner";
 import PrettyRating from "pretty-rating-react";
 import img from "../images/creator-img.png";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
@@ -462,7 +463,7 @@ const ContentCreators = ({
       </Row>
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
-        {val &&
+        {val.length !== 0 ? (
           val.map((item, i) => {
             const date = new Date(item.createdAt);
             const options = { day: "2-digit", month: "short", year: "numeric" };
@@ -675,7 +676,23 @@ const ContentCreators = ({
                 </div>
               </>
             );
-          })}
+          })
+        ) : (
+          <div className="d-flex justify-content-center align-items-start" style={{height:"50vh",width:"100%"}}>
+            <Oval
+              height={100}
+              width={100}
+              color="#fca878"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#feeae0"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+        )}
       </div>
       {/* {console.log(modal)} */}
       {content && content === "Content" ? (

@@ -162,7 +162,7 @@ function Hastag() {
       .get(`/user/getVideo`)
       .then((res) => {
         setNewslettervid(res.data.data);
-        // console.log(res.data.data);
+        console.log(res.data.data,"This is video Data");
       })
       .catch((err) => {
         // console.log(err);
@@ -420,7 +420,7 @@ function Hastag() {
                                   <img
                                     style={{
                                       objectFit: "contain",
-                                      height: "100%",
+                                      height: "300px",
                                       borderRadius: 12,
                                     }}
                                     className="w-100  object-contain"
@@ -459,7 +459,7 @@ function Hastag() {
                                   <img
                                     style={{
                                       objectFit: "contain",
-                                      height: "250px",
+                                      height: "300px",
                                       borderRadius: 12,
                                     }}
                                     className="w-100  object-contain"

@@ -16,6 +16,7 @@ import HomeCountDown from "../components/home/HomeCountDown";
 import { useNavigate } from "react-router-dom";
 import axiosConfig from "../components/axiosConfig";
 import NoImage from "../components/home/noimage1.png";
+import { Oval } from "react-loader-spinner";
 
 const Category = () => {
   const [allWarData, setAllWarData] = useState();
@@ -47,7 +48,7 @@ const Category = () => {
   }, []);
   console.log(allWarData, "allWarData")
   return (
-    <div className="category-main overflow-x-hidden">
+    <div className="category-main overflow-hidden">
       <Row className="hero-swiper">
         <h3 className="text-center">Brahmaand Warzone</h3>
         {/* <Swiper
@@ -72,18 +73,18 @@ const Category = () => {
       </Row>
 
       <Row className="common-swipers ps-5 position-relative">
-        {allWarData && allWarData?.map((ele) => (
+        {allWarData ? (allWarData?.map((ele) => (
           <>
-            <div
+            {/* <div
               style={{ top: 0 }}
               className="position-absolute d-flex h-100 w-100"
             >
-              <img
+              <img  
                 className="w-100 object-fit-contain"
                 src="/trending-bg.png"
                 alt="bg"
               />
-            </div>
+            </div> */}
             <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
             <Swiper
               breakpoints={{
@@ -136,7 +137,7 @@ const Category = () => {
                               <div className="top-main">
                                 {slides?.resource1.format === "Video" ? (
                                   <iframe
-                                    className="w-100 rounded-4 ct_if_asrto"
+                                    className="w-100 rounded-4 ct_if_asrto rounded-circle"
                                     src={`https://www.youtube.com/embed/${new URLSearchParams(
                                       new URL(slides?.resource1.link).search
                                     ).get("v")}`}
@@ -148,12 +149,12 @@ const Category = () => {
                                 ) : (
                                   <div
                                     style={{ height: "300px" }}
-                                    className="d-flex"
+                                    className="d-flex justify-content-center"
                                   >
                                     {console.log(slides?.resource1.img.includes("https"), "slides?.resource1.img")}
                                     <img
-                                      className="w-100 h-auto rounded-4 object-fit-contain"
-                                      style={{ height: "400px" }}
+                                      className=" rounded-4 object-fit-contain rounded-circle"
+                                      style={{ height: "300px",width:"300px" }}
                                       src={
                                         slides?.resource1.img.includes("https")
                                           ? slides?.resource1.img
@@ -308,7 +309,20 @@ const Category = () => {
               className={`swiper_pagination d-flex justify-content-center gap-3 py-4 z-1`}
             ></div>
           </>
-        ))}
+        ))):<div className="d-flex justify-content-center align-items-start" style={{height:"50vh",width:"100%"}}>
+            <Oval
+              height={100}
+              width={100}
+              color="#fca878"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#feeae0"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>}
       </Row>
     </div>
   );
