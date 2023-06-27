@@ -1229,12 +1229,14 @@ function Productsearch(args) {
                                       id={subctgry?._id}
                                       className="ft-check"
                                       type="checkbox"
-                                      checked={subctgry?._id === sub_category}
+                                      checked={sub_category.some(
+                                        (e) => e === subctgry?._id
+                                      )}
                                       name="format"
-                                      value={sub_category?._id}
+                                      value={subctgry?._id}
                                       onClick={(e) => {
-                                        // setSub_category([...sub_category,subctgry?._id]);
-                                        setSub_category(subctgry?._id);
+                                        setCategoryData(subctgry?._id);
+                                        // setSub_category(subctgo?._id);
                                         handlefilter();
                                       }}
                                     />
