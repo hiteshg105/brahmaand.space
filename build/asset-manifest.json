@@ -1,17 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.2e28d62a.css",
-    "main.js": "/static/js/main.55bb67cf.js",
+    "main.js": "/static/js/main.bd30419e.js",
     "static/js/787.2d6ec2d3.chunk.js": "/static/js/787.2d6ec2d3.chunk.js",
     "static/media/dummy.png": "/static/media/dummy.ee2c95b333a006a294b7.png",
     "static/media/technology.png": "/static/media/technology.f9c43a613b0cc9ac4204.png",
     "static/media/Glass.png": "/static/media/Glass.57dcd834abd9b79f0516.png",
     "static/media/2.png": "/static/media/2.ab83218ae6c7010ae212.png",
+    "static/media/hero-swiper-img-1.png": "/static/media/hero-swiper-img-1.a3e0f08fd1b94a5cf27f.png",
     "static/media/emoji.png": "/static/media/emoji.c6491ffc548fa5043c16.png",
     "static/media/logo.png": "/static/media/logo.c37f13bdf9c75149a4db.png",
     "static/media/woman.png": "/static/media/woman.b99e44f5524d1bf2e182.png",
-    "static/media/hero-swiper-img-1.png": "/static/media/hero-swiper-img-1.166f427160a31313bea4.png",
     "static/media/backimg.png": "/static/media/backimg.14874d57e808fe5a6e94.png",
+    "static/media/hero-swiper-img-2.png": "/static/media/hero-swiper-img-2.a52f19487b54ba935de8.png",
     "static/media/newsletter.png": "/static/media/newsletter.a9fb0b0c502c248d5b8b.png",
     "static/media/Arial.ttf": "/static/media/Arial.178a7b1671683dd3e805.ttf",
     "static/media/Arial Bold.ttf": "/static/media/Arial Bold.2e1c14639217f2abd40c.ttf",
@@ -60,11 +61,11 @@
     "static/media/logo.svg": "/static/media/logo.f0da73cdba90ef9b7be31f136a184bcf.svg",
     "index.html": "/index.html",
     "main.2e28d62a.css.map": "/static/css/main.2e28d62a.css.map",
-    "main.55bb67cf.js.map": "/static/js/main.55bb67cf.js.map",
+    "main.bd30419e.js.map": "/static/js/main.bd30419e.js.map",
     "787.2d6ec2d3.chunk.js.map": "/static/js/787.2d6ec2d3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2e28d62a.css",
-    "static/js/main.55bb67cf.js"
+    "static/js/main.bd30419e.js"
   ]
 }
