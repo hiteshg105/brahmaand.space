@@ -30,7 +30,7 @@ import NoImage from "../images/noimage.jpg";
 import swal from "sweetalert";
 import ShowMore from "react-show-more";
 
-const TrendingWarzone = ({getPath}) => {
+const TrendingWarzone = ({ getPath }) => {
   // const { id } = useParams();
   // // console.log(id, "id");
 
@@ -325,13 +325,10 @@ const TrendingWarzone = ({getPath}) => {
       const userid = localStorage.getItem("userId");
 
       // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
-      if(war?.winner){
+      if (war?.winner) {
         // swal("Bettle Ended");
         swal("Battle is completed so you can not add Rating and Reviews.");
-
-
-      }
-      else{
+      } else {
         if (userid !== null) {
           if (isContent === "0") {
             if (rsc1Review.rate != 0) {
@@ -356,7 +353,7 @@ const TrendingWarzone = ({getPath}) => {
               swal("Please Enter Comment And Rating");
             }
           }
-  
+
           if (isContent === "1") {
             if (rsc1Review.rate != 0) {
               console.log("rsc1Review");
@@ -385,7 +382,6 @@ const TrendingWarzone = ({getPath}) => {
           swal("Please Login OR Sign Up");
         }
       }
-      
     } catch (error) {
       if (error.response?.status === 403) {
         swal("You have already submit your review on this.");
@@ -399,64 +395,62 @@ const TrendingWarzone = ({getPath}) => {
     try {
       // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
       const userid = localStorage.getItem("userId");
-      if(war?.winner){
+      if (war?.winner) {
         swal("Battle is completed so you can not add Rating and Reviews.");
-
-      }
-     else{
-      if (userid !== null) {
-        if (isContent === "0") {
-          if (rsc2Review.rate != 0) {
-            console.log("rsc2Review");
-            const data = await instance.post(`user/add_Comment`, {
-              submitresrcId: war.resource2._id,
-              userid: userid,
-              comment: rsc2Review.comment,
-              rating: rsc2Review.rate,
-            });
-            // console.log(data.data);
-            if (data.data.status === true) {
-              swal("Review submitted Successfully.");
-              setRsc2Review({ comment: "", rate: 0 });
-              getComment();
-            }
-            if (data.data.msg === "waiting for admin approvel") {
-              swal("You have already submit your review on this.");
-              setRsc2Review({ comment: "", rate: 0 });
-            }
-          } else {
-            swal("Please Enter Comment And Rating");
-          }
-        }
-
-        if (isContent === "1") {
-          if (rsc2Review.rate != 0) {
-            console.log("rsc2Review");
-            const userid = localStorage.getItem("userId");
-            const data = await instance.post(`/user/add_creator_comment`, {
-              creatorResrcId: war.resource2._id,
-              userid: userid,
-              comment: rsc2Review.comment,
-              rating: rsc2Review.rate,
-            });
-            // console.log(data.data);
-            if (data.data.status === true) {
-              swal("Review submitted Successfully.");
-              setRsc2Review({ comment: "", rate: 0 });
-              getComment();
-            }
-            if (data.data.status === false) {
-              swal("You have already submit your review on this.");
-              setRsc2Review({ comment: "", rate: 0 });
-            }
-          } else {
-            swal("Please Enter Comment And Rating");
-          }
-        }
       } else {
-        swal("Please Login OR Sign Up");
+        if (userid !== null) {
+          if (isContent === "0") {
+            if (rsc2Review.rate != 0) {
+              console.log("rsc2Review");
+              const data = await instance.post(`user/add_Comment`, {
+                submitresrcId: war.resource2._id,
+                userid: userid,
+                comment: rsc2Review.comment,
+                rating: rsc2Review.rate,
+              });
+              // console.log(data.data);
+              if (data.data.status === true) {
+                swal("Review submitted Successfully.");
+                setRsc2Review({ comment: "", rate: 0 });
+                getComment();
+              }
+              if (data.data.msg === "waiting for admin approvel") {
+                swal("You have already submit your review on this.");
+                setRsc2Review({ comment: "", rate: 0 });
+              }
+            } else {
+              swal("Please Enter Comment And Rating");
+            }
+          }
+
+          if (isContent === "1") {
+            if (rsc2Review.rate != 0) {
+              console.log("rsc2Review");
+              const userid = localStorage.getItem("userId");
+              const data = await instance.post(`/user/add_creator_comment`, {
+                creatorResrcId: war.resource2._id,
+                userid: userid,
+                comment: rsc2Review.comment,
+                rating: rsc2Review.rate,
+              });
+              // console.log(data.data);
+              if (data.data.status === true) {
+                swal("Review submitted Successfully.");
+                setRsc2Review({ comment: "", rate: 0 });
+                getComment();
+              }
+              if (data.data.status === false) {
+                swal("You have already submit your review on this.");
+                setRsc2Review({ comment: "", rate: 0 });
+              }
+            } else {
+              swal("Please Enter Comment And Rating");
+            }
+          }
+        } else {
+          swal("Please Login OR Sign Up");
+        }
       }
-     }
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
@@ -471,7 +465,7 @@ const TrendingWarzone = ({getPath}) => {
     getWarRscReview();
     getComment();
   }, []);
-  getPath(location.pathname)
+  getPath(location.pathname);
   return (
     <Container>
       {/* <Col className="mb-4 mt-5">
@@ -711,8 +705,8 @@ const TrendingWarzone = ({getPath}) => {
                 className="me-3"
                 to={
                   isContent === "0"
-                    ? war?.resource1.link
-                    : war?.resource1.link[0]
+                    ? war?.resource2.link
+                    : war?.resource2.link[0]
                 }
                 target="_blank"
               >
