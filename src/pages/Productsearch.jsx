@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import StarsRating from "stars-rating";
 import "swiper/css";
 import "../css/arrow.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import swal from "sweetalert";
 import { BsFillBookmarkCheckFill, BsBookmark } from "react-icons/bs";
@@ -19,7 +19,14 @@ import { AiFillEdit } from "react-icons/ai";
 
 import Slider from "../components/filter/Slider";
 import Pagination from "react-bootstrap/Pagination";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Label } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Input,
+} from "reactstrap";
 import "../styles/ModulePage.css";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
@@ -44,8 +51,13 @@ import {
 import { Link, useParams } from "react-router-dom";
 import "../styles/Filter.css";
 import AutoSearch from "../components/filter/AutoSearch";
-
-import { FaHeart, FaStar, FaRegHeart, FaSearch } from "react-icons/fa";
+import {
+  FaHeart,
+  FaStar,
+  FaRegHeart,
+  FaSearch,
+  FaPhoenixFramework,
+} from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import FilterList from "../components/filter/FilterList";
 import RecentProductList from "../components/filter/RecentProductList";
@@ -53,8 +65,11 @@ import backimg from "../assets/images/backimg.png";
 import axiosConfig from "../components/axiosConfig";
 import Moment from "react-moment";
 import PrettyRating from "pretty-rating-react";
-import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
-import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import {
+  faStar,
+  faStarHalfAlt,
+  faStar as farStar,
+} from "@fortawesome/free-regular-svg-icons";
 import { CloudLightning, CornerDownLeft } from "react-feather";
 import ProgressBar from "@ramonak/react-progress-bar";
 import "swiper/css";
@@ -63,11 +78,10 @@ import "../styles/Filter.css";
 import { number } from "prop-types";
 import { useFormState } from "react-hook-form";
 import ContentCreators from "./ContentCreators";
+import Swal from "sweetalert2";
 
 function Productsearch(args) {
-
-  const [parentState, setParentState] = useState("");
-
+  const [parentState, setParentState] = useState("Content");
 
   const [modalsuggestion, setModalsuggestion] = useState(false);
   const togglesuggestion = () => setModalsuggestion(!modalsuggestion);
@@ -87,6 +101,7 @@ function Productsearch(args) {
   const [promotiondata, setPromotiondata] = useState({});
   const [type, setType] = useState("");
   const [format, setFormat] = useState("");
+
   // const [searchrating, setSearchrating] = useState("");
   const [handlebookmark, setHandlebookmark] = useState("");
   const [myId, setmyId] = useState("");
@@ -97,11 +112,15 @@ function Productsearch(args) {
   const [contentyear, setContentyear] = useState("");
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
+  const [all, setAll] = useState("");
+  const [display, setDisplay] = useState("d-none");
+  const [display2, setDisplay2] = useState("d-none");
 
   const updateParentState = (newValue) => {
     setParentState(newValue);
   };
 
+  // console.log("category::",category)
   const toggleedit = () => {
     setEditmodal(!editmodal);
   };
@@ -123,7 +142,7 @@ function Productsearch(args) {
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
-      handlesearchdescription();
+      handlesearchtopics();
     }
   };
   const [Filtertype, setFiltertype] = useState("");
@@ -163,12 +182,62 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
   };
 
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
 
+  const [category, setCategory] = useState("");
+  const [catgry, setCatgry] = useState("");
+  const [searchData, setSearchData] = useState({
+    data: { content: [], resource: [] },
+  });
+  // const [subcatry, setSubcatry] = useState("");
+
+  const [allcatego, setAllcatego] = useState([]);
+  const allcategory = () => {
+    axiosConfig
+      .get(`/admin/getallCategory`)
+
+      .then((response) => {
+        // console.log(response.data.data);
+        setAllcatego(response.data.data);
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  };
+
+  // const [cat, setCat] = useState("");
+  const [subctgry, setSubctgry] = useState([]);
+  const [sub_category, setSub_category] = useState([]);
+
+  useEffect(() => {
+    // const params = catgry ? catgry : category;
+    axiosConfig
+      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
+      .then((response) => {
+        // console.log(response.data.data, "sub cat");
+        setSubctgry(response.data.data);
+      })
+      .catch((error) => {
+        // console.log(error.response.data);
+      });
+  }, [catgry, category]);
+
+  // console.log(subctgry, "subctgry")
+
+  useEffect(() => {
+    allcategory();
+  }, []);
+
+  useEffect(() => {
+    setSubctgry([]);
+    setCategory("");
+    setSub_category([]);
+    setCatgry("");
+  }, [parentState]);
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -263,7 +332,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -331,31 +400,64 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
   };
 
-  const handlesearchdescription = async () => {
+  // console.log(parentState, "parentState");
+  const handlesearchtopics = () => {
     localStorage.setItem("searchdata", searchitem);
-    const responce = await axiosConfig.post(`/user/search_topic_title`, {
-      searchinput: searchitem,
-    });
-    if (responce.data.status === true) {
-      navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
+    if (searchitem !== "") {
+      axiosConfig
+        .post(`/user/search_topic_title/test`, {
+          searchinput: searchitem,
+        })
+        .then((res) => {
+          setSearchitem("");
+          console.log(parentState, "res");
+          setSearchData(res);
+
+          // if (res.data.data.length == "0") {
+          //   swal("No product found");
+          // } else {
+          //   const search = res.data.data[0]?.sub_category;
+          //   if (search !== "" && search !== undefined) {
+          //     navigate(`/productsearch/${search}`);
+          //   }
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    axiosConfig
-      .post(`/user/search_promotion`, {
-        searchinput: searchitem,
-      })
-      .then((res) => {
-        // console.log(res.data.data);
-        if (res.data.data !== "" && res.data.data !== null) {
-          setPromotion(res.data.data);
-        }
-      })
-      .catch((err) => { });
+    // const data = "#learning , #media , #study,  #songs, #learning ";
+    // const onedata = data.split(",");
   };
+
+  // const handlesearchdescription = async () => {
+  //   localStorage.setItem("searchdata", searchitem);
+  //   const responce = await axiosConfig.post(`/user/search_topic_title`, {
+  //     searchinput: searchitem,
+  //   });
+  //   if (responce.data.status === true && responce.data.data.length !== 0) {
+  //     navigate(`/productsearch/${responce.data.data[0]?.sub_category}`);
+  //   } else {
+  //     swal("No Data Found");
+  //   }
+
+  //   axiosConfig
+  //     .post(`/user/search_promotion`, {
+  //       searchinput: searchitem,
+  //     })
+  //     .then((res) => {
+  //       // console.log(res.data.data);
+  //       if (res.data.data !== "" && res.data.data !== null) {
+  //         setPromotion(res.data.data);
+  //       }
+  //     })
+  //     .catch((err) => {});
+  // };
 
   const getLanguage = () => {
     axiosConfig
@@ -363,7 +465,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -390,7 +492,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => { });
+        .catch((error) => {});
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -473,14 +575,18 @@ function Productsearch(args) {
         .get(`/user/comment_list/${promotionId}`)
         .then((res) => {
           setGetonecomment(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         })
         .catch((err) => {
           // console.log(err);
         });
     }
   };
-
+  const setCategoryData = (id) => {
+    sub_category.includes(id)
+      ? setSub_category((pre) => pre.filter((e) => e !== id))
+      : setSub_category([...sub_category, id]);
+  };
   let Params = useParams();
 
   const [loading, setLoading] = useState(false);
@@ -511,6 +617,9 @@ function Productsearch(args) {
   const clearfilter = () => {
     setType("");
     setFormat("");
+    setCategory("");
+    setAll("");
+
     // setSearchrating("");
     setLanguage("");
     setContentyear("");
@@ -676,55 +785,59 @@ function Productsearch(args) {
       });
   };
 
-  useEffect(() => {
-    allsuggestedproduct();
-    getYear();
-    getLanguage();
-    getUser();
+  useEffect(
+    () => {
+      allsuggestedproduct();
+      getYear();
+      getLanguage();
+      getUser();
 
-    if (
-      (type === "" &&
-        format === "" &&
-        contentyear == "" &&
-        language === "" &&
-        searchitem === "" &&
-        hastagdata === "hastag" &&
-        searchdata === "",
+      if (
+        (type === "" &&
+          format === "" &&
+          contentyear == "" &&
+          language === "" &&
+          searchitem === "" &&
+          hastagdata === "hastag" &&
+          searchdata === "",
         Filtertype === "")
-    ) {
-      allsearchproduct();
-    }
+      ) {
+        allsearchproduct();
+      }
 
-    if (hastagdata !== "hastag") {
-      gethastagdata();
-    }
-    if (searchdata !== "" && searchdata !== null) {
-      // handleSearchHomePage();
-    }
+      if (hastagdata !== "hastag") {
+        gethastagdata();
+      }
+      if (searchdata !== "" && searchdata !== null) {
+        // handleSearchHomePage();
+      }
 
-    if (Filtertype !== "" || searchdata !== "") {
-      handlefilter();
-    }
+      if (Filtertype !== "" || searchdata !== "") {
+        handlefilter();
+      }
 
-    // if (searchitem !== "") {
-    //   handlesearchdescription();
-    // }
-  }, [
-    Params,
-    type,
-    format,
-    liked,
-    Producdetail,
-    myId,
-    promotiondata,
-    handlebookmark,
-    activelike,
-    // searchitem,
-    language,
-    // contentyear,
-    hastagdata,
-    // searchdata,
-  ], [parentState]);
+      // if (searchitem !== "") {
+      //   handlesearchdescription();
+      // }
+    },
+    [
+      Params,
+      type,
+      format,
+      liked,
+      Producdetail,
+      myId,
+      promotiondata,
+      handlebookmark,
+      activelike,
+      // searchitem,
+      language,
+      // contentyear,
+      hastagdata,
+      // searchdata,
+    ],
+    [parentState]
+  );
 
   const [typelength, setTypelength] = useState([]);
   // const gettypefilter = () => {
@@ -760,7 +873,7 @@ function Productsearch(args) {
 
   const allsearchproduct = () => {
     const searchdata = localStorage.getItem("searchdata");
-    setSearchitem(searchdata);
+    // setSearchitem(searchdata);
     if (searchdata !== "" && searchdata !== null)
       axiosConfig
         .post(`/user/search_topic_title`, {
@@ -788,7 +901,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => { });
+      .catch((err) => {});
     // console.log("you are searching");
     // axios
     //   .get(
@@ -825,7 +938,34 @@ function Productsearch(args) {
     // );
     setItemOffset(newOffset);
   };
-
+  const mobiles = [
+    "Apple",
+    "Samsung",
+    "Google",
+    "Huawei",
+    "Xiaomi",
+    "OnePlus",
+    "LG",
+    "Sony",
+    "Nokia",
+    "Motorola",
+    "HTC",
+    "Lenovo",
+    "Oppo",
+    "Vivo",
+    "Asus",
+    "BlackBerry",
+    "Alcatel",
+    "ZTE",
+    "Meizu",
+    "Micromax",
+  ];
+  const hndleMoreCategory = () => {
+    display === "d-none" ? setDisplay("") : setDisplay("d-none");
+  };
+  const hndleMoreCategory2 = () => {
+    display2 === "d-none" ? setDisplay2("") : setDisplay2("d-none");
+  };
   return (
     <>
       <section className="seachproduct">
@@ -848,7 +988,7 @@ function Productsearch(args) {
             <Col lg="2">
               <Button className=" d-flex probtn text-center ">
                 <p
-                  onClick={handlesearchdescription}
+                  onClick={handlesearchtopics}
                   className="searchproduct d-flex"
                 >
                   SEARCH
@@ -927,7 +1067,212 @@ function Productsearch(args) {
                       </div>
                     </Col>
                     {/* {console.log(parentState)} */}
-                    {parentState === "Content Creators" ? (<span></span>) : (<Col lg="12" className="py-3">
+
+                    <Col lg="12" className="py-3">
+                      <Row className="mt-3 mb-3 mx-2 d-flex flex-nowrap align-items-center">
+                        <input
+                          id="All"
+                          className="ft-check"
+                          type="radio"
+                          checked={all}
+                          name="all"
+                          value="all"
+                          onClick={() => {
+                            setAll(all ? false : true);
+                            handlefilter();
+                          }}
+                        />
+                        <h5 className="mb-0">All &nbsp;</h5>
+                      </Row>
+
+                      <Col lg="12" className="py-3">
+                        <div className="ft-type position-relative">
+                          <h5 className="mb-3">Category</h5>
+
+                          {allcatego
+                            .filter((res, i) => i < 5)
+                            .map((allCategory) => {
+                              return (
+                                <Row className="mt-3 mb-3 mx-2">
+                                  <input
+                                    id={allCategory._id}
+                                    className="ft-check"
+                                    type="radio"
+                                    checked={allCategory?._id === catgry}
+                                    name="category"
+                                    value={allCategory?._id}
+                                    onClick={(e) => {
+                                      setCatgry(allCategory?._id);
+                                      handlefilter();
+                                    }}
+                                  />
+                                  {allCategory?.title} &nbsp;
+                                </Row>
+                              );
+                            })}
+                          {/* {console.log(catgry, "catgry")} */}
+                          <button
+                            className="bg-white border-0"
+                            onClick={hndleMoreCategory}
+                          >
+                            More {allcatego.length - 5} category here
+                          </button>
+                          <div
+                            className={`bg-light border border-black ${display}`}
+                            style={{
+                              padding: "10px",
+                              height: "300px",
+                              width: "700px",
+                              position: "absolute",
+                              zIndex: 99,
+                              overflowX: "hidden",
+                              overflowY: "auto",
+                              left: "250px",
+                              top: "50%",
+                            }}
+                          >
+                            <button
+                              onClick={hndleMoreCategory}
+                              className="top-0 rounded-circle"
+                              style={{
+                                position: "sticky",
+                                left: "100%",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              X
+                            </button>
+                            <div className="d-flex flex-wrap">
+                              {allcatego.map((allCategory) => {
+                                return (
+                                  <div
+                                    className="mt-3 mb-3 mx-2"
+                                    style={{ width: "200px" }}
+                                  >
+                                    <input
+                                      id={allCategory._id}
+                                      className="ft-check"
+                                      type="radio"
+                                      checked={allCategory?._id === catgry}
+                                      name="allCategory"
+                                      value={allCategory?._id}
+                                      onClick={(e) => {
+                                        setCatgry(allCategory?._id);
+                                        handlefilter();
+                                      }}
+                                    />
+                                    {allCategory?.title} &nbsp;
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+
+                      <Col lg="12" className="py-3">
+                        <div className="ft-type">
+                          <h5 className="mb-3">Sub Category</h5>
+
+                          {subctgry
+                            .filter((res, i) => i < 5)
+                            .map((subctgo) => {
+                              return (
+                                <Row className="mt-3 mb-3 mx-2">
+                                  <input
+                                    id={subctgo?._id}
+                                    className="ft-check"
+                                    type="checkbox"
+                                    checked={sub_category.some(
+                                      (e) => e === subctgo?._id
+                                    )}
+                                    name="format"
+                                    value={subctgo?._id}
+                                    onClick={(e) => {
+                                      setCategoryData(subctgo?._id);
+                                      // setSub_category(subctgo?._id);
+                                      handlefilter();
+                                    }}
+                                  />
+                                  {/* {console.log("cvbvcbv",subctgry._id)} */}
+                                  {subctgo?.title} &nbsp;
+                                </Row>
+                              );
+                            })}
+                          {/* {console.log("subctgry", sub_category)} */}
+
+                          <div
+                            className={`bg-light border border-black ${display2}`}
+                            style={{
+                              padding: "10px",
+                              height: "300px",
+                              width: "700px",
+                              position: "absolute",
+                              zIndex: 99,
+                              overflowX: "hidden",
+                              overflowY: "auto",
+                            }}
+                          >
+                            <button
+                              onClick={hndleMoreCategory2}
+                              className="top-0 rounded-circle"
+                              style={{
+                                position: "sticky",
+                                left: "100%",
+                                height: "30px",
+                                width: "30px",
+                                backgroundColor: "#fc9357",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              X
+                            </button>
+                            <div className="d-flex flex-wrap">
+                              {subctgry.map((subctgry) => {
+                                return (
+                                  <div
+                                    className="mt-3 mb-3 mx-2"
+                                    style={{ width: "200px" }}
+                                  >
+                                    <input
+                                      id={subctgry?._id}
+                                      className="ft-check"
+                                      type="checkbox"
+                                      checked={subctgry?._id === sub_category}
+                                      name="format"
+                                      value={sub_category?._id}
+                                      onClick={(e) => {
+                                        // setSub_category([...sub_category,subctgry?._id]);
+                                        setSub_category(subctgry?._id);
+                                        handlefilter();
+                                      }}
+                                    />
+                                    {subctgry?.title} &nbsp;
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                        {subctgry.length > 5 && (
+                          <button
+                            className="bg-white border-0"
+                            onClick={hndleMoreCategory2}
+                          >
+                            More {subctgry.length - 5} category here
+                          </button>
+                        )}
+                      </Col>
+                    </Col>
+
+                    {parentState === "Content Creators" ? (
+                      <span></span>
+                    ) : (
                       <div className="ft-type">
                         <h5 className="mb-3">Type</h5>
                         <Row className="mt-3 mx-2">
@@ -967,8 +1312,7 @@ function Productsearch(args) {
                             : null}
                         </Row>
                       </div>
-                    </Col>)}
-
+                    )}
 
                     <Col lg="12" className="py-3">
                       <div className="ft-type">
@@ -1009,44 +1353,65 @@ function Productsearch(args) {
                             ? formatelength.length
                             : null}
                         </Row>
+                        <Row className=" mb-3 mx-2">
+                          <input
+                            id="Video & Text"
+                            className="ft-check"
+                            type="radio"
+                            name="format"
+                            checked={"Video & Text" === format}
+                            value="Video & Text"
+                            onClick={() => {
+                              setFormat("Video & Text");
+                              handlefilter();
+                            }}
+                          />
+                          Video & Text &nbsp;
+                          {formatelength[0]?.format == "Video & Text"
+                            ? formatelength.length
+                            : null}
+                        </Row>
                       </div>
                     </Col>
+
                     <Col lg="12" className="">
                       <div className="ft-type">
                         <Row className=" mb-3 mx-2"></Row>
                         <Row>
                           <Container>
-                            {
-                              parentState === "Content Creators" ? (<span></span>) : (
-                                <>
-                                  <Label
-                                    className="mt-3"
-                                    style={{ font: "GT Walsheim Pro" }}
-                                  >
-                                    <b style={{ fontSize: "19px" }}>Content Year</b>
-                                  </Label>
-                                  <select
-                                    defaultValue="Select Year"
-                                    value={contentyear}
-                                    // checked={"Select Year" === contentyear}
-                                    onChange={(e) => {
-                                      setContentyear(e.target.value);
-                                      handlefilter(e.target.value);
-                                    }}
-                                    className="form-control"
-                                  >
-                                    <option>Select Year</option>
-                                    {relyear?.map((yr) => {
-                                      return (
-                                        <option value={yr?._id} key={yr?._id}>
-                                          {yr?.yrName}
-                                        </option>
-                                      );
-                                    })}
-                                  </select>     
-                                </>
-                              )
-                            }
+                            {parentState === "Content Creators" ? (
+                              <span></span>
+                            ) : (
+                              <>
+                                <Label
+                                  className="mt-3"
+                                  style={{ font: "GT Walsheim Pro" }}
+                                >
+                                  <b style={{ fontSize: "19px" }}>
+                                    Content Year
+                                  </b>
+                                </Label>
+                                <select
+                                  defaultValue="Select Year"
+                                  value={contentyear}
+                                  // checked={"Select Year" === contentyear}
+                                  onChange={(e) => {
+                                    setContentyear(e.target.value);
+                                    handlefilter(e.target.value);
+                                  }}
+                                  className="form-control"
+                                >
+                                  <option>Select Year</option>
+                                  {relyear?.map((yr) => {
+                                    return (
+                                      <option value={yr?._id} key={yr?._id}>
+                                        {yr?.yrName}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </>
+                            )}
                             <Label
                               className="mt-3"
                               style={{ font: "GT Walsheim Pro" }}
@@ -1175,8 +1540,9 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
-                                                  }`}
+                                                src={`https://www.youtube.com/embed/${
+                                                  promotion?.link?.split("=")[1]
+                                                }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1518,7 +1884,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                      0 ? (
+                                                    0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1644,9 +2010,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                        localStorage.getItem(
-                                                          "userId"
-                                                        ) ? (
+                                                      localStorage.getItem(
+                                                        "userId"
+                                                      ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -1844,6 +2210,11 @@ function Productsearch(args) {
                     type={type}
                     language={language}
                     searchdata={searchdata}
+                    Filtertype={Filtertype}
+                    category={catgry}
+                    subcategory={sub_category}
+                    contentyear={contentyear}
+                    searchitem={searchitem}
                   />
 
                   {/* {console.log(parentState,"")} */}

@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga";
 
 // Fonts
@@ -81,12 +81,22 @@ import ProductsearchNew from "./pages/Productsearch";
 ReactGA.initialize("UA-250944909-1");
 // ReactGA.initialize("UA-250944909-1");
 function App() {
+  const [path,setPath] = useState("")
   const location = useLocation();
 
   useEffect(() => {
     ReactGA.pageview(location.pathname + location.search);
   }, [location]);
   // console.log(location.pathname)
+  const getPath = (e) =>{
+    setPath(e)
+  }
+const metaTag = document.querySelector("#metaData")
+if (location.pathname === path) {
+  metaTag.setAttribute("content","width=1500")
+} else {
+  metaTag.setAttribute("content","width=device-width, initial-scale=1")
+}
 
   return (
     // <div className="App">
@@ -173,7 +183,7 @@ function App() {
             />
             <Route path="/loginplan" element={<Loginplan />} />
             <Route path="/category" element={<Category />} />
-            <Route path="/trending-warzone/:id" element={<TrendingWarzone />} />
+            <Route path="/trending-warzone/:id" element={<TrendingWarzone getPath={getPath} />} />
             <Route path="/content-creators" element={<ContentCreators />} />
             <Route path="/newdesign" element={<NewDesign />} />
             <Route path="/productsearch" element={<ProductsearchNew />} />

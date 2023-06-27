@@ -204,7 +204,7 @@ function Hastag() {
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/all/creator_warzone`);
     const data1 = responce1.data.war;
-    // console.log(data1, "data1");
+    console.log(data1, "data1");
     data1.forEach((obj) => {
       obj.isContent = 1;
     });
@@ -308,7 +308,7 @@ function Hastag() {
                   to="/category"
                   style={{ color: "black", textDecoration: "none" }}
                 >
-                  <span style={{ font: "larger" }}></span>
+                  <span style={{ font: "larger" }}>SEE ALL</span>
                 </Link>
               </div>
             </Col>
@@ -394,7 +394,15 @@ function Hastag() {
                     <div>
                       {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
-                        <Col className="position-relative p-0 mx-3 -z-50 " style={{height:"300px",width:"300px",borderRadius:"50%",overflow:"hidden"}}>
+                        <Col
+                          className="position-relative p-0 mx-3 -z-50 "
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            borderRadius: "50%",
+                            overflow: "hidden",
+                          }}
+                        >
                           {/* {features.resource1.format === "Video" ? (
                             <> */}
                           {typeof features.resource1.link === "string" ? (
@@ -579,11 +587,15 @@ function Hastag() {
                               alt="img"
                             />
                           </div>
-                        </Col>  
+                        </Col>
                         <Col
                           lg=""
                           className="d-flex justify-content-center align-items-center position-relative p-0 mx-3 overflow-hidden"
-                          style={{height:"300px",width:"300px",borderRadius:"50%"}}
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            borderRadius: "50%",
+                          }}
                         >
                           {/* {features.resource2.format === "Video" ? (
                             <> */}
@@ -607,7 +619,7 @@ function Hastag() {
                                   style={{
                                     objectFit: "contain",
                                     height: "100%",
-                                    width:"100%",
+                                    width: "100%",
                                     borderRadius: 12,
                                   }}
                                   // className="w-h-100"
@@ -759,6 +771,10 @@ function Hastag() {
                               colors={colors.star}
                             />
                             <span style={{ fontSize: "14px" }} className="ms-1">
+                              {console.log(
+                                features?.resource1.ava_rating,
+                                "features?.resource1.ava_rating"
+                              )}
                               {features?.resource1.ava_rating?.toFixed(2)}
                             </span>
                           </div>
@@ -1132,7 +1148,7 @@ function Hastag() {
                           onClick={() => setOpenone(true)}
                         />
                         <div className="modalvideo">
-                          <ModalVideo 
+                          <ModalVideo
                             style={{ borderRadius: "12px" }}
                             channel="youtube"
                             autoplay
