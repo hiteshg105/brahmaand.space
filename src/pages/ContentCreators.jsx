@@ -74,6 +74,7 @@ const ContentCreators = ({
   const navigate = useNavigate();
   const [upcom, setUpcom] = useState("");
   const [data1, setData1] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleedit = () => {
     setEditmodal(!editmodal);
@@ -374,6 +375,8 @@ const ContentCreators = ({
     setLimit(limit + 12);
   };
   const handleContent = async (data) => {
+    setIsLoading(true);
+
     // if (searchData.data.content || searchData.data.resource !== 0) {
     //   if (content === "Content") {
     //     if (searchData?.data.resource.length === 0) {
@@ -434,6 +437,7 @@ const ContentCreators = ({
 
       //   setVal(dataFilter.slice(0, end));
       // } else {
+      setIsLoading(false);
       setData1(responce.data.data);
       setVal(responce.data.data.slice(0, end));
       // }
@@ -482,6 +486,7 @@ const ContentCreators = ({
       //   setData1(dataFilter);
       //   setVal(dataFilter.slice(0, end));
       // } else {
+      setIsLoading(false);
       setData1(responce.data.data);
       setVal(responce.data.data.slice(0, end));
       // }
@@ -579,7 +584,7 @@ const ContentCreators = ({
       </Row>
       {/* {console.log(modal, "model")} */}
       <div className="grid-main">
-        {val.length !== 0 ? (
+        {val.length !== 0 &&
           val.map((item, i) => {
             const date = new Date(item.createdAt);
             const options = { day: "2-digit", month: "short", year: "numeric" };
@@ -791,23 +796,7 @@ const ContentCreators = ({
                 </div>
               </>
             );
-          })
-        ) : (
-          <div className="d-flex justify-content-center align-items-start" style={{height:"50vh",width:"100%"}}>
-            <Oval
-              height={100}
-              width={100}
-              color="#fca878"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-              ariaLabel="oval-loading"
-              secondaryColor="#feeae0"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
-        )}
+          })}
       </div>
       {/* {console.log(modal)} */}
       {content && content === "Content" ? (
@@ -1718,9 +1707,31 @@ const ContentCreators = ({
         </>
       )}
       {data1.length === 0 ? (
-        <center>
-          <h1 className="">No content found</h1>
-        </center>
+        <>
+          {isLoading ? (
+            <div
+              className="d-flex justify-content-center align-items-start"
+              style={{ height: "50vh", width: "100%" }}
+            >
+              <Oval
+                height={100}
+                width={100}
+                color="#fca878"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="#feeae0"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
+            <center>
+              <h1 className="">No content found</h1>
+            </center>
+          )}
+        </>
       ) : data1.length <= 12 ? (
         <span></span>
       ) : data1.length === val.length ? (
