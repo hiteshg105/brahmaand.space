@@ -146,7 +146,7 @@ const Category = () => {
                                     {slides.resource1.link.includes("v=") ? (
                                       <iframe
                                         allowfullscreen="true"
-                                        className="iframesetdata obj rounded-circle"
+                                        className="iframesetdata obj rounded-circle border border-dark"
                                         style={{
                                           borderRadius: "12px",
                                           width: "300px",
@@ -166,7 +166,7 @@ const Category = () => {
                                             borderRadius: 12,
                                             width:"300px"
                                           }}
-                                          className=" rounded-circle object-contain"
+                                          className=" rounded-circle object-contain border border-dark"
                                           src={
                                             slides?.resource1.img.length === 0
                                               ? NoImage
@@ -185,7 +185,7 @@ const Category = () => {
                                       <>
                                         <iframe
                                           allowfullscreen="true"
-                                          className="iframesetdata obj"
+                                          className="iframesetdata obj rounded-circle border border-dark"
                                           style={{
                                             borderRadius: "12px",
                                             width: "300px",
@@ -206,7 +206,7 @@ const Category = () => {
                                             width:"300px",
                                             // borderRadius: 12,
                                           }}
-                                          className="rounded-circle object-contain"
+                                          className="rounded-circle object-contain border border-dark"
                                           src={
                                             slides?.resource1.img?.length === 0
                                               ? NoImage
@@ -305,7 +305,7 @@ const Category = () => {
                               {slides.resource2.link.includes("v=") ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj rounded-circle"
+                                  className="iframesetdata obj rounded-circle border border-dark"
                                   style={{
                                     // borderRadius: "12px",
                                     width: "300px",
@@ -323,7 +323,7 @@ const Category = () => {
                                     width:"300px",
                                     borderRadius: 12,
                                   }}
-                                  className="rounded-circle"
+                                  className="rounded-circle border border-dark"
                                   src={
                                     slides?.resource2.img.length === 0
                                       ? NoImage
@@ -340,7 +340,7 @@ const Category = () => {
                               ) ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj rounded-circle"
+                                  className="iframesetdata obj rounded-circle border border-dark"
                                   style={{
                                     borderRadius: "12px",
                                     width: "300px",
@@ -358,7 +358,7 @@ const Category = () => {
                                     width:"300px",
                                     borderRadius: 12,
                                   }}
-                                  className="rounded-circle"
+                                  className="rounded-circle border border-dark"
                                   src={
                                     slides?.resource2.img?.length === 0
                                       ? NoImage

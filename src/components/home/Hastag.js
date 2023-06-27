@@ -413,10 +413,10 @@ function Hastag() {
                               {features.resource1.link.includes("v=") ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj"
+                                  className="iframesetdata obj rounded-circle border border-dark"
                                   style={{
-                                    width: "100%",
-                                    height: "100%",
+                                    width: "300px",
+                                    height: "300px",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(features?.resource1.link).search
@@ -430,8 +430,9 @@ function Hastag() {
                                       objectFit: "contain",
                                       height: "300px",
                                       borderRadius: 12,
+                                      width:"300px"
                                     }}
-                                    className="w-100  object-contain"
+                                    className="object-contain rounded-circle border border-dark"
                                     src={
                                       features?.resource1.img.length === 0
                                         ? NoImage
@@ -450,11 +451,11 @@ function Hastag() {
                                 <>
                                   <iframe
                                     allowfullscreen="true"
-                                    className="iframesetdata obj"
+                                    className="iframesetdata obj border border-dark rounded-circle"
                                     style={{
                                       borderRadius: "12px",
-                                      width: "100%",
-                                      height: "100%",
+                                      width: "300px",
+                                      height: "300px",
                                     }}
                                     src={`https://www.youtube.com/embed/${new URLSearchParams(
                                       new URL(features?.resource1.link).search
@@ -468,9 +469,10 @@ function Hastag() {
                                     style={{
                                       objectFit: "contain",
                                       height: "300px",
+                                      width:"300px",
                                       borderRadius: 12,
                                     }}
-                                    className="w-100  object-contain"
+                                    className="object-contain border border-dark rounded-circle"
                                     src={
                                       features?.resource1.img?.length === 0
                                         ? NoImage
@@ -604,11 +606,10 @@ function Hastag() {
                               {features.resource2.link.includes("v=") ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj"
+                                  className="iframesetdata obj border border-dark rounded-circle"
                                   style={{
-                                    borderRadius: "12px",
-                                    width: "100%",
-                                    height: "100%",
+                                    width: "300px",
+                                    height: "300px",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(features?.resource2.link).search
@@ -618,11 +619,11 @@ function Hastag() {
                                 <img
                                   style={{
                                     objectFit: "contain",
-                                    height: "100%",
-                                    width: "100%",
+                                    height: "300px",
+                                    width: "300px",
                                     borderRadius: 12,
                                   }}
-                                  // className="w-h-100"
+                                  className="rounded-circle border border-dark"
                                   src={
                                     features?.resource2.img.length === 0
                                       ? NoImage
@@ -639,11 +640,11 @@ function Hastag() {
                               ) ? (
                                 <iframe
                                   allowfullscreen="true"
-                                  className="iframesetdata obj"
+                                  className="iframesetdata obj border border-black rounded-circle"
                                   style={{
                                     borderRadius: "12px",
-                                    width: "100%",
-                                    height: "100%",
+                                    width: "300px",
+                                    height: "300px",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(features?.resource2.link).search
@@ -654,9 +655,10 @@ function Hastag() {
                                   style={{
                                     objectFit: "contain",
                                     height: "300px",
+                                    height:"300px",
                                     borderRadius: 12,
                                   }}
-                                  className="w-100"
+                                  className="border border-dark rounded-circle"
                                   src={
                                     features?.resource2.img?.length === 0
                                       ? NoImage
@@ -1071,6 +1073,7 @@ function Hastag() {
           backgroundSize: "cover",
           // opacity: 0.8,
           width: "100%",
+          overflow:"hidden"
         }}
       >
         <div className="row mt-3">
