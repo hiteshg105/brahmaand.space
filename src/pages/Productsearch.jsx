@@ -1118,40 +1118,32 @@ function Productsearch(args) {
                             More {allcatego.length - 5} category here
                           </button>
                           <div
-                            className={`bg-light border border-black ${display}`}
+                            className={`bg-light border border-dark ${display}`}
                             style={{
-                              padding: "10px",
-                              height: "300px",
-                              width: "700px",
+                              height: "350px",
+                              width: "670px",
                               position: "absolute",
                               zIndex: 99,
-                              overflowX: "hidden",
-                              overflowY: "auto",
+                              overflow: "auto",
                               left: "250px",
-                              top: "50%",
+                              top: "0%",
                             }}
                           >
-                            <button
-                              onClick={hndleMoreCategory}
-                              className="top-0 rounded-circle"
-                              style={{
-                                position: "sticky",
-                                left: "100%",
-                                height: "30px",
-                                width: "30px",
-                                backgroundColor: "#fc9357",
-                                fontSize: "20px",
-                                color: "white",
-                              }}
-                            >
-                              X
-                            </button>
+                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
+                            <h3>Category</h3>
+                              <button
+                                onClick={hndleMoreCategory}
+                                className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
+                              >
+                                &#10006;
+                              </button>
+                            </div>
                             <div className="d-flex flex-wrap">
                               {allcatego.map((allCategory) => {
                                 return (
                                   <div
-                                    className="mt-3 mb-3 mx-2"
-                                    style={{ width: "200px" }}
+                                    className="my-3 mx-2"
+                                    style={{ width: "200px", padding: "10px" }}
                                   >
                                     <input
                                       id={allCategory._id}
@@ -1206,36 +1198,28 @@ function Productsearch(args) {
                           {/* {console.log("subctgry", sub_category)} */}
 
                           <div
-                            className={`bg-light border border-black ${display2}`}
+                            className={`bg-light border border-dark ${display2}`}
                             style={{
-                              top:"0",
-                              left:"100%",
-                              padding: "10px",
-                              height: "300px",
-                              width: "700px",
+                              height: "350px",
+                              width: "670px",
                               position: "absolute",
                               zIndex: 99,
-                              overflowX: "hidden",
-                              overflowY: "auto",
+                              overflow: "auto",
+                              left: "250px",
+                              top: "0%",
                             }}
                           >
-                            <button
-                              onClick={hndleMoreCategory2}
-                              className="top-0 rounded-circle"
-                              style={{
-                                position: "sticky",
-                                left: "100%",
-                                height: "30px",
-                                width: "30px",
-                                backgroundColor: "#fc9357",
-                                fontSize: "20px",
-                                color: "white",
-                              }}
-                            >
-                              X
-                            </button>
+                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
+                            <h3>Sub Category</h3>
+                              <button
+                                onClick={hndleMoreCategory2}
+                                className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
+                              >
+                                &#10006;
+                              </button>
+                            </div>
                             <div className="d-flex flex-wrap">
-                              {subctgry.map((subctgry) => {
+                            {subctgry.map((subctgry) => {
                                 return (
                                   <div
                                     className="mt-3 mb-3 mx-2"

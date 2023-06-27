@@ -296,6 +296,12 @@ const Category = () => {
                                   </div>
                                 </div>
                               </Row>
+
+
+
+
+
+                              
                             </Col>
                             <Col className="d-flex flex-column justify-content-center">
                               <div className="top-main d-flex justify-content-center">
