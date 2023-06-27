@@ -441,6 +441,20 @@
   .hero-subheading {
     font-size: 20px;
   }
+  .newdesign-main .hero-swiper .swiper .swiper-button-next,
+  .newdesign-main .hero-swiper .swiper .swiper-button-prev{
+    height:25px !important;
+    width:25px !important;
+    padding:0 !important;
+  }
+  .newdesign-main .hero-swiper .swiper .swiper-button-next:after,
+  .newdesign-main .hero-swiper .swiper .swiper-button-prev:after {
+    font-size:10px !important ;
+  }
+  .newdesign-main .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 
@@ -463,20 +477,6 @@
 .ct_slider_w{
   width: 49% !important;
 }
-
-
-.previousNextButton{
-  height: 50px;
-  width:50px;
-  background-color: transparent;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size:50px;
-}
-
-
 
 .newdesign-main .hero-swiper {
   position: relative;
@@ -503,4 +503,20 @@
   background-color: transparent;
   border-radius: 50%;
   margin: 0;
+}
+
+
+.CloseIconSearch{
+  height: 35px;
+  width: 35px;
+  font-size:17px;
+  font-weight:600;
+  border-color:#fca878;
+  color:#fca878;
+  transition:all 0.5s
+}
+
+.CloseIconSearch:hover{
+  background-color:#fca878;
+  color:#fff;
 }

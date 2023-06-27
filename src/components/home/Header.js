@@ -528,7 +528,7 @@ function Header(args) {
         <>
           {/* <span style={{ display: "block", textAlign: "left" }}>
             id: {item.id}
-          </span> */}
+          </span> */} 
           <span style={{ display: "block", textAlign: "left" }}>
             {item?.name}
           </span>
@@ -634,6 +634,7 @@ function Header(args) {
               <SwiperSlide>
                 <div className="position-relative">
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img1.png"}
                     alt="hero-images"
@@ -660,6 +661,7 @@ function Header(args) {
                   }
                 >
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img2.png"}
                     alt="hero-images"
@@ -669,6 +671,7 @@ function Header(args) {
               {/* <SwiperSlide>
                 <div onClick={() => toggle()}>
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img3.png"}
                     alt="hero-images"
@@ -678,6 +681,7 @@ function Header(args) {
               <SwiperSlide>
                 <div>
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img4.png"}
                     alt="hero-images"
@@ -687,6 +691,7 @@ function Header(args) {
               <SwiperSlide>
                 <div>
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img5.png"}
                     alt="hero-images"
@@ -696,15 +701,17 @@ function Header(args) {
               <SwiperSlide>
                 <div>
                   <img
+                    style={{ minHeight: "150px" }}
                     className="w-100"
                     src={"/hero-img6.png"}
                     alt="hero-images"
                   />
                 </div>
               </SwiperSlide>
-              <SwiperSlide>
+              <SwiperSlide> 
                 <Link to={"/leaderboard"}>
                   <img
+                  style={{minHeight:"150px"}}
                     className="w-100"
                     src={"/hero-img7.png"}
                     alt="hero-images"

@@ -141,8 +141,11 @@ const Category = () => {
                             )}
                             {/* <HomeCountDown endDate={slides.endDate} /> */}
                             <Row className="position-relative">
-                              <Col className="d-flex flex-column justify-content-center">
-                                <div className="top-main d-flex justify-content-center">
+                              <Col className="d-flex flex-column justify-content-center align-items-center">
+                                <div
+                                  className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden"
+                                  style={{ height: "300px", width: "300px" }}
+                                >
                                   {typeof slides.resource1.link === "string" ? (
                                     <>
                                       {/* {console.log(`https://www.youtube.com/embed/${
@@ -232,6 +235,44 @@ const Category = () => {
                                       )}
                                     </>
                                   )}
+                                  {slides.winner || slides.winner === null ? (
+                                    slides.winner === null ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        DRAW
+                                      </div>
+                                    ) : slides.winner ===
+                                      slides.resource1._id ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        WINNER
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
                                 </div>
 
                                 {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
@@ -266,8 +307,8 @@ const Category = () => {
                                   </div>
                                 </Row>
                               </Col>
-                              <Col className="d-flex flex-column justify-content-center">
-                                <div className="top-main d-flex justify-content-center">
+                              <Col className="d-flex flex-column justify-content-center align-items-center">
+                                <div className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden">
                                   {typeof slides.resource2.link === "string" ? (
                                     <>
                                       {slides.resource2.link.includes("v=") ? (
@@ -346,34 +387,72 @@ const Category = () => {
                                     </>
                                   )}
 
-                                  {/* {slides?.resource2.format === "Video" ? (
-                                  <iframe
-                                    className="w-100 rounded-4 ct_if_asrto"
-                                    src={`https://www.youtube.com/embed/${new URLSearchParams(
-                                      new URL(slides?.resource2.link).search
-                                    ).get("v")}`}
-                                    title="YouTube video player"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen
-                                  ></iframe>
-                                ) : (
-                                  <div
-                                    style={{ height: "300px" }}
-                                    className="d-flex"
-                                  >
-                                    <img
-                                      className="w-100 h-auto rounded-4 object-fit-contain"
-                                      style={{ height: "400px" }}
-                                      src={
-                                        slides?.resource2?.img?.includes("https") ? slides.resource2.img
-                                          : NoImage
-                                      }
-                                      // src={slides?.resource2.img}
-                                      alt=""
-                                    />
-                                  </div>
-                                )} */}
+                                          {/* {slides?.resource2.format === "Video" ? (
+                                          <iframe
+                                            className="w-100 rounded-4 ct_if_asrto"
+                                            src={`https://www.youtube.com/embed/${new URLSearchParams(
+                                              new URL(slides?.resource2.link).search
+                                            ).get("v")}`}
+                                            title="YouTube video player"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen
+                                          ></iframe>
+                                        ) : (
+                                          <div
+                                            style={{ height: "300px" }}
+                                            className="d-flex"
+                                          >
+                                            <img
+                                              className="w-100 h-auto rounded-4 object-fit-contain"
+                                              style={{ height: "400px" }}
+                                              src={
+                                                slides?.resource2?.img?.includes("https") ? slides.resource2.img
+                                                  : NoImage
+                                              }
+                                              // src={slides?.resource2.img}
+                                              alt=""
+                                            />
+                                          </div>
+                                        )} */}
+                                  {slides.winner || slides.winner === null ? (
+                                    slides.winner === null ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        DRAW
+                                      </div>
+                                    ) : slides.winner ===
+                                      slides.resource1._id ? (
+                                      <div
+                                        style={{
+                                          backgroundColor: "#000000B3",
+                                          height: "100%",
+                                          width: "100%",
+                                          top: "50%",
+                                          left: "50%",
+                                          transform: "translate(-50%,-50%)",
+                                          fontSize: "32px",
+                                        }}
+                                        className="position-absolute text-white d-flex justify-content-center align-items-center"
+                                      >
+                                        WINNER
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
                                 </div>
                                 {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
                                 <Row>
