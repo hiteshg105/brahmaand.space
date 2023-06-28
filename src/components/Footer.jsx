@@ -112,9 +112,9 @@ function Footer() {
         <hr></hr>
         <Row>
           <div className="footer-bootom">
-            <Row className="gap-3 gap-md-0">
+            <Row className="gap-3 gap-md-0 w-100">
               <Col md="6" className="d-flex justify-content-center justify-content-md-start align-items-center">
-                <p>© brahmaand.space 2023 -2024. All rights reserved</p>
+                <p className="text-center">© brahmaand.space 2023 -2024. All rights reserved</p>
               </Col>
               <Col md="6" className="d-flex justify-content-center justify-content-md-end">
                 <div className="icon">

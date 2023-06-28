@@ -812,7 +812,7 @@ function Header(args) {
             </div>
             <Container>
               <Modal toggle={toggle} {...args} className="mdlg" isOpen={modal}>
-                <div className="p-3 w-100">
+                <div className="p-sm-3 p-2 w-100">
                   <Row className=" justify-content-right canceltoggle">
                     <Col lg="10" md="8">
                       <h2 style={{ font: "GT Walsheim Pro", fontSize: "25px" }}>

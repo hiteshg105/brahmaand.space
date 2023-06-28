@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination,Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import PrettyRating from "pretty-rating-react";
 
 import img1 from "../images/hero-swiper-img-1.png";
@@ -47,11 +47,11 @@ const Category = () => {
   }, []);
   console.log(allWarData, "allWarData");
   return (
-    <div className="category-main overflow-x-hidden">
-      <Row className="hero-swiper">
+    <div className="category-main overflow-hidden">
+      <Row className="hero-swiper mx-0">
         <h3 className="text-center">Brahmaand Warzone</h3>
         <Swiper
-          modules={[Navigation,Autoplay]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
           navigation
@@ -74,7 +74,7 @@ const Category = () => {
         </Swiper>
       </Row>
 
-      <Row className="common-swipers ps-5 position-relative">
+      <Row className="common-swipers px-5 w-100 position-relative overflow-hidden m-0">
         {allWarData ? (
           allWarData?.map((ele) => (
             <>
@@ -92,22 +92,22 @@ const Category = () => {
               <Swiper
                 breakpoints={{
                   1084: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   980: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   910: {
-                    slidesPerView: 2,
-                  },
+                    slidesPerView: 1,
+                  },  
                   820: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   780: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   768: {
-                    slidesPerView: 2,
+                    slidesPerView: 1,
                   },
                   640: {
                     slidesPerView: 1,
@@ -121,8 +121,8 @@ const Category = () => {
                 }}
                 modules={[Navigation, Pagination]}
                 spaceBetween={20}
-                slidesPerView={2}
-                centeredSlides={ele.length === 1 ? true : false}
+                slidesPerView={1}
+                centeredSlides={true}
                 navigation
                 pagination={{
                   el: ".swiper_pagination",
@@ -132,7 +132,7 @@ const Category = () => {
                 {ele?.map((slides) => {
                   return (
                     <>
-                      <div className="row w-100">
+                      <div className="row w-100 flex-nowrap border border-dark">
                         <SwiperSlide className="ct_slider_w">
                           <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
                             {slides.winner || slides.winner === null ? (
@@ -143,11 +143,10 @@ const Category = () => {
                               <HomeCountDown endDate={slides.endDate} />
                             )}
                             {/* <HomeCountDown endDate={slides.endDate} /> */}
-                            <Row className="position-relative">
+                            <Row className="position-relative flex-nowrap">
                               <Col className="d-flex flex-column justify-content-center align-items-center">
                                 <div
                                   className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden"
-                                  style={{ height: "300px", width: "300px" }}
                                 >
                                   {typeof slides.resource1.link === "string" ? (
                                     <>
@@ -159,9 +158,8 @@ const Category = () => {
                                           allowfullscreen="true"
                                           className="iframesetdata obj rounded-circle"
                                           style={{
-                                            borderRadius: "12px",
-                                            width: "300px",
-                                            height: "300px",
+                                            width: "100%",
+                                            height: "100%",
                                           }}
                                           src={`https://www.youtube.com/embed/${new URLSearchParams(
                                             new URL(
@@ -175,9 +173,8 @@ const Category = () => {
                                           <img
                                             style={{
                                               objectFit: "contain",
-                                              height: "300px",
-                                              borderRadius: 12,
-                                              width: "300px",
+                                              height: "100%",
+                                              width: "100%",
                                             }}
                                             className=" rounded-circle object-contain"
                                             src={
@@ -201,8 +198,8 @@ const Category = () => {
                                             className="iframesetdata obj"
                                             style={{
                                               borderRadius: "12px",
-                                              width: "300px",
-                                              height: "300px",
+                                              width: "100%",
+                                              height: "100%",
                                             }}
                                             src={`https://www.youtube.com/embed/${new URLSearchParams(
                                               new URL(
@@ -217,8 +214,8 @@ const Category = () => {
                                           <img
                                             style={{
                                               objectFit: "contain",
-                                              height: "300px",
-                                              width: "300px",
+                                              height: "100%",
+                                              width: "100%",
                                               // borderRadius: 12,
                                             }}
                                             className="rounded-circle object-contain"
@@ -320,8 +317,8 @@ const Category = () => {
                                           className="iframesetdata obj rounded-circle"
                                           style={{
                                             // borderRadius: "12px",
-                                            width: "300px",
-                                            height: "300px",
+                                            width: "100%",
+                                            height: "100%",
                                           }}
                                           src={`https://www.youtube.com/embed/${new URLSearchParams(
                                             new URL(
@@ -333,8 +330,8 @@ const Category = () => {
                                         <img
                                           style={{
                                             objectFit: "contain",
-                                            height: "300px",
-                                            width: "300px",
+                                            height: "100%",
+                                            width: "100%",
                                             borderRadius: 12,
                                           }}
                                           className="rounded-circle"
@@ -357,8 +354,8 @@ const Category = () => {
                                           className="iframesetdata obj rounded-circle"
                                           style={{
                                             borderRadius: "12px",
-                                            width: "300px",
-                                            height: "300px",
+                                            width: "100%",
+                                            height: "100%",
                                           }}
                                           src={`https://www.youtube.com/embed/${new URLSearchParams(
                                             new URL(
@@ -370,8 +367,8 @@ const Category = () => {
                                         <img
                                           style={{
                                             objectFit: "contain",
-                                            height: "300px",
-                                            width: "300px",
+                                            height: "100%",
+                                            width: "100%",
                                             borderRadius: 12,
                                           }}
                                           className="rounded-circle"

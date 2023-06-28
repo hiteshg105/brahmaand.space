@@ -22,6 +22,7 @@
 /* Category */
 
 .category-main .hero-swiper {
+  width: 100%;
   position: relative;
 }
 
@@ -93,7 +94,7 @@
 }
 
 .category-main .common-swipers .swiper .swiper-button-next {
-  right: 12px;
+  right: 0;
   background: linear-gradient(270.55deg,
       #00273a 13%,
       rgba(1, 21, 31, 0.729967) 30%,
@@ -114,11 +115,17 @@
 .category-main .common-swipers .swiper .swiper-button-disabled {
   display: none !important;
 }
-
 .category-main .common-swipers .top-main {
-  max-height: 300px;
+  height: 100%;
+  width: 300px;
 }
 
+@media screen and (max-width:1024px){
+  .category-main .common-swipers .top-main {
+    height: 200px;
+    width: 200px;
+  } 
+}
 /* Content Creators */
 
 .content-creator-main .toggle {
