@@ -162,7 +162,7 @@ function Hastag() {
       .get(`/user/getVideo`)
       .then((res) => {
         setNewslettervid(res.data.data);
-        console.log(res.data.data,"This is video Data");
+        console.log(res.data.data, "This is video Data");
       })
       .catch((err) => {
         // console.log(err);
@@ -337,11 +337,6 @@ function Hastag() {
                   direction: "horizontal",
                   spaceBetween: 10,
                 },
-                820: {
-                  slidesPerView: 2,
-                  direction: "horizontal",
-                  spaceBetween: 10,
-                },
                 780: {
                   slidesPerView: 2,
                   direction: "horizontal",
@@ -394,15 +389,7 @@ function Hastag() {
                     <div>
                       {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
-                        <Col
-                          className="position-relative p-0 mx-3 -z-50 "
-                          style={{
-                            height: "300px",
-                            width: "300px",
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                          }}
-                        >
+                        <Col className="position-relative p-0 mx-3 rounded-circle overflow-hidden -z-50 slideParent">
                           {/* {features.resource1.format === "Video" ? (
                             <> */}
                           {typeof features.resource1.link === "string" ? (
@@ -415,8 +402,8 @@ function Hastag() {
                                   allowfullscreen="true"
                                   className="iframesetdata obj rounded-circle border border-dark"
                                   style={{
-                                    width: "300px",
-                                    height: "300px",
+                                    width: "100%",
+                                    height: "100%",
                                   }}
                                   src={`https://www.youtube.com/embed/${new URLSearchParams(
                                     new URL(features?.resource1.link).search
@@ -426,13 +413,7 @@ function Hastag() {
                                 <>
                                   {/* {features?.resource1.img.length ==0 } */}
                                   <img
-                                    style={{
-                                      objectFit: "contain",
-                                      height: "300px",
-                                      borderRadius: 12,
-                                      width:"300px"
-                                    }}
-                                    className="object-contain rounded-circle border border-dark"
+                                    className="object-contain rounded-circle border border-dark imageSetdata"
                                     src={
                                       features?.resource1.img.length === 0
                                         ? NoImage
@@ -466,13 +447,7 @@ function Hastag() {
                                 <>
                                   {/* {console.log(features?.resource1.img) } */}
                                   <img
-                                    style={{
-                                      objectFit: "contain",
-                                      height: "300px",
-                                      width:"300px",
-                                      borderRadius: 12,
-                                    }}
-                                    className="object-contain border border-dark rounded-circle"
+                                    className="object-contain border border-dark rounded-circle imageSetdata"
                                     src={
                                       features?.resource1.img?.length === 0
                                         ? NoImage
@@ -592,12 +567,7 @@ function Hastag() {
                         </Col>
                         <Col
                           lg=""
-                          className="d-flex justify-content-center align-items-center position-relative p-0 mx-3 overflow-hidden"
-                          style={{
-                            height: "300px",
-                            width: "300px",
-                            borderRadius: "50%",
-                          }}
+                          className="d-flex justify-content-center align-items-center position-relative p-0 mx-3 rounded-circle overflow-hidden slideParent"
                         >
                           {/* {features.resource2.format === "Video" ? (
                             <> */}
@@ -617,13 +587,7 @@ function Hastag() {
                                 ></iframe>
                               ) : (
                                 <img
-                                  style={{
-                                    objectFit: "contain",
-                                    height: "300px",
-                                    width: "300px",
-                                    borderRadius: 12,
-                                  }}
-                                  className="rounded-circle border border-dark"
+                                  className="rounded-circle border border-dark imageSetdata"
                                   src={
                                     features?.resource2.img.length === 0
                                       ? NoImage
@@ -652,13 +616,7 @@ function Hastag() {
                                 ></iframe>
                               ) : (
                                 <img
-                                  style={{
-                                    objectFit: "contain",
-                                    height: "300px",
-                                    height:"300px",
-                                    borderRadius: 12,
-                                  }}
-                                  className="border border-dark rounded-circle"
+                                  className="border border-dark rounded-circle imageSetdata"
                                   src={
                                     features?.resource2.img?.length === 0
                                       ? NoImage
@@ -893,7 +851,35 @@ function Hastag() {
           </Button>
         </Link>
       </Container>
+      {/* contant creater */}
+      <Container className="mt-3">
+        <p className="category">Content Creator</p>
+        <Row className="m-3 mb-4">
 
+
+          {<Col lg="3" md="6" sm="12" className="my-3">
+            <Link>
+              <div className="p-2 border border-dark creatorParent rounded-3 shadow">
+                <div className="CreatorCard rounded-circle overflow-hidden">
+                  <img src={socialnetwork} className="h-100 w-100" />
+                </div>
+                <div className="d-flex flex-column align-items-center">
+                  <p className="fs-3 text-dark text-center">This Is Name</p>
+                  <div>
+                    <PrettyRating
+                      value={5}
+                      icons={icons.star}
+                      colors={colors.star}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </Col>}
+          
+
+        </Row>
+      </Container>
       {/* Featured */}
 
       <div className="container">
@@ -923,18 +909,18 @@ function Hastag() {
                 spaceBetween: 10,
               },
               820: {
-                slidesPerView: 3,
+                slidesPerView: 1,
                 direction: "horizontal",
                 spaceBetween: 10,
               },
               780: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 direction: "horizontal",
                 spaceBetween: 10,
               },
 
               768: {
-                slidesPerView: 2,
+                slidesPerView: 1,
                 direction: "horizontal",
                 spaceBetween: 10,
               },
@@ -1073,7 +1059,7 @@ function Hastag() {
           backgroundSize: "cover",
           // opacity: 0.8,
           width: "100%",
-          overflow:"hidden"
+          overflow: "hidden",
         }}
       >
         <div className="row mt-3">
@@ -1095,7 +1081,12 @@ function Hastag() {
                     {/* news letter */}
                     <Container>
                       <InputGroup className="Card-Form mb-4">
-                        <Col lg="8" md="8" sm="8" className="searchbara ">
+                        <Col
+                          lg="8"
+                          md="8"
+                          sm="8"
+                          className="searchbara w-xl-75 w-100"
+                        >
                           <input
                             value={email}
                             onChange={handleChange}
@@ -1118,7 +1109,7 @@ function Hastag() {
                           onClick={() => (
                             handleSubmit(), gaEventTracker("Subscribe")
                           )}
-                          className=" d-flex justify-content-center subscribebtn col-md-4"
+                          className=" d-flex justify-content-center subscribebtn col-md-4 w-xl-25 w-50"
                         >
                           Subscribe
                         </Button>

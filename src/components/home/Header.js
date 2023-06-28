@@ -643,12 +643,11 @@ function Header(args) {
                     to={"/signup"}
                     style={{
                       backgroundColor: "#fc9358",
-                      fontSize: 24,
                       borderRadius: 69,
                       bottom: "20%",
                       left: "7%",
                     }}
-                    className="btn-sn-hover position-absolute border-0 text-white z-10 px-4 py-2 fw-bold btn-sn-hover"
+                    className="btn-sn-hover text-center position-absolute border-0 text-white z-10 px-4 py-2 fw-bold "
                   >
                     SIGN UP
                   </Link>
@@ -776,7 +775,7 @@ function Header(args) {
             >
               Finding quality resources is not a hassle anymore.
             </p>
-            <div className="text-center p-0 m-0 mt-5 pb-4 d-flex justify-content-center flex-wrap gap-5">
+            <div className="text-center p-0 m-0 mt-5 pb-4 d-flex justify-content-center flex-wrap gap-sm-5 gap-3">
               <button
                 onClick={(e) => (
                   toggle(e), gaEventTracker("+Submit a Content")

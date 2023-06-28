@@ -431,9 +431,19 @@
   .hero-subheading {
     font-size: 25px;
   }
+  
 }
-
+@media (max-width:1024px) {
+  .btn-sn-hover{
+    bottom:15% !important;
+  }
+}
 @media (max-width:575px) {
+  .btn-sn-hover{
+    font-size:12px !important;
+    padding: 5px 10px !important;
+    bottom:10% !important;
+  }
   .hero-heading {
     font-size: 30px;
   }
@@ -460,6 +470,7 @@
 
 .btn-sn-hover:hover {
   background-color: #00273a !important;
+  /* font-size:24px; */
 }
 
 /* Hero  */

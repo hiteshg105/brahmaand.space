@@ -350,7 +350,7 @@ function Productsearch(args) {
     setPromotId("");
     setPromotiondata("");
   };
-
+  
   // const getolderyeardata = () => {
   //   if (contentyear !== "") {
   //     axios
