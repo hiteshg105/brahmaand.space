@@ -1306,11 +1306,6 @@ input[type="range"] {
   background: none;
 }
 
-.iframesetdata {
-  width: 100%;
-  height: 400px;
-}
-
 .imagemainhead {
   display: flex;
   justify-content: center;
@@ -1517,4 +1512,51 @@ input[type="range"] {
   font-size: 1rem !important;
   color: black;
   opacity: 1;
+}
+
+
+
+
+
+
+
+.iframesetdata {
+  width: 100%;
+  height: 300px;
+}
+.slideParent{
+  height: 300px;
+  width: 300px;
+}
+.imageSetdata{
+  
+  height: 100%;
+  width: 100%;
+}
+@media screen and (max-width: 1000px) {
+  .iframesetdata {
+    width: 100% !important;
+    height:200px !important;
+  } 
+  .slideParent{
+    height:200px;
+    width:100% !important;
+  }
+}
+
+
+
+
+
+.creatorParent{
+  width:260px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+
+.CreatorCard{
+  height: 250px;
+  width: 250px;
 }

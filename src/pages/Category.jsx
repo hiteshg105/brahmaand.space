@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination,Autoplay } from "swiper";
 import PrettyRating from "pretty-rating-react";
 
 import img1 from "../images/hero-swiper-img-1.png";
@@ -51,10 +51,13 @@ const Category = () => {
       <Row className="hero-swiper">
         <h3 className="text-center">Brahmaand Warzone</h3>
         <Swiper
-          modules={[Navigation]}
+          modules={[Navigation,Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
           navigation
+          autoplay={{
+            delay: 5000,
+          }}
         >
           <SwiperSlide>
             <img className="w-100 h-auto" src={img1} alt="" />
@@ -387,7 +390,7 @@ const Category = () => {
                                     </>
                                   )}
 
-                                          {/* {slides?.resource2.format === "Video" ? (
+                                  {/* {slides?.resource2.format === "Video" ? (
                                           <iframe
                                             className="w-100 rounded-4 ct_if_asrto"
                                             src={`https://www.youtube.com/embed/${new URLSearchParams(
