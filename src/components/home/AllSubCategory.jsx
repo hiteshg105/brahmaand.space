@@ -55,6 +55,10 @@ function AllSubCategory() {
           ? subcatgry[0]?.category.title
           : null}
       </p>
+
+      {/* {
+        console.log(subcatgry[0].category.title,"title")
+      } */}
       <Container fluid className=" d-flex justify-content-center">
         <Container>
           <Row className="m-3 mb-4">

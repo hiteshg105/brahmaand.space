@@ -43,7 +43,17 @@ const ContentCreators = ({
   subcategory,
   contentyear,
   searchitem,
+  
 }) => {
+
+  const location = useLocation();
+
+
+  // const [name,setName] = useState(location.state.state);
+  const name = location.state && location.state.state
+  console.log("name:",name)
+
+
   const params = useParams();
   const [content, setContent] = useState("Content");
   // let [page,setPage] = useState(1);
@@ -80,6 +90,7 @@ const ContentCreators = ({
     setEditmodal(!editmodal);
   };
 
+  // console.log("subcategory:::",subcategory)
   const secondExample = {
     size: 50,
     count: 5,
@@ -95,6 +106,7 @@ const ContentCreators = ({
       setRating(newValue);
     },
   };
+  console.log("val",val[0]?.sub_category?.desc)
   // console.log(contentCretorDetail, "contentCretorDetail");
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
@@ -547,6 +559,8 @@ const ContentCreators = ({
     contentyear,
   ]);
 
+  
+  
   useEffect(() => {}, []);
 
   useEffect(() => {
@@ -559,13 +573,13 @@ const ContentCreators = ({
     setProductdetail("");
     setProductdes("");
   };
-
+// console.log(stateValue,"stateValue")
   return (
     <div className="ccm content-creator-main mt-5">
       <Row className="d-flex justify-content-between flex-column flex-md-row gap-3 gap-md-0">
         <Col>
           <h3 className="fw-bold text-center p-0 text-md-start">
-            Showing Results
+            Showing Results ({location.state.data?(location?.state?.data?.title):(val[0]?.sub_category?.desc)})
           </h3>
         </Col>
         <Col>

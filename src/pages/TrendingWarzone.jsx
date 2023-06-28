@@ -325,63 +325,63 @@ const TrendingWarzone = ({ getPath }) => {
       const userid = localStorage.getItem("userId");
 
       // if (rsc1Review.comment.length != 0 && rsc1Review.rate != 0) {
-      if (war?.winner) {
-        // swal("Bettle Ended");
-        swal("Battle is completed so you can not add Rating and Reviews.");
-      } else {
-        if (userid !== null) {
-          if (isContent === "0") {
-            if (rsc1Review.rate != 0) {
-              console.log("rsc1Review");
-              const data = await instance.post(`user/add_Comment`, {
-                submitresrcId: war.resource1._id,
-                userid: userid,
-                comment: rsc1Review.comment,
-                rating: rsc1Review.rate,
-              });
-              // console.log(data.data);
-              if (data.data.status === true) {
-                setRsc1Review({ comment: "", rate: 0 });
-                getComment();
-                swal("Review submitted Successfully.");
-              }
-              if (data.data.msg === "waiting for admin approvel") {
-                swal("You have already submit your review on this.");
-                setRsc1Review({ comment: "", rate: 0 });
-              }
-            } else {
-              swal("Please Enter Comment And Rating");
+      // if (war?.winner) {
+      //   // swal("Bettle Ended");
+      //   swal("Battle is completed so you can not add Rating and Reviews.");
+      // } else {
+      if (userid !== null) {
+        if (isContent === "0") {
+          if (rsc1Review.rate != 0) {
+            console.log("rsc1Review");
+            const data = await instance.post(`user/add_Comment`, {
+              submitresrcId: war.resource1._id,
+              userid: userid,
+              comment: rsc1Review.comment,
+              rating: rsc1Review.rate,
+            });
+            // console.log(data.data);
+            if (data.data.status === true) {
+              setRsc1Review({ comment: "", rate: 0 });
+              getComment();
+              swal("Review submitted Successfully.");
             }
-          }
-
-          if (isContent === "1") {
-            if (rsc1Review.rate != 0) {
-              console.log("rsc1Review");
-              const userid = localStorage.getItem("userId");
-              const data = await instance.post(`/user/add_creator_comment`, {
-                creatorResrcId: war.resource1._id,
-                userid: userid,
-                comment: rsc1Review.comment,
-                rating: rsc1Review.rate,
-              });
-              // console.log(data.data);
-              if (data.data.status === true) {
-                setRsc1Review({ comment: "", rate: 0 });
-                getComment();
-                swal("Review submitted Successfully.");
-              }
-              if (data.data.status === false) {
-                swal("You have already submit your review on this.");
-                setRsc1Review({ comment: "", rate: 0 });
-              }
-            } else {
-              swal("Please Enter Comment And Rating");
+            if (data.data.msg === "waiting for admin approvel") {
+              swal("You have already submit your review on this.");
+              setRsc1Review({ comment: "", rate: 0 });
             }
+          } else {
+            swal("Please Enter Comment And Rating");
           }
-        } else {
-          swal("Please Login OR Sign Up");
         }
+
+        if (isContent === "1") {
+          if (rsc1Review.rate != 0) {
+            console.log("rsc1Review");
+            const userid = localStorage.getItem("userId");
+            const data = await instance.post(`/user/add_creator_comment`, {
+              creatorResrcId: war.resource1._id,
+              userid: userid,
+              comment: rsc1Review.comment,
+              rating: rsc1Review.rate,
+            });
+            // console.log(data.data);
+            if (data.data.status === true) {
+              setRsc1Review({ comment: "", rate: 0 });
+              getComment();
+              swal("Review submitted Successfully.");
+            }
+            if (data.data.status === false) {
+              swal("You have already submit your review on this.");
+              setRsc1Review({ comment: "", rate: 0 });
+            }
+          } else {
+            swal("Please Enter Comment And Rating");
+          }
+        }
+      } else {
+        swal("Please Login OR Sign Up");
       }
+
     } catch (error) {
       if (error.response?.status === 403) {
         swal("You have already submit your review on this.");
@@ -395,62 +395,62 @@ const TrendingWarzone = ({ getPath }) => {
     try {
       // if (rsc2Review.comment.length != 0 && rsc2Review.rate != 0) {
       const userid = localStorage.getItem("userId");
-      if (war?.winner) {
-        swal("Battle is completed so you can not add Rating and Reviews.");
-      } else {
-        if (userid !== null) {
-          if (isContent === "0") {
-            if (rsc2Review.rate != 0) {
-              console.log("rsc2Review");
-              const data = await instance.post(`user/add_Comment`, {
-                submitresrcId: war.resource2._id,
-                userid: userid,
-                comment: rsc2Review.comment,
-                rating: rsc2Review.rate,
-              });
-              // console.log(data.data);
-              if (data.data.status === true) {
-                swal("Review submitted Successfully.");
-                setRsc2Review({ comment: "", rate: 0 });
-                getComment();
-              }
-              if (data.data.msg === "waiting for admin approvel") {
-                swal("You have already submit your review on this.");
-                setRsc2Review({ comment: "", rate: 0 });
-              }
-            } else {
-              swal("Please Enter Comment And Rating");
+      // if (war?.winner) {
+      //   swal("Battle is completed so you can not add Rating and Reviews.");
+      // } else {
+      if (userid !== null) {
+        if (isContent === "0") {
+          if (rsc2Review.rate != 0) {
+            console.log("rsc2Review");
+            const data = await instance.post(`user/add_Comment`, {
+              submitresrcId: war.resource2._id,
+              userid: userid,
+              comment: rsc2Review.comment,
+              rating: rsc2Review.rate,
+            });
+            // console.log(data.data);
+            if (data.data.status === true) {
+              swal("Review submitted Successfully.");
+              setRsc2Review({ comment: "", rate: 0 });
+              getComment();
             }
-          }
-
-          if (isContent === "1") {
-            if (rsc2Review.rate != 0) {
-              console.log("rsc2Review");
-              const userid = localStorage.getItem("userId");
-              const data = await instance.post(`/user/add_creator_comment`, {
-                creatorResrcId: war.resource2._id,
-                userid: userid,
-                comment: rsc2Review.comment,
-                rating: rsc2Review.rate,
-              });
-              // console.log(data.data);
-              if (data.data.status === true) {
-                swal("Review submitted Successfully.");
-                setRsc2Review({ comment: "", rate: 0 });
-                getComment();
-              }
-              if (data.data.status === false) {
-                swal("You have already submit your review on this.");
-                setRsc2Review({ comment: "", rate: 0 });
-              }
-            } else {
-              swal("Please Enter Comment And Rating");
+            if (data.data.msg === "waiting for admin approvel") {
+              swal("You have already submit your review on this.");
+              setRsc2Review({ comment: "", rate: 0 });
             }
+          } else {
+            swal("Please Enter Comment And Rating");
           }
-        } else {
-          swal("Please Login OR Sign Up");
         }
+
+        if (isContent === "1") {
+          if (rsc2Review.rate != 0) {
+            console.log("rsc2Review");
+            const userid = localStorage.getItem("userId");
+            const data = await instance.post(`/user/add_creator_comment`, {
+              creatorResrcId: war.resource2._id,
+              userid: userid,
+              comment: rsc2Review.comment,
+              rating: rsc2Review.rate,
+            });
+            // console.log(data.data);
+            if (data.data.status === true) {
+              swal("Review submitted Successfully.");
+              setRsc2Review({ comment: "", rate: 0 });
+              getComment();
+            }
+            if (data.data.status === false) {
+              swal("You have already submit your review on this.");
+              setRsc2Review({ comment: "", rate: 0 });
+            }
+          } else {
+            swal("Please Enter Comment And Rating");
+          }
+        }
+      } else {
+        swal("Please Login OR Sign Up");
       }
+      // }
     } catch (error) {
       if (error.response.status === 403) {
         swal("You have already submit your review on this.");
@@ -870,8 +870,8 @@ const TrendingWarzone = ({ getPath }) => {
                         war?.resource1.img.length === 0
                           ? NoImage
                           : war?.resource1.img.includes("https")
-                          ? war?.resource1.img
-                          : `https://backend.brahmaand.space/${war?.resource1.img}`
+                            ? war?.resource1.img
+                            : `https://backend.brahmaand.space/${war?.resource1.img}`
                       }
                       alt=""
                     />
@@ -1013,8 +1013,8 @@ const TrendingWarzone = ({ getPath }) => {
                         war?.resource2.img.length === 0
                           ? NoImage
                           : war?.resource2.img.includes("https")
-                          ? war?.resource2.img
-                          : `https://backend.brahmaand.space/${war?.resource2.img}`
+                            ? war?.resource2.img
+                            : `https://backend.brahmaand.space/${war?.resource2.img}`
                       }
                       alt=""
                     />
@@ -1104,14 +1104,14 @@ const TrendingWarzone = ({ getPath }) => {
                     ? "Bad"
                     : warReview?.rsc1AvReview >= 2 &&
                       warReview?.rsc1AvReview < 3
-                    ? "Average"
-                    : warReview?.rsc1AvReview >= 3 &&
-                      warReview?.rsc1AvReview < 4
-                    ? "Good"
-                    : warReview?.rsc1AvReview >= 4 &&
-                      warReview?.rsc1AvReview < 4.5
-                    ? "Very Good"
-                    : "Excellent"}
+                      ? "Average"
+                      : warReview?.rsc1AvReview >= 3 &&
+                        warReview?.rsc1AvReview < 4
+                        ? "Good"
+                        : warReview?.rsc1AvReview >= 4 &&
+                          warReview?.rsc1AvReview < 4.5
+                          ? "Very Good"
+                          : "Excellent"}
                 </p>
               )}
 
@@ -1149,14 +1149,14 @@ const TrendingWarzone = ({ getPath }) => {
                     ? "Bad"
                     : warReview?.rsc2AvReview >= 2 &&
                       warReview?.rsc2AvReview < 3
-                    ? "Average"
-                    : warReview?.rsc2AvReview >= 3 &&
-                      warReview?.rsc2AvReview < 4
-                    ? "Good"
-                    : warReview?.rsc2AvReview >= 4 &&
-                      warReview?.rsc2AvReview < 4.5
-                    ? "Very Good"
-                    : "Excellent"}
+                      ? "Average"
+                      : warReview?.rsc2AvReview >= 3 &&
+                        warReview?.rsc2AvReview < 4
+                        ? "Good"
+                        : warReview?.rsc2AvReview >= 4 &&
+                          warReview?.rsc2AvReview < 4.5
+                          ? "Very Good"
+                          : "Excellent"}
                 </p>
               )}
               <p className="my-3 text-center text-md-start p-0">
@@ -1583,8 +1583,8 @@ const TrendingWarzone = ({ getPath }) => {
             {war?.resource1.res_desc
               ? war?.resource1.res_desc
               : war?.resource1.desc
-              ? war?.resource1.desc
-              : "No Description Found"}
+                ? war?.resource1.desc
+                : "No Description Found"}
           </p>
         </Col>
         <Col lg={6} className="content-box px-0">
@@ -1595,8 +1595,8 @@ const TrendingWarzone = ({ getPath }) => {
             {war?.resource2.res_desc
               ? war?.resource2.res_desc
               : war?.resource2.desc
-              ? war?.resource2.desc
-              : "No Description Found"}
+                ? war?.resource2.desc
+                : "No Description Found"}
 
             {/* {war?.resource2.res_desc
               ? war?.resource2.res_desc
@@ -1636,14 +1636,14 @@ const TrendingWarzone = ({ getPath }) => {
                   ? "Bad"
                   : warRscReview?.rsc1AvReview >= 2 &&
                     warRscReview?.rsc1AvReview < 3
-                  ? "Average"
-                  : warRscReview?.rsc1AvReview >= 3 &&
-                    warRscReview?.rsc1AvReview < 4
-                  ? "Good"
-                  : warRscReview?.rsc1AvReview >= 4 &&
-                    warRscReview?.rsc1AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
+                    ? "Average"
+                    : warRscReview?.rsc1AvReview >= 3 &&
+                      warRscReview?.rsc1AvReview < 4
+                      ? "Good"
+                      : warRscReview?.rsc1AvReview >= 4 &&
+                        warRscReview?.rsc1AvReview < 4.5
+                        ? "Very Good"
+                        : "Excellent"}
               </p>
             )}
 
@@ -1815,14 +1815,14 @@ const TrendingWarzone = ({ getPath }) => {
                   ? "Bad"
                   : warRscReview?.rsc2AvReview >= 2 &&
                     warRscReview?.rsc2AvReview < 3
-                  ? "Average"
-                  : warRscReview?.rsc2AvReview >= 3 &&
-                    warRscReview?.rsc2AvReview < 4
-                  ? "Good"
-                  : warRscReview?.rsc2AvReview >= 4 &&
-                    warRscReview?.rsc2AvReview < 4.5
-                  ? "Very Good"
-                  : "Excellent"}
+                    ? "Average"
+                    : warRscReview?.rsc2AvReview >= 3 &&
+                      warRscReview?.rsc2AvReview < 4
+                      ? "Good"
+                      : warRscReview?.rsc2AvReview >= 4 &&
+                        warRscReview?.rsc2AvReview < 4.5
+                        ? "Very Good"
+                        : "Excellent"}
               </p>
             )}
             <div className="d-flex justify-content-center justify-content-lg-start align-items-center">
@@ -1980,78 +1980,82 @@ const TrendingWarzone = ({ getPath }) => {
         >
           Add your reviews
         </p>
-        <Col lg={6} className="p-2 p-lg-3 pe-lg-4 border-top">
-          <div className="w-100 w-lg-75 mx-auto ms-lg-auto">
-            <div className="reviews-rating-stars d-flex justify-content-center justify-content-lg-end">
-              <PrettyRating
-                value={rsc1Review.rate}
-                onChange={(e) => setRsc1Review({ ...rsc1Review, rate: e })}
-                icons={icons.star}
-                colors={colors.star}
-              />
-            </div>
-            {/* {console.log(rsc1Review, "rsc1Review")} */}
-            <form className="position-relative">
-              <textarea
-                value={rsc1Review.comment}
-                onChange={(e) =>
-                  setRsc1Review({ ...rsc1Review, comment: e.target.value })
-                }
-                name="text"
-                className="form-control st-taetarea"
-                placeholder=" Enter your Review if you want"
-              ></textarea>
-              <button
-                onClick={(e) => submitRcc1Comment(e)}
-                style={{
-                  backgroundColor: "#5F56C6",
-                  right: "8px",
-                  bottom: "8px",
-                }}
-                className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
-              >
-                send
-              </button>
-            </form>
-          </div>
+
+        <Col lg={6} className="p-2 p-lg-3 pe-lg-4 border-top text-lg-end">
+          {war?.winner === null || war?.winner ? "Battle Ended." :
+            <div className="w-100 w-lg-75 mx-auto ms-lg-auto">
+              <div className="reviews-rating-stars d-flex justify-content-center justify-content-lg-end">
+                <PrettyRating
+                  value={rsc1Review.rate}
+                  onChange={(e) => setRsc1Review({ ...rsc1Review, rate: e })}
+                  icons={icons.star}
+                  colors={colors.star}
+                />
+              </div>
+              <form className="position-relative">
+                <textarea
+                  value={rsc1Review.comment}
+                  onChange={(e) =>
+                    setRsc1Review({ ...rsc1Review, comment: e.target.value })
+                  }
+                  name="text"
+                  className="form-control st-taetarea"
+                  placeholder=" Enter your Review if you want"
+                ></textarea>
+                <button
+                  onClick={(e) => submitRcc1Comment(e)}
+                  style={{
+                    backgroundColor: "#5F56C6",
+                    right: "8px",
+                    bottom: "8px",
+                  }}
+                  className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
+                >
+                  send
+                </button>
+              </form>
+            </div>}
         </Col>
         <Col lg={6} className="content-box p-2 p-lg-3 ps-lg-4 border-top">
-          <div className="w-100 w-lg-75 mx-auto mx-lg-0">
-            <div className="reviews-rating-stars justify-content-center justify-content-lg-start d-flex">
-              <PrettyRating
-                value={rsc2Review.rate}
-                onChange={(e) => setRsc2Review({ ...rsc2Review, rate: e })}
-                icons={icons.star}
-                colors={colors.star}
-              />
-            </div>
-            <form className="position-relative">
-              <textarea
-                value={rsc2Review.comment}
-                name="text"
-                onChange={(e) =>
-                  setRsc2Review({
-                    ...rsc2Review,
-                    comment: e.target.value,
-                  })
-                }
-                className="form-control st-taetarea"
-                placeholder=" Enter your Review if you want"
-              ></textarea>
-              <button
-                onClick={(e) => submitRcc2Comment(e)}
-                style={{
-                  backgroundColor: "#5F56C6",
-                  right: "8px",
-                  bottom: "8px",
-                }}
-                className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
-              >
-                send
-              </button>
-            </form>
-          </div>
+          {war?.winner === null || war?.winner ? "Battle Ended." :
+
+            <div className="w-100 w-lg-75 mx-auto mx-lg-0">
+              <div className="reviews-rating-stars justify-content-center justify-content-lg-start d-flex">
+                <PrettyRating
+                  value={rsc2Review.rate}
+                  onChange={(e) => setRsc2Review({ ...rsc2Review, rate: e })}
+                  icons={icons.star}
+                  colors={colors.star}
+                />
+              </div>
+              <form className="position-relative">
+                <textarea
+                  value={rsc2Review.comment}
+                  name="text"
+                  onChange={(e) =>
+                    setRsc2Review({
+                      ...rsc2Review,
+                      comment: e.target.value,
+                    })
+                  }
+                  className="form-control st-taetarea"
+                  placeholder=" Enter your Review if you want"
+                ></textarea>
+                <button
+                  onClick={(e) => submitRcc2Comment(e)}
+                  style={{
+                    backgroundColor: "#5F56C6",
+                    right: "8px",
+                    bottom: "8px",
+                  }}
+                  className="position-absolute text-uppercase text-white border-0 shadow-lg fw-bold px-4 py-1 rounded-2"
+                >
+                  send
+                </button>
+              </form>
+            </div>}
         </Col>
+        
       </Row>
 
       <Row className="border-top border-bottom">
@@ -2068,50 +2072,50 @@ const TrendingWarzone = ({ getPath }) => {
           {comment?.newData && comment?.newData.length === 0
             ? "No Review Found"
             : comment?.newData.map((value) => (
-                <div
-                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                  className="d-flex flex-column p-3 rounded-4"
-                >
-                  <div className="re-list d-flex align-items-center gap-4">
-                    <div style={{ width: "50px" }}>
-                      <img
-                        className="w-100 h-auto rounded-circle"
-                        src={value?.userid?.profileImg?.[0]}
-                        timeLine
-                        alt="UserImage"
-                      />
-                    </div>
-                    <div className="re-listcont w-100 d-flex justify-content-between">
-                      <div>
-                        <h5>{value?.userid?.username}</h5>
-                        <div className="star-1">
-                          <PrettyRating
-                            value={value.rating}
-                            edit={false}
-                            icons={icons.star}
-                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                          />
-                        </div>
-                      </div>
-                      <span>
-                        {/* <Moment format="ll"></Moment> */}
-                        {value?.timeLine}
-                      </span>
-                    </div>
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg?.[0]}
+                      timeLine
+                      alt="UserImage"
+                    />
                   </div>
-                  <ShowMore
-                    className="showmore"
-                    style={{ color: "black" }}
-                    lines={1}
-                    more="learn More"
-                    less="learn less"
-                    anchorClass=""
-                  >
-                    {value.comment}
-                  </ShowMore>
-                  {/* <p className="fw-bold">{value.comment}</p> */}
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          value={value.rating}
+                          edit={false}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={1}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
+                  {value.comment}
+                </ShowMore>
+                {/* <p className="fw-bold">{value.comment}</p> */}
+              </div>
+            ))}
         </Col>
         <Col
           lg={6}
@@ -2121,48 +2125,48 @@ const TrendingWarzone = ({ getPath }) => {
           {comment?.newData2 && comment?.newData2.length === 0
             ? "No Review Found"
             : comment?.newData2.map((value) => (
-                <div
-                  style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
-                  className="d-flex flex-column p-3 rounded-4"
-                >
-                  <div className="re-list d-flex align-items-center gap-4">
-                    <div style={{ width: "50px" }}>
-                      <img
-                        className="w-100 h-auto rounded-circle"
-                        src={value?.userid?.profileImg[0]}
-                        alt="UserImage"
-                      />
-                    </div>
-                    <div className="re-listcont w-100 d-flex justify-content-between">
-                      <div>
-                        <h5>{value?.userid?.username}</h5>
-                        <div className="star-1">
-                          <PrettyRating
-                            edit={false}
-                            value={value.rating}
-                            icons={icons.star}
-                            colors={["#5F56C6", "#5F56C6", "#434b4d"]}
-                          />
-                        </div>
-                      </div>
-                      <span>
-                        {/* <Moment format="ll"></Moment> */}
-                        {value?.timeLine}
-                      </span>
-                    </div>
+              <div
+                style={{ backgroundColor: "rgba(0,0,0,0.08)" }}
+                className="d-flex flex-column p-3 rounded-4"
+              >
+                <div className="re-list d-flex align-items-center gap-4">
+                  <div style={{ width: "50px" }}>
+                    <img
+                      className="w-100 h-auto rounded-circle"
+                      src={value?.userid?.profileImg[0]}
+                      alt="UserImage"
+                    />
                   </div>
-                  <ShowMore
-                    className="showmore"
-                    style={{ color: "black" }}
-                    lines={1}
-                    more="learn More"
-                    less="learn less"
-                    anchorClass=""
-                  >
-                    {value.comment}
-                  </ShowMore>
+                  <div className="re-listcont w-100 d-flex justify-content-between">
+                    <div>
+                      <h5>{value?.userid?.username}</h5>
+                      <div className="star-1">
+                        <PrettyRating
+                          edit={false}
+                          value={value.rating}
+                          icons={icons.star}
+                          colors={["#5F56C6", "#5F56C6", "#434b4d"]}
+                        />
+                      </div>
+                    </div>
+                    <span>
+                      {/* <Moment format="ll"></Moment> */}
+                      {value?.timeLine}
+                    </span>
+                  </div>
                 </div>
-              ))}
+                <ShowMore
+                  className="showmore"
+                  style={{ color: "black" }}
+                  lines={1}
+                  more="learn More"
+                  less="learn less"
+                  anchorClass=""
+                >
+                  {value.comment}
+                </ShowMore>
+              </div>
+            ))}
         </Col>
       </Row>
     </Container>

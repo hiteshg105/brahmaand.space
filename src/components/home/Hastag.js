@@ -61,6 +61,8 @@ function Hastag() {
   const prevBtnRef = useRef();
   const nextBtnRef = useRef();
 
+  const [name,setName] = useState("");
+
   const navigate = useNavigate();
 
   const secondExample = {
@@ -162,7 +164,7 @@ function Hastag() {
       .get(`/user/getVideo`)
       .then((res) => {
         setNewslettervid(res.data.data);
-        console.log(res.data.data,"This is video Data");
+        // console.log(res.data.data,"This is video Data");
       })
       .catch((err) => {
         // console.log(err);
@@ -204,7 +206,7 @@ function Hastag() {
     // console.log(responce.data.war, "responce.data.war")
     const responce1 = await axiosConfig.get(`/get/all/creator_warzone`);
     const data1 = responce1.data.war;
-    console.log(data1, "data1");
+    // console.log(data1, "data1");
     data1.forEach((obj) => {
       obj.isContent = 1;
     });
@@ -220,14 +222,14 @@ function Hastag() {
   localStorage.setItem("hastag", "hastag");
   function handlehastagtopic(hastag) {
     localStorage.setItem("hastag", hastag);
-
+    setName(hastag)
     if (hastag !== "") {
       axiosConfig
         .post(`/user/search_topic_title`, {
           searchinput: hastag,
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (
             res.data.data[0]?.sub_category === "" ||
             res.data.data[0]?.sub_category == undefined
@@ -235,12 +237,16 @@ function Hastag() {
             swal("No data Found!");
           }
           const search = res.data.data[0]?.sub_category;
-
+          console.log(search,"search")
           // if (search !== "" && search !== undefined) {
           //   navigate(`/productList/${search}`);
+          // console.log(res.data.data[0].topics[0],"name::")
           // }
+
+          
+          // setName(res.data.data[0]?.topics)
           if (search !== "" && search !== undefined) {
-            navigate(`/productsearch/${search}`);
+            navigate(`/productsearch/${search}`,{ state: hastag });
           }
         })
         .catch((err) => {
@@ -248,7 +254,7 @@ function Hastag() {
         });
     }
   }
-
+  console.log("name:",name)
   const [isOpenone, setOpenone] = useState(false);
 
   const gaEventTracker = useAnalyticsEventTracker("Hastag");
@@ -269,18 +275,27 @@ function Hastag() {
             <div className=" row mt-3">
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
-                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => (
-                      <button
+                  ? trendingsearch?.slice(0, 32).map((trendingtopics) => {
+                    
+                      return(
+                        <>
+                        <button
                         key={trendingtopics._id}
                         onClick={() => (
                           handlehastagtopic(trendingtopics?.topics),
                           gaEventTracker(`${trendingtopics?.topics}`)
+                          // setName(trendingtopics?.topics)
                         )}
+                        // stateValue={trendingtopics?.topics}
                         className="btn1"
                       >
                         {trendingtopics?.topics}
                       </button>
-                    ))
+                        
+                        </>
+                      )
+                  
+                        })
                   : null}
               </div>
             </div>
@@ -773,10 +788,10 @@ function Hastag() {
                               colors={colors.star}
                             />
                             <span style={{ fontSize: "14px" }} className="ms-1">
-                              {console.log(
+                              {/* {console.log(
                                 features?.resource1.ava_rating,
                                 "features?.resource1.ava_rating"
-                              )}
+                              )} */}
                               {features?.resource1.ava_rating?.toFixed(2)}
                             </span>
                           </div>
