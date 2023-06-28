@@ -425,7 +425,7 @@ function Hastag() {
                     <div>
                       {/* {console.log(Array.isArray(features?.resource1.link) === true ? features?.resource1.link[0].split("v=")[1] : features?.resource1.link.split("v=")[1])} */}
                       <Row className="rowmainheading">
-                        <Col className="position-relative p-0 mx-3 rounded-circle overflow-hidden -z-50 slideParent">
+                        <Col className="position-relative  slideParent p-0 mx-3 rounded-circle overflow-hidden -z-50 ">
                           {/* {features.resource1.format === "Video" ? (
                             <> */}
                           {typeof features.resource1.link === "string" ? (
@@ -455,7 +455,7 @@ function Hastag() {
                                         ? NoImage
                                         : features?.resource1.img
                                     }
-                                    alt=""
+                                    alt="player"
                                   />
                                 </>
                               )}
@@ -603,7 +603,7 @@ function Hastag() {
                         </Col>
                         <Col
                           lg=""
-                          className="d-flex justify-content-center align-items-center position-relative p-0 mx-3 rounded-circle overflow-hidden slideParent"
+                          className="slideParent position-relative p-0 mx-3 rounded-circle overflow-hidden "
                         >
                           {/* {features.resource2.format === "Video" ? (
                             <> */}
@@ -892,7 +892,7 @@ function Hastag() {
         contentCreators?.length !== 0 ? (
           <Container className="mt-3">
             <p className="category">Content Creator</p>
-            <Row className="m-3 mb-4 justify-content-center">
+            <Row className="m-3 mb-4 w-100 justify-content-center">
               {
                 contentCreators?.map((data) => {
                   return (
@@ -1007,9 +1007,9 @@ function Hastag() {
                 <div className="ifram">
                   <iframe
                     allowfullscreen="true"
-                    className="iframesetdata"
-                    // width="auto"
-                    // height="300px"
+                    className=""
+                    width="100%"
+                    height="200px"
                     style={{ borderRadius: "12px" }}
                     src={`https://www.youtube.com/embed/${features?.video_link}`}
                   ></iframe>
@@ -1024,7 +1024,7 @@ function Hastag() {
       <div className="container">
         <p className="category3">How does Brahmaand works?</p>
         <Row>
-          <Col lg="4" md="6" sm="12" className="Card-Text">
+          <Col lg="4" md="6" sm="12" className="Card-Text my-3">
             <Card className="h-100">
               <Container>
                 <img height="140" className="imgCard" src={edu} alt="img" />
@@ -1046,7 +1046,7 @@ function Hastag() {
             </Card>
           </Col>
 
-          <Col lg="4" md="6" sm="12" className="Card-Text">
+          <Col lg="4" md="6" sm="12" className="Card-Text my-3">
             <Card className="h-100">
               <Container>
                 <img height="140" className="imgCard" src={rate} alt="img" />
@@ -1070,7 +1070,7 @@ function Hastag() {
             </Card>
           </Col>
 
-          <Col lg="4" md="6" sm="12" className="Card-Text">
+          <Col lg="4" md="6" sm="12" className="Card-Text my-3">
             <Card className="h-100">
               <Container>
                 <img
@@ -1104,7 +1104,7 @@ function Hastag() {
       <br />
 
       <div
-        className="fluid newsletters mb-3"
+        className="fluid newsletters mb-3 W-100"
         style={{
           // height: "70vh",
           position: "relative",
@@ -1138,14 +1138,14 @@ function Hastag() {
                           lg="8"
                           md="8"
                           sm="8"
-                          className="searchbara w-xl-75 w-100"
+                          className="searchbara w-100 mb-2"
                         >
                           <input
                             value={email}
                             onChange={handleChange}
                             type="email"
                             placeholder="Enter Email Address to Subscribe"
-                            className="d-flex searchnew  inputareea"
+                            className="d-flex searchnew inputareea"
                           />
 
                           {error && (
@@ -1162,7 +1162,7 @@ function Hastag() {
                           onClick={() => (
                             handleSubmit(), gaEventTracker("Subscribe")
                           )}
-                          className=" d-flex justify-content-center subscribebtn col-md-4 w-xl-25 w-50"
+                          className=" d-flex justify-content-center subscribebtn col-md-4 "
                         >
                           Subscribe
                         </Button>
