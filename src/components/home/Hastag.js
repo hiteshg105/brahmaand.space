@@ -52,6 +52,10 @@ import CountDown from "../../pages/CountDown";
 import HomeCountDown from "./HomeCountDown";
 import NoImage from "../../images/noimage.jpg";
 
+const baseURL = `https://backend.brahmaand.space/`
+// const baseURL: `http://localhost:9000`,
+
+
 function Hastag() {
   const [trendingsearch, setTrendingsearch] = useState([]);
   const [categry, setCategry] = useState([]);
@@ -61,7 +65,8 @@ function Hastag() {
   const prevBtnRef = useRef();
   const nextBtnRef = useRef();
 
-  const [name,setName] = useState("");
+  const [contentCreators, setContentCreators] = useState([]);
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
@@ -99,7 +104,7 @@ function Hastag() {
         // console.log(res.data.data,"This is data by smit");
         setTrendingsearch(res.data.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   const [popblog, setPop] = useState([]);
   const popularblog = () => {
@@ -114,6 +119,8 @@ function Hastag() {
       });
   };
 
+
+
   useEffect(() => {
     popularblog();
     gettrendingdata();
@@ -121,6 +128,7 @@ function Hastag() {
     monthlynewslettervid();
     featuredContent();
     warContent();
+    contentCator();
   }, []);
   const allcategory = () => {
     axiosConfig
@@ -129,7 +137,7 @@ function Hastag() {
         setCategry(response.data.data);
         // console.log(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   const [email, setEmail] = useState("");
@@ -150,7 +158,7 @@ function Hastag() {
         setEmail("");
         swal("Subscribed Successfully");
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   function isValidEmail(email) {
     const expression =
@@ -196,6 +204,18 @@ function Hastag() {
       });
   };
 
+  const contentCator = () => {
+    axiosConfig
+      .get(`/content/creator/get_content_data/home`)
+      .then((res) => {
+        setContentCreators(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  console.log("contentcreators", contentCreators)
+
   const warContent = async () => {
     const responce = await axiosConfig.get(`/get/all/warzone`);
     const data = responce.data.war;
@@ -237,16 +257,17 @@ function Hastag() {
             swal("No data Found!");
           }
           const search = res.data.data[0]?.sub_category;
-          console.log(search,"search")
+          console.log(search, "search")
           // if (search !== "" && search !== undefined) {
           //   navigate(`/productList/${search}`);
           // console.log(res.data.data[0].topics[0],"name::")
           // }
 
-          
+
           // setName(res.data.data[0]?.topics)
           if (search !== "" && search !== undefined) {
-            navigate(`/productsearch/${search}`,{ state: hastag });
+            navigate(`/productsearch/${search}`, { state: hastag });
+            // 
           }
         })
         .catch((err) => {
@@ -254,7 +275,7 @@ function Hastag() {
         });
     }
   }
-  console.log("name:",name)
+  // console.log("name:", name)
   const [isOpenone, setOpenone] = useState(false);
 
   const gaEventTracker = useAnalyticsEventTracker("Hastag");
@@ -276,26 +297,26 @@ function Hastag() {
               <div className="col col-lg-12 col-md-12 col-sm-12 col-xs-3 text-center">
                 {trendingsearch !== ""
                   ? trendingsearch?.slice(0, 32).map((trendingtopics) => {
-                    
-                      return(
-                        <>
+
+                    return (
+                      <>
                         <button
-                        key={trendingtopics._id}
-                        onClick={() => (
-                          handlehastagtopic(trendingtopics?.topics),
-                          gaEventTracker(`${trendingtopics?.topics}`)
-                          // setName(trendingtopics?.topics)
-                        )}
-                        // stateValue={trendingtopics?.topics}
-                        className="btn1"
-                      >
-                        {trendingtopics?.topics}
-                      </button>
-                        
-                        </>
-                      )
-                  
-                        })
+                          key={trendingtopics._id}
+                          onClick={() => (
+                            handlehastagtopic(trendingtopics?.topics),
+                            gaEventTracker(`${trendingtopics?.topics}`)
+                            // setName(trendingtopics?.topics)
+                          )}
+                          // stateValue={trendingtopics?.topics}
+                          className="btn1"
+                        >
+                          {trendingtopics?.topics}
+                        </button>
+
+                      </>
+                    )
+
+                  })
                   : null}
               </div>
             </div>
@@ -467,10 +488,10 @@ function Hastag() {
                                       features?.resource1.img?.length === 0
                                         ? NoImage
                                         : features?.resource1.img?.includes(
-                                            "https"
-                                          )
-                                        ? features?.resource1.img
-                                        : `https://backend.brahmaand.space/${features?.resource1.img}`
+                                          "https"
+                                        )
+                                          ? features?.resource1.img
+                                          : `https://backend.brahmaand.space/${features?.resource1.img}`
                                     }
                                     alt=""
                                   />
@@ -636,10 +657,10 @@ function Hastag() {
                                     features?.resource2.img?.length === 0
                                       ? NoImage
                                       : features?.resource2.img?.includes(
-                                          "https"
-                                        )
-                                      ? features?.resource2.img
-                                      : `https://backend.brahmaand.space/${features?.resource2.img}`
+                                        "https"
+                                      )
+                                        ? features?.resource2.img
+                                        : `https://backend.brahmaand.space/${features?.resource2.img}`
                                   }
                                   alt=""
                                 />
@@ -867,34 +888,51 @@ function Hastag() {
         </Link>
       </Container>
       {/* contant creater */}
-      <Container className="mt-3">
-        <p className="category">Content Creator</p>
-        <Row className="m-3 mb-4">
+      {
+        contentCreators?.length !== 0 ? (
+          <Container className="mt-3">
+            <p className="category">Content Creator</p>
+            <Row className="m-3 mb-4 justify-content-center">
+              {
+                contentCreators?.map((data) => {
+                  return (
+                    <Col lg="3" md="6" sm="12" className="my-3">
+                      <Link>
+                        <div className="p-2 border border-dark creatorParent rounded-3 shadow">
+                          <div className="CreatorCard rounded-circle overflow-hidden">
+                            <img src={
+                              data?.img.includes('https')
+                                ? data?.img
+                                : baseURL + data?.img
+                            }
 
+                              className="h-100 w-100" />
+                          </div>
+                          <div className="d-flex flex-column align-items-center">
+                            <p className="fs-3 text-dark text-center">{data?.creatorName}</p>
+                            <div>
+                              <PrettyRating
+                                value={data?.ava_rating === null ? 0 : data?.ava_rating}
+                                icons={icons.star}
+                                colors={colors.star}
 
-          {<Col lg="3" md="6" sm="12" className="my-3">
-            <Link>
-              <div className="p-2 border border-dark creatorParent rounded-3 shadow">
-                <div className="CreatorCard rounded-circle overflow-hidden">
-                  <img src={socialnetwork} className="h-100 w-100" />
-                </div>
-                <div className="d-flex flex-column align-items-center">
-                  <p className="fs-3 text-dark text-center">This Is Name</p>
-                  <div>
-                    <PrettyRating
-                      value={5}
-                      icons={icons.star}
-                      colors={colors.star}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </Col>}
-          
+                              />
+                              <span className="ms-2">
+                                ({data?.ava_rating === null ? 0 : data?.ava_rating})
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </Col>
+                  )
+                })
+              }
+            </Row>
+          </Container>
+        ):(<></>)
+      }
 
-        </Row>
-      </Container>
       {/* Featured */}
 
       <div className="container">
@@ -961,8 +999,8 @@ function Hastag() {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           >
             {feature?.map((features) => (
               <SwiperSlide key={features?._id}>

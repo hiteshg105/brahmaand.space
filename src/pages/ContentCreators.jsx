@@ -51,7 +51,7 @@ const ContentCreators = ({
 
   // const [name,setName] = useState(location.state.state);
   const name = location.state && location.state.state
-  console.log("name:",name)
+  // console.log("name:",name)
 
 
   const params = useParams();
@@ -106,7 +106,7 @@ const ContentCreators = ({
       setRating(newValue);
     },
   };
-  console.log("val",val[0]?.sub_category?.desc)
+  // console.log("val",val[0]?.sub_category?.desc)
   // console.log(contentCretorDetail, "contentCretorDetail");
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
@@ -579,7 +579,7 @@ const ContentCreators = ({
       <Row className="d-flex justify-content-between flex-column flex-md-row gap-3 gap-md-0">
         <Col>
           <h3 className="fw-bold text-center p-0 text-md-start">
-            Showing Results ({location.state.data?(location?.state?.data?.title):(val[0]?.sub_category?.desc)})
+            Showing Results ({location?.state?.data?(location?.state?.data?.title):(val[0]?.sub_category?.desc)})
           </h3>
         </Col>
         <Col>
