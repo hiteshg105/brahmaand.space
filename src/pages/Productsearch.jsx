@@ -182,7 +182,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const navigate = useNavigate();
@@ -212,11 +212,11 @@ function Productsearch(args) {
   // const [cat, setCat] = useState("");
   const [subctgry, setSubctgry] = useState([]);
   const [sub_category, setSub_category] = useState([]);
-
+  const [catgryDataNew, setCatgryDataNew] = useState("")
   useEffect(() => {
     // const params = catgry ? catgry : category;
     axiosConfig
-      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
+      .get(`/admin/listbycategory/${catgry ? catgry : catgryDataNew ? catgryDataNew : category}`)
       .then((response) => {
         // console.log(response.data.data, "sub cat");
         setSubctgry(response.data.data);
@@ -224,7 +224,7 @@ function Productsearch(args) {
       .catch((error) => {
         // console.log(error.response.data);
       });
-  }, [catgry, category]);
+  }, [catgry, catgryDataNew, category, parentState]);
 
   // console.log(subctgry, "subctgry")
 
@@ -238,6 +238,11 @@ function Productsearch(args) {
     setSub_category([]);
     setCatgry("");
   }, [parentState]);
+
+  useEffect(() => {
+    setSub_category([]);
+  }, [catgry]);
+
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -332,7 +337,7 @@ function Productsearch(args) {
       .then((response) => {
         setRelyear(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const handleclosemodal = () => {
     setModal(false);
@@ -350,7 +355,7 @@ function Productsearch(args) {
     setPromotId("");
     setPromotiondata("");
   };
-  
+
   // const getolderyeardata = () => {
   //   if (contentyear !== "") {
   //     axios
@@ -400,7 +405,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
   };
 
@@ -465,7 +470,7 @@ function Productsearch(args) {
       .then((response) => {
         setLngage(response.data.data);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
   const getUser = async () => {
     const user = await localStorage.getItem("userId");
@@ -492,7 +497,7 @@ function Productsearch(args) {
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -785,12 +790,15 @@ function Productsearch(args) {
       });
   };
 
+
+
   useEffect(
     () => {
       allsuggestedproduct();
       getYear();
       getLanguage();
       getUser();
+
 
       if (
         (type === "" &&
@@ -800,7 +808,7 @@ function Productsearch(args) {
           searchitem === "" &&
           hastagdata === "hastag" &&
           searchdata === "",
-        Filtertype === "")
+          Filtertype === "")
       ) {
         allsearchproduct();
       }
@@ -838,6 +846,17 @@ function Productsearch(args) {
     ],
     [parentState]
   );
+
+
+  const getsingleSubgategorydetail = async () => {
+    const responce = await axiosConfig.get(`/admin/getoneSubCategory/${Params.id}`)
+    setCatgryDataNew(responce.data.data.category._id)
+    setSub_category([responce.data.data._id])
+  }
+
+  useEffect(() => {
+    getsingleSubgategorydetail()
+  }, [Params.id, parentState])
 
   const [typelength, setTypelength] = useState([]);
   // const gettypefilter = () => {
@@ -901,7 +920,7 @@ function Productsearch(args) {
           // localStorage.removeItem("searchdata");
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
     // console.log("you are searching");
     // axios
     //   .get(
@@ -1098,7 +1117,7 @@ function Productsearch(args) {
                                     id={allCategory._id}
                                     className="ft-check"
                                     type="radio"
-                                    checked={allCategory?._id === catgry}
+                                    checked={catgryDataNew === allCategory?._id || allCategory?._id === catgry}
                                     name="category"
                                     value={allCategory?._id}
                                     onClick={(e) => {
@@ -1129,8 +1148,8 @@ function Productsearch(args) {
                               top: "0%",
                             }}
                           >
-                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
-                            <h3>Category</h3>
+                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{ zIndex: 20 }}>
+                              <h3>Category</h3>
                               <button
                                 onClick={hndleMoreCategory}
                                 className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
@@ -1149,7 +1168,7 @@ function Productsearch(args) {
                                       id={allCategory._id}
                                       className="ft-check"
                                       type="radio"
-                                      checked={allCategory?._id === catgry}
+                                      checked={catgryDataNew === allCategory?._id || allCategory?._id === catgry}
                                       name="allCategory"
                                       value={allCategory?._id}
                                       onClick={(e) => {
@@ -1209,8 +1228,8 @@ function Productsearch(args) {
                               top: "0%",
                             }}
                           >
-                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
-                            <h3>Sub Category</h3>
+                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{ zIndex: 20 }}>
+                              <h3>Sub Category</h3>
                               <button
                                 onClick={hndleMoreCategory2}
                                 className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
@@ -1219,7 +1238,7 @@ function Productsearch(args) {
                               </button>
                             </div>
                             <div className="d-flex flex-wrap">
-                            {subctgry.map((subctgry) => {
+                              {subctgry.map((subctgry) => {
                                 return (
                                   <div
                                     className="mt-3 mb-3 mx-2"
@@ -1528,9 +1547,8 @@ function Productsearch(args) {
                                                 style={{
                                                   borderRadius: "12px",
                                                 }}
-                                                src={`https://www.youtube.com/embed/${
-                                                  promotion?.link?.split("=")[1]
-                                                }`}
+                                                src={`https://www.youtube.com/embed/${promotion?.link?.split("=")[1]
+                                                  }`}
                                               ></iframe>
                                             </>
                                           ) : null}
@@ -1872,7 +1890,7 @@ function Productsearch(args) {
                                                   </div>
                                                   <div className="starratinginno">
                                                     {promotiondata?.ava_rating !=
-                                                    0 ? (
+                                                      0 ? (
                                                       <>
                                                         [
                                                         {
@@ -1998,9 +2016,9 @@ function Productsearch(args) {
                                                     </Col>
                                                     <Col lg="2">
                                                       {value?.userid?._id ==
-                                                      localStorage.getItem(
-                                                        "userId"
-                                                      ) ? (
+                                                        localStorage.getItem(
+                                                          "userId"
+                                                        ) ? (
                                                         <>
                                                           <h6>
                                                             <AiFillEdit
@@ -2192,7 +2210,6 @@ function Productsearch(args) {
                     </Swiper>
                   </Row>
 
-                        
                   <ContentCreators
                     updateParentState={updateParentState}
                     format={format}
@@ -2204,6 +2221,7 @@ function Productsearch(args) {
                     subcategory={sub_category}
                     contentyear={contentyear}
                     searchitem={searchitem}
+                    catgryDataNew= {catgryDataNew}
                   />
 
                   {/* {console.log(parentState,"")} */}

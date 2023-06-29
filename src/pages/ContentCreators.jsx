@@ -43,7 +43,7 @@ const ContentCreators = ({
   subcategory,
   contentyear,
   searchitem,
-  
+  catgryDataNew
 }) => {
 
   const location = useLocation();
@@ -259,7 +259,7 @@ const ContentCreators = ({
           swal("you Removed your bookmark ");
           hadlestatusbookmark();
         })
-        .catch((error) => {});
+        .catch((error) => { });
     } else {
       swal("User Need to Login first ");
       navigate("/login");
@@ -411,11 +411,13 @@ const ContentCreators = ({
       let responce;
 
       if (subcategory.length === 0) {
-        if (category) {
+        console.log("1000")
+        if (category || catgryDataNew) {
+          console.log("category ma gayu")
           responce = await axiosClient.post(
             // `/content/advance_content_filter?sub_category=${params.id}`
             `/user/advancefilter/categoryNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
-            { category: category, searchinput: searchitem }
+            { category: category ? category : catgryDataNew, searchinput: searchitem }
           );
         } else {
           // console.log("object");
@@ -423,10 +425,9 @@ const ContentCreators = ({
             `/user/advancefilterNew?sub_category=${params.id}&type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
             { searchinput: searchitem }
           );
-          console.log(responce, "responce");
         }
       } else {
-        console.log(subcategory, "object");
+        console.log("2000")
         responce = await axiosClient.post(
           // `/user/advancefilter?sub_category=${params.id} `
           `/user/advancefilterNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
@@ -456,11 +457,11 @@ const ContentCreators = ({
     } else {
       let responce;
       if (subcategory.length === 0) {
-        if (category) {
+        if (category || catgryDataNew) {
           responce = await axiosClient.post(
             // `/content/advance_content_filter?sub_category=${params.id}`
             `/content/category/advance_content_filterNew?type=${type}&format=${format}&language=${language}&relYear=${contentyear}`,
-            { category: category, searchinput: searchitem }
+            { category: category ? category : catgryDataNew, searchinput: searchitem }
           );
         } else {
           responce = await axiosClient.post(
@@ -543,8 +544,7 @@ const ContentCreators = ({
   // };
 
   useEffect(() => {
-    // console.log("okokok");
-    content && handleContent(content);
+    handleContent();
   }, [
     searchitem,
     content,
@@ -559,9 +559,6 @@ const ContentCreators = ({
     contentyear,
   ]);
 
-  
-  
-  useEffect(() => {}, []);
 
   useEffect(() => {
     getUser();
@@ -573,13 +570,13 @@ const ContentCreators = ({
     setProductdetail("");
     setProductdes("");
   };
-// console.log(stateValue,"stateValue")
+  // console.log(stateValue,"stateValue")
   return (
     <div className="ccm content-creator-main mt-5">
       <Row className="d-flex justify-content-between flex-column flex-md-row gap-3 gap-md-0">
         <Col>
           <h3 className="fw-bold text-center p-0 text-md-start">
-            Showing Results ({location?.state?.data?(location?.state?.data?.title):(val[0]?.sub_category?.desc)})
+            Showing Results ({location?.state?.data ? (location?.state?.data?.title) : (val[0]?.sub_category?.desc)})
           </h3>
         </Col>
         <Col>
@@ -652,8 +649,8 @@ const ContentCreators = ({
                                   item.img.includes("https")
                                     ? item.img
                                     : img.includes("data:image")
-                                    ? item.img
-                                    : NoImage
+                                      ? item.img
+                                      : NoImage
                                 }
                                 alt=""
                               />
@@ -693,8 +690,8 @@ const ContentCreators = ({
                                       item.img.includes("https")
                                         ? item.img
                                         : img.includes("data:image")
-                                        ? item.img
-                                        : NoImage
+                                          ? item.img
+                                          : NoImage
                                     }
                                     alt=""
                                   />
@@ -819,7 +816,7 @@ const ContentCreators = ({
           className="mdlg ccm"
           isOpen={modal}
           toggle={handleclosemodal}
-          // {...args}
+        // {...args}
         >
           <ModalBody>
             <Row>
@@ -1264,7 +1261,7 @@ const ContentCreators = ({
             className="mdlg ccm"
             isOpen={modal}
             toggle={handleclosemodal}
-            // {...args}
+          // {...args}
           >
             <ModalBody>
               <Row>
@@ -1417,8 +1414,8 @@ const ContentCreators = ({
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                             </Link>
                           </div>
                         </div>
@@ -1487,8 +1484,8 @@ const ContentCreators = ({
                               {contentCretorDetail?.avarageRating === null
                                 ? 0
                                 : contentCretorDetail?.avarageRating?.toFixed(
-                                    1
-                                  )}
+                                  1
+                                )}
                               ] of 5 Stars
                             </>
                           ) : (
@@ -1506,7 +1503,7 @@ const ContentCreators = ({
                       isHalf={true}
                       value={cmtRating}
                       onChange={(e) => setCmtRating(e)}
-                      // {...secondExample}
+                    // {...secondExample}
                     />
                   </Col>
                   {/* {console.log(cmtRating)} */}
