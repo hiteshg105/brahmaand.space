@@ -1578,6 +1578,7 @@ input[type="range"] {
 
 
 .pop-up{
+  background-color: white;
   height: 350px;
   width: 670px;
   position: absolute;
@@ -1603,4 +1604,20 @@ input[type="range"] {
   .pop-up{
     width:220px
   }
+}
+
+
+
+#pop-upScroll::-webkit-scrollbar {
+  width: 15px;
+}
+
+#pop-upScroll::-webkit-scrollbar-track {
+  background-color: #feeae0;
+  border-radius:10px;
+}
+
+#pop-upScroll::-webkit-scrollbar-thumb {
+  border-radius:10px;
+  background-color: #fca878;
 }

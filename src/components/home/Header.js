@@ -154,23 +154,23 @@ function Header(args) {
     }
   };
   function handleChange(event) {
-    const file = event.target.files[0];
+    // const file = event.target.files[0];
 
-    if (file) {
-      const reader = new FileReader();
+    // if (file) {
+    //   const reader = new FileReader();
 
-      reader.onload = (e) => {
-        const img = new Image();
-        img.src = e.target.result;
+    //   reader.onload = (e) => {
+    //     const img = new Image();
+    //     img.src = e.target.result;
 
-        img.onload = () => {
-          setImageDimensions({ width: img.width, height: img.height });
-        };
-      };
+    //     img.onload = () => {
+    //       setImageDimensions({ width: img.width, height: img.height });
+    //     };
+    //   };
 
-      reader.readAsDataURL(file);
-      setFile(file);
-    }
+    //   reader.readAsDataURL(file);
+    setFile(file);
+    // }
   }
   // console.log(imageDimensions, "imageDimensions");
   const handleSubmitResource = (e) => {
@@ -242,84 +242,84 @@ function Header(args) {
   };
   // console.log(localStorage.getItem("userId"), "userid");
   const NewContentCrete = async () => {
-    if (imageDimensions.width === 300 && imageDimensions.height === 300) {
-      let linkNewData;
+    // if (imageDimensions.width === 300 && imageDimensions.height === 300) {
+    let linkNewData;
 
-      // If linkData is already an array
-      if (Array.isArray(linkData)) {
-        linkNewData = linkData;
-      } else {
-        // Convert linkData to an array if it's not already
-        linkNewData = [linkData];
-      }
-
-      const linkNewData2 = linkNewData?.map((e) => e.value);
-      const userid = localStorage.getItem("userId");
-      console.log(userid, "hello");
-      if (userid === null) {
-        swal("Please Login OR Sign Up");
-      } else {
-        const formData = new FormData();
-        formData.append("img", file === null ? "" : file);
-        formData.append("creatorName", creatorName);
-        linkNewData2.map((e) => formData.append("link", e));
-        formData.append("phoneNo", phoneNo);
-        formData.append("email", email);
-        formData.append("category", category);
-        formData.append("sub_category", sub_category);
-        formData.append("format", format);
-        if (language.length != 0) {
-          language.map((e2) => formData.append("language", e2));
-        }
-        formData.append("level", level);
-        formData.append("topics", topics);
-        formData.append("desc", descriptionData);
-        formData.append("userid", userid);
-
-        if (creatorName && linkData && category && sub_category) {
-          const responce = await axiosConfig.post(
-            `/user/content/creator`,
-            formData
-          );
-
-          console.log(responce, "hello");
-          if (responce.data.success === true) {
-            swal("Content Creator profile added successfully👍.");
-            setIsContentCreatorModel(false);
-            setCreatorName("");
-            setLinkData([
-              { id: 1, name: "youtube", value: "" },
-              { id: 2, name: "instagram", value: "" },
-              { id: 3, name: "linkedin", value: "" },
-              { id: 4, name: "facebook", value: "" },
-            ]);
-            setPhoneNo("");
-            setEmail("");
-            setCategory("");
-            setSub_category("");
-            setFormat("");
-            setLanguage("");
-            setTopics("");
-            setDescriptionData("");
-            setFile(null);
-          }
-          if (responce.data.success === false) {
-            swal("Content Creator Exists");
-            setIsContentCreatorModel(false);
-          }
-          //  else {
-          //   swal("Something went wrong, Try again");
-          //   setIsContentCreatorModel(false);
-          // }
-        } else {
-          setFillPlease("define");
-          // swal("* Field is Mandatory");
-          swal("Field is mandatory");
-        }
-      }
+    // If linkData is already an array
+    if (Array.isArray(linkData)) {
+      linkNewData = linkData;
     } else {
-      swal("Please Select 300*300 Image");
+      // Convert linkData to an array if it's not already
+      linkNewData = [linkData];
     }
+
+    const linkNewData2 = linkNewData?.map((e) => e.value);
+    const userid = localStorage.getItem("userId");
+    console.log(userid, "hello");
+    if (userid === null) {
+      swal("Please Login OR Sign Up");
+    } else {
+      const formData = new FormData();
+      formData.append("img", file === null ? "" : file);
+      formData.append("creatorName", creatorName);
+      linkNewData2.map((e) => formData.append("link", e));
+      formData.append("phoneNo", phoneNo);
+      formData.append("email", email);
+      formData.append("category", category);
+      formData.append("sub_category", sub_category);
+      formData.append("format", format);
+      if (language.length != 0) {
+        language.map((e2) => formData.append("language", e2));
+      }
+      formData.append("level", level);
+      formData.append("topics", topics);
+      formData.append("desc", descriptionData);
+      formData.append("userid", userid);
+
+      if (creatorName && linkData && category && sub_category) {
+        const responce = await axiosConfig.post(
+          `/user/content/creator`,
+          formData
+        );
+
+        console.log(responce, "hello");
+        if (responce.data.success === true) {
+          swal("Content Creator profile added successfully👍.");
+          setIsContentCreatorModel(false);
+          setCreatorName("");
+          setLinkData([
+            { id: 1, name: "youtube", value: "" },
+            { id: 2, name: "instagram", value: "" },
+            { id: 3, name: "linkedin", value: "" },
+            { id: 4, name: "facebook", value: "" },
+          ]);
+          setPhoneNo("");
+          setEmail("");
+          setCategory("");
+          setSub_category("");
+          setFormat("");
+          setLanguage("");
+          setTopics("");
+          setDescriptionData("");
+          setFile(null);
+        }
+        if (responce.data.success === false) {
+          swal("Content Creator Exists");
+          setIsContentCreatorModel(false);
+        }
+        //  else {
+        //   swal("Something went wrong, Try again");
+        //   setIsContentCreatorModel(false);
+        // }
+      } else {
+        setFillPlease("define");
+        // swal("* Field is Mandatory");
+        swal("Field is mandatory");
+      }
+    }
+    // } else {
+    //   swal("Please Select 300*300 Image");
+    // }
   };
   const DiscardContent = (e) => {
     if (
@@ -1614,9 +1614,9 @@ function Header(args) {
                         className="uploadimage w-100"
                       />
                     </h5>
-                    <p style={{ color: "red" }} className="fs-6">
+                    {/* <p style={{ color: "red" }} className="fs-6">
                       Only 300*300 Image allowed
-                    </p>
+                    </p> */}
                   </div>
                   <div className="form-group mb-4">
                     <label

@@ -27,6 +27,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+// import { Modal as catModal, Button as Butn } from "react-bootstrap";
 import "../styles/ModulePage.css";
 import mdicon1 from "../assets/icons/mdicon-1.png";
 import mdicon2 from "../assets/icons/mdicon-2.png";
@@ -113,8 +114,8 @@ function Productsearch(args) {
   const [language, setLanguage] = useState("");
   const [editmodal, setEditmodal] = useState(false);
   const [all, setAll] = useState("");
-  const [display, setDisplay] = useState("d-none");
-  const [display2, setDisplay2] = useState("d-none");
+  const [display, setDisplay] = useState(false);
+  const [display2, setDisplay2] = useState(false);
 
   const updateParentState = (newValue) => {
     setParentState(newValue);
@@ -212,11 +213,15 @@ function Productsearch(args) {
   // const [cat, setCat] = useState("");
   const [subctgry, setSubctgry] = useState([]);
   const [sub_category, setSub_category] = useState([]);
-
+  const [catgryDataNew, setCatgryDataNew] = useState("");
   useEffect(() => {
     // const params = catgry ? catgry : category;
     axiosConfig
-      .get(`/admin/listbycategory/${catgry ? catgry : category}`)
+      .get(
+        `/admin/listbycategory/${
+          catgry ? catgry : catgryDataNew ? catgryDataNew : category
+        }`
+      )
       .then((response) => {
         // console.log(response.data.data, "sub cat");
         setSubctgry(response.data.data);
@@ -224,7 +229,7 @@ function Productsearch(args) {
       .catch((error) => {
         // console.log(error.response.data);
       });
-  }, [catgry, category]);
+  }, [catgry, catgryDataNew, category, parentState]);
 
   // console.log(subctgry, "subctgry")
 
@@ -238,6 +243,11 @@ function Productsearch(args) {
     setSub_category([]);
     setCatgry("");
   }, [parentState]);
+
+  useEffect(() => {
+    setSub_category([]);
+  }, [catgry]);
+
   const editcomment = (id, dataid, oldrating) => {
     // console.log(oldrating);
     if (rating == "") {
@@ -350,7 +360,7 @@ function Productsearch(args) {
     setPromotId("");
     setPromotiondata("");
   };
-  
+
   // const getolderyeardata = () => {
   //   if (contentyear !== "") {
   //     axios
@@ -839,6 +849,18 @@ function Productsearch(args) {
     [parentState]
   );
 
+  const getsingleSubgategorydetail = async () => {
+    const responce = await axiosConfig.get(
+      `/admin/getoneSubCategory/${Params.id}`
+    );
+    setCatgryDataNew(responce.data.data.category._id);
+    setSub_category([responce.data.data._id]);
+  };
+
+  useEffect(() => {
+    getsingleSubgategorydetail();
+  }, [Params.id, parentState]);
+
   const [typelength, setTypelength] = useState([]);
   // const gettypefilter = () => {
   //   axios
@@ -961,10 +983,10 @@ function Productsearch(args) {
     "Micromax",
   ];
   const hndleMoreCategory = () => {
-    display === "d-none" ? setDisplay("") : setDisplay("d-none");
+    display ? setDisplay(false) : setDisplay(true);
   };
   const hndleMoreCategory2 = () => {
-    display2 === "d-none" ? setDisplay2("") : setDisplay2("d-none");
+    display2 ? setDisplay2(false) : setDisplay2(true);
   };
   return (
     <>
@@ -1098,7 +1120,10 @@ function Productsearch(args) {
                                     id={allCategory._id}
                                     className="ft-check"
                                     type="radio"
-                                    checked={allCategory?._id === catgry}
+                                    checked={
+                                      catgryDataNew === allCategory?._id ||
+                                      allCategory?._id === catgry
+                                    }
                                     name="category"
                                     value={allCategory?._id}
                                     onClick={(e) => {
@@ -1117,11 +1142,14 @@ function Productsearch(args) {
                           >
                             More {allcatego.length - 5} category here
                           </button>
-                          <div
-                            className={`bg-light border border-dark ${display} pop-up`}
+                          {/* <Modal
+                            className="mdlg"
+                            isOpen={display}
+                            toggle={hndleMoreCategory}
+                            scrollable={true}
                           >
-                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
-                            <h3>Category</h3>
+                            <div className="w-100 d-flex justify-content-between">
+                              <h3>Category</h3>
                               <button
                                 onClick={hndleMoreCategory}
                                 className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
@@ -1129,7 +1157,54 @@ function Productsearch(args) {
                                 &#10006;
                               </button>
                             </div>
-                            <div className="d-flex flex-wrap">
+                            <hr />
+                            <ModalBody>
+                              <div className="d-flex flex-wrap">
+                                {allcatego.map((allCategory) => {
+                                  return (
+                                    <div
+                                      className="my-3 mx-2"
+                                      style={{
+                                        width: "200px",
+                                        padding: "10px",
+                                      }}  
+                                    >
+                                      <input
+                                        id={allCategory._id}
+                                        className="ft-check"
+                                        type="radio"
+                                        checked={
+                                          catgryDataNew === allCategory?._id ||
+                                          allCategory?._id === catgry
+                                        }
+                                        name="allCategory"
+                                        value={allCategory?._id}
+                                        onClick={(e) => {
+                                          setCatgry(allCategory?._id);
+                                          handlefilter();
+                                        }}
+                                      />
+                                      {allCategory?.title} &nbsp;
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </ModalBody>
+                          </Modal> */}
+                          {display && <div
+                            className="border border-dark pop-up shadow"
+                            id="pop-upScroll"
+                          >
+                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center border-bottom border-dark" style={{ zIndex: 20,background:"white" }}>
+                              <h3>Category</h3>
+                              <button
+                                onClick={hndleMoreCategory}
+                                className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
+                              >
+                                &#10006;
+                              </button>
+                            </div>
+                            <div className="d-flex flex-wrap" style={{background:"white "}}>
                               {allcatego.map((allCategory) => {
                                 return (
                                   <div
@@ -1140,7 +1215,7 @@ function Productsearch(args) {
                                       id={allCategory._id}
                                       className="ft-check"
                                       type="radio"
-                                      checked={allCategory?._id === catgry}
+                                      checked={catgryDataNew === allCategory?._id || allCategory?._id === catgry}
                                       name="allCategory"
                                       value={allCategory?._id}
                                       onClick={(e) => {
@@ -1153,7 +1228,7 @@ function Productsearch(args) {
                                 );
                               })}
                             </div>
-                          </div>
+                          </div>}
                         </div>
                       </Col>
 
@@ -1186,22 +1261,23 @@ function Productsearch(args) {
                                 </Row>
                               );
                             })}
-                          {/* {console.log("subctgry", sub_category)} */}
 
-                          <div
-                            className={`bg-light border border-dark ${display2} pop-up`}
-                            style={{
-                              height: "350px",
-                              width: "670px",
-                              position: "absolute",
-                              zIndex: 99,
-                              overflow: "auto",
-                              left: "250px",
-                              top: "0%",
-                            }}
+                          {subctgry.length > 5 && (
+                            <button
+                              className="bg-white border-0"
+                              onClick={hndleMoreCategory2}
+                            >
+                              More {subctgry.length - 5} category here
+                            </button>
+                          )}
+                          {/* <Modal
+                            className="mdlg"
+                            isOpen={display2}
+                            toggle={hndleMoreCategory2}
+                            scrollable={true}
                           >
-                            <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
-                            <h3>Sub Category</h3>
+                            <div className="w-100 d-flex justify-content-between">
+                              <h3>Sub Category</h3>
                               <button
                                 onClick={hndleMoreCategory2}
                                 className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
@@ -1209,8 +1285,55 @@ function Productsearch(args) {
                                 &#10006;
                               </button>
                             </div>
-                            <div className="d-flex flex-wrap">
-                            {subctgry.map((subctgry) => {
+                            <hr />
+                            <ModalBody>
+                              <div className="d-flex flex-wrap">
+                                {subctgry.map((subctgry) => {
+                                  return (
+                                    <div
+                                      className="mt-3 mb-3 mx-2"
+                                      style={{ width: "200px" }}
+                                    >
+                                      <input
+                                        id={subctgry?._id}
+                                        className="ft-check"
+                                        type="checkbox"
+                                        checked={sub_category.some(
+                                          (e) => e === subctgry?._id
+                                        )}
+                                        name="format"
+                                        value={subctgry?._id}
+                                        onClick={(e) => {
+                                          setCategoryData(subctgry?._id);
+                                          // setSub_category(subctgo?._id);
+                                          handlefilter();
+                                        }}
+                                      />
+                                      {subctgry?.title} &nbsp;
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </ModalBody>
+                          </Modal> */}
+                          {display2 && <div
+                            className={`bg-light border border-dark pop-up shadow`}
+                            id="pop-upScroll"
+                          >
+                            <div
+                              className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center border-bottom border-dark"
+                              style={{ zIndex: 20,background:"white" }}
+                            >
+                              <h3>Sub Category</h3>
+                              <button
+                                onClick={hndleMoreCategory2}
+                                className="rounded-circle d-flex justify-content-center align-items-center CloseIconSearch"
+                              >
+                                &#10006;
+                              </button>
+                            </div>
+                            <div className="d-flex flex-wrap" style={{background:"white"}}>
+                              {subctgry.map((subctgry) => {
                                 return (
                                   <div
                                     className="mt-3 mb-3 mx-2"
@@ -1220,12 +1343,14 @@ function Productsearch(args) {
                                       id={subctgry?._id}
                                       className="ft-check"
                                       type="checkbox"
-                                      checked={subctgry?._id === sub_category}
+                                      checked={sub_category.some(
+                                        (e) => e === subctgry?._id
+                                      )}
                                       name="format"
-                                      value={sub_category?._id}
+                                      value={subctgry?._id}
                                       onClick={(e) => {
-                                        // setSub_category([...sub_category,subctgry?._id]);
-                                        setSub_category(subctgry?._id);
+                                        setCategoryData(subctgry?._id);
+                                        // setSub_category(subctgo?._id);
                                         handlefilter();
                                       }}
                                     />
@@ -1234,16 +1359,8 @@ function Productsearch(args) {
                                 );
                               })}
                             </div>
-                          </div>
+                          </div>}
                         </div>
-                        {subctgry.length > 5 && (
-                          <button
-                            className="bg-white border-0"
-                            onClick={hndleMoreCategory2}
-                          >
-                            More {subctgry.length - 5} category here
-                          </button>
-                        )}
                       </Col>
                     </Col>
 
@@ -2192,6 +2309,7 @@ function Productsearch(args) {
                     subcategory={sub_category}
                     contentyear={contentyear}
                     searchitem={searchitem}
+                    catgryDataNew={catgryDataNew}
                   />
 
                   {/* {console.log(parentState,"")} */}
