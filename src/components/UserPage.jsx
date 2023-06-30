@@ -46,7 +46,7 @@ function UserPage({ direction, ...args }) {
     <div>
       <div className="dropdown">
         <img
-          className="imgloginb"
+          className="imgloginb m-sm-0 m-xl-2"
           src={userdata?.profileImg}
           alt="image"
           style={{ width: "50px", height: "42px", borderRadius: "50%" }}

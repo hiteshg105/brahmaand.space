@@ -74,7 +74,7 @@ const Category = () => {
         </Swiper>
       </Row>
 
-      <Row className="common-swipers px-5 w-100 position-relative overflow-hidden m-0">
+      <Row className="common-swipers px-lg-5 px-0  w-100 position-relative overflow-hidden m-0">
         {allWarData ? (
           allWarData?.map((ele) => (
             <>
@@ -91,50 +91,64 @@ const Category = () => {
               <h3 className="my-4 fw-bold">{ele[0]?.category?.title}</h3>
               <Swiper
                 breakpoints={{
-                  1084: {
-                    slidesPerView: 1,
+                  1427: {
+                    slidesPerView: 2,
+                    centeredSlides: ele.length === 1 ? true : false,
                   },
-                  980: {
-                    slidesPerView: 1,
-                  },
+                  // 1084: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides :true
+                  // },
+                  // 980: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides :true
+                  // },
                   910: {
-                    slidesPerView: 1,
-                  },  
+                    slidesPerView: 2,
+                    centeredSlides: ele.length === 1 ? true : false,
+                  },
                   820: {
                     slidesPerView: 1,
+                    centeredSlides: true,
                   },
-                  780: {
-                    slidesPerView: 1,
-                  },
-                  768: {
-                    slidesPerView: 1,
-                  },
-                  640: {
-                    slidesPerView: 1,
-                  },
-                  320: {
-                    slidesPerView: 1,
-                  },
+                  // 780: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides: true,
+                  // },
+                  // 768: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides: true,
+                  // },
+                  // 640: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides: true,
+                  // },
+                  // 320: {
+                  //   slidesPerView: 1,
+                  //   centeredSlides: true,
+                  // },
                   240: {
                     slidesPerView: 1,
+                    centeredSlides: true,
                   },
                 }}
                 modules={[Navigation, Pagination]}
                 spaceBetween={20}
-                slidesPerView={1}
-                centeredSlides={true}
+                slidesPerView={2}
+                // centeredSlides={ele.length === 1?true:false}
+
                 navigation
-                pagination={{
-                  el: ".swiper_pagination",
-                  clickable: true,
-                }}
+                // pagination={{
+                //   el: ".swiper_pagination",
+                //   clickable: true,
+                // }}
               >
                 {ele?.map((slides) => {
                   return (
                     <>
                       <div className="row w-100 flex-nowrap border border-dark">
-                        <SwiperSlide className="ct_slider_w">
-                          <Container className="py-1 px-4 m-2  bg-white rounded-4 ct_box_shadow">
+                        <SwiperSlide>
+                          <Container className="py-1 px-2 px-sm-4  bg-white rounded-4 ct_box_shadow">
                             {slides.winner || slides.winner === null ? (
                               <h3 className="text-center fw-bold">
                                 Result Declared
@@ -145,9 +159,7 @@ const Category = () => {
                             {/* <HomeCountDown endDate={slides.endDate} /> */}
                             <Row className="position-relative flex-nowrap">
                               <Col className="d-flex flex-column justify-content-center align-items-center">
-                                <div
-                                  className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden"
-                                >
+                                <div className="top-main d-flex justify-content-center position-relative rounded-circle overflow-hidden">
                                   {typeof slides.resource1.link === "string" ? (
                                     <>
                                       {/* {console.log(`https://www.youtube.com/embed/${
@@ -277,7 +289,7 @@ const Category = () => {
 
                                 {/* <img className="w-100 h-auto rounded-4" src={swiperLeft} alt="" /> */}
                                 <Row>
-                                  <h4 className="text-center">
+                                  <h4 className="text-center cardName">
                                     {slides?.resource1.creatorName}
                                   </h4>
                                   <div className="d-flex align-items-center justify-content-center">
@@ -456,7 +468,7 @@ const Category = () => {
                                 </div>
                                 {/* <img className="w-100 h-auto rounded-4" src={swiperRight} alt="" /> */}
                                 <Row>
-                                  <h4 className="text-center">
+                                  <h4 className="text-center cardName">
                                     {slides?.resource2.creatorName}
                                   </h4>
                                   <div className="d-flex align-items-center justify-content-center">
@@ -517,7 +529,7 @@ const Category = () => {
                                   backgroundColor: "#5F56C6",
                                 }}
                                 size="sm"
-                                className="m-0 mb-2 border-0 mx-auto text-white px-3"
+                                className="m-0 mb-2 border-0 mx-auto text-white px-3 mt-2"
                               >
                                 Rate Now
                               </Button>

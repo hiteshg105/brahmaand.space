@@ -564,7 +564,7 @@ const ContentCreators = ({
     <div className="ccm content-creator-main mt-5">
       <Row className="d-flex justify-content-between flex-column flex-md-row gap-3 gap-md-0">
         <Col>
-          <h3 className="fw-bold text-center p-0 text-md-start">
+          <h3 className="fw-bold text-center p-0 text-md-start mb-0">
             Showing Results
           </h3>
         </Col>
@@ -595,13 +595,13 @@ const ContentCreators = ({
             return (
               <>
                 <div
-                  className="item"
+                  className="item overflow-hidden"
                   key={item._id}
                   onClick={() => handleSelection(item._id)}
                 >
                   <Col
                     style={{ padding: "18px", borderRadius: "10px" }}
-                    className="bg-white"
+                    className="bg-white p-sm-3 p-1"
                   >
                     {/* {console.log(item)} */}
 

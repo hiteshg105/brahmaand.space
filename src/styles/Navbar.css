@@ -105,8 +105,8 @@ b.mt-4 {
 
   .navbar-brand,
   .navbar-nav {
-    padding-left: 60px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
@@ -230,7 +230,7 @@ b.mt-4 {
 .rbutton {
   /* position: absolute; */
   margin: 8px;
-  width: 215px;
+  width: 200px;
   height: 47px;
   left: 0px;
   top: 0px;

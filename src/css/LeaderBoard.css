@@ -11,7 +11,7 @@ h3.Pointtext {
   text-align: left;
   font-family: "GT Walsheim Pro";
   color: black;
-  font-weight: 500;
+  font-weight: 500; 
   font-size: 35px;
 }
 p-2 {
@@ -105,7 +105,10 @@ h3 {
   font-family: "GT Walsheim Pro";
 }
 
-@media screen and (min-width: 450px) {
+@media(max-width: 450px) {
+  .leadertext {
+    font-size: 45px!important;
+  }
 }
 
 .leadertext {

@@ -70,7 +70,7 @@ function ContactUs() {
   const gaEventTracker = useAnalyticsEventTracker('ContactUs')
   return (
     <>
-      <Row>
+      <Row className="w-100 m-0">
         <Col className="mt-3 " lg="5">
           <Row className="mx-2 my-1">
             <img

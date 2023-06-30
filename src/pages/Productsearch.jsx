@@ -1118,16 +1118,7 @@ function Productsearch(args) {
                             More {allcatego.length - 5} category here
                           </button>
                           <div
-                            className={`bg-light border border-dark ${display}`}
-                            style={{
-                              height: "350px",
-                              width: "670px",
-                              position: "absolute",
-                              zIndex: 99,
-                              overflow: "auto",
-                              left: "250px",
-                              top: "0%",
-                            }}
+                            className={`bg-light border border-dark ${display} pop-up`}
                           >
                             <div className="position-sticky top-0 p-3 d-flex justify-content-between align-items-center bg-light border-bottom border-dark" style={{zIndex:20}}>
                             <h3>Category</h3>
@@ -1198,7 +1189,7 @@ function Productsearch(args) {
                           {/* {console.log("subctgry", sub_category)} */}
 
                           <div
-                            className={`bg-light border border-dark ${display2}`}
+                            className={`bg-light border border-dark ${display2} pop-up`}
                             style={{
                               height: "350px",
                               width: "670px",

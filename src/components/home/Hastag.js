@@ -855,12 +855,10 @@ function Hastag() {
       <Container className="mt-3">
         <p className="category">Content Creator</p>
         <Row className="m-2 mb-4 w-100 justify-content-center">
-
-
           {<Col lg="3" md="6" sm="12" className="my-3">
             <Link>
-              <div className="p-2 border border-dark creatorParent rounded-3 shadow">
-                <div className="CreatorCard rounded-circle overflow-hidden">
+              <div className="p-2 border border-dark creatorParent rounded-3 shadow  overflow-hidden mx-auto">
+                <div className="CreatorCard w-100  rounded-circle overflow-hidden">
                   <img src={socialnetwork} className="h-100 w-100" />
                 </div>
                 <div className="d-flex flex-column align-items-center">

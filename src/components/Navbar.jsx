@@ -527,7 +527,7 @@ function CustomNavbar(args) {
       </Navbar.Brand>
 
       <Link to="/leaderboard">
-        <button className="btn rbutton mobile" type="submit">
+        <button className="btn rbutton mobile p-0" type="submit">
           <h4 className="rText">LeaderBoard</h4>
         </button>
       </Link>
@@ -581,15 +581,15 @@ function CustomNavbar(args) {
         id="responsive-navbar-nav"
         className="justify-content-end"
       >
-        <Nav className="navbar-nav ms-0">
-          <Nav.Link as={NavLink} className="navbar-link">
+        <Nav className="navbar-nav ms-0 p-0 pe-1 d-flex align-items-center">
+          <Nav.Link as={NavLink} className="navbar-link p-0 m-0">
             {pathname.pathname === "/" ||
             pathname.pathname === "/signup" ||
             pathname.pathname === "/login" ? (
               ""
             ) : (
               <button
-                className="btn rbutton mobile"
+                className="btn rbutton mobile p-0"
                 type="submit"
                 onClick={(e) => (
                   closeModel(),
@@ -632,7 +632,7 @@ function CustomNavbar(args) {
               <Container></Container>
             </Nav.Link>
           ) : ( */}
-          <Nav.Link as={NavLink} className="navbar-link">
+          <Nav.Link as={NavLink} className="navbar-link p-0 m-0">
             {/* <Link to={`/signup`}> */}
 
             {pathname.pathname === "/" ||
@@ -641,7 +641,7 @@ function CustomNavbar(args) {
               ""
             ) : (
               <button
-                className="btn rbutton mobile"
+                className="btn rbutton mobile p-0"
                 onClick={(e) => (
                   toggle(e), gaEventTracker("+Submit a Content")
                 )}
@@ -656,7 +656,7 @@ function CustomNavbar(args) {
           {localStorage.getItem("userId") !== "" &&
           localStorage.getItem("userId") !== null &&
           localStorage.getItem("userId") !== undefined ? (
-            <Nav.Link>
+            <Nav.Link className="p-0 m-0">
               <UserPage />
             </Nav.Link>
           ) : (

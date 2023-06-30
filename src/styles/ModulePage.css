@@ -1573,3 +1573,34 @@ input[type="range"] {
   height: 250px;
   width: 250px;
 }
+
+
+
+
+.pop-up{
+  height: 350px;
+  width: 670px;
+  position: absolute;
+  z-index: 99;
+  overflow: auto;
+  left: 200px;
+  top: 0;
+}
+
+@media (max-width:968px){
+  .pop-up{
+    width:435px
+  }
+}
+
+@media (max-width:685px){
+  .pop-up{
+    left:0
+  }
+}
+
+@media (max-width:420px){
+  .pop-up{
+    width:220px
+  }
+}

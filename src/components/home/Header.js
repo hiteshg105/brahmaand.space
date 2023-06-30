@@ -621,7 +621,7 @@ function Header(args) {
             <Swiper
               modules={[Pagination, Autoplay, Navigation]}
               slidesPerView={1}
-              navigation
+              navigation  
               loop
               pagination={{
                 el: ".hero-swiper_swiper_pagination",
